@@ -1,6 +1,9 @@
 #summary One-sentence summary of this page.
 
 == Screenshots nov 18th @ 2AM ==
+
+This is a very early version (far from ready for release) as you can see. It get some basics implemented but needs much more late working evening!
+
 http://img694.imageshack.us/img694/3645/device001.png
 http://img694.imageshack.us/img694/5798/device002.png
 http://img35.imageshack.us/img35/2862/device003.png
