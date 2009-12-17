@@ -1,0 +1,8 @@
+=Nightly Releases=
+*Version 0.0.1*
+  * Network capability
+  * Login form
+  * Basic overview of episodes to watch
+
+=Android Market Releases=
+None yet!
