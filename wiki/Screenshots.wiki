@@ -1,3 +1,7 @@
+== Screenshots dec 17th @ 1:30 AM ==
+http://img695.imageshack.us/img695/3645/device001.png
+http://img695.imageshack.us/img695/5798/device002.png
+
 == Screenshots nov 18th @ 2AM ==
 
 This is a very early version (far from ready for release) as you can see. It get some basics implemented but needs much more late working evening!
