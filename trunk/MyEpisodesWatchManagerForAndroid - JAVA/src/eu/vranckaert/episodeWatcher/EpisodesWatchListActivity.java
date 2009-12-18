@@ -5,6 +5,8 @@ import java.util.List;
 
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
+import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnableToReadFeed;
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 
@@ -17,12 +19,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EpisodesWatchListActivity extends ListActivity {
 	private User user;
     private MyEpisodesService myEpisodesService;
     private List<Episode> episodes = new ArrayList<Episode>(0);
+    private Episode currentEpisode = null;
     private TextView subTitle;
     private EpisodeAdapter episodeAdapter;
     private ProgressDialog progressDialog;
@@ -46,7 +52,12 @@ public class EpisodesWatchListActivity extends ListActivity {
         episodes = new ArrayList<Episode>();
         episodeAdapter = new EpisodeAdapter(this, R.layout.episoderow, episodes);
         setListAdapter(episodeAdapter);
-        viewEpisodes = new Runnable() {
+        
+        reloadEpisodes();
+	}
+	
+	public void reloadEpisodes() {
+		viewEpisodes = new Runnable() {
 			@Override
 			public void run() {
 				getEpisodes();
@@ -108,10 +119,26 @@ public class EpisodesWatchListActivity extends ListActivity {
 			
 			TextView topText = (TextView) row.findViewById(R.id.episodeRowTitle);
 			TextView bottomText = (TextView) row.findViewById(R.id.episodeRowDetail);
+			ImageView markWatchedButton = (ImageView) row.findViewById(R.id.episodeMarkWatched);
 			
 			Episode episode = episodes.get(posistion);
 			topText.setText(episode.getShowName());
 			bottomText.setText("S" + episode.getSeason() + "E" + episode.getEpisode() + " - " + episode.getName());
+			currentEpisode = episode;
+			markWatchedButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					try {
+						myEpisodesService.watchedEpisode(currentEpisode, user);
+					} catch (LoginFailedException e) {
+						Toast.makeText(EpisodesWatchListActivity.this, R.string.markWatchFailedException, Toast.LENGTH_LONG).show();
+					} catch (ShowUpdateFailedException e) {
+						// TODO Auto-generated catch block
+						Toast.makeText(EpisodesWatchListActivity.this, R.string.markWatchFailedException, Toast.LENGTH_LONG).show();
+					}
+					reloadEpisodes();
+				}
+			});
 			
 			return row;
 		}

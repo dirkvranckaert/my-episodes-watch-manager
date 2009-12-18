@@ -16,6 +16,8 @@
     <string name="watchListTitle">List of shows/episodes</string>
     <string name="watchListSubTitle">%d episodes to watch</string>
     <string name="watchListEmpty">No episodes found.</string>
+    <string name="episodeMarkWatched">Mark watched</string>
+    <string name="markWatchFailedException">Network error!\nTry again later.</string>
     
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Loading</string>
