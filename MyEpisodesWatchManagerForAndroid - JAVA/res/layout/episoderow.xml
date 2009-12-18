@@ -24,4 +24,10 @@
             android:ellipsize="marquee"
         />
     </LinearLayout>
+    <ImageView
+        android:id="@+id/episodeMarkWatched"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="6dip"
+        android:src="@drawable/icon" />
 </LinearLayout>
