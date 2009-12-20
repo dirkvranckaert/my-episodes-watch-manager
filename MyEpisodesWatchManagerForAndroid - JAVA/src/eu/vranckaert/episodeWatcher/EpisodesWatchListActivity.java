@@ -14,7 +14,9 @@ import eu.vranckaert.episodeWatcher.R;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,15 +47,12 @@ public class EpisodesWatchListActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-		Bundle userBundle = getIntent().getExtras();
-        user = new User(userBundle.getString(User.USERNAME), userBundle.getString(User.PASSWORD));
-        
         setContentView(R.layout.watchlist);
         episodes = new ArrayList<Episode>();
         episodeAdapter = new EpisodeAdapter(this, R.layout.episoderow, episodes);
         setListAdapter(episodeAdapter);
         
-        reloadEpisodes();
+        openLoginActivity();
 	}
 	
 	public void reloadEpisodes() {
@@ -142,5 +141,25 @@ public class EpisodesWatchListActivity extends ListActivity {
 			
 			return row;
 		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+			Bundle userBundle = data.getExtras();
+	        user = new User(
+        		userBundle.getString(User.USERNAME),
+        		userBundle.getString(User.PASSWORD)
+    		);
+	        
+	        reloadEpisodes();
+		} else {
+			finish();
+		}
+	}
+
+	private void openLoginActivity() {
+		Intent loginSubActivity = new Intent(this.getApplicationContext(), LoginSubActivity.class);
+        startActivityForResult(loginSubActivity, 0);
 	}
 }
