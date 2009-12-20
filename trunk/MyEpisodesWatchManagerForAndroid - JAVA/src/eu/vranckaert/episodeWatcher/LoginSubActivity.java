@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class LoginSubActivity extends Activity {
     private Button loginButton;
     private MyEpisodesService myEpisodesService;
     private User user;
@@ -33,19 +33,21 @@ public class MainActivity extends Activity {
 						((EditText) findViewById(R.id.loginPassword)).getText().toString()
 				);
 				
-		    	Toast.makeText(MainActivity.this, R.string.loginStartLogin, Toast.LENGTH_SHORT).show();
+		    	Toast.makeText(LoginSubActivity.this, R.string.loginStartLogin, Toast.LENGTH_SHORT).show();
 		    	int status = 0;
 				try {
 					status = myEpisodesService.login(user);
-					Toast.makeText(MainActivity.this, R.string.loginSuccessfullLogin, Toast.LENGTH_LONG).show();
-					Intent watchListIntent = new Intent(v.getContext(), EpisodesWatchListActivity.class);
-					watchListIntent.putExtra(User.USERNAME, user.getUsername());
-					watchListIntent.putExtra(User.PASSWORD, user.getPassword());
-	                startActivityForResult(watchListIntent, 0);
+					Toast.makeText(LoginSubActivity.this, R.string.loginSuccessfullLogin, Toast.LENGTH_LONG).show();
+					
+					Intent intent = new Intent();
+					intent.putExtra(User.USERNAME, user.getUsername());
+					intent.putExtra(User.PASSWORD, user.getPassword());
+					setResult(RESULT_OK, intent);
+					finish();
 				} catch (LoginFailedException e) {
-					Toast.makeText(MainActivity.this, R.string.loginLoginFailed, Toast.LENGTH_LONG).show();
+					Toast.makeText(LoginSubActivity.this, R.string.loginLoginFailed, Toast.LENGTH_LONG).show();
 				} catch (Exception e) {
-					Toast.makeText(MainActivity.this, R.string.loginLoginFailedUnhandledException, Toast.LENGTH_LONG).show();
+					Toast.makeText(LoginSubActivity.this, R.string.loginLoginFailedUnhandledException, Toast.LENGTH_LONG).show();
 				}
 			}
 		});
