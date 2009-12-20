@@ -15,6 +15,7 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -146,10 +147,9 @@ public class EpisodesWatchListActivity extends ListActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
-			Bundle userBundle = data.getExtras();
 	        user = new User(
-        		userBundle.getString(User.USERNAME),
-        		userBundle.getString(User.PASSWORD)
+        		getPreference(User.USERNAME),
+        		getPreference(User.PASSWORD)
     		);
 	        
 	        reloadEpisodes();
@@ -161,5 +161,11 @@ public class EpisodesWatchListActivity extends ListActivity {
 	private void openLoginActivity() {
 		Intent loginSubActivity = new Intent(this.getApplicationContext(), LoginSubActivity.class);
         startActivityForResult(loginSubActivity, 0);
+	}
+	
+	private String getPreference(String key) {
+		SharedPreferences settings = getSharedPreferences(Preferences.PREF_NAME, MODE_PRIVATE);
+		String result = settings.getString(key, null);		
+		return result;
 	}
 }
