@@ -1,8 +1,8 @@
 =Release Management=
-Development releases x.x.0
-Alpha releases x.0.x
-Beta releases x.0.x
-Final releases 0.x.x
+  * Development releases x.x.0
+  * Alpha releases x.0.x
+  * Beta releases x.0.x
+  * Final releases 0.x.x
 
 =Nightly Releases=
 *Version 0.1.0 (Alpha release)*
