@@ -1,0 +1,21 @@
+<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
+	<TextView android:textSize="23px" android:id="@+id/episodeDetShowName" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center_horizontal"/>
+	<TextView android:textSize="17px" android:id="@+id/episodeDetName" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center_horizontal"/>
+	
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+		<TextView android:text="Season: " android:id="@+id/episodeDetSeasonLabel" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+		<TextView android:id="@+id/episodeDetSeason" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+		<TextView android:text="Episode: " android:id="@+id/episodeDetEpisodeLabel" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+		<TextView android:id="@+id/episodeDetEpisode" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+		<TextView android:text="Airdate: " android:id="@+id/episodeDetAirdateLabel" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+		<TextView android:id="@+id/episodeDetAirdate" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+	</LinearLayout>
+	
+	<Button android:id="@+id/markAsSeenButton" android:text="Watched" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+</LinearLayout>
