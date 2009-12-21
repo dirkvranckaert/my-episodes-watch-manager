@@ -4,9 +4,6 @@ import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,8 +43,10 @@ public class LoginSubActivity extends Activity {
 						finalizeLogin();
 					} catch (LoginFailedException e) {
 						Toast.makeText(LoginSubActivity.this, R.string.loginLoginFailed, Toast.LENGTH_LONG).show();
+						e.printStackTrace();
 					} catch (Exception e) {
 						Toast.makeText(LoginSubActivity.this, R.string.loginLoginFailedUnhandledException, Toast.LENGTH_LONG).show();
+						e.printStackTrace();
 					}
 				}
 			});
@@ -57,9 +56,8 @@ public class LoginSubActivity extends Activity {
     }
     
     private boolean checkLoginCredentials() {
-		SharedPreferences settings = getSharedPreferences(Preferences.PREF_NAME, MODE_PRIVATE);
-		String username = settings.getString(User.USERNAME, null);
-		String password = settings.getString(User.PASSWORD, null);
+		String username = Preferences.getPreference(this, User.USERNAME);
+		String password = Preferences.getPreference(this, User.PASSWORD);
 		
 		if (username == null || password == null) {
 			return false;
@@ -69,11 +67,8 @@ public class LoginSubActivity extends Activity {
 	}
     
     private void storeLoginCredentials(User user) {
-		SharedPreferences settings = getSharedPreferences(Preferences.PREF_NAME, MODE_PRIVATE);
-		Editor editor = settings.edit();
-		editor.putString(User.USERNAME, user.getUsername());
-		editor.putString(User.PASSWORD, user.getPassword());
-		editor.commit();
+    	Preferences.setPreference(this, User.USERNAME, user.getUsername());
+    	Preferences.setPreference(this, User.PASSWORD, user.getPassword());
     }
 
 	private void finalizeLogin() {
