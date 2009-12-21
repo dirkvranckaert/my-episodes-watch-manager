@@ -15,27 +15,30 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.AttributeSet;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class EpisodesWatchListActivity extends ListActivity {
 	private User user;
     private MyEpisodesService myEpisodesService;
     private List<Episode> episodes = new ArrayList<Episode>(0);
-    private Episode currentEpisode = null;
+    private Episode currentEpisode= null;
     private TextView subTitle;
     private EpisodeAdapter episodeAdapter;
     private ProgressDialog progressDialog;
     private Runnable viewEpisodes;
+    private Runnable markEpisode;
 	
 	public EpisodesWatchListActivity() {
 		super();
@@ -45,18 +48,81 @@ public class EpisodesWatchListActivity extends ListActivity {
 	}
 	
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.watchlistmenu, menu);
+		return true;
+	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.episodemenu, menu);
+	}
+
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        setContentView(R.layout.watchlist);
-        episodes = new ArrayList<Episode>();
-        episodeAdapter = new EpisodeAdapter(this, R.layout.episoderow, episodes);
-        setListAdapter(episodeAdapter);
+        init();
         
         openLoginActivity();
 	}
 	
-	public void reloadEpisodes() {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case R.id.refresh:
+			reloadEpisodes();
+			return true;
+		case R.id.logout:
+			logout();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+		currentEpisode = episodes.get(menuInfo.position);
+		switch(item.getItemId()) {
+		case R.id.episodeMenuWatched:
+			markEpisodeWatched(currentEpisode);
+			return true;
+		}
+		return false;
+	}
+
+	private void init() {
+		setContentView(R.layout.watchlist);
+        episodes = new ArrayList<Episode>();
+        episodeAdapter = new EpisodeAdapter(this, R.layout.episoderow, episodes);
+        setListAdapter(episodeAdapter);
+        registerForContextMenu(getListView());
+	}
+
+	private void openLoginActivity() {
+		Intent loginSubActivity = new Intent(this.getApplicationContext(), LoginSubActivity.class);
+        startActivityForResult(loginSubActivity, 0);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+	        user = new User(
+        		Preferences.getPreference(this, User.USERNAME),
+        		Preferences.getPreference(this, User.PASSWORD)
+    		);
+	        
+	        reloadEpisodes();
+		} else {
+			exit();
+		}
+	}
+	
+	private void reloadEpisodes() {
 		viewEpisodes = new Runnable() {
 			@Override
 			public void run() {
@@ -78,7 +144,8 @@ public class EpisodesWatchListActivity extends ListActivity {
 		try {
 			episodes = myEpisodesService.retrieveEpisodes(user);
 		} catch (UnableToReadFeed e) {
-			
+			Toast.makeText(EpisodesWatchListActivity.this, R.string.watchListUnableToReadFeed, Toast.LENGTH_LONG);
+			e.printStackTrace();
 		}
 		runOnUiThread(returnEpisodes);
 	}
@@ -119,53 +186,62 @@ public class EpisodesWatchListActivity extends ListActivity {
 			
 			TextView topText = (TextView) row.findViewById(R.id.episodeRowTitle);
 			TextView bottomText = (TextView) row.findViewById(R.id.episodeRowDetail);
-			ImageView markWatchedButton = (ImageView) row.findViewById(R.id.episodeMarkWatched);
 			
 			Episode episode = episodes.get(posistion);
 			topText.setText(episode.getShowName());
 			bottomText.setText("S" + episode.getSeason() + "E" + episode.getEpisode() + " - " + episode.getName());
-			currentEpisode = episode;
-			markWatchedButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					try {
-						myEpisodesService.watchedEpisode(currentEpisode, user);
-					} catch (LoginFailedException e) {
-						Toast.makeText(EpisodesWatchListActivity.this, R.string.markWatchFailedException, Toast.LENGTH_LONG).show();
-					} catch (ShowUpdateFailedException e) {
-						// TODO Auto-generated catch block
-						Toast.makeText(EpisodesWatchListActivity.this, R.string.markWatchFailedException, Toast.LENGTH_LONG).show();
-					}
-					reloadEpisodes();
-				}
-			});
 			
 			return row;
 		}
 	}
 	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK) {
-	        user = new User(
-        		getPreference(User.USERNAME),
-        		getPreference(User.PASSWORD)
-    		);
-	        
-	        reloadEpisodes();
-		} else {
-			finish();
-		}
-	}
-
-	private void openLoginActivity() {
-		Intent loginSubActivity = new Intent(this.getApplicationContext(), LoginSubActivity.class);
-        startActivityForResult(loginSubActivity, 0);
+	private void markEpisodeWatched(final Episode episode) {
+		markEpisode = new Runnable() {
+			@Override
+			public void run() {
+				markEpisode(episode);
+			}
+		};
+        
+		Thread thread =  new Thread(null, markEpisode, "EpisodeMarkWatchedBackground");
+		thread.start();
+		
+		progressDialog = ProgressDialog.show(
+				this,
+				getString(R.string.progressLoadingTitle),
+				getString(R.string.progressLoadingBody),
+				true
+		);
 	}
 	
-	private String getPreference(String key) {
-		SharedPreferences settings = getSharedPreferences(Preferences.PREF_NAME, MODE_PRIVATE);
-		String result = settings.getString(key, null);		
-		return result;
+	private void markEpisode(Episode episode) {
+		try {
+			myEpisodesService.watchedEpisode(episode, user);
+		} catch (LoginFailedException e) {
+			Toast.makeText(EpisodesWatchListActivity.this, R.string.watchListUnableToMarkWatched, Toast.LENGTH_LONG);
+			e.printStackTrace();
+		} catch (ShowUpdateFailedException e) {
+			Toast.makeText(EpisodesWatchListActivity.this, R.string.watchListUnableToMarkWatched, Toast.LENGTH_LONG);
+			e.printStackTrace();
+		}
+		runOnUiThread(delegateEpisodeReloading);
+	}
+	
+	private Runnable delegateEpisodeReloading = new Runnable() {
+		@Override
+		public void run() {
+			progressDialog.dismiss();
+			reloadEpisodes();
+		}
+	};
+	
+	private void logout() {
+		Preferences.removePreference(this, User.USERNAME);
+		Preferences.removePreference(this, User.PASSWORD);
+		openLoginActivity();
+	}
+	
+	private void exit() {
+		finish();
 	}
 }
