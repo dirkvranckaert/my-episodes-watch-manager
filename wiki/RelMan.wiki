@@ -1,5 +1,11 @@
+=Release Management=
+Development releases x.x.0
+Alpha releases x.0.x
+Beta releases x.0.x
+Final releases 0.x.x
+
 =Nightly Releases=
-  *Version 0.1.0*
+*Version 0.1.0 (Alpha release)*
   * including menu on the list view (refreshing a list, logging out (returns to the login activity and clears the stored credentials), about (not implemented yet, however button already visible)
   * including context menu on list items (mark an episode as watched, ask for an episodes details (not implemented yet, however menu option already present)
 *Version 0.0.3*
