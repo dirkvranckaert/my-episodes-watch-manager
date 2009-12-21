@@ -25,15 +25,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class EpisodesWatchListActivity extends ListActivity {
+	private static final int LOGIN_REQUEST_CODE = 0;
+	private static final int EPISODE_DETAILS_REQUEST_CODE = 1;
 	private User user;
     private MyEpisodesService myEpisodesService;
     private List<Episode> episodes = new ArrayList<Episode>(0);
-    private Episode currentEpisode= null;
     private TextView subTitle;
     private EpisodeAdapter episodeAdapter;
     private ProgressDialog progressDialog;
@@ -42,7 +44,6 @@ public class EpisodesWatchListActivity extends ListActivity {
 	
 	public EpisodesWatchListActivity() {
 		super();
-		//TODO: pass credentials from login activity to here instead of hardcoding
 		this.user = new User("myUsername", "myPassword");
 		this.myEpisodesService = new MyEpisodesService();
 	}
@@ -86,13 +87,22 @@ public class EpisodesWatchListActivity extends ListActivity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
-		currentEpisode = episodes.get(menuInfo.position);
+		Episode currentEpisode = episodes.get(menuInfo.position);
 		switch(item.getItemId()) {
 		case R.id.episodeMenuWatched:
 			markEpisodeWatched(currentEpisode);
 			return true;
+		case R.id.episodeMenuDetails:
+			openEpisodeDetails(currentEpisode);
+			return true;
 		}
 		return false;
+	}
+
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Episode currentEpisode = episodes.get(position);
+		openEpisodeDetails(currentEpisode);
 	}
 
 	private void init() {
@@ -105,18 +115,42 @@ public class EpisodesWatchListActivity extends ListActivity {
 
 	private void openLoginActivity() {
 		Intent loginSubActivity = new Intent(this.getApplicationContext(), LoginSubActivity.class);
-        startActivityForResult(loginSubActivity, 0);
+        startActivityForResult(loginSubActivity, LOGIN_REQUEST_CODE);
+	}
+
+	private void openEpisodeDetails(Episode episode) {
+		Intent episodeDetailsSubActivity = new Intent(this.getApplicationContext(), EpisodeDetailsSubActivity.class);
+		episodeDetailsSubActivity.putExtra("episode:episode", episode.getEpisode());
+		episodeDetailsSubActivity.putExtra("episode:myEpisodeID", episode.getMyEpisodeID());
+		episodeDetailsSubActivity.putExtra("episode:name", episode.getName());
+		episodeDetailsSubActivity.putExtra("episode:season", episode.getSeason());
+		episodeDetailsSubActivity.putExtra("episode:showName", episode.getShowName());
+		episodeDetailsSubActivity.putExtra("episode:airDate", episode.getAirDate());
+        startActivityForResult(episodeDetailsSubActivity, EPISODE_DETAILS_REQUEST_CODE);
 	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK) {
+		if (requestCode == LOGIN_REQUEST_CODE && resultCode == RESULT_OK) {
 	        user = new User(
         		Preferences.getPreference(this, User.USERNAME),
         		Preferences.getPreference(this, User.PASSWORD)
     		);
 	        
 	        reloadEpisodes();
+		} else if (requestCode == EPISODE_DETAILS_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				Bundle intentData = data.getExtras();
+				boolean markEpisodeWathed = intentData.getBoolean("markEpisodeWatched");
+				Episode episode = new Episode();
+				episode.setMyEpisodeID(intentData.getString("episode:myEpisodeID"));
+				episode.setEpisode(intentData.getInt("episode:Episode"));
+				episode.setSeason(intentData.getInt("episode:season"));
+				
+				if (markEpisodeWathed) {
+					markEpisode(episode);
+				}
+			}
 		} else {
 			exit();
 		}
