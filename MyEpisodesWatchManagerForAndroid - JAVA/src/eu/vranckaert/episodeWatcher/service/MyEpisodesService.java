@@ -91,22 +91,25 @@ public class MyEpisodesService {
             Episode episode = new Episode();
 
             StringBuilder title = new StringBuilder(item.getTitle());
-            //Sample title: [ Reaper ][ 01x14 ][ Rebellion ][ 23-Apr-2008 ]
-            title = title.replace(0, 2, ""); //Strip off first bracket [
-            title = title.replace(title.length()-2, title.length(), ""); //Strip off last bracket ]
-            String[] episodeInfo = title.toString().split(FEED_TITLE_SEPERATOR);
-            if (episodeInfo.length == FEED_TITLE_EPISODE_FIELDS) {
-                episode.setShowName(episodeInfo[0].trim());
-                getSeasonAndEpisodeNumber(episodeInfo[1], episode);
-                episode.setName(episodeInfo[2].trim());
-                episode.setAirDate(parseDate(episodeInfo[3].trim()));
-                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
-                
-                episodes.add(episode);
-            } else {
-                String message = "Problem parsing a feed item. Feed details: " + item.toString();
-                Log.e(LOG_TAG, message);
-                //throw new UnableToParseFeedException(message);
+            
+            if (title.length() > 0) {
+	            //Sample title: [ Reaper ][ 01x14 ][ Rebellion ][ 23-Apr-2008 ]
+	            title = title.replace(0, 2, ""); //Strip off first bracket [
+	            title = title.replace(title.length()-2, title.length(), ""); //Strip off last bracket ]
+	            String[] episodeInfo = title.toString().split(FEED_TITLE_SEPERATOR);
+	            if (episodeInfo.length == FEED_TITLE_EPISODE_FIELDS) {
+	                episode.setShowName(episodeInfo[0].trim());
+	                getSeasonAndEpisodeNumber(episodeInfo[1], episode);
+	                episode.setName(episodeInfo[2].trim());
+	                episode.setAirDate(parseDate(episodeInfo[3].trim()));
+	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
+	                
+	                episodes.add(episode);
+	            } else {
+	                String message = "Problem parsing a feed item. Feed details: " + item.toString();
+	                Log.e(LOG_TAG, message);
+	                //throw new UnableToParseFeedException(message);
+	            }
             }
         }
 
