@@ -5,6 +5,10 @@
   * Final releases 0.x.x
 
 =Nightly Releases=
+*Version 0.2.0 (Alpha release)*
+  * includes the detail screen
+  * includes all 'mark as seen' code for an episode
+
 *Version 0.1.0 (Alpha release)*
   * including menu on the list view (refreshing a list, logging out (returns to the login activity and clears the stored credentials), about (not implemented yet, however button already visible)
   * including context menu on list items (mark an episode as watched, ask for an episodes details (not implemented yet, however menu option already present)
