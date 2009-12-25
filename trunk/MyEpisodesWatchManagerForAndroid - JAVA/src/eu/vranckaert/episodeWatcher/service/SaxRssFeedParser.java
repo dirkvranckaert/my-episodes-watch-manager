@@ -3,6 +3,7 @@ package eu.vranckaert.episodeWatcher.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.UnknownHostException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -15,6 +16,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import eu.vranckaert.episodeWatcher.domain.Feed;
 import eu.vranckaert.episodeWatcher.domain.FeedItem;
 import eu.vranckaert.episodeWatcher.exception.FeedUrlParsingException;
+import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.RssFeedParserException;
 
 import android.util.Log;
@@ -28,10 +30,14 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
     Feed feed = new Feed();
     FeedItem item = null;
 
-    public Feed parseFeed(final URL url) throws ParserConfigurationException, SAXException {
+    public Feed parseFeed(final URL url) throws ParserConfigurationException, SAXException, FeedUrlParsingException, RssFeedParserException, InternetConnectivityException {
         InputStream inputStream;
 		try {
 			inputStream = url.openConnection().getInputStream();
+		} catch (UnknownHostException e) {
+			String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
 		} catch (IOException e) {
 			String message = "Could not parse the URL for the feed.";
 			Log.e(LOG_TAG, message, e);

@@ -5,9 +5,10 @@ import java.util.List;
 
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
-import eu.vranckaert.episodeWatcher.exception.UnableToReadFeed;
+import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 
 import eu.vranckaert.episodeWatcher.R;
@@ -169,7 +170,10 @@ public class EpisodesWatchListActivity extends ListActivity {
 	private void getEpisodes() {
 		try {
 			episodes = myEpisodesService.retrieveEpisodes(user);
-		} catch (UnableToReadFeed e) {
+		} catch (InternetConnectivityException e) {
+			Toast.makeText(EpisodesWatchListActivity.this, R.string.networkIssues, Toast.LENGTH_LONG);
+			e.printStackTrace();
+		} catch (Exception e) {
 			Toast.makeText(EpisodesWatchListActivity.this, R.string.watchListUnableToReadFeed, Toast.LENGTH_LONG);
 			e.printStackTrace();
 		}
@@ -248,6 +252,9 @@ public class EpisodesWatchListActivity extends ListActivity {
 			e.printStackTrace();
 		} catch (ShowUpdateFailedException e) {
 			Toast.makeText(EpisodesWatchListActivity.this, R.string.watchListUnableToMarkWatched, Toast.LENGTH_LONG);
+			e.printStackTrace();
+		} catch (UnsupportedHttpPostEncodingException e) {
+			Toast.makeText(EpisodesWatchListActivity.this, R.string.networkIssues, Toast.LENGTH_LONG);
 			e.printStackTrace();
 		}
 		runOnUiThread(delegateEpisodeReloading);

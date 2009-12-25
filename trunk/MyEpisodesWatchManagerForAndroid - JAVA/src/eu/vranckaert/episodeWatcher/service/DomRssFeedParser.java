@@ -21,7 +21,7 @@ import java.net.URL;
 public class DomRssFeedParser implements RssFeedParser {
 	private static final String LOG_TAG = "DomRssFeedParser";
 	
-    public Feed parseFeed(final URL url) {
+    public Feed parseFeed(final URL url) throws RssFeedParserException, FeedUrlParsingException {
         Feed rssFeed = new Feed();
         DocumentBuilder builder = null;
         Document doc = null;
