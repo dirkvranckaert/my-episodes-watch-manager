@@ -1,8 +1,6 @@
 package eu.vranckaert.episodeWatcher.exception;
 
-import java.io.IOException;
-
-public class LoginFailedException extends Throwable {
+public class LoginFailedException extends Exception {
     public LoginFailedException(String message, Throwable e) {
         super(message, e);
     }

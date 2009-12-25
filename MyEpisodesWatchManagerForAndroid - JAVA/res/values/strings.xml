@@ -17,6 +17,7 @@
     <string name="watchListSubTitle">%d episodes to watch</string>
     <string name="watchListEmpty">No episodes found.</string>
     <string name="watchListUnableToReadFeed">Network error!\nTry to refresh manually.</string>
+    <string name="networkIssues">Network error!\nTry to refresh manually.</string>
     <string name="watchListUnableToMarkWatched">Failed to mark this episode watched!\nCheck internet connection or refresh the list!</string>
     
     <!-- progressDialog -->

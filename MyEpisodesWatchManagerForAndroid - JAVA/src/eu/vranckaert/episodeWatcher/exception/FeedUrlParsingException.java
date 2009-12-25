@@ -1,6 +1,6 @@
 package eu.vranckaert.episodeWatcher.exception;
 
-public class FeedUrlParsingException extends RuntimeException {
+public class FeedUrlParsingException extends Exception {
     public FeedUrlParsingException(String message, Throwable e) {
         super(message, e);
     }

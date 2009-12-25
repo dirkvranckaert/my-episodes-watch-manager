@@ -32,8 +32,11 @@ import eu.vranckaert.episodeWatcher.domain.Feed;
 import eu.vranckaert.episodeWatcher.domain.FeedItem;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.FeedUrlBuildingFaildException;
+import eu.vranckaert.episodeWatcher.exception.FeedUrlParsingException;
+import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.exception.PasswordEnctyptionFailedException;
+import eu.vranckaert.episodeWatcher.exception.RssFeedParserException;
 import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnableToReadFeed;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
@@ -72,18 +75,12 @@ public class MyEpisodesService {
 
 	private static final String HTTP_POST_ENCODING = HTTP.UTF_8;
 
-    public List<Episode> retrieveEpisodes(final User user) throws UnableToReadFeed {
+    public List<Episode> retrieveEpisodes(final User user) throws InternetConnectivityException, Exception {
         String encryptedPassword = encryptPassword(user.getPassword());
         URL feedUrl = buildUnwatchedEpisodesUrl(user.getUsername(), encryptedPassword);
         RssFeedParser rssFeedParser = new SaxRssFeedParser();
         Feed rssFeed;
-		try {
-			rssFeed = rssFeedParser.parseFeed(feedUrl);
-		} catch (Exception e) {
-			//TODO catch this exception the 'good' way and log sth to the user to inform him!
-			Log.e(LOG_TAG, "", e);
-			throw new RuntimeException(e);
-		}
+		rssFeed = rssFeedParser.parseFeed(feedUrl);
 
         List<Episode> episodes = new ArrayList<Episode>(0);
 
@@ -117,7 +114,7 @@ public class MyEpisodesService {
     }
 
     public void watchedEpisode(Episode episode, User user) throws LoginFailedException
-            , ShowUpdateFailedException {
+            , ShowUpdateFailedException, UnsupportedHttpPostEncodingException {
         HttpClient httpClient = new DefaultHttpClient();
 
         login(httpClient, user.getUsername(), user.getPassword());
@@ -154,14 +151,14 @@ public class MyEpisodesService {
         }
     }
 
-    public int login(User user) throws LoginFailedException {
+    public int login(User user) throws LoginFailedException, UnsupportedHttpPostEncodingException {
         HttpClient httpClient = new DefaultHttpClient();
     	int status = login(httpClient, user.getUsername(), user.getPassword());
         httpClient.getConnectionManager().shutdown();
         return status;
     }
     
-    private int login(HttpClient httpClient, String username, String password) throws LoginFailedException {
+    private int login(HttpClient httpClient, String username, String password) throws LoginFailedException, UnsupportedHttpPostEncodingException {
     	HttpPost post = new HttpPost(MYEPISODES_LOGIN_PAGE);
 
     	List <NameValuePair> nvps = new ArrayList <NameValuePair>();
@@ -218,7 +215,7 @@ public class MyEpisodesService {
         episode.setEpisode(Integer.parseInt(episodeInfoNumber[1].trim()));;
     }
 
-    private URL buildUnwatchedEpisodesUrl(final String username, final String encryptedPassword) {
+    private URL buildUnwatchedEpisodesUrl(final String username, final String encryptedPassword) throws FeedUrlBuildingFaildException {
         String urlRep = UNWATCHED_EPISODES_URL;
         urlRep = urlRep.replace(UID_REPLACEMENT_STRING, username);
         urlRep = urlRep.replace(PWD_REPLACEMENT_STRING, encryptedPassword);
@@ -237,7 +234,7 @@ public class MyEpisodesService {
         return url;
     }
 
-    private String encryptPassword(final String password) {
+    private String encryptPassword(final String password) throws PasswordEnctyptionFailedException {
         String encryptedPwd = "";
         MessageDigest digest = null;
         try {
