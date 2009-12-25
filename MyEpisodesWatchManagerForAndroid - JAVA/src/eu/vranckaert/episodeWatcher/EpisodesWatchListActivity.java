@@ -120,12 +120,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 
 	private void openEpisodeDetails(Episode episode) {
 		Intent episodeDetailsSubActivity = new Intent(this.getApplicationContext(), EpisodeDetailsSubActivity.class);
-		episodeDetailsSubActivity.putExtra("episode:episode", episode.getEpisode());
-		episodeDetailsSubActivity.putExtra("episode:myEpisodeID", episode.getMyEpisodeID());
-		episodeDetailsSubActivity.putExtra("episode:name", episode.getName());
-		episodeDetailsSubActivity.putExtra("episode:season", episode.getSeason());
-		episodeDetailsSubActivity.putExtra("episode:showName", episode.getShowName());
-		episodeDetailsSubActivity.putExtra("episode:airDate", episode.getAirDate());
+		episodeDetailsSubActivity.putExtra("episode", episode);
         startActivityForResult(episodeDetailsSubActivity, EPISODE_DETAILS_REQUEST_CODE);
 	}
 	
@@ -142,10 +137,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 			if (resultCode == RESULT_OK) {
 				Bundle intentData = data.getExtras();
 				boolean markEpisodeWathed = intentData.getBoolean("markEpisodeWatched");
-				Episode episode = new Episode();
-				episode.setMyEpisodeID(intentData.getString("episode:myEpisodeID"));
-				episode.setEpisode(intentData.getInt("episode:Episode"));
-				episode.setSeason(intentData.getInt("episode:season"));
+				Episode episode = (Episode) intentData.getSerializable("episode");
 				
 				if (markEpisodeWathed) {
 					markEpisode(episode);
