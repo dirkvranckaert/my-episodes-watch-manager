@@ -1,8 +1,9 @@
 package eu.vranckaert.episodeWatcher.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Episode {
+public class Episode implements Serializable {
     private String showName;
     private String name;
     private int season;

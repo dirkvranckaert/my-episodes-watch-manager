@@ -30,5 +30,8 @@
     <string name="logout">Logout</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Details</string>
+    <string name="episodeDetailsSeasonLabel">Season: </string>
+    <string name="episodeDetailsEpisodeLabel">Episode: </string>
+    <string name="episodeDetailsAirDateLabel">Airdate: </string>
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
 </resources>
