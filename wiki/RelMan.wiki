@@ -5,6 +5,11 @@
   * Final releases 0.x.x
 
 =Nightly Releases=
+*Version 0.2.1*
+  * Some bugfixes:
+  * Issue 4: Exception when list is empty
+  * Issue 5: Exception handling (partially done)
+
 *Version 0.2.0 (Alpha release)*
   * includes the detail screen
   * includes all 'mark as seen' code for an episode
