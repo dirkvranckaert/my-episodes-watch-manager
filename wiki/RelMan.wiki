@@ -29,4 +29,8 @@
   * Basic overview of episodes to watch
 
 =Android Market Releases=
-None yet!
+*Version 1.0.0*
+  * All functionnality from version 0.2.1
+  * known bugs:
+  * Switching between horizontal and vertical mode of the device sometimes makes the app crashing (Issue 2)
+  * Starting the application with no internet connection makes the application chrasing
