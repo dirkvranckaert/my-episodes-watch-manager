@@ -4,6 +4,13 @@
   * Beta releases x.0.x
   * Final releases 0.x.x
 
+=Android Market Releases=
+*Version 1.0.0*
+  * All functionnality from version 0.2.1
+  * known bugs:
+  * Switching between horizontal and vertical mode of the device sometimes makes the app crashing (Issue 2)
+  * Starting the application with no internet connection makes the application chrasing (Issue 7)
+
 =Nightly Releases=
 *Version 0.2.1*
   * Some bugfixes:
@@ -27,10 +34,3 @@
   * Network capability
   * Login form
   * Basic overview of episodes to watch
-
-=Android Market Releases=
-*Version 1.0.0*
-  * All functionnality from version 0.2.1
-  * known bugs:
-  * Switching between horizontal and vertical mode of the device sometimes makes the app crashing (Issue 2)
-  * Starting the application with no internet connection makes the application chrasing
