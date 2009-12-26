@@ -11,6 +11,9 @@
   * Switching between horizontal and vertical mode of the device sometimes makes the app crashing (Issue 2)
   * Starting the application with no internet connection makes the application chrasing (Issue 7)
 
+*Version 1.0.1*
+  * New application image
+
 =Nightly Releases=
 *Version 0.2.1*
   * Some bugfixes:
