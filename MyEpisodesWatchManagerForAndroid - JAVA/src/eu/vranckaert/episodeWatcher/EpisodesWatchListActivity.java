@@ -203,6 +203,10 @@ public class EpisodesWatchListActivity extends ListActivity {
 				
 				subTitle = (TextView) findViewById(R.id.watchListSubTitle);
 		        subTitle.setText(getString(R.string.watchListSubTitle, episodes.size()));
+			} else {
+				episodeAdapter.clear();
+				subTitle = (TextView) findViewById(R.id.watchListSubTitle);
+				subTitle.setText("");
 			}
 			dismissDialog(EPISODE_LOADING_DIALOG);
 			episodeAdapter.notifyDataSetChanged();
