@@ -12,6 +12,7 @@ import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingExcepti
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 
 import eu.vranckaert.episodeWatcher.R;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -34,6 +35,9 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 public class EpisodesWatchListActivity extends ListActivity {
 	private static final int LOGIN_REQUEST_CODE = 0;
 	private static final int EPISODE_DETAILS_REQUEST_CODE = 1;
+	
+	private static final int EPISODE_LOADING_DIALOG = 0;
+	
 	private User user;
     private MyEpisodesService myEpisodesService;
     private List<Episode> episodes = new ArrayList<Episode>(0);
@@ -61,6 +65,18 @@ public class EpisodesWatchListActivity extends ListActivity {
 			ContextMenuInfo menuInfo) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.episodemenu, menu);
+	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		if (id == EPISODE_LOADING_DIALOG) {
+			ProgressDialog progressDialog = new ProgressDialog(this);
+			progressDialog.setMessage(this.getString(R.string.progressLoadingTitle));
+			//progressDialog.setTitle(R.string.progressLoadingTitle);
+			return progressDialog;
+		}
+		
+		return super.onCreateDialog(id);
 	}
 
 	@Override
@@ -150,6 +166,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 	}
 	
 	private void reloadEpisodes() {
+		showDialog(EPISODE_LOADING_DIALOG);
 		viewEpisodes = new Runnable() {
 			@Override
 			public void run() {
@@ -159,12 +176,6 @@ public class EpisodesWatchListActivity extends ListActivity {
         
 		Thread thread =  new Thread(null, viewEpisodes, "EpisodeRetrievalBackground");
 		thread.start();
-		progressDialog = ProgressDialog.show(
-				this,
-				getString(R.string.progressLoadingTitle),
-				getString(R.string.progressLoadingBody),
-				true
-		);
 	}
 	
 	private void getEpisodes() {
@@ -193,7 +204,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 				subTitle = (TextView) findViewById(R.id.watchListSubTitle);
 		        subTitle.setText(getString(R.string.watchListSubTitle, episodes.size()));
 			}
-			progressDialog.dismiss();
+			dismissDialog(EPISODE_LOADING_DIALOG);
 			episodeAdapter.notifyDataSetChanged();
 		}
 	};
@@ -226,6 +237,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 	}
 	
 	private void markEpisodeWatched(final Episode episode) {
+		showDialog(EPISODE_LOADING_DIALOG);
 		markEpisode = new Runnable() {
 			@Override
 			public void run() {
@@ -235,13 +247,6 @@ public class EpisodesWatchListActivity extends ListActivity {
         
 		Thread thread =  new Thread(null, markEpisode, "EpisodeMarkWatchedBackground");
 		thread.start();
-		
-		progressDialog = ProgressDialog.show(
-				this,
-				getString(R.string.progressLoadingTitle),
-				getString(R.string.progressLoadingBody),
-				true
-		);
 	}
 	
 	private void markEpisode(Episode episode) {
@@ -263,7 +268,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 	private Runnable delegateEpisodeReloading = new Runnable() {
 		@Override
 		public void run() {
-			progressDialog.dismiss();
+			dismissDialog(EPISODE_LOADING_DIALOG);
 			reloadEpisodes();
 		}
 	};

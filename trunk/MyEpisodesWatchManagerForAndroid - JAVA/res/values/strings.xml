@@ -21,7 +21,7 @@
     <string name="watchListUnableToMarkWatched">Failed to mark this episode watched!\nCheck internet connection or refresh the list!</string>
     
     <!-- progressDialog -->
-    <string name="progressLoadingTitle">Loading</string>
+    <string name="progressLoadingTitle">Loading...</string>
     <string name="progressLoadingBody">Sending/Retreiving data</string>
     
     <!-- menu's -->
