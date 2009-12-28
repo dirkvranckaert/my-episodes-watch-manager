@@ -5,14 +5,17 @@
   * Final releases 0.x.x
 
 =Android Market Releases=
+*Version 1.1.0*
+  * Bugfixing release for Issue 2 and Issue 8
+
+*Version 1.0.2*
+  * New application image
+
 *Version 1.0.0*
   * All functionnality from version 0.2.1
   * known bugs:
   * Switching between horizontal and vertical mode of the device sometimes makes the app crashing (Issue 2)
   * Starting the application with no internet connection makes the application chrasing (Issue 7)
-
-*Version 1.0.2*
-  * New application image
 
 =Nightly Releases=
 *Version 0.2.1*
