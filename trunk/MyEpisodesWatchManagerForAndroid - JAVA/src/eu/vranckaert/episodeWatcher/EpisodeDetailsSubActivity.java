@@ -1,5 +1,7 @@
 package eu.vranckaert.episodeWatcher;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import eu.vranckaert.episodeWatcher.domain.Episode;
@@ -34,9 +36,15 @@ public class EpisodeDetailsSubActivity extends Activity {
         
         showNameText.setText(episode.getShowName());
         episodeNameText.setText(episode.getName());
-        seasonText.setText("" + episode.getSeason());
-        episodeText.setText("" + episode.getEpisode());
-        airdateText.setText("" + episode.getAirDate().toLocaleString());
+        seasonText.setText(" " + episode.getSeason());
+        episodeText.setText(" " + episode.getEpisode());
+        
+        //Air date in specifc format
+        Date airdate = episode.getAirDate();
+        DateFormat formatter = SimpleDateFormat.getDateInstance(DateFormat.SHORT);
+        String formattedAirDate = formatter.format(airdate);
+        
+        airdateText.setText(" " + formattedAirDate);
         
         Button markAsSeenButton = (Button) findViewById(R.id.markAsSeenButton);
         
