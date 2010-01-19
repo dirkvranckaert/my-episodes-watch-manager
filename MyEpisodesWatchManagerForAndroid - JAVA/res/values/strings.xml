@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MyEpisodes Watch Manager</string>
+    <string name="versionCode">4</string>
+    <string name="versionName">1.1.0</string>
     
     <!-- login form -->
     <string name="loginFormTitle">Provide your user details for the MyEpisodes.com website below.</string>

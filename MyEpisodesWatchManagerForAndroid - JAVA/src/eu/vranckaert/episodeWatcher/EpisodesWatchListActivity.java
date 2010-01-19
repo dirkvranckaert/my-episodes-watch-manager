@@ -182,7 +182,8 @@ public class EpisodesWatchListActivity extends ListActivity {
 		try {
 			episodes = myEpisodesService.retrieveEpisodes(user);
 		} catch (InternetConnectivityException e) {
-			Toast.makeText(EpisodesWatchListActivity.this, R.string.networkIssues, Toast.LENGTH_LONG);
+			//TODO handle a connection exception in a proper way!
+			//Toast.makeText(EpisodesWatchListActivity.this, R.string.networkIssues, Toast.LENGTH_LONG);
 			e.printStackTrace();
 		} catch (Exception e) {
 			Toast.makeText(EpisodesWatchListActivity.this, R.string.watchListUnableToReadFeed, Toast.LENGTH_LONG);
