@@ -5,6 +5,11 @@
   * Final releases 0.x.x
 
 =Android Market Releases=
+*Version 1.2.0*
+  * Bugfixes:
+  * Issue 7: network connection problem which made the application crash
+  * Issue 9: Date formatting in the episode details
+
 *Version 1.1.0*
   * Bugfixing release for Issue 2 and Issue 8
 
