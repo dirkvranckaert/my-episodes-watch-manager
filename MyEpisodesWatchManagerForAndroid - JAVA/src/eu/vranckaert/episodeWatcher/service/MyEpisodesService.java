@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -114,7 +115,7 @@ public class MyEpisodesService {
     }
 
     public void watchedEpisode(Episode episode, User user) throws LoginFailedException
-            , ShowUpdateFailedException, UnsupportedHttpPostEncodingException {
+            , ShowUpdateFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
         HttpClient httpClient = new DefaultHttpClient();
 
         login(httpClient, user.getUsername(), user.getPassword());
@@ -123,7 +124,7 @@ public class MyEpisodesService {
         httpClient.getConnectionManager().shutdown();
     }
 
-    private void markAsSeen(HttpClient httpClient, Episode episode) throws ShowUpdateFailedException {
+    private void markAsSeen(HttpClient httpClient, Episode episode) throws ShowUpdateFailedException, InternetConnectivityException {
         String urlRep = MYEPISODES_UPDATE_PAGE;
         urlRep = urlRep.replace(MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT, String.valueOf(episode.getEpisode()));
         urlRep = urlRep.replace(MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT, String.valueOf(episode.getSeason()));
@@ -136,7 +137,11 @@ public class MyEpisodesService {
         try {
         	HttpResponse response = httpClient.execute(get);
         	status = response.getStatusLine().getStatusCode();
-        } catch (IOException e) {
+        } catch (UnknownHostException e) {
+			String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
+		} catch (IOException e) {
             String message = "Updating the show status failed for URL " + urlRep;
             Log.w(LOG_TAG, message, e);
             throw new ShowUpdateFailedException(message, e);
@@ -151,14 +156,14 @@ public class MyEpisodesService {
         }
     }
 
-    public int login(User user) throws LoginFailedException, UnsupportedHttpPostEncodingException {
+    public int login(User user) throws LoginFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
         HttpClient httpClient = new DefaultHttpClient();
     	int status = login(httpClient, user.getUsername(), user.getPassword());
         httpClient.getConnectionManager().shutdown();
         return status;
     }
     
-    private int login(HttpClient httpClient, String username, String password) throws LoginFailedException, UnsupportedHttpPostEncodingException {
+    private int login(HttpClient httpClient, String username, String password) throws LoginFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
     	HttpPost post = new HttpPost(MYEPISODES_LOGIN_PAGE);
 
     	List <NameValuePair> nvps = new ArrayList <NameValuePair>();
@@ -182,7 +187,11 @@ public class MyEpisodesService {
         	status = response.getStatusLine().getStatusCode();
         	
         	response.getEntity().consumeContent();
-        } catch (IOException e) {
+        } catch (UnknownHostException e) {
+			String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
+		} catch (IOException e) {
             String message = "Login to MyEpisodes failed.";
             Log.w(LOG_TAG, message, e);
             throw new LoginFailedException(message, e);

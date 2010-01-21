@@ -1,10 +1,12 @@
 package eu.vranckaert.episodeWatcher;
 
 import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +16,8 @@ public class LoginSubActivity extends Activity {
     private Button loginButton;
     private MyEpisodesService myEpisodesService;
     private User user;
+    
+    private static final String LOG_TAG = "LoginSubActivity";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,19 +38,23 @@ public class LoginSubActivity extends Activity {
 					);
 					
 			    	Toast.makeText(LoginSubActivity.this, R.string.loginStartLogin, Toast.LENGTH_SHORT).show();
-			    	int status = 0;
 					try {
-						status = myEpisodesService.login(user);
+						myEpisodesService.login(user);
 						Toast.makeText(LoginSubActivity.this, R.string.loginSuccessfullLogin, Toast.LENGTH_LONG).show();
-						
 						storeLoginCredentials(user);
 						finalizeLogin();
+					} catch (InternetConnectivityException e) {
+						String message = "Could not connect to host";
+						Log.e(LOG_TAG, message, e);
+						Toast.makeText(LoginSubActivity.this, R.string.internetConnectionFailureTryAgain, Toast.LENGTH_LONG).show();
 					} catch (LoginFailedException e) {
+						String message = "Login failed";
+						Log.e(LOG_TAG, message, e);
 						Toast.makeText(LoginSubActivity.this, R.string.loginLoginFailed, Toast.LENGTH_LONG).show();
-						e.printStackTrace();
 					} catch (Exception e) {
-						Toast.makeText(LoginSubActivity.this, R.string.loginLoginFailedUnhandledException, Toast.LENGTH_LONG).show();
-						e.printStackTrace();
+						String message = "Some Exception occured";
+						Log.e(LOG_TAG, message, e);
+						Toast.makeText(LoginSubActivity.this, R.string.defaultExceptionMessage, Toast.LENGTH_LONG).show();
 					}
 				}
 			});
