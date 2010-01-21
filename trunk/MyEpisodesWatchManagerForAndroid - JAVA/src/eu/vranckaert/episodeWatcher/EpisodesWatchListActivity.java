@@ -5,6 +5,7 @@ import java.util.List;
 
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.exception.FeedUrlParsingException;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
@@ -12,12 +13,15 @@ import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingExcepti
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 
 import eu.vranckaert.episodeWatcher.R;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,7 +33,6 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class EpisodesWatchListActivity extends ListActivity {
@@ -37,15 +40,18 @@ public class EpisodesWatchListActivity extends ListActivity {
 	private static final int EPISODE_DETAILS_REQUEST_CODE = 1;
 	
 	private static final int EPISODE_LOADING_DIALOG = 0;
+	private static final int EXCEPTION_DIALOG = 1;
+	private static final String LOG_TAG = "EpisodeWatchListActivity";
 	
 	private User user;
     private MyEpisodesService myEpisodesService;
     private List<Episode> episodes = new ArrayList<Episode>(0);
     private TextView subTitle;
     private EpisodeAdapter episodeAdapter;
-    private ProgressDialog progressDialog;
     private Runnable viewEpisodes;
     private Runnable markEpisode;
+    
+    private Integer exceptionMessageResId = null;
 	
 	public EpisodesWatchListActivity() {
 		super();
@@ -69,14 +75,34 @@ public class EpisodesWatchListActivity extends ListActivity {
 
 	@Override
 	protected Dialog onCreateDialog(int id) {
-		if (id == EPISODE_LOADING_DIALOG) {
-			ProgressDialog progressDialog = new ProgressDialog(this);
-			progressDialog.setMessage(this.getString(R.string.progressLoadingTitle));
-			//progressDialog.setTitle(R.string.progressLoadingTitle);
-			return progressDialog;
+		Dialog dialog = null;
+		switch (id) {
+			case EPISODE_LOADING_DIALOG:
+				ProgressDialog progressDialog = new ProgressDialog(this);
+				progressDialog.setMessage(this.getString(R.string.progressLoadingTitle));
+				//progressDialog.setTitle(R.string.progressLoadingTitle);
+				dialog = progressDialog;
+				break;
+			case EXCEPTION_DIALOG:
+				if (exceptionMessageResId == null) {
+					exceptionMessageResId = R.string.defaultExceptionMessage;
+				}
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle(R.string.exceptionDialogTitle)
+					   .setMessage(exceptionMessageResId)
+					   .setCancelable(false)
+					   .setPositiveButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				                dialog.cancel();
+				           }
+				       });
+				dialog = builder.create();
+				break;
+			default:
+				dialog = super.onCreateDialog(id);
+				break;
 		}
-		
-		return super.onCreateDialog(id);
+		return dialog;
 	}
 
 	@Override
@@ -182,12 +208,17 @@ public class EpisodesWatchListActivity extends ListActivity {
 		try {
 			episodes = myEpisodesService.retrieveEpisodes(user);
 		} catch (InternetConnectivityException e) {
-			//TODO handle a connection exception in a proper way!
-			//Toast.makeText(EpisodesWatchListActivity.this, R.string.networkIssues, Toast.LENGTH_LONG);
-			e.printStackTrace();
+			String message = "Could not connect to host";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.internetConnectionFailureReload;
+		} catch(FeedUrlParsingException e) { 
+			String message = "Exception occured:";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.watchListUnableToReadFeed;
 		} catch (Exception e) {
-			Toast.makeText(EpisodesWatchListActivity.this, R.string.watchListUnableToReadFeed, Toast.LENGTH_LONG);
-			e.printStackTrace();
+			String message = "Exception occured:";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.defaultExceptionMessage;
 		}
 		runOnUiThread(returnEpisodes);
 	}
@@ -210,6 +241,12 @@ public class EpisodesWatchListActivity extends ListActivity {
 				subTitle.setText("");
 			}
 			dismissDialog(EPISODE_LOADING_DIALOG);
+			
+			if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
+				showDialog(EXCEPTION_DIALOG);
+				exceptionMessageResId = null;
+			}
+			
 			episodeAdapter.notifyDataSetChanged();
 		}
 	};
@@ -257,15 +294,26 @@ public class EpisodesWatchListActivity extends ListActivity {
 	private void markEpisode(Episode episode) {
 		try {
 			myEpisodesService.watchedEpisode(episode, user);
+		} catch (InternetConnectivityException e) {
+			String message = "Could not connect to host";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.networkIssues;
 		} catch (LoginFailedException e) {
-			Toast.makeText(EpisodesWatchListActivity.this, R.string.watchListUnableToMarkWatched, Toast.LENGTH_LONG);
-			e.printStackTrace();
+			String message = "Login failure";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.networkIssues;
 		} catch (ShowUpdateFailedException e) {
-			Toast.makeText(EpisodesWatchListActivity.this, R.string.watchListUnableToMarkWatched, Toast.LENGTH_LONG);
-			e.printStackTrace();
+			String message = "Marking the show watched failed (" + episode + ")";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.watchListUnableToMarkWatched;
 		} catch (UnsupportedHttpPostEncodingException e) {
-			Toast.makeText(EpisodesWatchListActivity.this, R.string.networkIssues, Toast.LENGTH_LONG);
-			e.printStackTrace();
+			String message = "Network issues";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.networkIssues;
+		} catch (Exception e) {
+			String message = "Unknown exception occured";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.defaultExceptionMessage;
 		}
 		runOnUiThread(delegateEpisodeReloading);
 	}
@@ -274,7 +322,13 @@ public class EpisodesWatchListActivity extends ListActivity {
 		@Override
 		public void run() {
 			dismissDialog(EPISODE_LOADING_DIALOG);
-			reloadEpisodes();
+			
+			if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
+				showDialog(EXCEPTION_DIALOG);
+				exceptionMessageResId = null;
+			} else {			
+				reloadEpisodes();
+			}
 		}
 	};
 	
