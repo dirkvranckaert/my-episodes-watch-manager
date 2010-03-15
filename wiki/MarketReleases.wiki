@@ -1,4 +1,9 @@
 =Android Market Releases=
+*Version 1.3.1*
+  * Issue 15
+  * Issue 13 (Could not do anything as bug was not reproducable)
+  * Issue 14 (Dutch i18n implemented)
+
 *Version 1.3.0*
   * Major bugfix:
   * Issue 5: Exception handling is now implemented in a decent way!
