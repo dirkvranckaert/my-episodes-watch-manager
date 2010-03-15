@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -41,6 +42,8 @@ public class EpisodesWatchListActivity extends ListActivity {
 	
 	private static final int EPISODE_LOADING_DIALOG = 0;
 	private static final int EXCEPTION_DIALOG = 1;
+	private static final int ABOUT_DIALOG = 2;
+	private static final int CHANGELOG_DIALOG = 3;
 	private static final String LOG_TAG = "EpisodeWatchListActivity";
 	
 	private User user;
@@ -98,6 +101,22 @@ public class EpisodesWatchListActivity extends ListActivity {
 				       });
 				dialog = builder.create();
 				break;
+			case ABOUT_DIALOG:
+				dialog = new Dialog(this);
+				dialog.setContentView(R.layout.informationsdialog);
+				dialog.setTitle(R.string.aboutTitle);
+				TextView aboutText = (TextView) dialog.findViewById(R.id.informationtext);
+				aboutText.setText(R.string.aboutText);
+				Linkify.addLinks(aboutText, Linkify.ALL);
+				break;
+			case CHANGELOG_DIALOG:
+				dialog = new Dialog(this);
+				dialog.setContentView(R.layout.informationsdialog);
+				dialog.setTitle(R.string.changelogTitle);
+				TextView changelogText = (TextView) dialog.findViewById(R.id.informationtext);
+				changelogText.setText(R.string.changelogText);
+				Linkify.addLinks(changelogText, Linkify.ALL);
+				break;
 			default:
 				dialog = super.onCreateDialog(id);
 				break;
@@ -120,8 +139,14 @@ public class EpisodesWatchListActivity extends ListActivity {
 		case R.id.refresh:
 			reloadEpisodes();
 			return true;
+		case R.id.about:
+			showDialog(ABOUT_DIALOG);
+			return true;
 		case R.id.logout:
 			logout();
+			return true;
+		case R.id.changelog:
+			showDialog(CHANGELOG_DIALOG);
 			return true;
 		}
 		return false;
