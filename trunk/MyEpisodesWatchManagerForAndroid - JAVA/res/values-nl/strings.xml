@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyEpisodes Watch Manager</string>
+
+    
+    <!-- login form -->
+    <string name="loginFormTitle">Vul uw logingegevens voor de MyEpisodes.com hieronder in.</string>
+    <string name="loginUsernameHint">Gebruikersnaam</string>
+    <string name="loginPasswordHint">Wachtwoord</string>
+    <string name="loginLoginBtn">Aanmelden</string>
+    <string name="loginStartLogin">Bezig met aanmelen bij MyEpisodes.com</string>
+    <string name="loginSuccessfullLogin">Aanmelden gelukt</string>
+    <string name="loginLoginFailed">Aanmelden bij MyEpisodes.com is mislukt. Kijk uw aanmeldingsgegevens en connectie met internet na vooraleer opnieuw te proberen!</string>
+    
+    <!-- watchtlist -->
+    <string name="watchListTitle">Lijst series/afleveringen</string>
+    <string name="watchListSubTitle">%d afleveringen te bekijken</string>
+    <string name="watchListEmpty">Geen afleveringen gevonden.</string>
+    
+    <!-- progressDialog -->
+    <string name="progressLoadingTitle">Laden...</string>
+    <string name="progressLoadingBody">Verzenden/Ontvangen data</string>
+    
+    <!-- aboutDialog -->
+    <string name="aboutTitle">Over...</string>
+    <string name="aboutText">Geschreven door: Dirk Vranckaert\n
+    Onderhouden door: Dirk Vranckaert\n
+    Licentie: GNU GPL V3 License\n
+    Project website: http://code.google.com/p/my-episodes-watch-manager\n
+    Project contact: dirkvranckaert@gmail.com\n
+    \n
+    Beheer alle series die u volgt gebruik makende van MyEpisodes.com (registratie verplicht) and ga op je mobiele telefoon meteen na wat de volgende aflevering is de je nog moet bekijken.</string>
+    
+    <!-- menu's -->
+    <!-- main menu -->
+    <string name="refresh">Vernieuwen</string>
+    <string name="about">Over</string>
+    <string name="logout">Afmelden</string>
+    <string name="changelog">Veranderingen</string>
+    <!-- episode specific menu -->
+    <string name="menuEpisodeDetails">Details</string>
+    <string name="episodeDetailsSeasonLabel">Seizoen: </string>
+    <string name="episodeDetailsEpisodeLabel">Aflevering: </string>
+    <string name="episodeDetailsAirDateLabel">Uitzend-datum: </string>
+    <string name="menuEpisodeMarkWatched">Markeer als bekeken</string>
+    
+    <!-- Basic Dialog -->
+    <string name="dialogOK">OK</string>
+    
+    <!-- Exception handling for dialogs -->
+    <string name="exceptionDialogTitle">Ooops...</string>
+    <string name="defaultExceptionMessage">Er is iets fout gegaan. Probeer de applicatie te herstarten en kijk uw internet verbinding na. Indien dit probleem blijft gelieve een bug te registreren op http://code.google.com/p/my-episodes-watch-manager/.</string>
+    <string name="internetConnectionFailureTryAgain">Kan geen internetverbinding maken. Gelieve opnieuw te proberen.</string>
+    <string name="internetConnectionFailureReload">Kan geen internetverbinding maken. Gebruik de menu-optie om the herladen en opnieuw te proberen.</string>
+    <string name="networkIssues">Netwerk probleem!\nProbeer handmatig te vernieuwen.</string>
+    <string name="watchListUnableToReadFeed">Netwerk probleem!\nProbeer handmatig te vernieuwen.</string>
+    <string name="watchListUnableToMarkWatched">Kan deze episode niet markeren als gezien!\nKijk uw internetverbinding na of herlaad de lijst!</string>
+</resources>

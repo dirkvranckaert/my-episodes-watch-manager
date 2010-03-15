@@ -21,11 +21,40 @@
     <string name="progressLoadingTitle">Loading...</string>
     <string name="progressLoadingBody">Sending/Retreiving data</string>
     
+    <!-- aboutDialog -->
+    <string name="aboutTitle">About...</string>
+    <string name="aboutText">Written by: Dirk Vranckaert\n
+    Maintained by: Dirk Vranckaert\n
+    License: GNU GPL V3 License\n
+    Project website: http://code.google.com/p/my-episodes-watch-manager\n
+    Project contact: dirkvranckaert@gmail.com\n
+    \n
+    Mange the episodes you follow using MyEpisodes.com (registration required) and watch directly on your mobile what\'s the next episode you have to watch.</string>
+    
+    <!-- changelogDialog -->
+    <string name="changelogTitle">What\'s changed</string>
+    <string name="changelogText"> Version 1.3.1\n
+    ***********\n
+    Added about dialog\n
+    Added changelog dialog\n
+    Tested compatibility with Android 2.0\n
+    Internationalization (i18n: English, Dutch)\n
+    \n
+    Version 1.3.0\n
+    ***********\n
+    Bugfixing release\n
+    \n
+    Version 1.2.0\n
+    ***********\n
+    Network connction issues solved\n
+    Date formatting in episode details</string>
+    
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Refresh</string>
     <string name="about">About</string>
     <string name="logout">Logout</string>
+    <string name="changelog">What\'s changed</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Details</string>
     <string name="episodeDetailsSeasonLabel">Season: </string>
