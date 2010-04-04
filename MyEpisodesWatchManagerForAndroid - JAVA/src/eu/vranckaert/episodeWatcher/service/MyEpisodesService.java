@@ -103,10 +103,17 @@ public class MyEpisodesService {
 	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
 	                
 	                episodes.add(episode);
+	            } else if (episodeInfo.length == FEED_TITLE_EPISODE_FIELDS - 1) {
+	            	//Solves problem mentioned in Issue 20
+	            	episode.setShowName(episodeInfo[0].trim());
+	                getSeasonAndEpisodeNumber(episodeInfo[1], episode);
+	                episode.setName(episodeInfo[2].trim() + "...");
+	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
+	                
+	                episodes.add(episode);
 	            } else {
 	                String message = "Problem parsing a feed item. Feed details: " + item.toString();
 	                Log.e(LOG_TAG, message);
-	                //throw new UnableToParseFeedException(message);
 	            }
             }
         }

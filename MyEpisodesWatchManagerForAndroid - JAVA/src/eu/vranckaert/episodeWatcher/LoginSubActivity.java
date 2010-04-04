@@ -1,5 +1,7 @@
 package eu.vranckaert.episodeWatcher;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
@@ -26,6 +28,9 @@ public class LoginSubActivity extends Activity {
         init();
         
         if (!checkLoginCredentials()) {
+        	GoogleAnalyticsTracker tracker = GoogleAnalyticsTracker.getInstance();
+        	tracker.trackPageView("loginSubActivity");
+        	
 	        setContentView(R.layout.login);
 	        
 	        loginButton = (Button) findViewById(R.id.loginLogin);
