@@ -1,4 +1,8 @@
 =Android Market Releases=
+*Version 1.3.2*
+  * Issue 19 (Google Analytics)
+  * Issue 20 (To long episode names)
+
 *Version 1.3.1*
   * Issue 15
   * Issue 13 (Could not do anything as bug was not reproducable)
