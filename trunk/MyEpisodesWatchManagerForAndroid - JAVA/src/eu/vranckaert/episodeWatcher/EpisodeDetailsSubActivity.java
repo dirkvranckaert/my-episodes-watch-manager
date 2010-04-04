@@ -41,6 +41,9 @@ public class EpisodeDetailsSubActivity extends Activity {
         
         //Air date in specifc format
         Date airdate = episode.getAirDate();
+        if (airdate == null) {
+        	airdate = new Date();
+        }
         DateFormat formatter = SimpleDateFormat.getDateInstance(DateFormat.SHORT);
         String formattedAirDate = formatter.format(airdate);
         

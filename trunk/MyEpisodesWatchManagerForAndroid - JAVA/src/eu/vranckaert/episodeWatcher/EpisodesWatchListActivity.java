@@ -3,6 +3,8 @@ package eu.vranckaert.episodeWatcher;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.FeedUrlParsingException;
@@ -55,6 +57,8 @@ public class EpisodesWatchListActivity extends ListActivity {
     private Runnable markEpisode;
     
     private Integer exceptionMessageResId = null;
+    
+    private GoogleAnalyticsTracker tracker;
 	
 	public EpisodesWatchListActivity() {
 		super();
@@ -102,6 +106,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 				dialog = builder.create();
 				break;
 			case ABOUT_DIALOG:
+				tracker.trackPageView("/aboutDialog");
 				dialog = new Dialog(this);
 				dialog.setContentView(R.layout.informationsdialog);
 				dialog.setTitle(R.string.aboutTitle);
@@ -110,6 +115,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 				Linkify.addLinks(aboutText, Linkify.ALL);
 				break;
 			case CHANGELOG_DIALOG:
+				tracker.trackPageView("/changeLogDialog");
 				dialog = new Dialog(this);
 				dialog.setContentView(R.layout.informationsdialog);
 				dialog.setTitle(R.string.changelogTitle);
@@ -127,6 +133,9 @@ public class EpisodesWatchListActivity extends ListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        tracker = GoogleAnalyticsTracker.getInstance();
+        tracker.start("UA-3183255-2", 30, this);
         
         init();
         
@@ -158,9 +167,11 @@ public class EpisodesWatchListActivity extends ListActivity {
 		Episode currentEpisode = episodes.get(menuInfo.position);
 		switch(item.getItemId()) {
 		case R.id.episodeMenuWatched:
+			tracker.trackEvent("MarkAsWatched", "ContextMenu-EpisodesWatchListActivity", "", 0);
 			markEpisodeWatched(currentEpisode);
 			return true;
 		case R.id.episodeMenuDetails:
+			tracker.trackPageView("/episodeDetailsSubActivity");
 			openEpisodeDetails(currentEpisode);
 			return true;
 		}
@@ -208,7 +219,8 @@ public class EpisodesWatchListActivity extends ListActivity {
 				Episode episode = (Episode) intentData.getSerializable("episode");
 				
 				if (markEpisodeWathed) {
-					markEpisode(episode);
+					tracker.trackEvent("MarkAsWatched", "MenuButton-DetailsSubActivity", "", 0);
+					markEpisodeWatched(episode);
 				}
 			}
 		} else {
@@ -358,6 +370,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 	};
 	
 	private void logout() {
+		tracker.trackEvent("Logout", "MenuButton-EpisodesWatchListActivity", "", 0);
 		Preferences.removePreference(this, User.USERNAME);
 		Preferences.removePreference(this, User.PASSWORD);
 		openLoginActivity();
@@ -365,5 +378,12 @@ public class EpisodesWatchListActivity extends ListActivity {
 	
 	private void exit() {
 		finish();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		// Stop the tracker when it is no longer needed.
+		tracker.stop();
 	}
 }

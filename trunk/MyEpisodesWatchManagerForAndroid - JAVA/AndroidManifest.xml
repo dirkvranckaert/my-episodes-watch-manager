@@ -17,6 +17,15 @@
     </application>
     <uses-sdk android:minSdkVersion="3" />
     
-     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <!-- 
+Profielnaam: 	myepisodeswatchmanager-android.vranckaert.eu
+Website-URL: 	http://myepisodeswatchmanager-android.vranckaert.eu
+Webeigendom-id [?] : 	UA-3183255-2
+Status voor het bijhouden van conversies: 	waarschuwing   Bijhouden van conversies niet geïnstalleerd (Laatst gecontroleerd op: 3-apr-2010 8:25:44 )
+De conversiecode van Google Analytics is niet gedetecteerd op de startpagina van uw website. Voor een correcte werking van Analytics moet de conversiecode door u of uw webbeheerder aan elke pagina van uw website worden toegevoegd. 
+     -->
 
 </manifest> 
