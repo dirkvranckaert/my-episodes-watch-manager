@@ -36,7 +36,11 @@
     
     <!-- changelogDialog -->
     <string name="changelogTitle">What\'s changed</string>
-    <string name="changelogText"> Version 1.3.2\n
+    <string name="changelogText"> Version 1.3.3\n
+    ***********\n
+    Implemented Question dialog when logging out\n
+    \n
+    Version 1.3.2\n
     ***********\n
     Added Google Analytics for statics\n
     Solved issue with to long episode names\n
