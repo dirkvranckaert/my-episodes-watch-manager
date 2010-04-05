@@ -1,4 +1,7 @@
 =Android Market Releases=
+*Version 1.3.3*
+  * Issue 17 (Pop-up question upon logout)
+
 *Version 1.3.2*
   * Issue 19 (Google Analytics)
   * Issue 20 (To long episode names)
