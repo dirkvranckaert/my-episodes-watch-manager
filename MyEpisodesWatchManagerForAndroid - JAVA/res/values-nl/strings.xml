@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MyEpisodes Watch Manager</string>
-
+    
+    <!-- default values -->
+    <string name="yes">Ja</string>
+    <string name="no">Nee</string>
     
     <!-- login form -->
     <string name="loginFormTitle">Vul uw logingegevens voor de MyEpisodes.com hieronder in.</string>
@@ -30,6 +33,10 @@
     Project contact: dirkvranckaert@gmail.com\n
     \n
     Beheer alle series die u volgt gebruik makende van MyEpisodes.com (registratie verplicht) and ga op je mobiele telefoon meteen na wat de volgende aflevering is de je nog moet bekijken.</string>
+    
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Bent u zeker?</string>
+    <string name="logoutDialogMessage">Uw login-gegevens zullen niet langer op het toestel worden opgeslagen.</string>
     
     <!-- menu's -->
     <!-- main menu -->

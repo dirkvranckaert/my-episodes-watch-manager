@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MyEpisodes Watch Manager</string>
-
+    
+    <!-- default values -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     
     <!-- login form -->
     <string name="loginFormTitle">Provide your user details for the MyEpisodes.com website below.</string>
@@ -53,6 +56,10 @@
     ***********\n
     Network connction issues solved\n
     Date formatting in episode details</string>
+    
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Are you sure?</string>
+    <string name="logoutDialogMessage">Your credentials will no longer be stored on the device.</string>
     
     <!-- menu's -->
     <!-- main menu -->
