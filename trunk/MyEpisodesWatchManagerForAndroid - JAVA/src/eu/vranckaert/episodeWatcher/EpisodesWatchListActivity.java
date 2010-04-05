@@ -46,6 +46,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 	private static final int EXCEPTION_DIALOG = 1;
 	private static final int ABOUT_DIALOG = 2;
 	private static final int CHANGELOG_DIALOG = 3;
+	private static final int LOGOUT_DIALOG = 4;
 	private static final String LOG_TAG = "EpisodeWatchListActivity";
 	
 	private User user;
@@ -123,6 +124,26 @@ public class EpisodesWatchListActivity extends ListActivity {
 				changelogText.setText(R.string.changelogText);
 				Linkify.addLinks(changelogText, Linkify.ALL);
 				break;
+			case LOGOUT_DIALOG:
+				AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+				alertBuilder.setTitle(R.string.logoutDialogTitle)
+						   .setMessage(R.string.logoutDialogMessage)
+						   .setCancelable(false)
+						   .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									logout();
+								}
+							})
+						   .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									dialog.cancel();
+								}
+							});
+				AlertDialog alertDialog = alertBuilder.create();
+				dialog = alertDialog;
+				break;
 			default:
 				dialog = super.onCreateDialog(id);
 				break;
@@ -152,7 +173,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 			showDialog(ABOUT_DIALOG);
 			return true;
 		case R.id.logout:
-			logout();
+			showDialog(LOGOUT_DIALOG);
 			return true;
 		case R.id.changelog:
 			showDialog(CHANGELOG_DIALOG);
