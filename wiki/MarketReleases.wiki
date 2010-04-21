@@ -1,4 +1,7 @@
 =Android Market Releases=
+*Version 1.3.4*
+  * Issue 21 (White theme)
+
 *Version 1.3.3*
   * Issue 17 (Pop-up question upon logout)
 
