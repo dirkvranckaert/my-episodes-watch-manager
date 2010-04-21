@@ -3,6 +3,7 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:padding="10dp"
+              android:background="#FFF"
               >
     <ScrollView
 		android:id="@+id/scrollview"
@@ -13,7 +14,7 @@
     	<TextView android:id="@+id/informationtext"
         	    android:layout_width="wrap_content"
             	android:layout_height="fill_parent"
-				android:textColor="#FFF"
+				android:textColor="#000"
 				/>
 	</ScrollView>
 </LinearLayout>
