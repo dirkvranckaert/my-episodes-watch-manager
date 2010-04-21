@@ -3,20 +3,30 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#FFF"
     >
     
+    <ImageView android:id="@+id/ImageView01"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/icon"
+	    />
+
     <TextView
     	android:id="@+id/watchListTitle"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     	android:text="@string/watchListTitle"
-    	android:textSize="20px"
+    	android:textColor="#000"
+    	android:textSize="18px"
     	/>
     	
     <TextView
     	android:id="@+id/watchListSubTitle"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
+    	android:paddingBottom="3px"
+    	android:textColor="#000"
     	/>
 	<ListView
 		android:id="@+id/android:list"
