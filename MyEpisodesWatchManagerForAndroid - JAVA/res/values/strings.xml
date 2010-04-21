@@ -27,7 +27,9 @@
     <!-- aboutDialog -->
     <string name="aboutTitle">About...</string>
     <string name="aboutText">Written by: Dirk Vranckaert\n
-    Maintained by: Dirk Vranckaert\n
+    Maintained by:\n
+    * Dirk Vranckaert\n
+    * Ivo Janssens\n
     License: GNU GPL V3 License\n
     Project website: http://code.google.com/p/my-episodes-watch-manager\n
     Project contact: dirkvranckaert@gmail.com\n
