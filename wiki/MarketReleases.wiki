@@ -1,6 +1,6 @@
 =Android Market Releases=
 *Version 1.3.5* (Not released yet)
-  * Issue-25 (On click animation in list)
+  * Issue 25 (On click animation in list)
 
 *Version 1.3.4*
   * Issue 21 (White theme)
