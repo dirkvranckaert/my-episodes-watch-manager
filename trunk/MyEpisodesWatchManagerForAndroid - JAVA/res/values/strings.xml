@@ -92,7 +92,7 @@
     <string name="defaultExceptionMessage">Something went wrong. Try to restart the application and check your internet connection. If you keep having this issue report a bug at http://code.google.com/p/my-episodes-watch-manager/.</string>
     <string name="internetConnectionFailureTryAgain">Could not establish internet connection. Please try again!</string>
     <string name="internetConnectionFailureReload">Could not establish internet connection. Use the menu option to reload and try again.</string>
-    <string name="networkIssues">Network error!\nTry to refresh manually.</string>
+    <string name="networkIssues">Network error!\nCheck you network settings and try refreshing manually.</string>
     <string name="watchListUnableToReadFeed">Network error!\nTry to refresh manually.</string>
     <string name="watchListUnableToMarkWatched">Failed to mark this episode watched!\nCheck internet connection or refresh the list!</string>
 </resources>
