@@ -61,7 +61,7 @@
     <string name="defaultExceptionMessage">Er is iets fout gegaan. Probeer de applicatie te herstarten en kijk uw internet verbinding na. Indien dit probleem blijft gelieve een bug te registreren op http://code.google.com/p/my-episodes-watch-manager/.</string>
     <string name="internetConnectionFailureTryAgain">Kan geen internetverbinding maken. Gelieve opnieuw te proberen.</string>
     <string name="internetConnectionFailureReload">Kan geen internetverbinding maken. Gebruik de menu-optie om the herladen en opnieuw te proberen.</string>
-    <string name="networkIssues">Netwerk probleem!\nProbeer handmatig te vernieuwen.</string>
+    <string name="networkIssues">Netwerk probleem!\nControleer je netwerkinstellingen en probeer handmatig te vernieuwen.</string>
     <string name="watchListUnableToReadFeed">Netwerk probleem!\nProbeer handmatig te vernieuwen.</string>
     <string name="watchListUnableToMarkWatched">Kan deze episode niet markeren als gezien!\nKijk uw internetverbinding na of herlaad de lijst!</string>
 </resources>
