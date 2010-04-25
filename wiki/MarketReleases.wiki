@@ -1,6 +1,9 @@
 =Android Market Releases=
 *Version 1.3.5* (Not released yet)
+  * Issue 10 (Update error messages)
   * Issue 25 (On click animation in list)
+  * Issue 26 (Scroll in login screen)
+  * Issue 27 (New header)
 
 *Version 1.3.4*
   * Issue 21 (White theme)
