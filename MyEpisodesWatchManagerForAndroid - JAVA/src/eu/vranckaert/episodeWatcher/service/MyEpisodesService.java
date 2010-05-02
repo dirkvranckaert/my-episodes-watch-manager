@@ -192,15 +192,23 @@ public class MyEpisodesService {
 		
 		boolean result = false;
 		String responsePage = "";
-        	HttpResponse response;
-			try {
-				response = httpClient.execute(post);
-				responsePage = EntityUtils.toString(response.getEntity());
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+        HttpResponse response;
+        try {
+            response = httpClient.execute(post);
+            responsePage = EntityUtils.toString(response.getEntity());
+        } catch (ClientProtocolException e) {
+            String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
+        } catch (UnknownHostException e) {
+			String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
+		} catch (IOException e) {
+            String message = "Login to MyEpisodes failed.";
+            Log.w(LOG_TAG, message, e);
+            throw new LoginFailedException(message, e);
+        }
 
         if (responsePage.contains("Wrong username/password")) {
             String message = "Login to MyEpisodes failed. Login page: " + MYEPISODES_LOGIN_PAGE + " Username: " + username +
