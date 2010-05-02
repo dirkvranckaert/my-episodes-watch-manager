@@ -44,16 +44,21 @@ public class LoginSubActivity extends Activity {
 					
 			    	Toast.makeText(LoginSubActivity.this, R.string.loginStartLogin, Toast.LENGTH_SHORT).show();
 					try {
-						myEpisodesService.login(user);
-						Toast.makeText(LoginSubActivity.this, R.string.loginSuccessfullLogin, Toast.LENGTH_LONG).show();
-						storeLoginCredentials(user);
-						finalizeLogin();
+						boolean loginStatus = myEpisodesService.login(user);
+						if(loginStatus)
+						{
+							Toast.makeText(LoginSubActivity.this, R.string.loginSuccessfullLogin, Toast.LENGTH_LONG).show();
+							storeLoginCredentials(user);
+							finalizeLogin();
+						}
 					} catch (InternetConnectivityException e) {
 						String message = "Could not connect to host";
 						Log.e(LOG_TAG, message, e);
 						Toast.makeText(LoginSubActivity.this, R.string.internetConnectionFailureTryAgain, Toast.LENGTH_LONG).show();
 					} catch (LoginFailedException e) {
 						String message = "Login failed";
+						((EditText) findViewById(R.id.loginUsername)).setText("");
+						((EditText) findViewById(R.id.loginPassword)).setText("");
 						Log.e(LOG_TAG, message, e);
 						Toast.makeText(LoginSubActivity.this, R.string.loginLoginFailed, Toast.LENGTH_LONG).show();
 					} catch (Exception e) {

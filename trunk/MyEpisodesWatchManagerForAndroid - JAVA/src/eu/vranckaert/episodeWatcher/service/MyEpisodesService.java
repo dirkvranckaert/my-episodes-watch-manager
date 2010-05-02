@@ -19,6 +19,7 @@ import java.util.Locale;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -26,8 +27,11 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 
 import android.util.Log;
+import android.widget.EditText;
+import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.domain.Feed;
 import eu.vranckaert.episodeWatcher.domain.FeedItem;
@@ -163,14 +167,14 @@ public class MyEpisodesService {
         }
     }
 
-    public int login(User user) throws LoginFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
+    public boolean login(User user) throws LoginFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
         HttpClient httpClient = new DefaultHttpClient();
-    	int status = login(httpClient, user.getUsername(), user.getPassword());
+    	boolean status = login(httpClient, user.getUsername(), user.getPassword());
         httpClient.getConnectionManager().shutdown();
         return status;
     }
     
-    private int login(HttpClient httpClient, String username, String password) throws LoginFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
+    private boolean login(HttpClient httpClient, String username, String password) throws LoginFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
     	HttpPost post = new HttpPost(MYEPISODES_LOGIN_PAGE);
 
     	List <NameValuePair> nvps = new ArrayList <NameValuePair>();
@@ -185,34 +189,29 @@ public class MyEpisodesService {
 			Log.e(LOG_TAG, message, e);
 			throw new UnsupportedHttpPostEncodingException(message, e);
 		}
+		
+		boolean result = false;
+		String responsePage = "";
+        	HttpResponse response;
+			try {
+				response = httpClient.execute(post);
+				responsePage = EntityUtils.toString(response.getEntity());
+			} catch (ClientProtocolException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
-        int status = 0;
-        HttpEntity entity = null;
-
-        try {
-        	HttpResponse response = httpClient.execute(post);
-        	status = response.getStatusLine().getStatusCode();
-        	
-        	response.getEntity().consumeContent();
-        } catch (UnknownHostException e) {
-			String message = "Could not connect to host.";
-			Log.e(LOG_TAG, message, e);
-			throw new InternetConnectivityException(message, e);
-		} catch (IOException e) {
-            String message = "Login to MyEpisodes failed.";
-            Log.w(LOG_TAG, message, e);
-            throw new LoginFailedException(message, e);
-        }
-
-        if (status != 200) {
+        if (responsePage.contains("Wrong username/password")) {
             String message = "Login to MyEpisodes failed. Login page: " + MYEPISODES_LOGIN_PAGE + " Username: " + username +
-            					" Password: ***** Leaving with status code " + status;
+            					" Password: ***** Leaving with status code " + result;
             Log.w(LOG_TAG, message);
             throw new LoginFailedException(message);
         } else {
-            Log.i(LOG_TAG, "Successfull login to " + MYEPISODES_LOGIN_PAGE + " with user " + username + " and password *****");
-            return status;
+            Log.i(LOG_TAG, "Successfull login to " + MYEPISODES_LOGIN_PAGE + result);
+            result = true;
         }
+        return result;
     }
 
     private Date parseDate(String date) {
