@@ -36,36 +36,42 @@ public class LoginSubActivity extends Activity {
 	        loginButton = (Button) findViewById(R.id.loginLogin);
 	        loginButton.setOnClickListener(new View.OnClickListener() {
 				@Override
-				public void onClick(View v) {				
-					user = new User(
-							((EditText) findViewById(R.id.loginUsername)).getText().toString(),
-							((EditText) findViewById(R.id.loginPassword)).getText().toString()
-					);
-					
-			    	Toast.makeText(LoginSubActivity.this, R.string.loginStartLogin, Toast.LENGTH_SHORT).show();
-					try {
-						boolean loginStatus = myEpisodesService.login(user);
-						if(loginStatus)
-						{
-							Toast.makeText(LoginSubActivity.this, R.string.loginSuccessfullLogin, Toast.LENGTH_LONG).show();
-							storeLoginCredentials(user);
-							finalizeLogin();
-						}
-					} catch (InternetConnectivityException e) {
-						String message = "Could not connect to host";
-						Log.e(LOG_TAG, message, e);
-						Toast.makeText(LoginSubActivity.this, R.string.internetConnectionFailureTryAgain, Toast.LENGTH_LONG).show();
-					} catch (LoginFailedException e) {
-						String message = "Login failed";
-						((EditText) findViewById(R.id.loginUsername)).setText("");
-						((EditText) findViewById(R.id.loginPassword)).setText("");
-						Log.e(LOG_TAG, message, e);
-						Toast.makeText(LoginSubActivity.this, R.string.loginLoginFailed, Toast.LENGTH_LONG).show();
-					} catch (Exception e) {
-						String message = "Some Exception occured";
-						Log.e(LOG_TAG, message, e);
-						Toast.makeText(LoginSubActivity.this, R.string.defaultExceptionMessage, Toast.LENGTH_LONG).show();
-					}
+				public void onClick(View v) {
+                    String username = ((EditText) findViewById(R.id.loginUsername)).getText().toString();
+				    String password = ((EditText) findViewById(R.id.loginPassword)).getText().toString();
+
+                    if( (username!= null && username.length()>0) && (password!=null && password.length()>0) ) {
+                        user = new User(
+                                username, password
+                        );
+
+                        Toast.makeText(LoginSubActivity.this, R.string.loginStartLogin, Toast.LENGTH_SHORT).show();
+                        try {
+                            boolean loginStatus = myEpisodesService.login(user);
+                            if(loginStatus)
+                            {
+                                Toast.makeText(LoginSubActivity.this, R.string.loginSuccessfullLogin, Toast.LENGTH_LONG).show();
+                                storeLoginCredentials(user);
+                                finalizeLogin();
+                            }
+                        } catch (InternetConnectivityException e) {
+                            String message = "Could not connect to host";
+                            Log.e(LOG_TAG, message, e);
+                            Toast.makeText(LoginSubActivity.this, R.string.internetConnectionFailureTryAgain, Toast.LENGTH_LONG).show();
+                        } catch (LoginFailedException e) {
+                            String message = "Login failed";
+                            ((EditText) findViewById(R.id.loginUsername)).setText("");
+                            //((EditText) findViewById(R.id.loginPassword)).setText("");
+                            Log.e(LOG_TAG, message, e);
+                            Toast.makeText(LoginSubActivity.this, R.string.loginLoginFailed, Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            String message = "Some Exception occured";
+                            Log.e(LOG_TAG, message, e);
+                            Toast.makeText(LoginSubActivity.this, R.string.defaultExceptionMessage, Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(LoginSubActivity.this, R.string.fillInAllFields, Toast.LENGTH_LONG).show();
+                    }
 				}
 			});
         } else {
