@@ -60,8 +60,8 @@ public class LoginSubActivity extends Activity {
                             Toast.makeText(LoginSubActivity.this, R.string.internetConnectionFailureTryAgain, Toast.LENGTH_LONG).show();
                         } catch (LoginFailedException e) {
                             String message = "Login failed";
-                            ((EditText) findViewById(R.id.loginUsername)).setText("");
-                            //((EditText) findViewById(R.id.loginPassword)).setText("");
+                            //((EditText) findViewById(R.id.loginUsername)).setText("");
+                            ((EditText) findViewById(R.id.loginPassword)).setText("");
                             Log.e(LOG_TAG, message, e);
                             Toast.makeText(LoginSubActivity.this, R.string.loginLoginFailed, Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
