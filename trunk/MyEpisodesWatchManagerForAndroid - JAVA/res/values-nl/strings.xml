@@ -38,7 +38,7 @@
     
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Bent u zeker?</string>
-    <string name="logoutDialogMessage">Uw login-gegevens zullen niet langer op het toestel worden opgeslagen.</string>
+    <string name="logoutDialogMessage">Uw login-gegevens zullen niet langer op het toestel worden bewaardt.</string>
     
     <!-- menu's -->
     <!-- main menu -->
@@ -57,6 +57,7 @@
     <string name="dialogOK">OK</string>
     
     <!-- Exception handling for dialogs -->
+    <string name="fillInAllFields">Alle velden moeten worden ingevuld!</string>
     <string name="exceptionDialogTitle">Ooops...</string>
     <string name="defaultExceptionMessage">Er is iets fout gegaan. Probeer de applicatie te herstarten en kijk uw internet verbinding na. Indien dit probleem blijft gelieve een bug te registreren op http://code.google.com/p/my-episodes-watch-manager/.</string>
     <string name="internetConnectionFailureTryAgain">Kan geen internetverbinding maken. Gelieve opnieuw te proberen.</string>
