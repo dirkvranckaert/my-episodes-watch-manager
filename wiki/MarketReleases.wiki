@@ -1,9 +1,14 @@
 =Android Market Releases=
-*Version 1.3.5* (Not released yet)
+*Version 1.4.0* (Not released yet)
+  * Issue 23 (Grouping of episodes by show)
+
+*Version 1.3.5* (Planned for May 6th 2010)
+  * Issue 26 (Scroll in login screen when keyboard active)
   * Issue 10 (Update error messages)
-  * Issue 25 (On click animation in list)
-  * Issue 26 (Scroll in login screen)
+  * Issue 31 and Issue 28(Login procedure)
   * Issue 27 (New header)
+  * Issue 25 (Onclick animation with new white theme)
+  * Issue 31 (Login screen checks for required fields)
 
 *Version 1.3.4*
   * Issue 21 (White theme)
