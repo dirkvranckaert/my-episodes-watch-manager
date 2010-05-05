@@ -1,5 +1,5 @@
 =Android Market Releases=
-*Version 1.4.0* (Not released yet)
+*Version 1.4.0* (Not yet released)
   * Issue 23 (Grouping of episodes by show)
 
 *Version 1.3.5* (Planned for May 6th 2010)
