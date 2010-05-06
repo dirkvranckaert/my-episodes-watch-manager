@@ -38,9 +38,15 @@
     
     <!-- changelogDialog -->
     <string name="changelogTitle">What\'s changed</string>
-    <string name="changelogText"> Version 1.3.4\n
+    <string name="changelogText"> Version 1.3.5\n
     ***********\n
-    Implemented white theme suggested by Ivo Janssen
+    Update login screen and procedure\n
+    Layout modifications (header)\n
+    Bugs in white theme solved\n
+    \n
+    Version 1.3.4\n
+    ***********\n
+    Implemented white theme suggested by Ivo Janssen\n
     \n
     Version 1.3.3\n
     ***********\n
