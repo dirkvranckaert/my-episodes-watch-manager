@@ -1,8 +1,8 @@
 =Android Market Releases=
-*Version 1.4.0* (Not yet released)
+*Version 1.4.0* (Planned for Sunday May 9th 2010)
   * Issue 23 (Grouping of episodes by show)
 
-*Version 1.3.5* (Planned for May 6th 2010)
+*Version 1.3.5* (Planned for Thursday May 6th 2010)
   * Issue 26 (Scroll in login screen when keyboard active)
   * Issue 10 (Update error messages)
   * Issue 31 and Issue 28(Login procedure)
