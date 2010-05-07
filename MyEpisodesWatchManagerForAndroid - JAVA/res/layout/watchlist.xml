@@ -3,7 +3,6 @@
     	android:orientation="vertical"
     	android:layout_width="fill_parent"
     	android:layout_height="fill_parent"
-    	android:background="#FFF"
     >
     <ImageView android:id="@+id/ImageView01"
 	    android:layout_width="wrap_content"
@@ -29,11 +28,12 @@
     	android:textColor="#000"
     />
     
-	<ListView
+	<ExpandableListView
 		android:id="@+id/android:list"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:choiceMode="singleChoice"
+		android:drawSelectorOnTop="false"
 	/>
 		
 	<TextView

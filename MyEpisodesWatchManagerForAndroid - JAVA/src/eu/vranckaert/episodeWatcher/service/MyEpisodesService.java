@@ -105,6 +105,7 @@ public class MyEpisodesService {
 	                episode.setName(episodeInfo[2].trim());
 	                episode.setAirDate(parseDate(episodeInfo[3].trim()));
 	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
+	                episode.setID();
 	                
 	                episodes.add(episode);
 	            } else if (episodeInfo.length == FEED_TITLE_EPISODE_FIELDS - 1) {
@@ -113,6 +114,7 @@ public class MyEpisodesService {
 	                getSeasonAndEpisodeNumber(episodeInfo[1], episode);
 	                episode.setName(episodeInfo[2].trim() + "...");
 	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
+	                episode.setID();
 	                
 	                episodes.add(episode);
 	            } else {
