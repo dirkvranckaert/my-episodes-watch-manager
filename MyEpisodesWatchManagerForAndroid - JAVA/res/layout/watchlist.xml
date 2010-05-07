@@ -24,6 +24,7 @@
     	android:id="@+id/watchListSubTitle"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
+    	android:text="@string/watchListSubTitle"
     	android:paddingBottom="3px"
     	android:textColor="#000"
     />
