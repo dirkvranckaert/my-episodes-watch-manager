@@ -64,7 +64,6 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     private SimpleExpandableListAdapter episodeAdapter;
     private Runnable viewEpisodes;
     private Runnable markEpisode;
-    
     private Integer exceptionMessageResId = null;
     
     private GoogleAnalyticsTracker tracker;
@@ -83,11 +82,14 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	}
 	
 	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v,
-			ContextMenuInfo menuInfo) {
-		
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.episodemenu, menu);
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) menuInfo;
+		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
+		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+			MenuInflater inflater = getMenuInflater();
+			inflater.inflate(R.menu.episodemenu, menu);
+		}
 	}
 
 	@Override
@@ -210,18 +212,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			default:
 				return false;
 			}
-		} else if (type == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
-			switch(item.getItemId()) {
-			case R.id.episodeMenuWatched:
-				Toast.makeText(this, "Cannot mark a show as watched", Toast.LENGTH_SHORT).show();
-				return true;
-			case R.id.episodeMenuDetails:
-				Toast.makeText(this, "Cannot get details from a show", Toast.LENGTH_SHORT).show();
-				return true;
-			default:
-				return false;
-			}
-        }
+		}
 		return false;
 	}
 
@@ -251,6 +242,14 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		setListAdapter(episodeAdapter);
 		episodeAdapter.notifyDataSetChanged();
 		registerForContextMenu(getExpandableListView());
+		
+		int countEpisodes = 0;
+		for(Show show : shows)
+		{
+			countEpisodes += show.getNumberEpisodes();
+		}
+		subTitle = (TextView) findViewById(R.id.watchListSubTitle);
+        subTitle.setText(getString(R.string.watchListSubTitle, countEpisodes));
 	}
 	
 	private List<? extends Map<String, ?>> createGroups() {
@@ -357,9 +356,6 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 				for (Episode ep : episodes) {
 					AddEpisodeToShow(ep);
 				}
-				
-				subTitle = (TextView) findViewById(R.id.watchListSubTitle);
-		        subTitle.setText(getString(R.string.watchListSubTitle, episodes.size()));
 			} else {
 				subTitle = (TextView) findViewById(R.id.watchListSubTitle);
 				subTitle.setText("");
