@@ -1,11 +1,14 @@
 package eu.vranckaert.episodeWatcher;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import eu.vranckaert.episodeWatcher.domain.Episode;
+import eu.vranckaert.episodeWatcher.domain.Show;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.FeedUrlParsingException;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
@@ -17,6 +20,7 @@ import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 import eu.vranckaert.episodeWatcher.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ExpandableListActivity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -34,11 +38,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
+import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 
-public class EpisodesWatchListActivity extends ListActivity {
+public class EpisodesWatchListActivity extends ExpandableListActivity {
 	private static final int LOGIN_REQUEST_CODE = 0;
 	private static final int EPISODE_DETAILS_REQUEST_CODE = 1;
 	
@@ -51,9 +58,10 @@ public class EpisodesWatchListActivity extends ListActivity {
 	
 	private User user;
     private MyEpisodesService myEpisodesService;
-    private List<Episode> episodes = new ArrayList<Episode>(0);
+    private List<Episode> episodes = new ArrayList<Episode>();
+    private List<Show> shows = new ArrayList<Show>();
     private TextView subTitle;
-    private EpisodeAdapter episodeAdapter;
+    private SimpleExpandableListAdapter episodeAdapter;
     private Runnable viewEpisodes;
     private Runnable markEpisode;
     
@@ -77,6 +85,7 @@ public class EpisodesWatchListActivity extends ListActivity {
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
+		
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.episodemenu, menu);
 	}
@@ -159,7 +168,6 @@ public class EpisodesWatchListActivity extends ListActivity {
         tracker.start("UA-3183255-2", 30, this);
         
         init();
-        
         openLoginActivity();
 	}
 	
@@ -184,33 +192,93 @@ public class EpisodesWatchListActivity extends ListActivity {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
-		Episode currentEpisode = episodes.get(menuInfo.position);
-		switch(item.getItemId()) {
-		case R.id.episodeMenuWatched:
-			tracker.trackEvent("MarkAsWatched", "ContextMenu-EpisodesWatchListActivity", "", 0);
-			markEpisodeWatched(currentEpisode);
-			return true;
-		case R.id.episodeMenuDetails:
-			tracker.trackPageView("/episodeDetailsSubActivity");
-			openEpisodeDetails(currentEpisode);
-			return true;
-		}
+		ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) item.getMenuInfo();
+		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
+		int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
+		int childid = ExpandableListView.getPackedPositionChild(info.packedPosition);
+
+		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+			switch(item.getItemId()) {
+			case R.id.episodeMenuWatched:
+				tracker.trackEvent("MarkAsWatched", "ContextMenu-EpisodesWatchListActivity", "", 0);
+				markEpisodeWatched(shows.get(groupid).getEpisodes().get(childid));
+				return true;
+			case R.id.episodeMenuDetails:
+				tracker.trackPageView("/episodeDetailsSubActivity");
+				openEpisodeDetails(shows.get(groupid).getEpisodes().get(childid));
+				return true;
+			default:
+				return false;
+			}
+		} else if (type == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
+			switch(item.getItemId()) {
+			case R.id.episodeMenuWatched:
+				Toast.makeText(this, "Cannot mark a show as watched", Toast.LENGTH_SHORT).show();
+				return true;
+			case R.id.episodeMenuDetails:
+				Toast.makeText(this, "Cannot get details from a show", Toast.LENGTH_SHORT).show();
+				return true;
+			default:
+				return false;
+			}
+        }
 		return false;
 	}
 
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		Episode currentEpisode = episodes.get(position);
-		openEpisodeDetails(currentEpisode);
+	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
+	{
+		tracker.trackPageView("/episodeDetailsSubActivity");
+		openEpisodeDetails(shows.get(groupPosition).getEpisodes().get(childPosition));
+		return true;
 	}
-
+	
 	private void init() {
 		setContentView(R.layout.watchlist);
         episodes = new ArrayList<Episode>();
-        episodeAdapter = new EpisodeAdapter(this, R.layout.episoderow, episodes);
-        setListAdapter(episodeAdapter);
-        registerForContextMenu(getListView());
+		
+		episodeAdapter = new SimpleExpandableListAdapter(
+	                this,
+	                createGroups(),
+	                R.layout.episoderowgroup,
+	                new String[] {"episodeRowTitle"},
+	                new int[] { R.id.episodeRowTitle },
+	                createChilds(),
+	                R.layout.episoderowchild,
+	                new String[] {"episodeRowChildTitle", "episodeRowChildDetail"},
+	                new int[] { R.id.episodeRowChildTitle, R.id.episodeRowChildDetail }
+		);
+		setListAdapter(episodeAdapter);
+		episodeAdapter.notifyDataSetChanged();
+		registerForContextMenu(getExpandableListView());
+	}
+	
+	private List<? extends Map<String, ?>> createGroups() {
+		List output = new ArrayList();
+		
+		for(Show show : shows) {
+				HashMap map = new HashMap();
+				map.put("episodeRowTitle", show.getShowName() + " ( " + show.getNumberEpisodes() + " )");
+				output.add(map);
+			}
+
+		return output;
+	}
+	
+	private List<? extends List<? extends Map<String, ?>>> createChilds() {
+		List subList = new ArrayList();
+		for (Show show : shows) {
+			List subListSecondLvl = new ArrayList();
+			for (Episode episode : show.getEpisodes()) {
+					HashMap map = new HashMap();
+					map.put("episodeRowChildTitle", episode.getShowName());
+					map.put("episodeRowChildDetail", "S" + episode.getSeason() + "E" + episode.getEpisode() + " - " + episode.getName());
+					subListSecondLvl.add(map);
+			}
+			subList.add(subListSecondLvl);
+		}
+
+		return subList;
 	}
 
 	private void openLoginActivity() {
@@ -284,58 +352,60 @@ public class EpisodesWatchListActivity extends ListActivity {
 	private Runnable returnEpisodes = new Runnable() {
 		@Override
 		public void run() {
+			shows = new ArrayList<Show>();
 			if (episodes != null && episodes.size() > 0) {
-				episodeAdapter.notifyDataSetChanged();
-				episodeAdapter.clear();
 				for (Episode ep : episodes) {
-					episodeAdapter.add(ep);
+					AddEpisodeToShow(ep);
 				}
 				
 				subTitle = (TextView) findViewById(R.id.watchListSubTitle);
 		        subTitle.setText(getString(R.string.watchListSubTitle, episodes.size()));
 			} else {
-				episodeAdapter.clear();
 				subTitle = (TextView) findViewById(R.id.watchListSubTitle);
 				subTitle.setText("");
 			}
 			dismissDialog(EPISODE_LOADING_DIALOG);
+			init();
 			
 			if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
 				showDialog(EXCEPTION_DIALOG);
 				exceptionMessageResId = null;
 			}
-			
-			episodeAdapter.notifyDataSetChanged();
+		}
+
+		private void AddEpisodeToShow(Episode episode) {
+			Show returnShow = CheckShowDublicate(episode.getShowName());
+			if (returnShow == null)
+			{
+				Show tempShow = new Show(episode.getShowName());
+				tempShow.addEpisode(episode);
+				shows.add(tempShow);
+			}
+			else
+			{
+				for(Show show : shows)
+				{
+					if (show.getShowName().equals(returnShow.getShowName()))
+					{
+						show.addEpisode(episode);
+					}
+				}
+			}
+		}
+		
+		private Show CheckShowDublicate(String episode)
+		{
+			for(Show show : shows)
+			{
+				if (show.getShowName().equals(episode))
+				{
+					return show;
+				}
+			}
+			return null;
 		}
 	};
-	
-	private class EpisodeAdapter extends ArrayAdapter<Episode> {
-		private List<Episode> episodes;
-		
-		public EpisodeAdapter(Context context, int textViewResourceId, List<Episode> el) {
-			super(context, textViewResourceId, el);
-			this.episodes = el;
-		}
-		
-		@Override
-		public View getView(int posistion, View convertView, ViewGroup parent) {
-			View row = convertView;
-			if (row==null) {
-				LayoutInflater inflater = getLayoutInflater();
-				row = inflater.inflate(R.layout.episoderow, parent, false);
-			}
-			
-			TextView topText = (TextView) row.findViewById(R.id.episodeRowTitle);
-			TextView bottomText = (TextView) row.findViewById(R.id.episodeRowDetail);
-			
-			Episode episode = episodes.get(posistion);
-			topText.setText(episode.getShowName());
-			bottomText.setText("S" + episode.getSeason() + "E" + episode.getEpisode() + " - " + episode.getName());
-			
-			return row;
-		}
-	}
-	
+
 	private void markEpisodeWatched(final Episode episode) {
 		showDialog(EPISODE_LOADING_DIALOG);
 		markEpisode = new Runnable() {

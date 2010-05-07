@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Episode implements Serializable {
-    private String showName;
+    private int id;
+	private String showName;
     private String name;
     private int season;
     private int episode;
@@ -123,4 +124,12 @@ public class Episode implements Serializable {
     public String toString() {
         return showName + " S" + season + "E" + episode + " - " + name + " (" + myEpisodeID + ") (" + airDate + ")";
     }
+
+	public int getID() {
+		return id;
+	}
+	
+	public void setID() {
+		id++;
+	}
 }
