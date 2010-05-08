@@ -217,8 +217,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	}
 
 	@Override
-	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
-	{
+	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		tracker.trackPageView("/episodeDetailsSubActivity");
 		openEpisodeDetails(shows.get(groupPosition).getEpisodes().get(childPosition));
 		return true;
