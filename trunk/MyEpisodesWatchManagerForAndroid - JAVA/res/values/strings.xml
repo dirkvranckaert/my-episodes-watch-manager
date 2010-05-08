@@ -38,7 +38,11 @@
     
     <!-- changelogDialog -->
     <string name="changelogTitle">What\'s changed</string>
-    <string name="changelogText"> Version 1.3.5\n
+    <string name="changelogText"> Version 1.4.0\n
+    ***********\n
+    Grouping of episodes\n
+    \n
+    Version 1.3.5\n
     ***********\n
     Update login screen and procedure\n
     Layout modifications (header)\n
