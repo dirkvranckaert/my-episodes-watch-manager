@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -30,20 +29,15 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import android.util.Log;
-import android.widget.EditText;
-import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.domain.Feed;
 import eu.vranckaert.episodeWatcher.domain.FeedItem;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.FeedUrlBuildingFaildException;
-import eu.vranckaert.episodeWatcher.exception.FeedUrlParsingException;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.exception.PasswordEnctyptionFailedException;
-import eu.vranckaert.episodeWatcher.exception.RssFeedParserException;
 import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
-import eu.vranckaert.episodeWatcher.exception.UnableToReadFeed;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 
 public class MyEpisodesService {
@@ -105,7 +99,7 @@ public class MyEpisodesService {
 	                episode.setName(episodeInfo[2].trim());
 	                episode.setAirDate(parseDate(episodeInfo[3].trim()));
 	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
-	                episode.setID();
+	                episode.setId();
 	                
 	                episodes.add(episode);
 	            } else if (episodeInfo.length == FEED_TITLE_EPISODE_FIELDS - 1) {
@@ -114,7 +108,7 @@ public class MyEpisodesService {
 	                getSeasonAndEpisodeNumber(episodeInfo[1], episode);
 	                episode.setName(episodeInfo[2].trim() + "...");
 	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
-	                episode.setID();
+	                episode.setId();
 	                
 	                episodes.add(episode);
 	            } else {

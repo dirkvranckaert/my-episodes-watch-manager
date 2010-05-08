@@ -13,6 +13,22 @@ public class Episode implements Serializable {
     private String myEpisodeID;
 
     /**
+     * Gets the ID.
+     *
+     * @return Gets the ID.
+     */
+    public int getId() {
+		return id;
+	}
+
+    /**
+     * Sets the ID.
+     */
+	public void setId() {
+		id++;
+	}
+
+    /**
      * Gets the show name.
      *
      * @return The show name.
@@ -124,12 +140,4 @@ public class Episode implements Serializable {
     public String toString() {
         return showName + " S" + season + "E" + episode + " - " + name + " (" + myEpisodeID + ") (" + airDate + ")";
     }
-
-	public int getID() {
-		return id;
-	}
-	
-	public void setID() {
-		id++;
-	}
 }
