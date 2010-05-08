@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyEpisodes Watch Manager</string>
+    
+    <!-- default values -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    
+    <!-- login form -->
+    <string name="loginFormTitle">Provide your user details for the MyEpisodes.com website below.</string>
+    <string name="loginUsernameHint">Username</string>
+    <string name="loginPasswordHint">Password</string>
+    <string name="loginLoginBtn">Login</string>
+    <string name="loginStartLogin">Logging in to MyEpisodes.com</string>
+    <string name="loginSuccessfullLogin">Successfull logged in</string>
+    <string name="loginLoginFailed">Could not login to MyEpisodes.com, check internet connection and login details before trying again!</string>
+    
+    <!-- watchtlist -->
+    <string name="watchListTitle">List of shows/episodes</string>
+    <string name="watchListSubTitle">%d episodes to watch</string>
+    <string name="watchListEmpty">No episodes found.</string>
+    
+    <!-- progressDialog -->
+    <string name="progressLoadingTitle">Loading...</string>
+    <string name="progressLoadingBody">Sending/Retreiving data</string>
+    
+    <!-- aboutDialog -->
+    <string name="aboutTitle">About...</string>
+    <string name="aboutText">Written by: Dirk Vranckaert\n
+    Maintained by:\n
+    * Dirk Vranckaert\n
+    * Ivo Janssen\n
+    License: GNU GPL V3 License\n
+    Project website: http://code.google.com/p/my-episodes-watch-manager\n
+    Project contact: dirkvranckaert@gmail.com\n
+    \n
+    Mange the episodes you follow using MyEpisodes.com (registration required) and watch directly on your mobile what\'s the next episode you have to watch.</string>
+    
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Are you sure?</string>
+    <string name="logoutDialogMessage">Your credentials will no longer be stored on the device.</string>
+    
+    <!-- menu's -->
+    <!-- main menu -->
+    <string name="refresh">Refresh</string>
+    <string name="about">About</string>
+    <string name="logout">Logout</string>
+    <string name="changelog">What\'s changed</string>
+    <!-- episode specific menu -->
+    <string name="menuEpisodeDetails">Details</string>
+    <string name="episodeDetailsSeasonLabel">Season: </string>
+    <string name="episodeDetailsEpisodeLabel">Episode: </string>
+    <string name="episodeDetailsAirDateLabel">Airdate: </string>
+    <string name="menuEpisodeMarkWatched">Mark Watched</string>
+    
+    <!-- Basic Dialog -->
+    <string name="dialogOK">OK</string>
+    
+    <!-- Exception handling for dialogs -->
+    <string name="fillInAllFields">All fields should be filled in!</string>
+    <string name="exceptionDialogTitle">Ooops...</string>
+    <string name="defaultExceptionMessage">Something went wrong. Try to restart the application and check your internet connection. If you keep having this issue report a bug at http://code.google.com/p/my-episodes-watch-manager/.</string>
+    <string name="internetConnectionFailureTryAgain">Could not establish internet connection. Please try again!</string>
+    <string name="internetConnectionFailureReload">Could not establish internet connection. Use the menu option to reload and try again.</string>
+    <string name="networkIssues">Network error!\nCheck you network settings and try refreshing manually.</string>
+    <string name="watchListUnableToReadFeed">Network error!\nTry to refresh manually.</string>
+    <string name="watchListUnableToMarkWatched">Failed to mark this episode watched!\nCheck internet connection or refresh the list!</string>
+</resources>
