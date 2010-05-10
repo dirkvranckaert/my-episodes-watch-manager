@@ -1,5 +1,5 @@
-<!-- Revision #93 -->
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Revision #93 -->
 <resources>
     <string name="app_name">MyEpisodes Watch Manager</string>
 
@@ -74,7 +74,11 @@
 
     <!-- changelogDialog -->
     <string name="changelogTitle">What\'s changed</string>
-    <string name="changelogText"> Version 1.4.0\n
+    <string name="changelogText">Version 1.4.1\n
+    ***********\n
+    Swedish translation by Fredrik Nohrborg\n
+    \n
+    Version 1.4.0\n
     ***********\n
     Grouping of episodes\n
     \n
