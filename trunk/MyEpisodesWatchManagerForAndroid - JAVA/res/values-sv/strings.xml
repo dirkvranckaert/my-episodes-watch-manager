@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyEpisodes Watch Manager</string>
+    
+    <!-- default values -->
+    <string name="yes">Ja</string>
+    <string name="no">Nej</string>
+    
+    <!-- login form -->
+    <string name="loginFormTitle">Ange inloggningsuppgifter för the MyEpisodes.com.</string>
+    <string name="loginUsernameHint">Användarnamn</string>
+    <string name="loginPasswordHint">Lösenord</string>
+    <string name="loginLoginBtn">Inloggning</string>
+    <string name="loginStartLogin">Loggar in på MyEpisodes.com</string>
+    <string name="loginSuccessfullLogin">Inloggningen lyckades</string>
+    <string name="loginLoginFailed">Kunde inte logga in på MyEpisodes.com, kontrollera nätverksanslutning och inloggningsuppgifter!</string>
+    
+    <!-- watchtlist -->
+    <string name="watchListTitle">TV-Serier/Avsnitt</string>
+    <string name="watchListSubTitle">%d avsnitt att se</string>
+    <string name="watchListEmpty">Inga avsnitt hittade.</string>
+    
+    <!-- progressDialog -->
+    <string name="progressLoadingTitle">Laddar...</string>
+    <string name="progressLoadingBody">Skickar/Tar emot data</string>
+    
+    <!-- aboutDialog -->
+    <string name="aboutTitle">Om...</string>
+    <string name="aboutText">Skrivet av: Dirk Vranckaert\n
+    Underhålls av:\n
+    * Dirk Vranckaert\n
+    * Ivo Janssen\n
+    Översättningar av:\n
+    * Dirk Vranckaert (Engelska, Holländska)\n
+    * Fredrik Nohrborg (Svenska)\n
+    Lisens: GNU GPL V3 License\n
+    Projekt websida: http://code.google.com/p/my-episodes-watch-manager\n
+    Projekt kontakt: dirkvranckaert@gmail.com\n
+    \n
+    Organisera TV-serierna du följer på MyEpisodes.com (registrering krävs) och se direkt i mobilen vilka avsnitt du inte sett.</string>
+    
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Är du säker?</string>
+    <string name="logoutDialogMessage">Dina uppgifter kommer inte längre lagras i mobilen.</string>
+    
+    <!-- menu's -->
+    <!-- main menu -->
+    <string name="refresh">Uppdatera</string>
+    <string name="about">Om</string>
+    <string name="logout">Logga ut</string>
+    <string name="changelog">Ändringar</string>
+    <!-- episode specific menu -->
+    <string name="menuEpisodeDetails">Detaljer</string>
+    <string name="episodeDetailsSeasonLabel">Säsong: </string>
+    <string name="episodeDetailsEpisodeLabel">Avsnitt: </string>
+    <string name="episodeDetailsAirDateLabel">Sändes: </string>
+    <string name="menuEpisodeMarkWatched">Markera som sett</string>
+    
+    <!-- Basic Dialog -->
+    <string name="dialogOK">OK</string>
+    
+    <!-- Exception handling for dialogs -->
+    <string name="fillInAllFields">Alla fält måste fyllas i!</string>
+    <string name="exceptionDialogTitle">Oj...</string>
+    <string name="defaultExceptionMessage">Någonting gick fel. Försök starta om applikationen och kontrollera uppkopplingen. Om problemet kvarstår, rapportera buggen på http://code.google.com/p/my-episodes-watch-manager/.</string>
+    <string name="internetConnectionFailureTryAgain">Internetkoppling misslyckades. Var vänlig försök igen!</string>
+    <string name="internetConnectionFailureReload">Internetkoppling misslyckades. Uppdatera via menyn och försök igen.</string>
+    <string name="networkIssues">Nätverksfel!\nKontrollera nätveksinställningarna och försök uppdatera manuellt.</string>
+    <string name="watchListUnableToReadFeed">Nätverksfel!\nFörsök uppdatera manuellt.</string>
+    <string name="watchListUnableToMarkWatched">Misslyckades att markera avsnitt som sett!\nKontrollera nätverksanslutning eller uppdatera listan!</string>
+</resources>
