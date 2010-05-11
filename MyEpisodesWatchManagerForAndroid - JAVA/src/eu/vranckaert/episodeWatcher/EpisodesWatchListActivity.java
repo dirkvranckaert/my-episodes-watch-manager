@@ -1,15 +1,10 @@
 package eu.vranckaert.episodeWatcher;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
-import eu.vranckaert.episodeWatcher.domain.Episode;
-import eu.vranckaert.episodeWatcher.domain.Show;
-import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.domain.*;
 import eu.vranckaert.episodeWatcher.exception.FeedUrlParsingException;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
@@ -333,15 +328,12 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	
 	private void getEpisodes() {
 		try {
-            //TODO un-comment next line if preferences is implemented
-            //EpisodeSortingEnum sorting = EpisodeSortingEnum.getEpisodeSorting(Preferences.getPreference(this, PreferencesKeys.EPISODE_SORTING_KEY));
-            EpisodeSortingEnum sorting = EpisodeSortingEnum.OLDEST;
-			episodes = myEpisodesService.retrieveEpisodes(user, sorting);
+			episodes = myEpisodesService.retrieveEpisodes(user);
 		} catch (InternetConnectivityException e) {
 			String message = "Could not connect to host";
 			Log.e(LOG_TAG, message, e);
 			exceptionMessageResId = R.string.internetConnectionFailureReload;
-		} catch(FeedUrlParsingException e) { 
+		} catch(FeedUrlParsingException e) {
 			String message = "Exception occured:";
 			Log.e(LOG_TAG, message, e);
 			exceptionMessageResId = R.string.watchListUnableToReadFeed;
@@ -352,7 +344,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		}
 		runOnUiThread(returnEpisodes);
 	}
-	
+
 	private Runnable returnEpisodes = new Runnable() {
 		@Override
 		public void run() {
@@ -365,9 +357,12 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 				subTitle = (TextView) findViewById(R.id.watchListSubTitle);
 				subTitle.setText("");
 			}
+
+            sortEpisodesOfShows(shows);
+
 			dismissDialog(EPISODE_LOADING_DIALOG);
 			init();
-			
+
 			if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
 				showDialog(EXCEPTION_DIALOG);
 				exceptionMessageResId = null;
@@ -407,7 +402,21 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		}
 	};
 
-	private void markEpisodeWatched(final Episode episode) {
+    private void sortEpisodesOfShows(List<Show> showList) {
+        //TODO un-comment next line if preferences is implemented
+        //EpisodeSortingEnum sorting = EpisodeSortingEnum.getEpisodeSorting(Preferences.getPreference(this, PreferencesKeys.EPISODE_SORTING_KEY));
+        EpisodeSortingEnum sorting = EpisodeSortingEnum.OLDEST;
+
+        for (Show show : showList) {
+            if (sorting.equals(EpisodeSortingEnum.OLDEST)) {
+                Collections.sort(show.getEpisodes(), new EpisodeAscendingComparator());
+            } else if(sorting.equals(EpisodeSortingEnum.NEWEST)) {
+                Collections.sort(show.getEpisodes(), new EpisodeDescendingComparator());
+            }
+        }
+    }
+
+    private void markEpisodeWatched(final Episode episode) {
 		showDialog(EPISODE_LOADING_DIALOG);
 		markEpisode = new Runnable() {
 			@Override
