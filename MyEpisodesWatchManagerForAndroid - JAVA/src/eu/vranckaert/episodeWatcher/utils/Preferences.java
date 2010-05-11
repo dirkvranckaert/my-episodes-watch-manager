@@ -1,8 +1,9 @@
-package eu.vranckaert.episodeWatcher;
+package eu.vranckaert.episodeWatcher.utils;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import eu.vranckaert.episodeWatcher.utils.StringUtils;
 
 public class Preferences {
 	public static final String LOG_TAG = "MyEpisodesWatchManager";
@@ -27,4 +28,19 @@ public class Preferences {
 		editor.remove(key);
 		editor.commit();
 	}
+
+    /**
+     * Check if a preference with a certain key is already set. If not it will set a default value.
+     * Otherwise it will do nothing.
+     * @param ac The activity requesting the preference.
+     * @param key The key of the preference to look for.
+     * @param defaultValue The default value for the preference in case it's not found.
+     */
+    public static void checkDefaultPreference(Activity ac, String key, String defaultValue) {
+        String result = getPreference(ac, key);
+
+        if (result == null || result.equals(StringUtils.EMPTY)) {
+            setPreference(ac, key, defaultValue);
+        }
+    }
 }

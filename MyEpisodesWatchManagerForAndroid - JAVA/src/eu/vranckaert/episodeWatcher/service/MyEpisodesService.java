@@ -11,11 +11,10 @@ import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
+import eu.vranckaert.episodeWatcher.domain.*;
+import eu.vranckaert.episodeWatcher.utils.EpisodeSortingEnum;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -29,10 +28,6 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import android.util.Log;
-import eu.vranckaert.episodeWatcher.domain.Episode;
-import eu.vranckaert.episodeWatcher.domain.Feed;
-import eu.vranckaert.episodeWatcher.domain.FeedItem;
-import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.FeedUrlBuildingFaildException;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
@@ -74,7 +69,7 @@ public class MyEpisodesService {
 
 	private static final String HTTP_POST_ENCODING = HTTP.UTF_8;
 
-    public List<Episode> retrieveEpisodes(final User user) throws InternetConnectivityException, Exception {
+    public List<Episode> retrieveEpisodes(final User user, EpisodeSortingEnum sorting) throws InternetConnectivityException, Exception {
         String encryptedPassword = encryptPassword(user.getPassword());
         URL feedUrl = buildUnwatchedEpisodesUrl(user.getUsername(), encryptedPassword);
         RssFeedParser rssFeedParser = new SaxRssFeedParser();
@@ -116,6 +111,12 @@ public class MyEpisodesService {
 	                Log.e(LOG_TAG, message);
 	            }
             }
+        }
+
+        if (sorting.equals(EpisodeSortingEnum.OLDEST)) {
+            Collections.sort(episodes, new EpisodeAscendingComparator());
+        } else if(sorting.equals(EpisodeSortingEnum.NEWEST)) {
+            Collections.sort(episodes, new EpisodeDescendingComparator());
         }
 
         return episodes;
