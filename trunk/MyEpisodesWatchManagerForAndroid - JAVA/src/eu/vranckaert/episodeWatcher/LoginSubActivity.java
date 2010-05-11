@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import eu.vranckaert.episodeWatcher.utils.Preferences;
 
 public class LoginSubActivity extends Activity {
     private Button loginButton;

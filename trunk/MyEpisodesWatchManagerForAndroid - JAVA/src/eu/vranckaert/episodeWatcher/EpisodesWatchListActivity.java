@@ -21,29 +21,25 @@ import eu.vranckaert.episodeWatcher.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ExpandableListActivity;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
+import eu.vranckaert.episodeWatcher.utils.Preferences;
+import eu.vranckaert.episodeWatcher.utils.PreferencesKeys;
+import eu.vranckaert.episodeWatcher.utils.EpisodeSortingEnum;
 
 public class EpisodesWatchListActivity extends ExpandableListActivity {
 	private static final int LOGIN_REQUEST_CODE = 0;
@@ -297,7 +293,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         		Preferences.getPreference(this, User.USERNAME),
         		Preferences.getPreference(this, User.PASSWORD)
     		);
-	        
+
+            checkPreferences();
 	        reloadEpisodes();
 		} else if (requestCode == EPISODE_DETAILS_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
@@ -314,8 +311,14 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			exit();
 		}
 	}
-	
-	private void reloadEpisodes() {
+
+    private void checkPreferences() {
+        //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
+        //TODO un-comment next line if preferences is implemented
+        //Preferences.checkDefaultPreference(this, PreferencesKeys.EPISODE_SORTING_KEY, EpisodeSortingEnum.OLDEST.getName());
+    }
+
+    private void reloadEpisodes() {
 		showDialog(EPISODE_LOADING_DIALOG);
 		viewEpisodes = new Runnable() {
 			@Override
@@ -330,7 +333,10 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	
 	private void getEpisodes() {
 		try {
-			episodes = myEpisodesService.retrieveEpisodes(user);
+            //TODO un-comment next line if preferences is implemented
+            //EpisodeSortingEnum sorting = EpisodeSortingEnum.getEpisodeSorting(Preferences.getPreference(this, PreferencesKeys.EPISODE_SORTING_KEY));
+            EpisodeSortingEnum sorting = EpisodeSortingEnum.OLDEST;
+			episodes = myEpisodesService.retrieveEpisodes(user, sorting);
 		} catch (InternetConnectivityException e) {
 			String message = "Could not connect to host";
 			Log.e(LOG_TAG, message, e);
