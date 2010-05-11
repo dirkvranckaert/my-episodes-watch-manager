@@ -1,4 +1,8 @@
 =Android Market Releases=
+*Version 1.5.0*
+  * Issue 37 (Sort "Show List" alphabetically)
+  * Issue 37 (Option view)
+
 *Version 1.4.1*
   * Issue 34 (Swedish translation by Fredrik Nohrborg)
 
