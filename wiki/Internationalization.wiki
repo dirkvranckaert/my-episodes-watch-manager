@@ -1,0 +1,21 @@
+= Internationalization (i18n) =
+== Table Of Contents ==
+<wiki:toc max_depth="3" />
+
+== Translators ==
+  * Dutch
+    * Dirk Vranckaert: dirkvranckaert@gmail.com
+  * Swedish
+    * Fredrik Nohrborg: fredrik.nohrborg@gmail.com
+  * Korean
+    * Hyeon Tae Jeon: android@fingertool.com
+
+== How To Translate ==
+As base for the translations of the languages listed above we provide an English i18n file. When something changes to the English translations file a mail will be sent out to the translators listed above. This mail will contain following information:
+  * The language to translate to
+  * A list of all keys which values have changed
+And following attachments will be added:
+  * The previous version of the translation file of the language translating in
+  * The new version of the English translation file
+
+This way translators just have to check the list of tags to look into and translate them.
