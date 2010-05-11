@@ -1,0 +1,5 @@
+= Internationalization Changes =
+Beneath is a list of all version and the items in the internationalization files that have changed for each version. This is used to keep track of all items which should be translated (again) and will make it much more easier to manage the internationalization process.
+
+Version 1.4.1:
+  * No changes
