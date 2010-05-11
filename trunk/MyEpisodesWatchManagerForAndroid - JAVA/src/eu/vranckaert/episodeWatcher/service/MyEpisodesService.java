@@ -69,7 +69,7 @@ public class MyEpisodesService {
 
 	private static final String HTTP_POST_ENCODING = HTTP.UTF_8;
 
-    public List<Episode> retrieveEpisodes(final User user, EpisodeSortingEnum sorting) throws InternetConnectivityException, Exception {
+    public List<Episode> retrieveEpisodes(final User user) throws InternetConnectivityException, Exception {
         String encryptedPassword = encryptPassword(user.getPassword());
         URL feedUrl = buildUnwatchedEpisodesUrl(user.getUsername(), encryptedPassword);
         RssFeedParser rssFeedParser = new SaxRssFeedParser();
@@ -111,12 +111,6 @@ public class MyEpisodesService {
 	                Log.e(LOG_TAG, message);
 	            }
             }
-        }
-
-        if (sorting.equals(EpisodeSortingEnum.OLDEST)) {
-            Collections.sort(episodes, new EpisodeAscendingComparator());
-        } else if(sorting.equals(EpisodeSortingEnum.NEWEST)) {
-            Collections.sort(episodes, new EpisodeDescendingComparator());
         }
 
         return episodes;
