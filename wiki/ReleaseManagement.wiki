@@ -1,4 +1,6 @@
+#summary An overview of all current and future planned releases + release instructions
 #labels Featured
+
 = Release Management =
 <wiki:toc max_depth="4" />
 == Release management ==
