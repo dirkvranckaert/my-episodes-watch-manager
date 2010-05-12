@@ -1,5 +1,9 @@
 =Android Market Releases=
-*Version 1.5.0*
+*Version 1.5.0 * (Not yet released, bugfixing and small functionallity addition)
+  * Issue 39 (Episode title issue in list view)
+  * Issue 40 (Modification context menu)
+
+*Version 1.5.0 * (Not yet released, new functionallity)
   * Issue 37 (Sort "Show List" alphabetically)
   * Issue 37 (Option view)
 
