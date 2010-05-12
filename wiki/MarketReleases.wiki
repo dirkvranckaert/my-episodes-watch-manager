@@ -1,7 +1,7 @@
 =Android Market Releases=
 <wiki:toc max_depth="2" />
 == Release Plan ==
-*Version 1.5.1 * (Not yet released, bugfixing and small functionallity addition)
+*Version 1.5.1 * (Not yet released, bugfixing and new functionallity)
   * Issue 39 (Episode title issue in list view)
   * Issue 40 (Modification context menu)
 
