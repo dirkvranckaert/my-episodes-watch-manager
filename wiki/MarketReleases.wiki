@@ -1,4 +1,5 @@
 =Android Market Releases=
+== Release Plan ==
 *Version 1.5.1 * (Not yet released, bugfixing and small functionallity addition)
   * Issue 39 (Episode title issue in list view)
   * Issue 40 (Modification context menu)
@@ -7,6 +8,7 @@
   * Issue 37 (Sort "Show List" alphabetically)
   * Issue 37 (Option view)
 
+== Releases ==
 *Version 1.4.1*
   * Issue 34 (Swedish translation by Fredrik Nohrborg)
 
