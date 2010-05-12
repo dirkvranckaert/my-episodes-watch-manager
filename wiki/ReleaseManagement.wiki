@@ -1,8 +1,8 @@
+#labels Featured
 = Release Management =
 <wiki:toc max_depth="3" />
 == Release management ==
 === Scheduled releases ===
-
 ====Version 1.5.0====
 Release Date: Unknown<br>
 Content: New functionallity
@@ -10,13 +10,12 @@ Content: New functionallity
   * Issue 37 (Option view)
 
 ====Version 1.5.1====
-Release Date: Unknown
+Release Date: Unknown<br>
 Content: Bugfixes and a little new functionallity
   * Issue 39 (Episode title issue in list view)
   * Issue 40 (Modification context menu)
 
-=== Releases ===
-
+=== Market Releases ===
 ====Version 1.4.1====
   * Issue 34 (Swedish translation by Fredrik Nohrborg)
 
