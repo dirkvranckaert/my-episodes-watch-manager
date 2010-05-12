@@ -1,6 +1,8 @@
 = Release Management =
 <wiki:toc max_depth="3" />
 == Release scheduling ==
+A list of releases and scheduled releases (including changelist) can be found on the wiki under the MarketReleases page.
+For scheduled releases only the issues mentioned on the wiki page will be solved/included in this release.
 
 == Translation management ==
 Before releasing a new version all programmers should be contacted to collect a list of items that have changed in the English version of the strings.xml file.
