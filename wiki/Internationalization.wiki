@@ -1,4 +1,5 @@
 #summary Instruction in how to take part in the internationalization process for the application
+#labels Featured
 
 = Internationalization (i18n) =
 <wiki:toc max_depth="3" />
