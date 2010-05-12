@@ -68,11 +68,12 @@ Content: Bugfixes and a little new functionallity
   * Switching between horizontal and vertical mode of the device sometimes makes the app crashing (Issue 2)
   * Starting the application with no internet connection makes the application chrasing (Issue 7)
 
-== Translation management ==
+== Release instructions ==
+=== Translation management ===
 Before releasing a new version all programmers should be contacted to collect a list of items that have changed in the English version of the strings.xml file.
 If items have changed contact all translators using the template below and attach the English version and the old verion of the strings.xml file in the foreign languages.
 
-=== Mail template translators ===
+==== Mail template translators ====
 A new version of 'MyEpisodes Watch Manager' is about to be released. However this new version (*x.x.x*) contains changes to the text-resources. All changes have been implemented in the English version of the strings.xml file. Attached to this mail you can find the English version and the previous version of the language you are translating in.
 
 Hereby also the list of items in the translation file that have been changed or added, so please pay close attention to it:
