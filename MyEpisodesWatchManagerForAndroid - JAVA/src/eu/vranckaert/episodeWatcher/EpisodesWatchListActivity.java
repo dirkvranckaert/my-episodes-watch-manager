@@ -167,18 +167,21 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
-		case R.id.refresh:
-			reloadEpisodes();
-			return true;
-		case R.id.about:
-			showDialog(ABOUT_DIALOG);
-			return true;
-		case R.id.logout:
-			showDialog(LOGOUT_DIALOG);
-			return true;
-		case R.id.changelog:
-			showDialog(CHANGELOG_DIALOG);
-			return true;
+            case R.id.refresh:
+                reloadEpisodes();
+                return true;
+            case R.id.preferences:
+                openPreferencesActivity();
+                return true;
+            case R.id.about:
+                showDialog(ABOUT_DIALOG);
+                return true;
+            case R.id.logout:
+                showDialog(LOGOUT_DIALOG);
+                return true;
+            case R.id.changelog:
+                showDialog(CHANGELOG_DIALOG);
+                return true;
 		}
 		return false;
 	}
@@ -275,6 +278,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         startActivityForResult(loginSubActivity, LOGIN_REQUEST_CODE);
 	}
 
+    private void openPreferencesActivity() {
+        Intent preferencesActivity = new Intent(this.getApplicationContext(), PreferencesActivity.class);
+        startActivity(preferencesActivity);
+    }
+
 	private void openEpisodeDetails(Episode episode) {
 		Intent episodeDetailsSubActivity = new Intent(this.getApplicationContext(), EpisodeDetailsSubActivity.class);
 		episodeDetailsSubActivity.putExtra("episode", episode);
@@ -309,8 +317,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
     private void checkPreferences() {
         //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
-        //TODO un-comment next line if preferences is implemented
-        //Preferences.checkDefaultPreference(this, PreferencesKeys.EPISODE_SORTING_KEY, EpisodeSortingEnum.OLDEST.getName());
+        Preferences.checkDefaultPreference(this, PreferencesKeys.EPISODE_SORTING_KEY, EpisodeSortingEnum.OLDEST.getName());
     }
 
     private void reloadEpisodes() {
@@ -403,9 +410,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	};
 
     private void sortEpisodesOfShows(List<Show> showList) {
-        //TODO un-comment next line if preferences is implemented
-        //EpisodeSortingEnum sorting = EpisodeSortingEnum.getEpisodeSorting(Preferences.getPreference(this, PreferencesKeys.EPISODE_SORTING_KEY));
-        EpisodeSortingEnum sorting = EpisodeSortingEnum.OLDEST;
+        EpisodeSortingEnum sorting = EpisodeSortingEnum.getEpisodeSorting(Preferences.getPreference(this, PreferencesKeys.EPISODE_SORTING_KEY));
 
         for (Show show : showList) {
             if (sorting.equals(EpisodeSortingEnum.OLDEST)) {
