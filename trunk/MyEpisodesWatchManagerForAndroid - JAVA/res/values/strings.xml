@@ -6,6 +6,7 @@
     <!-- default values -->
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="close">Close</string>
 
     <!-- login form -->
     <string name="loginFormTitle">Provide your user details for the MyEpisodes.com website below.</string>
@@ -50,12 +51,22 @@
     <string name="about">About</string>
     <string name="logout">Logout</string>
     <string name="changelog">What\'s changed</string>
+    <string name="preferences">Preferences</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Details</string>
     <string name="episodeDetailsSeasonLabel">Season: </string>
     <string name="episodeDetailsEpisodeLabel">Episode: </string>
     <string name="episodeDetailsAirDateLabel">Airdate: </string>
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
+
+    <!-- Preferences Dialog -->
+    <string name="episodeOrderPrompt">Order of episodes</string>
+    <string name="episodeOrderPromptExtra">Oldest or newest first...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Older first</item>
+        <item>Newer first</item>
+    </string-array>
+
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
