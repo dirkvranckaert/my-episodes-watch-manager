@@ -67,11 +67,11 @@ public class PreferencesActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
                 ShowSortingEnum selectedSorting = ShowSortingEnum.ASCENDING;
                 if (i == 0) {
-                    selectedSorting = ShowSortingEnum.ASCENDING;
-                } else if (i == 1) {
-                    selectedSorting = ShowSortingEnum.DESCENDING;
-                } else if (i == 2) {
                     selectedSorting = ShowSortingEnum.DEFAULT_MYEPISODES_COM;
+                } else if (i == 1) {
+                    selectedSorting = ShowSortingEnum.ASCENDING;
+                } else if (i == 2) {
+                    selectedSorting = ShowSortingEnum.DESCENDING;
                 }
 
                 Preferences.setPreference(ac, PreferencesKeys.SHOW_SORTING_KEY, selectedSorting.getName());
