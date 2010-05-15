@@ -60,6 +60,13 @@
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
 
     <!-- Preferences Dialog -->
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Order of shows</string>
+    <string-array name="showOrderOptions">
+        <item>Default</item>
+        <item>Ascending</item>
+        <item>Descending</item>
+    </string-array>
     <!-- Episode sorting -->
     <string name="episodeOrderPrompt">Order of episodes</string>
     <string name="episodeOrderPromptExtra">Oldest or newest first...</string>
@@ -67,14 +74,6 @@
         <item>Oldest first</item>
         <item>Newest first</item>
     </string-array>
-    <!-- Show sorting -->
-    <string name="showOrderPrompt">Order of shows</string>
-    <string-array name="showOrderOptions">
-        <item>Newest first</item>
-        <item>Ascending</item>
-        <item>Descending</item>
-    </string-array>
-
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>

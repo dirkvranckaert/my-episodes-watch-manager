@@ -117,11 +117,11 @@ public class PreferencesActivity extends Activity {
 
     private void determineSelectedShowSortingOption(Spinner spinner) {
         String orderPref = Preferences.getPreference(this, PreferencesKeys.SHOW_SORTING_KEY);
-        if (orderPref.equals(ShowSortingEnum.ASCENDING.getName())) {
+        if (orderPref.equals(ShowSortingEnum.DEFAULT_MYEPISODES_COM.getName())) {
             spinner.setSelection(0);
-        } else if (orderPref.equals(ShowSortingEnum.DESCENDING.getName())) {
+        } else if (orderPref.equals(ShowSortingEnum.ASCENDING.getName())) {
             spinner.setSelection(1);
-        } else if (orderPref.equals(ShowSortingEnum.DEFAULT_MYEPISODES_COM.getName())) {
+        } else if (orderPref.equals(ShowSortingEnum.DESCENDING.getName())) {
             spinner.setSelection(2);
         }
     }
