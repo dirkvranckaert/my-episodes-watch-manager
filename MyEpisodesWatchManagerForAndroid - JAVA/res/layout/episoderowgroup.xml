@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="40px"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
 	>
    	<TextView
         android:id="@+id/episodeRowTitle"
         android:textStyle="bold"
         android:paddingLeft="40px"
-        android:paddingTop="9px"
+        android:paddingTop="8px"
+        android:paddingBottom="8px"
         android:textSize="15px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
