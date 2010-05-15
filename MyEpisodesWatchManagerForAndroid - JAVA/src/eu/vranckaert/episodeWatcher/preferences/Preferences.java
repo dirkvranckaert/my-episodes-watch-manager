@@ -1,4 +1,4 @@
-package eu.vranckaert.episodeWatcher.utils;
+package eu.vranckaert.episodeWatcher.preferences;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -11,14 +11,27 @@ public class Preferences {
 	
 	public static String getPreference(Activity ac, String key) {
 		SharedPreferences settings = ac.getSharedPreferences(Preferences.PREF_NAME, Activity.MODE_PRIVATE);
-		String result = settings.getString(key, null);		
+		String result = settings.getString(key, null);
 		return result;
 	}
+
+    public static boolean getPreferenceBoolean(Activity ac, String key) {
+        SharedPreferences settings = ac.getSharedPreferences(Preferences.PREF_NAME, Activity.MODE_PRIVATE);
+		boolean result = settings.getBoolean(key, true);
+		return result;
+    }
 	
 	public static void setPreference(Activity ac, String key, String value) {
 		SharedPreferences settings = ac.getSharedPreferences(Preferences.PREF_NAME, Activity.MODE_PRIVATE);
 		Editor editor = settings.edit();
 		editor.putString(key, value);
+		editor.commit();
+	}
+
+    public static void setPreference(Activity ac, String key, boolean value) {
+		SharedPreferences settings = ac.getSharedPreferences(Preferences.PREF_NAME, Activity.MODE_PRIVATE);
+		Editor editor = settings.edit();
+		editor.putBoolean(key, value);
 		editor.commit();
 	}
 	

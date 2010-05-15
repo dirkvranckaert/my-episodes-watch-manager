@@ -10,6 +10,9 @@ import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
+import eu.vranckaert.episodeWatcher.preferences.Preferences;
+import eu.vranckaert.episodeWatcher.preferences.enums.ShowSortingEnum;
+import eu.vranckaert.episodeWatcher.preferences.enums.EpisodeSortingEnum;
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 
 import eu.vranckaert.episodeWatcher.R;
@@ -32,10 +35,7 @@ import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
-import eu.vranckaert.episodeWatcher.utils.Preferences;
-import eu.vranckaert.episodeWatcher.utils.PreferencesKeys;
-import eu.vranckaert.episodeWatcher.utils.EpisodeSortingEnum;
-import eu.vranckaert.episodeWatcher.utils.ShowSortingEnum;
+import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 
 public class EpisodesWatchListActivity extends ExpandableListActivity {
 	private static final int LOGIN_REQUEST_CODE = 0;
@@ -162,6 +162,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         tracker.start("UA-3183255-2", 30, this);
         
         init();
+        checkPreferences();
         openLoginActivity();
 	}
 	
@@ -298,7 +299,6 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         		Preferences.getPreference(this, User.PASSWORD)
     		);
 
-            checkPreferences();
 	        reloadEpisodes();
 		} else if (requestCode == EPISODE_DETAILS_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
@@ -321,6 +321,10 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         Preferences.checkDefaultPreference(this, PreferencesKeys.EPISODE_SORTING_KEY, EpisodeSortingEnum.OLDEST.getName());
         //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
         Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, ShowSortingEnum.ASCENDING.getName());
+        //Checks preference for storing password
+        if (!Preferences.getPreferenceBoolean(this, PreferencesKeys.STORE_PASSWORD_KEY)) {
+            Preferences.removePreference(this, User.PASSWORD);
+        }
     }
 
     private void reloadEpisodes() {

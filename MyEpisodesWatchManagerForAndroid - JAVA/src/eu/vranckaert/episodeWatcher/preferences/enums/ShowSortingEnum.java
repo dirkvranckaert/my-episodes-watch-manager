@@ -1,4 +1,4 @@
-package eu.vranckaert.episodeWatcher.utils;
+package eu.vranckaert.episodeWatcher.preferences.enums;
 
 /**
  * @author Dirk Vranckaert
