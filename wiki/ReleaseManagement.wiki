@@ -11,6 +11,7 @@ Content: New functionallity
   * Issue 37 (Sort "Show List" alphabetically)
   * Issue 37 (Option view)
   * Issue 39 (Episode title issue in list view)
+  * Issue 42 (Option for application to forget password)
 
 ====Version 1.5.1====
 Release Date: Unknown<br>
