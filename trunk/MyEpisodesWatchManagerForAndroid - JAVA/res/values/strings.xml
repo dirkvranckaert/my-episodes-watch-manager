@@ -59,7 +59,7 @@
     <string name="episodeDetailsAirDateLabel">Airdate: </string>
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
 
-    <!-- Preferences Dialog -->
+    <!-- preferences Dialog -->
     <!-- Show sorting -->
     <string name="showOrderPrompt">Order of shows</string>
     <string-array name="showOrderOptions">
@@ -74,6 +74,8 @@
         <item>Oldest first</item>
         <item>Newest first</item>
     </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Store password</string>
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>

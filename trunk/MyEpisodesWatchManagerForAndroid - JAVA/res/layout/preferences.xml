@@ -2,8 +2,7 @@
 
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:stretchColumns="1">
+    android:layout_height="fill_parent">
 
 
     <TableRow android:paddingTop="2dp"
@@ -12,8 +11,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
-                android:paddingLeft="10dp"
-                android:layout_column="1">
+                android:paddingLeft="10dp">
             <TextView
                 android:text="@string/showOrderPrompt"
                 android:textColor="#000"
@@ -49,8 +47,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="70dp"
-                android:paddingLeft="10dp"
-                android:layout_column="1">
+                android:paddingLeft="10dp">
             <TextView
                 android:text="@string/episodeOrderPrompt"
                 android:textColor="#000"
@@ -71,6 +68,40 @@
             <Spinner
                 android:id="@+id/episodeOrderOptions"
                 android:prompt="@string/episodeOrderPrompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </TableRow>
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090"/>
+
+    <TableRow android:paddingTop="2dp"
+              android:paddingBottom="2dp">
+        <LinearLayout android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:paddingLeft="10dp">
+            <TextView
+                android:text="@string/storePasswordPrompt"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text=""
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout android:gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingRight="10dp">
+            <CheckBox
+                android:id="@+id/showPasswordOption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

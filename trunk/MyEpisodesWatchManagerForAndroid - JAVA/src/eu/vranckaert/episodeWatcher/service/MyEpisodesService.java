@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import eu.vranckaert.episodeWatcher.domain.*;
-import eu.vranckaert.episodeWatcher.utils.EpisodeSortingEnum;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;

@@ -6,13 +6,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import eu.vranckaert.episodeWatcher.utils.EpisodeSortingEnum;
-import eu.vranckaert.episodeWatcher.utils.Preferences;
-import eu.vranckaert.episodeWatcher.utils.PreferencesKeys;
-import eu.vranckaert.episodeWatcher.utils.ShowSortingEnum;
+import android.widget.*;
+import eu.vranckaert.episodeWatcher.preferences.enums.EpisodeSortingEnum;
+import eu.vranckaert.episodeWatcher.preferences.Preferences;
+import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
+import eu.vranckaert.episodeWatcher.preferences.enums.ShowSortingEnum;
 
 /**
  * @author Dirk Vranckaert
@@ -49,6 +47,7 @@ public class PreferencesActivity extends Activity {
         //Create a specific method for each preference to set
         handleOrderOfShowsPreference();
         handleOrderOfEpisodesPerference();
+        handleStorePasswordPreference();
     }
 
     private void handleOrderOfShowsPreference() {
@@ -133,5 +132,19 @@ public class PreferencesActivity extends Activity {
         } else {
             spinner.setSelection(0);
         }
+    }
+
+    private void handleStorePasswordPreference() {
+        final Activity ac = this;
+
+        CheckBox checkBox = (CheckBox) findViewById(R.id.showPasswordOption);
+        checkBox.setChecked(Preferences.getPreferenceBoolean(this, PreferencesKeys.STORE_PASSWORD_KEY));
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Preferences.setPreference(ac, PreferencesKeys.STORE_PASSWORD_KEY, b);
+            }
+        });
     }
 }
