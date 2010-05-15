@@ -35,6 +35,7 @@ import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import eu.vranckaert.episodeWatcher.utils.Preferences;
 import eu.vranckaert.episodeWatcher.utils.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.utils.EpisodeSortingEnum;
+import eu.vranckaert.episodeWatcher.utils.ShowSortingEnum;
 
 public class EpisodesWatchListActivity extends ExpandableListActivity {
 	private static final int LOGIN_REQUEST_CODE = 0;
@@ -316,8 +317,10 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	}
 
     private void checkPreferences() {
-        //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
+        //Checks preference for show sorting and sets the default to ascending (A-Z)
         Preferences.checkDefaultPreference(this, PreferencesKeys.EPISODE_SORTING_KEY, EpisodeSortingEnum.OLDEST.getName());
+        //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
+        Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, ShowSortingEnum.ASCENDING.getName());
     }
 
     private void reloadEpisodes() {
@@ -365,6 +368,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 				subTitle.setText("");
 			}
 
+            sortShows(shows);
             sortEpisodesOfShows(shows);
 
 			dismissDialog(EPISODE_LOADING_DIALOG);
@@ -408,6 +412,18 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			return null;
 		}
 	};
+
+    private void sortShows(List<Show> showList) {
+        ShowSortingEnum sorting = ShowSortingEnum.getShowSorting(Preferences.getPreference(this, PreferencesKeys.SHOW_SORTING_KEY));
+
+        if (sorting.equals(ShowSortingEnum.ASCENDING)) {
+            Collections.sort(showList, new ShowAscendingComparator());
+        } else  if (sorting.equals(ShowSortingEnum.DESCENDING)) {
+            Collections.sort(showList, new ShowDescendingComparator());
+        } else if (sorting.equals(ShowSortingEnum.DEFAULT_MYEPISODES_COM)) {
+            Log.d(LOG_TAG, "Default my episodes show sorting, nothing to do!");
+        }
+    }
 
     private void sortEpisodesOfShows(List<Show> showList) {
         EpisodeSortingEnum sorting = EpisodeSortingEnum.getEpisodeSorting(Preferences.getPreference(this, PreferencesKeys.EPISODE_SORTING_KEY));

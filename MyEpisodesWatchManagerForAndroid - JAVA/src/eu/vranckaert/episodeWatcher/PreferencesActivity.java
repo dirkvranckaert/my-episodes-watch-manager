@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import eu.vranckaert.episodeWatcher.utils.EpisodeSortingEnum;
 import eu.vranckaert.episodeWatcher.utils.Preferences;
 import eu.vranckaert.episodeWatcher.utils.PreferencesKeys;
+import eu.vranckaert.episodeWatcher.utils.ShowSortingEnum;
 
 /**
  * @author Dirk Vranckaert
@@ -46,7 +47,41 @@ public class PreferencesActivity extends Activity {
         setContentView(R.layout.preferences);
 
         //Create a specific method for each preference to set
+        handleOrderOfShowsPreference();
         handleOrderOfEpisodesPerference();
+    }
+
+    private void handleOrderOfShowsPreference() {
+        final Activity ac = this;
+        final Spinner spinner = (Spinner)findViewById(R.id.showOrderOptions);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.showOrderOptions, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        determineSelectedShowSortingOption(spinner);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+                ShowSortingEnum selectedSorting = ShowSortingEnum.ASCENDING;
+                if (i == 0) {
+                    selectedSorting = ShowSortingEnum.ASCENDING;
+                } else if (i == 1) {
+                    selectedSorting = ShowSortingEnum.DESCENDING;
+                } else if (i == 2) {
+                    selectedSorting = ShowSortingEnum.DEFAULT_MYEPISODES_COM;
+                }
+
+                Preferences.setPreference(ac, PreferencesKeys.SHOW_SORTING_KEY, selectedSorting.getName());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //Do nothing!
+            }
+        });
     }
 
     private void handleOrderOfEpisodesPerference() {
@@ -57,7 +92,7 @@ public class PreferencesActivity extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        determineSelectedOption(spinner);
+        determineSelectedEpisodeSortingOption(spinner);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -80,7 +115,18 @@ public class PreferencesActivity extends Activity {
         });
     }
 
-    private void determineSelectedOption(Spinner spinner) {
+    private void determineSelectedShowSortingOption(Spinner spinner) {
+        String orderPref = Preferences.getPreference(this, PreferencesKeys.SHOW_SORTING_KEY);
+        if (orderPref.equals(ShowSortingEnum.ASCENDING.getName())) {
+            spinner.setSelection(0);
+        } else if (orderPref.equals(ShowSortingEnum.DESCENDING.getName())) {
+            spinner.setSelection(1);
+        } else if (orderPref.equals(ShowSortingEnum.DEFAULT_MYEPISODES_COM.getName())) {
+            spinner.setSelection(2);
+        }
+    }
+
+    private void determineSelectedEpisodeSortingOption(Spinner spinner) {
         String orderPref = Preferences.getPreference(this, PreferencesKeys.EPISODE_SORTING_KEY);
         if (orderPref.equals(EpisodeSortingEnum.NEWEST.getName())) {
             spinner.setSelection(1);
