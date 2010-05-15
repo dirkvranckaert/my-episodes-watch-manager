@@ -10,11 +10,11 @@ Release Date: May 15th 2010<br>
 Content: New functionallity
   * Issue 37 (Sort "Show List" alphabetically)
   * Issue 37 (Option view)
+  * Issue 39 (Episode title issue in list view)
 
 ====Version 1.5.1====
 Release Date: Unknown<br>
 Content: Bugfixes and a little new functionallity
-  * Issue 39 (Episode title issue in list view)
   * Issue 40 (Modification context menu)
 
 === Market Releases ===
