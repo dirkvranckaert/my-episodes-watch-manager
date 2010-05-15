@@ -417,8 +417,10 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         ShowSortingEnum sorting = ShowSortingEnum.getShowSorting(Preferences.getPreference(this, PreferencesKeys.SHOW_SORTING_KEY));
 
         if (sorting.equals(ShowSortingEnum.ASCENDING)) {
+            Log.d(LOG_TAG, "Sorting episodes ascending");
             Collections.sort(showList, new ShowAscendingComparator());
         } else  if (sorting.equals(ShowSortingEnum.DESCENDING)) {
+            Log.d(LOG_TAG, "Sorting episodes descending");
             Collections.sort(showList, new ShowDescendingComparator());
         } else if (sorting.equals(ShowSortingEnum.DEFAULT_MYEPISODES_COM)) {
             Log.d(LOG_TAG, "Default my episodes show sorting, nothing to do!");

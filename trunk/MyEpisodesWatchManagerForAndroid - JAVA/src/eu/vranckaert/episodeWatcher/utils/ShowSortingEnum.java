@@ -23,8 +23,10 @@ public enum ShowSortingEnum {
     public static ShowSortingEnum getShowSorting(String name) {
         if (name.equals(ASCENDING.getName())) {
             return ASCENDING;
-        } else {
+        } else if (name.equals(DESCENDING.getName())) {
             return DESCENDING;
+        } else {
+            return DEFAULT_MYEPISODES_COM;
         }
     }
 }
