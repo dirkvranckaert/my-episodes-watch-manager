@@ -6,6 +6,7 @@
     <!-- default values -->
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
+    <string name="close">Sluiten</string>
     
     <!-- login form -->
     <string name="loginFormTitle">Vul uw logingegevens voor de MyEpisodes.com hieronder in.</string>
@@ -56,6 +57,24 @@
     <string name="episodeDetailsEpisodeLabel">Aflevering: </string>
     <string name="episodeDetailsAirDateLabel">Uitzend-datum: </string>
     <string name="menuEpisodeMarkWatched">Markeer als bekeken</string>
+
+    <!-- preferences Dialog -->
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Volgorde series</string>
+    <string-array name="showOrderOptions">
+        <item>Standaard</item>
+        <item>Aflopend</item>
+        <item>Oplopend</item>
+    </string-array>
+    <!-- Episode sorting -->
+    <string name="episodeOrderPrompt">Volgorde episodes</string>
+    <string name="episodeOrderPromptExtra">Oudste of nieuwste eerst...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Oudste eerst</item>
+        <item>Nieuwste eerst</item>
+    </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Wachwoord opslaan</string>
     
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>

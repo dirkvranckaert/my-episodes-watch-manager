@@ -2,29 +2,30 @@
 <!-- Revision #93 -->
 <resources>
     <string name="app_name">MyEpisodes Watch Manager</string>
-    
+
     <!-- default values -->
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
-    
+    <string name="close">Stäng</string>
+
     <!-- login form -->
-    <string name="loginFormTitle">Ange inloggningsuppgifter för the MyEpisodes.com.</string>
+    <string name="loginFormTitle">Ange inloggningsuppgifter för MyEpisodes.com.</string>
     <string name="loginUsernameHint">Användarnamn</string>
     <string name="loginPasswordHint">Lösenord</string>
     <string name="loginLoginBtn">Inloggning</string>
     <string name="loginStartLogin">Loggar in på MyEpisodes.com</string>
     <string name="loginSuccessfullLogin">Inloggningen lyckades</string>
     <string name="loginLoginFailed">Kunde inte logga in på MyEpisodes.com, kontrollera nätverksanslutning och inloggningsuppgifter!</string>
-    
+
     <!-- watchtlist -->
     <string name="watchListTitle">TV-Serier/Avsnitt</string>
     <string name="watchListSubTitle">%d avsnitt att se</string>
     <string name="watchListEmpty">Inga avsnitt hittade.</string>
-    
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Laddar...</string>
     <string name="progressLoadingBody">Skickar/Tar emot data</string>
-    
+
     <!-- aboutDialog -->
     <string name="aboutTitle">Om...</string>
     <string name="aboutText">Skrivet av: Dirk Vranckaert\n
@@ -39,27 +40,46 @@
     Projekt kontakt: dirkvranckaert@gmail.com\n
     \n
     Organisera TV-serierna du följer på MyEpisodes.com (registrering krävs) och se direkt i mobilen vilka avsnitt du inte sett.</string>
-    
+
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Är du säker?</string>
     <string name="logoutDialogMessage">Dina uppgifter kommer inte längre lagras i mobilen.</string>
-    
+
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Uppdatera</string>
     <string name="about">Om</string>
     <string name="logout">Logga ut</string>
     <string name="changelog">Ändringar</string>
+    <string name="preferences">Inställningar</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Detaljer</string>
     <string name="episodeDetailsSeasonLabel">Säsong: </string>
     <string name="episodeDetailsEpisodeLabel">Avsnitt: </string>
     <string name="episodeDetailsAirDateLabel">Sändes: </string>
     <string name="menuEpisodeMarkWatched">Markera som sett</string>
-    
+
+    <!-- preferences Dialog -->
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Sortering av serier</string>
+    <string-array name="showOrderOptions">
+        <item>Standard</item>
+        <item>Alfabetiskt A-Z</item>
+        <item>Alfabetiskt Z-A</item>
+    </string-array>
+    <!-- Episode sorting -->
+    <string name="episodeOrderPrompt">Sortering av avsnitt</string>
+    <string name="episodeOrderPromptExtra">Äldst eller nyast först...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Äldst först</item>
+        <item>Nyast först</item>
+    </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Lagra lösenord</string>
+
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
-    
+
     <!-- Exception handling for dialogs -->
     <string name="fillInAllFields">Alla fält måste fyllas i!</string>
     <string name="exceptionDialogTitle">Oj...</string>
