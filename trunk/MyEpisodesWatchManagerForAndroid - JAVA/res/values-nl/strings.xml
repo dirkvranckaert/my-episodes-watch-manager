@@ -2,12 +2,12 @@
 <!-- Revision #93 -->
 <resources>
     <string name="app_name">MyEpisodes Watch Manager</string>
-    
+
     <!-- default values -->
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <string name="close">Sluiten</string>
-    
+
     <!-- login form -->
     <string name="loginFormTitle">Vul uw logingegevens voor de MyEpisodes.com hieronder in.</string>
     <string name="loginUsernameHint">Gebruikersnaam</string>
@@ -16,16 +16,16 @@
     <string name="loginStartLogin">Bezig met aanmelen bij MyEpisodes.com</string>
     <string name="loginSuccessfullLogin">Aanmelden gelukt</string>
     <string name="loginLoginFailed">Aanmelden bij MyEpisodes.com is mislukt. Kijk uw aanmeldingsgegevens en connectie met internet na vooraleer opnieuw te proberen!</string>
-    
+
     <!-- watchtlist -->
     <string name="watchListTitle">Lijst series/afleveringen</string>
     <string name="watchListSubTitle">%d afleveringen te bekijken</string>
     <string name="watchListEmpty">Geen afleveringen gevonden.</string>
-    
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Laden...</string>
     <string name="progressLoadingBody">Verzenden/Ontvangen data</string>
-    
+
     <!-- aboutDialog -->
     <string name="aboutTitle">Over...</string>
     <string name="aboutText">Geschreven door: Dirk Vranckaert\n
@@ -35,16 +35,18 @@
     Vertalingen door:\n
     * Dirk Vranckaert (Engels, Nederlands)\n
     * Fredrik Nohrborg (Zweeds)\n
+    * Daniel De Luca (Frans, Italiaans)\n
+    * Hyeon Tae Jeon (Koreaans)\n
     Licentie: GNU GPL V3 License\n
     Project website: http://code.google.com/p/my-episodes-watch-manager\n
     Project contact: dirkvranckaert@gmail.com\n
     \n
     Beheer alle series die u volgt gebruik makende van MyEpisodes.com (registratie verplicht) en ga op je mobiele telefoon meteen na wat de volgende aflevering is de je nog moet bekijken.</string>
-    
+
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Bent u zeker?</string>
     <string name="logoutDialogMessage">Uw login-gegevens zullen niet langer op het toestel worden bewaardt.</string>
-    
+
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Vernieuwen</string>
@@ -76,10 +78,10 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Auto inloggen</string>
-    
+
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
-    
+
     <!-- Exception handling for dialogs -->
     <string name="fillInAllFields">Alle velden moeten worden ingevuld!</string>
     <string name="exceptionDialogTitle">Ooops...</string>
