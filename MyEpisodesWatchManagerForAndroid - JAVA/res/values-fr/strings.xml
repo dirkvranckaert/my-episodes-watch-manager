@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Revision #93 -->
+<resources>
+    <string name="app_name">MyEpisodes Watch Manager</string>
+
+    <!-- default values -->
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="close">Quitter</string>
+
+    <!-- login form -->
+    <string name="loginFormTitle">Encodez vos données utilisateur MyEpisodes.com ci-après.</string>
+    <string name="loginUsernameHint">Utilisateur</string>
+    <string name="loginPasswordHint">Mot de passe</string>
+    <string name="loginLoginBtn">Envoyer</string>
+    <string name="loginStartLogin">Authentification à MyEpisodes.com en cours</string>
+    <string name="loginSuccessfullLogin">Authentification réussie</string>
+    <string name="loginLoginFailed">Authentification à MyEpisodes.com impossible, vérifiez votre connexion Internet ainsi que vos données utilisateur avant de recommencer!</string>
+
+    <!-- watchtlist -->
+    <string name="watchListTitle">Liste des séries/épisodes</string>
+    <string name="watchListSubTitle">%d épisodes a regarder</string>
+    <string name="watchListEmpty">Aucun épisode trouvé.</string>
+
+    <!-- progressDialog -->
+    <string name="progressLoadingTitle">Chargement...</string>
+    <string name="progressLoadingBody">Envoi/Réception de données</string>
+
+    <!-- aboutDialog -->
+    <string name="aboutTitle">A propos...</string>
+    <string name="aboutText">Développé par: Dirk Vranckaert\n
+    Maintenu par:\n
+    * Dirk Vranckaert\n
+    * Ivo Janssen\n
+    Traduction par:\n
+    * Dirk Vranckaert (Anglais, Néerlandais)\n
+    * Fredrik Nohrborg (Suédois)\n
+    * Daniel De Luca (Français, Italien)\n
+    * Hyeon Tae Jeon (Coréen)\n
+    License: GNU GPL V3 License\n
+    Site Web du projet: http://code.google.com/p/my-episodes-watch-manager\n
+    Contact du projet: dirkvranckaert@gmail.com\n
+    \n
+    Gèrez les épisodes de vos séries préférées en utilisant MyEpisodes.com (enregistrement obligatoire) et vérifiez directement, sur votre mobile, quels sont les prochains épisodes à regarder.</string>
+
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Etes vous sûr ?</string>
+    <string name="logoutDialogMessage">Vos données d\'authentification vont être effacées de votre appareil.</string>
+
+    <!-- menu's -->
+    <!-- main menu -->
+    <string name="refresh">Rafraîchir</string>
+    <string name="about">A propos</string>
+    <string name="logout">Quitter</string>
+    <string name="changelog">Ce qui a changé</string>
+    <string name="preferences">Préférences</string>
+    <!-- episode specific menu -->
+    <string name="menuEpisodeDetails">Détails</string>
+    <string name="episodeDetailsSeasonLabel">Saison: </string>
+    <string name="episodeDetailsEpisodeLabel">Episode: </string>
+    <string name="episodeDetailsAirDateLabel">Date de diffusion: </string>
+    <string name="menuEpisodeMarkWatched">Marquer comme vu</string>
+
+    <!-- preferences Dialog -->
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Ordre des séries</string>
+    <string-array name="showOrderOptions">
+        <item>Défaut</item>
+        <item>Croissant</item>
+        <item>Décroissant</item>
+    </string-array>
+    <!-- Episode sorting -->
+    <string name="episodeOrderPrompt">Ordre des épisodes</string>
+    <string name="episodeOrderPromptExtra">Plus ancien ou plus récent ...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Du plus ancien au plus récent</item>
+        <item>Du plus récent au plus ancien</item>
+    </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Enregistrer le mot de passe</string>
+
+    <!-- Basic Dialog -->
+    <string name="dialogOK">OK</string>
+
+    <!-- Exception handling for dialogs -->
+    <string name="fillInAllFields">Veuillez remplir tous les champs !</string>
+    <string name="exceptionDialogTitle">Erreur...</string>
+    <string name="defaultExceptionMessage">Un problème est survenu dans l\'application. Veuillez redémarrer celle-ci et vérifier votre connexion Internet. Si le problème persiste, merci de faire un rapport sur http://code.google.com/p/my-episodes-watch-manager/.</string>
+    <string name="internetConnectionFailureTryAgain">Impossible d\'établir une connexion à Internet. Veuillez réessayer !</string>
+    <string name="internetConnectionFailureReload">Impossible d\'établir une connexion à Internet. Utilisez l\'option menu pour réessayer à nouveau.</string>
+    <string name="networkIssues">Erreur réseau !\nVérifiez votre configuration réseau et essayez à nouveau.</string>
+    <string name="watchListUnableToReadFeed">Erreur réseau !\nEssayez à nouveau.</string>
+    <string name="watchListUnableToMarkWatched">Impossible de marquer cet épisode comme vu !\nVeuillez vérifier votre connexion Internet ou réinitialiser la liste!</string>
+</resources>
