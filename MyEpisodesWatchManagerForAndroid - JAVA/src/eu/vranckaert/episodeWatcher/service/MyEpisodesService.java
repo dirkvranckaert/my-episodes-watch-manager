@@ -206,7 +206,7 @@ public class MyEpisodesService {
             Log.w(LOG_TAG, message);
             throw new LoginFailedException(message);
         } else {
-            Log.i(LOG_TAG, "Successfull login to " + MYEPISODES_LOGIN_PAGE + result);
+            Log.i(LOG_TAG, "Successfull login to " + MYEPISODES_LOGIN_PAGE);
             result = true;
         }
         return result;
@@ -252,14 +252,22 @@ public class MyEpisodesService {
         MessageDigest digest = null;
         try {
             digest = MessageDigest.getInstance(PASSWORD_ENCRYPTION_TYPE);
+            digest.reset();
             digest.update(password.getBytes());
-            BigInteger hash = new BigInteger(1, digest.digest());
-            encryptedPwd = hash.toString(16);
+
+            byte[] messageDigest = digest.digest();
+
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0; i<messageDigest.length; i++) {
+                hexString.append(String.format("%02x", messageDigest[i]));
+            }
+            encryptedPwd = hexString.toString();
         } catch (NoSuchAlgorithmException e) {
             String message = "The password could not be encrypted because there is no such algorithm (" + PASSWORD_ENCRYPTION_TYPE + ")";
             Log.e(LOG_TAG, message, e);
             throw new PasswordEnctyptionFailedException(message, e);
         }
+        Log.d(LOG_TAG, "The encrypted password is " + encryptedPwd);
         return encryptedPwd;
     }
 }
