@@ -13,7 +13,8 @@ Content: New functionallity
   * Issue 39 (Episode title issue in list view)
   * Issue 42 (Option for application to forget password)
   * Issue 48 (Bug reported by James Wernau)
-  * Issue 46 (French and Italian language support)
+  * Issue 46 (French, Italian and Swedish language support)
+  * Issue 49 (Korean language support)
 
 ====Version 1.5.1====
 Release Date: Unknown<br>
