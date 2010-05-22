@@ -11,8 +11,6 @@ import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
-import eu.vranckaert.episodeWatcher.preferences.enums.ShowSortingEnum;
-import eu.vranckaert.episodeWatcher.preferences.enums.EpisodeSortingEnum;
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 
 import eu.vranckaert.episodeWatcher.R;
@@ -326,9 +324,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
     private void checkPreferences() {
         //Checks preference for show sorting and sets the default to ascending (A-Z)
-        Preferences.checkDefaultPreference(this, PreferencesKeys.EPISODE_SORTING_KEY, EpisodeSortingEnum.OLDEST.getName());
+        String[] episodeOrderOptions = getResources().getStringArray(R.array.episodeOrderOptionsValues);
+        Preferences.checkDefaultPreference(this, PreferencesKeys.EPISODE_SORTING_KEY, episodeOrderOptions[0]);
         //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
-        Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, ShowSortingEnum.ASCENDING.getName());
+        String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
+        Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[1]);
         //Checks preference for storing password
         if (!Preferences.getPreferenceBoolean(this, PreferencesKeys.STORE_PASSWORD_KEY)) {
             Preferences.removePreference(this, User.PASSWORD);
@@ -426,26 +426,28 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	};
 
     private void sortShows(List<Show> showList) {
-        ShowSortingEnum sorting = ShowSortingEnum.getShowSorting(Preferences.getPreference(this, PreferencesKeys.SHOW_SORTING_KEY));
+        String sorting = Preferences.getPreference(this, PreferencesKeys.SHOW_SORTING_KEY);
+        String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
 
-        if (sorting.equals(ShowSortingEnum.ASCENDING)) {
+        if (sorting.equals(showOrderOptions[1])) {
             Log.d(LOG_TAG, "Sorting episodes ascending");
             Collections.sort(showList, new ShowAscendingComparator());
-        } else  if (sorting.equals(ShowSortingEnum.DESCENDING)) {
+        } else  if (sorting.equals(showOrderOptions[2])) {
             Log.d(LOG_TAG, "Sorting episodes descending");
             Collections.sort(showList, new ShowDescendingComparator());
-        } else if (sorting.equals(ShowSortingEnum.DEFAULT_MYEPISODES_COM)) {
+        } else if (sorting.equals(showOrderOptions[0])) {
             Log.d(LOG_TAG, "Default my episodes show sorting, nothing to do!");
         }
     }
 
     private void sortEpisodesOfShows(List<Show> showList) {
-        EpisodeSortingEnum sorting = EpisodeSortingEnum.getEpisodeSorting(Preferences.getPreference(this, PreferencesKeys.EPISODE_SORTING_KEY));
+        String sorting = Preferences.getPreference(this, PreferencesKeys.EPISODE_SORTING_KEY);
+        String[] episodeOrderOptions = getResources().getStringArray(R.array.episodeOrderOptionsValues);
 
         for (Show show : showList) {
-            if (sorting.equals(EpisodeSortingEnum.OLDEST)) {
+            if (sorting.equals(episodeOrderOptions[0])) {
                 Collections.sort(show.getEpisodes(), new EpisodeAscendingComparator());
-            } else if(sorting.equals(EpisodeSortingEnum.NEWEST)) {
+            } else if(sorting.equals(episodeOrderOptions[1])) {
                 Collections.sort(show.getEpisodes(), new EpisodeDescendingComparator());
             }
         }
