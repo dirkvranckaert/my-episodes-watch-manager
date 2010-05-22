@@ -15,13 +15,13 @@ Content: New functionallity
   * Issue 42 (Option for application to forget password)
   * Issue 48 (Bug reported by James Wernau)
   * Issue 46 (French, Italian and Swedish language support)
-  * Issue 49 (Korean language support)
   * Issue 50 (Android 2.2 aka Froyo supported)
 
 ====Version 1.5.1====
 Release Date: Unknown<br>
 Content: Bugfixes
   * Issue 51: (Improve Google Analytics reports)
+  * Issue 49 (Korean language support)
 
 === Market Releases ===
 ====Version 1.4.1====
