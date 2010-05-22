@@ -15,6 +15,7 @@ Content: New functionallity
   * Issue 48 (Bug reported by James Wernau)
   * Issue 46 (French, Italian and Swedish language support)
   * Issue 49 (Korean language support)
+  * Issue 50 (Android 2.2 aka Froyo supported)
 
 ====Version 1.5.1====
 Release Date: Unknown<br>
