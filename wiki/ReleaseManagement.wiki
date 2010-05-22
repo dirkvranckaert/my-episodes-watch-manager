@@ -11,6 +11,7 @@ Content: New functionallity
   * Issue 37 (Sort "Show List" alphabetically)
   * Issue 37, Issue 44, Issue 47, Issue 45  (Option view)
   * Issue 39 (Episode title issue in list view)
+  * Issue 40 (Modification context menu)
   * Issue 42 (Option for application to forget password)
   * Issue 48 (Bug reported by James Wernau)
   * Issue 46 (French, Italian and Swedish language support)
@@ -19,8 +20,8 @@ Content: New functionallity
 
 ====Version 1.5.1====
 Release Date: Unknown<br>
-Content: Bugfixes and a little new functionallity
-  * Issue 40 (Modification context menu)
+Content: Bugfixes
+  * Issue 51: (Improve Google Analytics reports)
 
 === Market Releases ===
 ====Version 1.4.1====
