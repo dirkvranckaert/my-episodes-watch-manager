@@ -70,14 +70,14 @@
         <item>Oplopend</item>
     </string-array>
     <!-- Episode sorting -->
-    <string name="episodeOrderPrompt">Sortering afl.</string>
-    <string name="episodeOrderPromptExtra"></string>
+    <string name="episodeOrderPrompt">Sortering afleveringen</string>
+    <string name="episodeOrderPromptExtra">Oudste of nieuwste eerst...</string>
     <string-array name="episodeOrderOptions">
         <item>Oudste eerst</item>
         <item>Nieuwste eerst</item>
     </string-array>
     <!-- Store password -->
-    <string name="storePasswordPrompt">Auto inloggen</string>
+    <string name="storePasswordPrompt">Automatisch aanmelden</string>
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
