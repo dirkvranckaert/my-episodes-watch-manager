@@ -7,37 +7,36 @@ import eu.vranckaert.episodeWatcher.utils.StringUtils;
 
 public class Preferences {
 	public static final String LOG_TAG = "MyEpisodesWatchManager";
-	private static final String PREF_NAME = "mewmfacred";
+	public static final String PREF_NAME = "mewmfacred";
+
+    private static final SharedPreferences getSharedPreferences(Activity ac) {
+        return ac.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+    }
 	
 	public static String getPreference(Activity ac, String key) {
-		SharedPreferences settings = ac.getSharedPreferences(Preferences.PREF_NAME, Activity.MODE_PRIVATE);
-		String result = settings.getString(key, null);
+		String result = getSharedPreferences(ac).getString(key, null);
 		return result;
 	}
 
     public static boolean getPreferenceBoolean(Activity ac, String key) {
-        SharedPreferences settings = ac.getSharedPreferences(Preferences.PREF_NAME, Activity.MODE_PRIVATE);
-		boolean result = settings.getBoolean(key, true);
+		boolean result = getSharedPreferences(ac).getBoolean(key, true);
 		return result;
     }
 	
 	public static void setPreference(Activity ac, String key, String value) {
-		SharedPreferences settings = ac.getSharedPreferences(Preferences.PREF_NAME, Activity.MODE_PRIVATE);
-		Editor editor = settings.edit();
+		Editor editor = getSharedPreferences(ac).edit();
 		editor.putString(key, value);
 		editor.commit();
 	}
 
     public static void setPreference(Activity ac, String key, boolean value) {
-		SharedPreferences settings = ac.getSharedPreferences(Preferences.PREF_NAME, Activity.MODE_PRIVATE);
-		Editor editor = settings.edit();
+		Editor editor = getSharedPreferences(ac).edit();
 		editor.putBoolean(key, value);
 		editor.commit();
 	}
 	
 	public static void removePreference(Activity ac, String key) {
-		SharedPreferences settings = ac.getSharedPreferences(Preferences.PREF_NAME, Activity.MODE_PRIVATE);
-		Editor editor = settings.edit();
+		Editor editor = getSharedPreferences(ac).edit();
 		editor.remove(key);
 		editor.commit();
 	}
