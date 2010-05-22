@@ -78,7 +78,15 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) menuInfo;
 		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
+		
 		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+			int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
+			int childid = ExpandableListView.getPackedPositionChild(info.packedPosition);
+			
+			menu.setHeaderTitle(shows.get(groupid).getEpisodes().get(childid).getShowName() + 
+					" S" + shows.get(groupid).getEpisodes().get(childid).getSeason() + 
+					"E" + shows.get(groupid).getEpisodes().get(childid).getEpisode() + "\n" +
+					shows.get(groupid).getEpisodes().get(childid).getName());
 			MenuInflater inflater = getMenuInflater();
 			inflater.inflate(R.menu.episodemenu, menu);
 		}
@@ -194,7 +202,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
 		int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
 		int childid = ExpandableListView.getPackedPositionChild(info.packedPosition);
-
+		
 		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
 			switch(item.getItemId()) {
 			case R.id.episodeMenuWatched:
