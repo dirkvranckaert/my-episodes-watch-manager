@@ -287,6 +287,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	}
 
     private void openPreferencesActivity() {
+        tracker.trackPageView("/generalPreferences");
         Intent preferencesActivity = new Intent(this.getApplicationContext(), PreferencesActivity.class);
         startActivity(preferencesActivity);
     }
