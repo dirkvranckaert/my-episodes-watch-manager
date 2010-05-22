@@ -145,4 +145,16 @@
     ***********\n
     Network connction issues solved\n
     Date formatting in episode details</string>
+
+    <!-- The tags beneath may never be translated or will cause an application failure!!! -->
+    <!-- Preferences -->
+    <string-array name="showOrderOptionsValues">
+        <item>show_myepisodes_default_sort</item>
+        <item>show_ascending_sort</item>
+        <item>show_descending_sort</item>
+    </string-array>
+    <string-array name="episodeOrderOptionsValues">
+        <item>oldest_on_top</item>
+        <item>newest_on_top</item>
+    </string-array>
 </resources>
