@@ -96,9 +96,11 @@
 
     <string name="changelogTitle">Veranderingen</string>
     <string name="changelogText">Versie 1.5.1\n
+    ***********\n
     Betere Google Analytics statistieken\n
     \n
     Versie 1.5.0\n
+    ***********\n
     Android 2.2 aka Froyo compatibel\n
     Voorkeuren scherm\n
     'Passwoord onthouden' optie\n
