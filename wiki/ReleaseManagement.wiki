@@ -6,7 +6,7 @@
 == Release management ==
 === Scheduled releases ===
 ====Version 1.5.0====
-Release Date: May 23th 2010<br>
+Release Date: May 27th 2010<br>
 Content: New functionallity
   * Issue 37 (Sort "Show List" alphabetically)
   * Issue 37, Issue 44, Issue 47, Issue 45  (Option view)
@@ -18,7 +18,7 @@ Content: New functionallity
   * Issue 50 (Android 2.2 aka Froyo supported)
 
 ====Version 1.5.1====
-Release Date: Unknown<br>
+Release Date: May 31th 2010<br>
 Content: Bugfixes
   * Issue 51: (Improve Google Analytics reports)
   * Issue 49 (Korean language support)
