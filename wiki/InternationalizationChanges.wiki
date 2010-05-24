@@ -13,3 +13,7 @@ Version 1.5.0:
   * showOrderOptions
   * storePasswordPrompt
   * aboutText
+
+Version 1.5.1:
+  * attention
+  * applyPreferences
