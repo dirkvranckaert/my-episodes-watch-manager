@@ -7,6 +7,7 @@
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <string name="close">Sluiten</string>
+    <string name="attention">Aandacht</string>
 
     <!-- login form -->
     <string name="loginFormTitle">Vul uw logingegevens voor de MyEpisodes.com hieronder in.</string>
@@ -62,6 +63,7 @@
     <string name="menuEpisodeMarkWatched">Markeer als bekeken</string>
 
     <!-- preferences Dialog -->
+    <string name="applyPreferences">Om de aanpassingen te kunnen doorvoeren dient u de applicatie te herstarten of de list van series en aflveringen te herladen</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Sortering series</string>
     <string-array name="showOrderOptions">
@@ -91,4 +93,64 @@
     <string name="networkIssues">Netwerk probleem!\nControleer je netwerkinstellingen en probeer handmatig te vernieuwen.</string>
     <string name="watchListUnableToReadFeed">Netwerk probleem!\nProbeer handmatig te vernieuwen.</string>
     <string name="watchListUnableToMarkWatched">Kan deze episode niet markeren als gezien!\nKijk uw internetverbinding na of herlaad de lijst!</string>
+
+    <string name="changelogTitle">Veranderingen</string>
+    <string name="changelogText">Versie 1.5.1\n
+    Betere Google Analytics statistieken\n
+    \n
+    Versie 1.5.0\n
+    Android 2.2 aka Froyo compatibel\n
+    Voorkeuren scherm\n
+    'Passwoord onthouden' optie\n
+    'Sortering series' optie\n
+    'Sortering afleveringen' optie\n
+    Beter episode-optie menu\n
+    Probleem met het tonen van de titel van alfeveringen opelost\n
+    Probleem bij het aanmelden opgelost\n
+    Franse vertalingen door Daniel De Luca\n
+    Italiaanse vertalingen door Daniel De Luca\n
+    Koreaanse vertalingen door Hyeon Tae Jeon\n
+    \n
+    Versie 1.4.1\n
+    ***********\n
+    Zweedse vertalingen door Fredrik Nohrborg\n
+    \n
+    Versie 1.4.0\n
+    ***********\n
+    Groeperen van afleveringen\n
+    \n
+    Versie 1.3.5\n
+    ***********\n
+    Update aanmeldscherm en -procedure\n
+    Aanpassingen layout (hoofding)\n
+    Problemen met witte thema opgelost\n
+    \n
+    Versie 1.3.4\n
+    ***********\n
+    Witte theme geïnstalleerd zoals voorgesteld door Ivo Janssen\n
+    \n
+    Versie 1.3.3\n
+    ***********\n
+    Dialoogvenster met vraag of u zeker bent dat u wilt uitloggen\n
+    \n
+    Versie 1.3.2\n
+    ***********\n
+    Google Analytics statistieken toegevoegd\n
+    Probleem met te lange episode namen opgelost\n
+    \n
+    Versie 1.3.1\n
+    ***********\n
+    Het 'Over' scherm toegevoegd\n
+    Het 'Veranderingen' scherm toegevoegd\n
+    Compatibiliteit met Android 2.0 getest\n
+    Internationalisatie (i18n: engels, nederlands)\n
+    \n
+    Versie 1.3.0\n
+    ***********\n
+    Probleemoplossende release\n
+    \n
+    Versie 1.2.0\n
+    ***********\n
+    Probleem met netwerk connectiviteit opelost\n
+    Datum formatteringen in de details van afleveringen opgelost</string>
 </resources>
