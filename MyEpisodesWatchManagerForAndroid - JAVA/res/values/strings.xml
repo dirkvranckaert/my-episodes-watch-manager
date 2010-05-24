@@ -7,6 +7,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="close">Close</string>
+    <string name="attention">Attention</string>
 
     <!-- login form -->
     <string name="loginFormTitle">Provide your user details for the MyEpisodes.com website below.</string>
@@ -62,6 +63,7 @@
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
 
     <!-- preferences Dialog -->
+    <string name="applyPreferences">In order to apply the preferences restart the application or reload the list of shows and episodes</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Order of shows</string>
     <string-array name="showOrderOptions">

@@ -1,13 +1,20 @@
 package eu.vranckaert.episodeWatcher;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.text.util.Linkify;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 
@@ -17,6 +24,8 @@ import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
  *         Time: 19:34:14
  */
 public class PreferencesActivity extends PreferenceActivity {
+    private static final int RELAOD_DIALOG = 0;
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -28,14 +37,14 @@ public class PreferencesActivity extends PreferenceActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
             case R.id.closePreferences:
-                exit();
+                finish();
                 return true;
         }
 		return false;
 	}
 
     private void exit() {
-        finish();
+        super.finish();
     }
 
     @Override
@@ -70,5 +79,35 @@ public class PreferencesActivity extends PreferenceActivity {
         root.addPreference(episodeOrderingPref);
 
         return root;
+    }
+
+    @Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dialog = null;
+		switch (id) {
+			case RELAOD_DIALOG:
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle(R.string.attention)
+					   .setMessage(R.string.applyPreferences)
+					   .setCancelable(false)
+					   .setPositiveButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				                dialog.cancel();
+                                exit();
+				           }
+				       });
+				dialog = builder.create();
+				break;
+			default:
+				dialog = super.onCreateDialog(id);
+				break;
+		}
+		return dialog;
+    }
+
+    @Override
+    public void finish() {
+        Log.d("PreferencesActivity", "Closing the preferences screen!");
+        showDialog(RELAOD_DIALOG);
     }
 }
