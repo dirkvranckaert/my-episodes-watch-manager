@@ -94,11 +94,11 @@
     <string name="watchListUnableToReadFeed">Network error!\nTry to refresh manually.</string>
     <string name="watchListUnableToMarkWatched">Failed to mark this episode watched!\nCheck internet connection or refresh the list!</string>
 
-    <!-- Next string values do not need to be translated into other languages! -->
-
-    <!-- changelogDialog -->
     <string name="changelogTitle">What\'s changed</string>
-    <string name="changelogText">Version 1.5.0\n
+    <string name="changelogText">Version 1.5.1\n
+    Better Google Analytics statistics\n
+    \n
+    Version 1.5.0\n
     Android 2.2 aka Froyo compatible\n
     Preferences screen\n
     Remember password preference\n
