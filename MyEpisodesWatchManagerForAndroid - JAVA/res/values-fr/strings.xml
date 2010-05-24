@@ -19,7 +19,7 @@
 
     <!-- watchtlist -->
     <string name="watchListTitle">Liste des séries/épisodes</string>
-    <string name="watchListSubTitle">%d épisodes a regarder</string>
+    <string name="watchListSubTitle">%d épisode(s) a regarder</string>
     <string name="watchListEmpty">Aucun épisode trouvé.</string>
 
     <!-- progressDialog -->
