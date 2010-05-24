@@ -99,11 +99,17 @@
     <!-- changelogDialog -->
     <string name="changelogTitle">What\'s changed</string>
     <string name="changelogText">Version 1.5.0\n
+    Android 2.2 aka Froyo compatible\n
     Preferences screen\n
     Remember password preference\n
     Sort shows preference\n
     Sort episodes preference\n
+    Better context menu\n
     Bug in showing episode title in list solved\n
+    Login bug solved\n
+    French translations by Daniel De Luca\n
+    Italian translations by Daniel De Luca\n
+    Korean translations by Hyeon Tae Jeon\n
     \n
     Version 1.4.1\n
     ***********\n
