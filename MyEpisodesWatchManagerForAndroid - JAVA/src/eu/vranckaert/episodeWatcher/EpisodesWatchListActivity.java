@@ -330,10 +330,6 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
         String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
         Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[1]);
-        //Checks preference for storing password
-        if (!Preferences.getPreferenceBoolean(this, PreferencesKeys.STORE_PASSWORD_KEY)) {
-            Preferences.removePreference(this, User.PASSWORD);
-        }
     }
 
     private void reloadEpisodes() {

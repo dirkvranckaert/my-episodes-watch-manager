@@ -59,6 +59,7 @@ public class PreferencesActivity extends PreferenceActivity {
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen(this);
 
         CheckBoxPreference passwordPref = new CheckBoxPreference(this);
+        passwordPref.setDefaultValue(true);
         passwordPref.setKey(PreferencesKeys.STORE_PASSWORD_KEY);
         passwordPref.setTitle(R.string.storePasswordPrompt);
         root.addPreference(passwordPref);
