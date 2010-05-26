@@ -8,7 +8,9 @@
 ====Version 1.5.1====
 Release Date: May 31th 2010<br>
 Content: Bugfixes
-  * Issue 51: (Improve Google Analytics reports)
+  * Issue 51 (Improve Google Analytics reports)
+  * Issue 55 (High res issue listView)
+  * Issue 56 (Everything translated, also the about dialog)
 
 ====Version 1.5.2====
 Release Date: Unknown<br>
