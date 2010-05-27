@@ -6,7 +6,7 @@
 == Release management ==
 === Scheduled releases ===
 ====Version 1.5.1====
-Release Date: May 31th 2010<br>
+Release Date: Unknown<br>
 Content: Bugfixes
   * Issue 51 (Improve Google Analytics reports)
   * Issue 55 (High res issue listView)
