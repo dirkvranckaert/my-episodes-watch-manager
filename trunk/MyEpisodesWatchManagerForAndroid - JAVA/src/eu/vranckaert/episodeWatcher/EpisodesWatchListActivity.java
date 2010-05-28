@@ -308,16 +308,19 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     		);
 
 	        reloadEpisodes();
-		} else if (requestCode == EPISODE_DETAILS_REQUEST_CODE && resultCode == RESULT_OK) {
-            tracker.trackPageView("/episodesWatchListActivity");
-            Bundle intentData = data.getExtras();
-            boolean markEpisodeWathed = intentData.getBoolean("markEpisodeWatched");
-            Episode episode = (Episode) intentData.getSerializable("episode");
-
-            if (markEpisodeWathed) {
-                tracker.trackEvent("MarkAsWatched", "MenuButton-DetailsSubActivity", "", 0);
-                markEpisodeWatched(episode);
-            }
+		} else if (requestCode == EPISODE_DETAILS_REQUEST_CODE) {
+			if (resultCode == RESULT_OK)
+			{
+	            tracker.trackPageView("/episodesWatchListActivity");
+	            Bundle intentData = data.getExtras();
+	            boolean markEpisodeWathed = intentData.getBoolean("markEpisodeWatched");
+	            Episode episode = (Episode) intentData.getSerializable("episode");
+	
+	            if (markEpisodeWathed) {
+	                tracker.trackEvent("MarkAsWatched", "MenuButton-DetailsSubActivity", "", 0);
+	                markEpisodeWatched(episode);
+	            }
+			}
 		} else {
 			exit();
 		}
