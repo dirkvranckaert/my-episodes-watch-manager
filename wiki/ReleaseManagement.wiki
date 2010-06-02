@@ -13,11 +13,6 @@ Content: Bugfixes
   * Issue 56 (Everything translated, also the about dialog)
   * Issue 57 (Issue when pressing the back button)
 
-====Version 1.5.2====
-Release Date: Unknown<br>
-Content: Bugfixes
-  * Swedish translations of version 1.5.1
-
 === Market Releases ===
 ====Version 1.5.0====
   * Issue 37 (Sort "Show List" alphabetically)
