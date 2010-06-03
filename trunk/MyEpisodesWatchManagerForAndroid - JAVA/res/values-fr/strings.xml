@@ -63,7 +63,7 @@
     <string name="menuEpisodeMarkWatched">Marquer comme vu</string>
 
     <!-- preferences Dialog -->
-    <string name="applyPreferences">Afin d'appliquer les préférences, redémarrez l'application ou rafraîchissez la liste des séries et épisodes</string>
+    <string name="applyPreferences">Afin d\'appliquer les préférences, redémarrez l\'application ou rafraîchissez la liste des séries et épisodes</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Ordre des séries</string>
     <string-array name="showOrderOptions">

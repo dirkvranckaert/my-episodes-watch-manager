@@ -63,7 +63,7 @@
     <string name="menuEpisodeMarkWatched">Contrassegna guardato</string>
 
     <!-- preferences Dialog -->
-    <string name="applyPreferences">Per usare le preferenze ripristina l'applicazione o ricarica la lista delle serie e degli episodi</string>
+    <string name="applyPreferences">Per usare le preferenze ripristina l\'applicazione o ricarica la lista delle serie e degli episodi</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Ordine delle serie</string>
     <string-array name="showOrderOptions">
