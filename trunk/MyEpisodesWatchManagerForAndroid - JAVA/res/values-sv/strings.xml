@@ -2,11 +2,13 @@
 <!-- Revision #93 -->
 <resources>
     <string name="app_name">MyEpisodes Watch Manager</string>
-    
+
     <!-- default values -->
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
-    
+    <string name="close">Stäng</string>
+    <string name="attention">Varning</string>
+
     <!-- login form -->
     <string name="loginFormTitle">Ange inloggningsuppgifter för MyEpisodes.com.</string>
     <string name="loginUsernameHint">Användarnamn</string>
@@ -15,16 +17,16 @@
     <string name="loginStartLogin">Loggar in på MyEpisodes.com</string>
     <string name="loginSuccessfullLogin">Inloggningen lyckades</string>
     <string name="loginLoginFailed">Kunde inte logga in på MyEpisodes.com, kontrollera nätverksanslutning och inloggningsuppgifter!</string>
-    
+
     <!-- watchtlist -->
     <string name="watchListTitle">TV-Serier/Avsnitt</string>
     <string name="watchListSubTitle">%d avsnitt att se</string>
     <string name="watchListEmpty">Inga avsnitt hittade.</string>
-    
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Laddar...</string>
     <string name="progressLoadingBody">Skickar/Tar emot data</string>
-    
+
     <!-- aboutDialog -->
     <string name="aboutTitle">Om...</string>
     <string name="aboutText">Skrivet av: Dirk Vranckaert\n
@@ -34,34 +36,54 @@
     Översättningar av:\n
     * Dirk Vranckaert (Engelska, Holländska)\n
     * Fredrik Nohrborg (Svenska)\n
+    * Daniel De Luca (Franska, Italienska)\n
     * Hyeon Tae Jeon (Koreanska)\n
-    * Daniel De Lica (Italienska, Franska)\n
     Lisens: GNU GPL V3 License\n
     Projekt websida: http://code.google.com/p/my-episodes-watch-manager\n
     Projekt kontakt: dirkvranckaert@gmail.com\n
     \n
     Organisera TV-serierna du följer på MyEpisodes.com (registrering krävs) och se direkt i mobilen vilka avsnitt du inte sett.</string>
-    
+
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Är du säker?</string>
     <string name="logoutDialogMessage">Dina uppgifter kommer inte längre lagras i mobilen.</string>
-    
+
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Uppdatera</string>
     <string name="about">Om</string>
     <string name="logout">Logga ut</string>
     <string name="changelog">Ändringar</string>
+    <string name="preferences">Inställningar</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Detaljer</string>
     <string name="episodeDetailsSeasonLabel">Säsong: </string>
     <string name="episodeDetailsEpisodeLabel">Avsnitt: </string>
     <string name="episodeDetailsAirDateLabel">Sändes: </string>
     <string name="menuEpisodeMarkWatched">Markera som sett</string>
-    
+
+    <!-- preferences Dialog -->
+    <string name="applyPreferences">För att spara inställningarna, starta om programmet, eller ladda om listan med avsnitt.</string>
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Sortering serier</string>
+    <string-array name="showOrderOptions">
+        <item>Default</item>
+        <item>Stigande</item>
+        <item>Fallande</item>
+    </string-array>
+    <!-- Episode sorting -->
+    <string name="episodeOrderPrompt">Sortering av avsnitt</string>
+    <string name="episodeOrderPromptExtra">Äldsta eller nyaste först...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Äldst först</item>
+        <item>Nyaste först</item>
+    </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Lagra lösenord</string>
+
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
-    
+
     <!-- Exception handling for dialogs -->
     <string name="fillInAllFields">Alla fält måste fyllas i!</string>
     <string name="exceptionDialogTitle">Oj...</string>
@@ -71,4 +93,64 @@
     <string name="networkIssues">Nätverksfel!\nKontrollera nätveksinställningarna och försök uppdatera manuellt.</string>
     <string name="watchListUnableToReadFeed">Nätverksfel!\nFörsök uppdatera manuellt.</string>
     <string name="watchListUnableToMarkWatched">Misslyckades att markera avsnitt som sett!\nKontrollera nätverksanslutning eller uppdatera listan!</string>
+
+    <string name="changelogTitle">Ändringar</string>
+    <string name="changelogText">Version 1.5.1\n
+    Bättre Google Analytics statistik\n
+    \n
+    Version 1.5.0\n
+    Android 2.2 (Froyo) kompatibelt\n
+    Inställningsdialog\n
+    Kom ihåg lösenord\n
+    Sortering av serier\n
+    Sortering av avsnitt\n
+    Förbättrad meny\n
+    Bug fixad när visning av avsnitt i listan\n
+    Bug vid inloggning fixad\n
+    Fransk översättning av Daniel De Luca\n
+    Italiensk översättning av Daniel De Luca\n
+    Koreansk översättning av Hyeon Tae Jeon\n
+    \n
+    Version 1.4.1\n
+    ***********\n
+    Svensk översättning av Fredrik Nohrborg\n
+    \n
+    Version 1.4.0\n
+    ***********\n
+    Gruppering av avsnitt\n
+    \n
+    Version 1.3.5\n
+    ***********\n
+    Uppdatering av inloggningsrutin\n
+    Ändrad layout (header)\n
+    Buggar i vitt tema löst\n
+    \n
+    Version 1.3.4\n
+    ***********\n
+    Infört vitt tema på förslag från Ivo Janssen\n
+    \n
+    Version 1.3.3\n
+    ***********\n
+    Infört dialog vid utloggning\n
+    \n
+    Version 1.3.2\n
+    ***********\n
+    Lagt till Google Analytics för statistik\n
+    Löst problem med långa avsnittsnamn\n
+    \n
+    Version 1.3.1\n
+    ***********\n
+    Tillägg Om...\n
+    Tillägg Förändringar...\n
+    Testat kompatibilitet med Android 2.0\n
+    Internationalisering (i18n: Engelska, Holländska)\n
+    \n
+    Version 1.3.0\n
+    ***********\n
+    Bugfixar\n
+    \n
+    Version 1.2.0\n
+    ***********\n
+    Anslutningsproblem löst\n
+    Datumformat i detaljvy</string>
 </resources>
