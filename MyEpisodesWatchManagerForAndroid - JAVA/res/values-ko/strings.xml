@@ -7,6 +7,7 @@
     <string name="yes">예</string>
     <string name="no">아니오</string>
     <string name="close">닫기</string>
+    <string name="attention">주의</string>
 
     <!-- login form -->
     <string name="loginFormTitle">MyEpisodes.com 웹사이트의 사용자 정보를 입력하시기 바랍니다.</string>
@@ -62,7 +63,8 @@
     <string name="menuEpisodeMarkWatched">시청날짜:</string>
 
     <!-- preferences Dialog -->
-    <!-- Show sorting -->
+    <string name="applyPreferences">에피소드의 목록을 새로고침하거나 설정을 적용하려면 어플리케이션을 재실행 해주시기 바랍니다.</string>
+	<!-- Show sorting -->
     <string name="showOrderPrompt">보기정렬</string>
     <string-array name="showOrderOptions">
         <item>기본</item>
@@ -92,16 +94,22 @@
     <string name="watchListUnableToReadFeed">네트워크 오류!\n메뉴의 새로고침을 눌러주세요.</string>
     <string name="watchListUnableToMarkWatched">시청한 에피소드를 표시가 정상적으로 진행되지 않았습니다!\n인터넷 연결확인 및 새로고침을 진행하세요!</string>
 
-    <!-- Next string values do not need to be translated into other languages! -->
-
-    <!-- changelogDialog -->
     <string name="changelogTitle">변경사항</string>
-    <string name="changelogText">Version 1.5.0\n
+    <string name="changelogText">Version 1.5.1\n
+    Better Google Analytics statistics\n
+    \n
+    Version 1.5.0\n
+    Android 2.2 aka Froyo compatible\n
     Preferences screen\n
     Remember password preference\n
     Sort shows preference\n
     Sort episodes preference\n
+    Better context menu\n
     Bug in showing episode title in list solved\n
+    Login bug solved\n
+    French translations by Daniel De Luca\n
+    Italian translations by Daniel De Luca\n
+    Korean translations by Hyeon Tae Jeon\n
     \n
     Version 1.4.1\n
     ***********\n

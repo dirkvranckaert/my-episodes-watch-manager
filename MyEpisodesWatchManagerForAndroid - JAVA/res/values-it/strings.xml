@@ -7,6 +7,7 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="close">Uscire</string>
+    <string name="attention">Attenzione</string>
 
     <!-- login form -->
     <string name="loginFormTitle">Fornire i vostri dati utente di MyEpisodes.com qui sotto.</string>
@@ -62,6 +63,7 @@
     <string name="menuEpisodeMarkWatched">Contrassegna guardato</string>
 
     <!-- preferences Dialog -->
+    <string name="applyPreferences">Per usare le preferenze ripristina l'applicazione o ricarica la lista delle serie e degli episodi</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Ordine delle serie</string>
     <string-array name="showOrderOptions">
@@ -91,4 +93,67 @@
     <string name="networkIssues">Errore rete !\nVerificare la configurazione rete e ripristinare.</string>
     <string name="watchListUnableToReadFeed">Errore rete !\nRipristina.</string>
     <string name="watchListUnableToMarkWatched">Impossibile contrassegnare questo episodio!\nControllare il collegamento a Internet o ripristinare l\'elenco!</string>
+
+    <!-- Next string values do not need to be translated into other languages! -->
+
+    <!-- changelogDialog -->
+    <string name="changelogTitle">Che cosa è cambiato</string>
+    <string name="changelogText">Version 1.5.1\n
+    Aggiornamento statistica Google Analytics\n
+    \n
+    Versione 1.5.0\n
+    Android 2.2 (Froyo) compatibilità\n
+    Schermo preferenze\n
+    Preferenza: Ricordi la password\n
+    Preferenza: Ordine delle serie\n
+    Preferenza: Ordine dei episodi\n
+    Miglioramento menu contestuale\n
+    Risoluzione problema : Titolo dell\'episodo nell\'elenco\n
+    Risoluzione problema : Login \n
+    Traduzione Francese di Daniel De Luca\n
+    Traduzione Italiana di Daniel De Luca\n
+    Traduzione Coreana di Hyeon Tae Jeon\n
+    \n
+    Versione 1.4.1\n
+    ***********\n
+    Traduzione Svedese di Fredrik Nohrborg\n
+    \n
+    Versione 1.4.0\n
+    ***********\n
+    Raggruppamento degli episodi\n
+    \n
+    Versione 1.3.5\n
+    ***********\n
+    Aggiornamento schermo e procedura di login\n
+    Modifiche messa in pagina (testata)\n
+    Risoluzione problema : Tema "bianco"\n
+    \n
+    Versione 1.3.4\n
+    ***********\n
+    Sviluppo tema "bianco" suggerito da Ivo Janssen\n
+    \n
+    Versione 1.3.3\n
+    ***********\n
+    Sviluppo del dialogo di conferma prima di chiudere la connessione a MyEpisodes.com\n
+    \n
+    Versione 1.3.2\n
+    ***********\n
+    Aggiunto : Google Analytics a scopo di statistica\n
+    Risoluzione problema : Lungo nome di episodio\n
+    \n
+    Versione 1.3.1\n
+    ***********\n
+    Aggiunto : Dialogo "A proposito"\n
+    Aggiunto : Dialogo "Che cosa è cambiato"\n
+    Verificato : Compatibilità Android 2.0\n
+    Internazionalizzazione (i18n: Inglese, Olandese)\n
+    \n
+    Versione 1.3.0\n
+    ***********\n
+    Risoluzione problemi \n
+    \n
+    Versione 1.2.0\n
+    ***********\n
+    Risoluzione problema : Connettività rete\n
+    Formato data nell dettaglio di un episodio</string>
 </resources>

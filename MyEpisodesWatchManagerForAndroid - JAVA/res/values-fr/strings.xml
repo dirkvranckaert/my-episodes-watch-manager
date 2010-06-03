@@ -7,9 +7,10 @@
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="close">Quitter</string>
+    <string name="attention">Attention</string>
 
     <!-- login form -->
-    <string name="loginFormTitle">Encodez vos données utilisateur MyEpisodes.com ci-après.</string>
+    <string name="loginFormTitle">Entrez vos données utilisateur MyEpisodes.com ci-dessous.</string>
     <string name="loginUsernameHint">Utilisateur</string>
     <string name="loginPasswordHint">Mot de passe</string>
     <string name="loginLoginBtn">Envoyer</string>
@@ -62,6 +63,7 @@
     <string name="menuEpisodeMarkWatched">Marquer comme vu</string>
 
     <!-- preferences Dialog -->
+    <string name="applyPreferences">Afin d'appliquer les préférences, redémarrez l'application ou rafraîchissez la liste des séries et épisodes</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Ordre des séries</string>
     <string-array name="showOrderOptions">
@@ -87,8 +89,71 @@
     <string name="exceptionDialogTitle">Erreur...</string>
     <string name="defaultExceptionMessage">Un problème est survenu dans l\'application. Veuillez redémarrer celle-ci et vérifier votre connexion Internet. Si le problème persiste, merci de faire un rapport sur http://code.google.com/p/my-episodes-watch-manager/.</string>
     <string name="internetConnectionFailureTryAgain">Impossible d\'établir une connexion à Internet. Veuillez réessayer !</string>
-    <string name="internetConnectionFailureReload">Impossible d\'établir une connexion à Internet. Utilisez l\'option menu pour réessayer à nouveau.</string>
+    <string name="internetConnectionFailureReload">Impossible d\'établir une connexion à Internet. Utilisez l\'option menu pour essayer de nouveau.</string>
     <string name="networkIssues">Erreur réseau !\nVérifiez votre configuration réseau et essayez à nouveau.</string>
-    <string name="watchListUnableToReadFeed">Erreur réseau !\nEssayez à nouveau.</string>
+    <string name="watchListUnableToReadFeed">Erreur réseau !\nEssayez de nouveau.</string>
     <string name="watchListUnableToMarkWatched">Impossible de marquer cet épisode comme vu !\nVeuillez vérifier votre connexion Internet ou réinitialiser la liste!</string>
+
+    <!-- Next string values do not need to be translated into other languages! -->
+
+    <!-- changelogDialog -->
+    <string name="changelogTitle">Dernières mises à jours</string>
+    <string name="changelogText">Version 1.5.1\n
+    Amélioration des statistiques Google Analytics\n
+    \n
+    Version 1.5.0\n
+    Compatibilité Android 2.2 (Froyo)\n
+    Ecran des préférences\n
+    Préférence: Conserver le mot de passe\n
+    Préférence: Ordre des séries\n
+    Préférence: Ordre des épisodes\n
+    Amélioration du menu contextuel
+    Résolution du problème : Affichage du titre de l\'épisode dans la liste\n
+    Résolution du problème : Authentification\n
+    Traduction Française par Daniel De Luca\n
+    Traduction Italienne par Daniel De Luca\n
+    Traduction Coréenne par Hyeon Tae Jeon\n
+    \n
+    Version 1.4.1\n
+    ***********\n
+    Traduction Suédoise par Fredrik Nohrborg\n
+    \n
+    Version 1.4.0\n
+    ***********\n
+    Groupement d\'épisodes\n
+    \n
+    Version 1.3.5\n
+    ***********\n
+    Mise à jour de l\'écran et de la procédure d\'authentification\n
+    Modifications de la mise en page (en-tête)\n
+    Résolution des problèmes : Thème "blanc"\n
+    \n
+    Version 1.3.4\n
+    ***********\n
+    Implémentation du thème "blanc" suggéré par Ivo Janssen\n
+    \n
+    Version 1.3.3\n
+    ***********\n
+    Implémentation du dialogue de confirmation avant fermeture de la connexion à MyEpisodes.com\n
+    \n
+    Version 1.3.2\n
+    ***********\n
+    Ajout de l\'intégration à Google Analytics à des fins statistiques\n
+    Résolution du problème : Long nom d\'épisode\n
+    \n
+    Version 1.3.1\n
+    ***********\n
+    Ajout du dialogue "A propos"\n
+    Ajout du dialogue "Dernières mises à jours"\n
+    Vérification de la compatibilité Android 2.0\n
+    Internationalisation (i18n: Anglais, Néerlandais)\n
+    \n
+    Version 1.3.0\n
+    ***********\n
+    Résolution de problèmes \n
+    \n
+    Version 1.2.0\n
+    ***********\n
+    Résolution de problèmes : Connectivité réseau\n
+    Format des dates dans le détail des épisodes</string>
 </resources>
