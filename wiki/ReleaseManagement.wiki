@@ -5,15 +5,20 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
+====Version 1.6.0====
+Release Date: 11th Juny 2010<br>
+Content: Features, Bugfixes
+  * Issue 52 (Tabs for episodes list)
+  * Issue 55 (High res issue listView)
+  * Issue 58 (Missing episodes)
+
+=== Market Releases ===
 ====Version 1.5.1====
 Release Date: 3th June 2010<br>
-Content: Bugfixes
   * Issue 51 (Improve Google Analytics reports)
-  * Issue 55 (High res issue listView)
   * Issue 56 (Everything translated, also the about dialog)
   * Issue 57 (Issue when pressing the back button)
 
-=== Market Releases ===
 ====Version 1.5.0====
   * Issue 37 (Sort "Show List" alphabetically)
   * Issue 37, Issue 44, Issue 47, Issue 45  (Option view)
