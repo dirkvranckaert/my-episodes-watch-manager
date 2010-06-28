@@ -19,9 +19,9 @@
     <string name="loginLoginFailed">Could not login to MyEpisodes.com, check internet connection and login details before trying again!</string>
 
     <!-- watchtlist -->
-    <string name="Watch">Watch</string>
-    <string name="Acquire">Acquire</string>
-    <string name="Coming">Coming</string>
+    <string name="watch">Watch</string>
+    <string name="acquire">Acquire</string>
+    <string name="coming">Coming</string>
     <string name="watchListTitle">List of shows/episodes</string>
     <string name="watchListSubTitleWatch">%d episodes to watch</string>
     <string name="watchListSubTitleAquire">%d episodes to acquire</string>

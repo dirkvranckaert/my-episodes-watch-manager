@@ -21,18 +21,18 @@ public class TabMain extends TabActivity {
         // Create an Intent to launch an Activity for the tab (to be reused)
         intent = new Intent().setClass(this, EpisodesWatchListActivity.class).putExtra("Type", 0);
         // Initialize a TabSpec for each tab and add it to the TabHost
-        spec = tabHost.newTabSpec("Watch").setIndicator("Watch",
+        spec = tabHost.newTabSpec("" + R.string.watch).setIndicator("Watch",
         res.getDrawable(R.drawable.tabwatched)).setContent(intent);
         tabHost.addTab(spec);
 
         // Do the same for the other tabs
         intent = new Intent().setClass(this, EpisodesWatchListActivity.class).putExtra("Type", 1);
-        spec = tabHost.newTabSpec("Acquire").setIndicator("Acquire",
+        spec = tabHost.newTabSpec("" + R.string.acquire).setIndicator("Acquire",
         res.getDrawable(R.drawable.tabacquired)).setContent(intent);
         tabHost.addTab(spec);
 
         intent = new Intent().setClass(this, EpisodesWatchListActivity.class).putExtra("Type", 2);
-        spec = tabHost.newTabSpec("Coming").setIndicator("Coming",
+        spec = tabHost.newTabSpec("" + R.string.coming).setIndicator("Coming",
         res.getDrawable(R.drawable.tabcoming)).setContent(intent);
         tabHost.addTab(spec);
 
