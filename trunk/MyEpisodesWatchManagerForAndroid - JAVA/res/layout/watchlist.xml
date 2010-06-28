@@ -4,44 +4,29 @@
     	android:layout_width="fill_parent"
     	android:layout_height="fill_parent"
     >
-    <ImageView android:id="@+id/ImageView01"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_gravity="center"
-	    android:src="@drawable/header"
+	
+	<TextView android:id="@+id/watchListTitle" 
+			  android:layout_width="fill_parent" 
+			  android:layout_height="wrap_content" 
+			  android:gravity="center"
+			  android:text="@string/watchListTitle" 
+			  android:textSize="18px"
 	/>
 
-    <TextView
-    	android:id="@+id/watchListTitle"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:text="@string/watchListTitle"
-    	android:textColor="#000"
-    	android:textSize="18px"
-    />
-    	
-    <TextView
-    	android:id="@+id/watchListSubTitle"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:text="@string/watchListSubTitle"
-    	android:paddingBottom="3px"
-    	android:textColor="#000"
-    />
-    
+	<TextView android:id="@+id/watchListSubTitle" 
+			  android:layout_width="fill_parent" 
+			  android:layout_height="wrap_content" 
+			  android:gravity="center"
+			  android:text="@string/watchListSubTitle" 
+			  android:paddingBottom="3px" 
+	/>
+	
 	<ExpandableListView
 		android:id="@+id/android:list"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:choiceMode="singleChoice"
-		android:divider="#000"
 		android:dividerHeight="1.5px"
-	/>
-		
-	<TextView
-	    android:id="@+id/android:empty"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:text="@string/watchListEmpty"
-	/>
+	></ExpandableListView>
+	
 </LinearLayout>

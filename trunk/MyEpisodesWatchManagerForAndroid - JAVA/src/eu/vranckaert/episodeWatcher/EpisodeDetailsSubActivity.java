@@ -17,11 +17,11 @@ import android.widget.TextView;
 
 public class EpisodeDetailsSubActivity extends Activity {
 	Episode episode = null;
+	int episodesType;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
         setContentView(R.layout.episodedetails);
         
         Bundle data = this.getIntent().getExtras();
@@ -33,11 +33,12 @@ public class EpisodeDetailsSubActivity extends Activity {
         TextView airdateText = (TextView) findViewById(R.id.episodeDetAirdate);
         
         episode = (Episode) data.getSerializable("episode");
+        episodesType = (Integer) data.getSerializable("episodesType");
         
         showNameText.setText(episode.getShowName());
         episodeNameText.setText(episode.getName());
-        seasonText.setText(" " + episode.getSeason());
-        episodeText.setText(" " + episode.getEpisode());
+        seasonText.setText(" " + episode.getSeasonString());
+        episodeText.setText(" " + episode.getEpisodeString());
         
         //Air date in specifc format
         Date airdate = episode.getAirDate();
@@ -49,7 +50,24 @@ public class EpisodeDetailsSubActivity extends Activity {
         
         airdateText.setText(" " + formattedAirDate);
         
+        Button markAsAcquiredButton = (Button) findViewById(R.id.markAsAcquiredButton);
         Button markAsSeenButton = (Button) findViewById(R.id.markAsSeenButton);
+        
+        if (episodesType != 1)
+        {
+        	markAsAcquiredButton.setVisibility(8);
+        }
+        if (episodesType == 2)
+        {
+        	markAsSeenButton.setVisibility(8);
+        }
+        
+        markAsAcquiredButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				closeAndAcquireEpisode(episode);
+			}
+		});        
         
         markAsSeenButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -63,6 +81,14 @@ public class EpisodeDetailsSubActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.episodedetailsmenu, menu);
+		if (episodesType != 1)
+		{
+			menu.removeItem(R.id.markAsAquired);
+		}
+		if (episodesType == 2)
+		{
+			menu.removeItem(R.id.markAsSeen);
+		}
 		return true;
 	}
     
@@ -72,13 +98,25 @@ public class EpisodeDetailsSubActivity extends Activity {
 		case R.id.markAsSeen:
 			closeAndMarkWatched(episode);
 			return true;
+		case R.id.markAsAquired:
+			closeAndAcquireEpisode(episode);
+			return true;
 		}
 		return false;
 	}
     
+    private void closeAndAcquireEpisode(Episode episode) {
+    	Intent intent = new Intent();
+    	intent.putExtra("markEpisode", "acquire");
+    	intent.putExtra("episode", episode);
+    	
+    	setResult(RESULT_OK, intent);
+		finish();
+	}
+    
     private void closeAndMarkWatched(Episode episode) {
     	Intent intent = new Intent();
-    	intent.putExtra("markEpisodeWatched", true);
+    	intent.putExtra("markEpisode", "watch");
     	intent.putExtra("episode", episode);
     	
     	setResult(RESULT_OK, intent);

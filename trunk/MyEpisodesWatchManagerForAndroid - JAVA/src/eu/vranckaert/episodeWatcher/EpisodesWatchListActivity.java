@@ -55,6 +55,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     private Runnable viewEpisodes;
     private Runnable markEpisode;
     private Integer exceptionMessageResId = null;
+    private int episodesType;
     
     private GoogleAnalyticsTracker tracker;
 	
@@ -82,11 +83,19 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			int childid = ExpandableListView.getPackedPositionChild(info.packedPosition);
 			
 			menu.setHeaderTitle(shows.get(groupid).getEpisodes().get(childid).getShowName() + 
-					" S" + shows.get(groupid).getEpisodes().get(childid).getSeason() + 
-					"E" + shows.get(groupid).getEpisodes().get(childid).getEpisode() + "\n" +
+					" S" + shows.get(groupid).getEpisodes().get(childid).getSeasonString() + 
+					"E" + shows.get(groupid).getEpisodes().get(childid).getEpisodeString() + "\n" +
 					shows.get(groupid).getEpisodes().get(childid).getName());
 			MenuInflater inflater = getMenuInflater();
 			inflater.inflate(R.menu.episodemenu, menu);
+			if (episodesType != 1) 
+			{
+				menu.removeItem(R.id.episodeMenuAcquired);
+			}
+			if (episodesType == 2)
+			{
+				menu.removeItem(R.id.episodeMenuWatched);
+			}
 		}
 	}
 
@@ -167,6 +176,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         tracker = GoogleAnalyticsTracker.getInstance();
         tracker.start("UA-3183255-2", 30, this);
         
+        Bundle data = this.getIntent().getExtras();
+        episodesType = (Integer) data.getSerializable("Type");
         init();
         checkPreferences();
         openLoginActivity();
@@ -205,11 +216,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			switch(item.getItemId()) {
 			case R.id.episodeMenuWatched:
 				tracker.trackEvent("MarkAsWatched", "ContextMenu-EpisodesWatchListActivity", "", 0);
-				markEpisodeWatched(shows.get(groupid).getEpisodes().get(childid));
+				markEpisodes(0, shows.get(groupid).getEpisodes().get(childid));
 				return true;
 			case R.id.episodeMenuDetails:
 				tracker.trackPageView("/episodeDetailsSubActivity");
-				openEpisodeDetails(shows.get(groupid).getEpisodes().get(childid));
+				openEpisodeDetails(shows.get(groupid).getEpisodes().get(childid), episodesType);
 				return true;
 			default:
 				return false;
@@ -221,7 +232,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		tracker.trackPageView("/episodeDetailsSubActivity");
-		openEpisodeDetails(shows.get(groupPosition).getEpisodes().get(childPosition));
+		openEpisodeDetails(shows.get(groupPosition).getEpisodes().get(childPosition), episodesType);
 		return true;
 	}
 	
@@ -250,7 +261,18 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			countEpisodes += show.getNumberEpisodes();
 		}
 		subTitle = (TextView) findViewById(R.id.watchListSubTitle);
-        subTitle.setText(getString(R.string.watchListSubTitle, countEpisodes));
+		switch(episodesType)
+		{
+		case 0:
+	        subTitle.setText(getString(R.string.watchListSubTitleWatch, countEpisodes));
+	        break;
+		case 1:
+		    subTitle.setText(getString(R.string.watchListSubTitleAquire, countEpisodes));
+		    break;
+		case 2:
+	        subTitle.setText(getString(R.string.watchListSubTitleComing, countEpisodes));
+	        break;
+		}
 	}
 	
 	private List<? extends Map<String, ?>> createGroups() {
@@ -272,7 +294,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			for (Episode episode : show.getEpisodes()) {
 					HashMap map = new HashMap();
 					map.put("episodeRowChildTitle", episode.getShowName());
-					map.put("episodeRowChildDetail", "S" + episode.getSeason() + "E" + episode.getEpisode() + " - " + episode.getName());
+					map.put("episodeRowChildDetail", "S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName());
 					subListSecondLvl.add(map);
 			}
 			subList.add(subListSecondLvl);
@@ -291,10 +313,16 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         Intent preferencesActivity = new Intent(this.getApplicationContext(), PreferencesActivity.class);
         startActivity(preferencesActivity);
     }
+    
+    public static String TestSomething() {
+        System.out.println("test Tab2");
+        return null;
+    }
 
-	private void openEpisodeDetails(Episode episode) {
+	private void openEpisodeDetails(Episode episode, int episodesType2) {
 		Intent episodeDetailsSubActivity = new Intent(this.getApplicationContext(), EpisodeDetailsSubActivity.class);
 		episodeDetailsSubActivity.putExtra("episode", episode);
+		episodeDetailsSubActivity.putExtra("episodesType", episodesType2);
         startActivityForResult(episodeDetailsSubActivity, EPISODE_DETAILS_REQUEST_CODE);
 	}
 	
@@ -313,12 +341,16 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			{
 	            tracker.trackPageView("/episodesWatchListActivity");
 	            Bundle intentData = data.getExtras();
-	            boolean markEpisodeWathed = intentData.getBoolean("markEpisodeWatched");
+	            String markEpisode = intentData.getString("markEpisode");
 	            Episode episode = (Episode) intentData.getSerializable("episode");
 	
-	            if (markEpisodeWathed) {
+	            if (markEpisode.equals("watch")) {
 	                tracker.trackEvent("MarkAsWatched", "MenuButton-DetailsSubActivity", "", 0);
-	                markEpisodeWatched(episode);
+	                markEpisodes(0, episode);
+	            }
+	            else if (markEpisode.equals("acquire")) {
+	                //tracker.trackEvent("MarkAsAcquire", "MenuButton-DetailsSubActivity", "", 0);
+	            	markEpisodes(1, episode);
 	            }
 			}
 		} else {
@@ -350,7 +382,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	
 	private void getEpisodes() {
 		try {
-			episodes = myEpisodesService.retrieveEpisodes(user);
+			episodes = myEpisodesService.retrieveEpisodes(episodesType, user);
 		} catch (InternetConnectivityException e) {
 			String message = "Could not connect to host";
 			Log.e(LOG_TAG, message, e);
@@ -385,6 +417,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
 			dismissDialog(EPISODE_LOADING_DIALOG);
 			init();
+			
 
 			if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
 				showDialog(EXCEPTION_DIALOG);
@@ -453,12 +486,12 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         }
     }
 
-    private void markEpisodeWatched(final Episode episode) {
+    private void markEpisodes(final int EpisodeStatus, final Episode episode) {
 		showDialog(EPISODE_LOADING_DIALOG);
 		markEpisode = new Runnable() {
 			@Override
 			public void run() {
-				markEpisode(episode);
+					markEpisode(EpisodeStatus, episode);
 			}
 		};
         
@@ -466,9 +499,16 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		thread.start();
 	}
 	
-	private void markEpisode(Episode episode) {
+	private void markEpisode(int EpisodeStatus, Episode episode) {
 		try {
-			myEpisodesService.watchedEpisode(episode, user);
+			if (EpisodeStatus == 0)
+			{
+				myEpisodesService.watchedEpisode(episode, user);
+			}
+			else if (EpisodeStatus == 1)
+			{
+				myEpisodesService.acquireEpisode(episode, user);
+			}
 		} catch (InternetConnectivityException e) {
 			String message = "Could not connect to host";
 			Log.e(LOG_TAG, message, e);
