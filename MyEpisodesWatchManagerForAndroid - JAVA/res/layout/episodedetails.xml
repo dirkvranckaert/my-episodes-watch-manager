@@ -15,7 +15,6 @@
 	<TextView android:textSize="23px"
 	  	android:id="@+id/episodeDetShowName"
 		android:layout_width="fill_parent"
-		android:textColor="#000"
 		android:paddingTop="10px"
 		android:layout_height="wrap_content"
 		android:gravity="center_horizontal"
@@ -25,7 +24,6 @@
 		android:id="@+id/episodeDetName"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:textColor="#000"
 		android:gravity="center_horizontal"
 	/>
 
@@ -37,14 +35,12 @@
 	<TextView android:text="@string/episodeDetailsSeasonLabel" 
 		android:paddingLeft="10px" 
 		android:id="@+id/episodeDetSeasonLabel" 
-		android:textColor="#000" 
 		android:layout_width="120px"
 		android:layout_height="wrap_content"
 	/>
 	
 	<TextView android:id="@+id/episodeDetSeason" 
 		android:layout_width="fill_parent" 
-		android:textColor="#000" 
 		android:layout_height="wrap_content"
 	/>
 	</LinearLayout>
@@ -56,34 +52,29 @@
 	<TextView android:text="@string/episodeDetailsEpisodeLabel" 
 		android:paddingLeft="10px" 
 		android:id="@+id/episodeDetEpisodeLabel" 
-		android:textColor="#000" 
 		android:layout_width="120px" 
 		android:layout_height="wrap_content"
 	/>
 	
 	<TextView android:id="@+id/episodeDetEpisode" 
 		android:layout_width="fill_parent" 
-		android:textColor="#000" 
 		android:layout_height="wrap_content"
 	/>
 	</LinearLayout>
 
 	<LinearLayout android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
-		android:textColor="#000" 
 		android:orientation="horizontal"
 	>
 	<TextView android:text="@string/episodeDetailsAirDateLabel" 
 		android:paddingLeft="10px" 
 		android:id="@+id/episodeDetAirdateLabel" 
 		android:layout_width="120px" 
-		android:textColor="#000" 
 		android:layout_height="wrap_content"
 	/>
 	
 	<TextView android:id="@+id/episodeDetAirdate" 
 		android:layout_width="fill_parent" 
-		android:textColor="#000" 
 		android:layout_height="wrap_content"
 	/>
 	</LinearLayout>
@@ -93,10 +84,16 @@
 		android:layout_height="30px"
 	/>
 	
+	<Button android:text="@string/menuEpisodeMarkAcquired" 
+			android:id="@+id/markAsAcquiredButton" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content">
+	</Button>
 	<Button android:id="@+id/markAsSeenButton" 
 		android:text="@string/menuEpisodeMarkWatched" 
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content"
 	/>
+
 
 </LinearLayout>

@@ -46,6 +46,15 @@ public class MyEpisodesService {
                                                             "&showignored=" + SHOW_IGNORED +
                                                             "&uid=" + UID_REPLACEMENT_STRING +
                                                             "&pwdmd5=" + PWD_REPLACEMENT_STRING;
+    private static final String UNAQUIRED_EPISODES_URL = "http://www.myepisodes.com/rss.php?feed=unacquired" +
+    														"&showignored=0" + SHOW_IGNORED +
+															"&uid=" + UID_REPLACEMENT_STRING +
+															"&pwdmd5=" + PWD_REPLACEMENT_STRING;
+    private static final String COMING_EPISODES_URL = "http://www.myepisodes.com/rss.php?feed=mylist" +
+    														"&showignored=0" + SHOW_IGNORED +
+    														"&onlyunacquired=1&sort=asc" +
+															"&uid=" + UID_REPLACEMENT_STRING +
+															"&pwdmd5=" + PWD_REPLACEMENT_STRING;  
     private static final String PASSWORD_ENCRYPTION_TYPE = "MD5";
     private static final String FEED_TITLE_SEPERATOR = " \\]\\[ ";
     private static final String SEASON_EPISODE_NUMBER_SEPERATOR = "x";
@@ -60,17 +69,23 @@ public class MyEpisodesService {
     private static final String MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT = "[S]";
     private static final String MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT = "[E]";
     private static final int MYEPISODES_UPDATE_PAGE_SEEN = 1;
-    private static final String MYEPISODES_UPDATE_PAGE = "http://www.myepisodes.com/myshows.php?action=Update" +
+    private static final String MYEPISODES_UPDATE_WATCH = "http://www.myepisodes.com/myshows.php?action=Update" +
                                                             "&showid=" + MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT +
                                                             "&season=" + MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT +
                                                             "&episode=" + MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT +
                                                             "&seen=" + MYEPISODES_UPDATE_PAGE_SEEN;
-
+    private static final int MYEPISODES_UPDATE_PAGE_UNSEEN = 0;
+    private static final String MYEPISODES_UPDATE_ACQUIRE = "http://www.myepisodes.com/myshows.php?action=Update" +
+    														"&showid=" + MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT +
+    														"&season=" + MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT +
+    														"&episode=" + MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT +
+    														"&seen=" + MYEPISODES_UPDATE_PAGE_UNSEEN;
 	private static final String HTTP_POST_ENCODING = HTTP.UTF_8;
 
-    public List<Episode> retrieveEpisodes(final User user) throws InternetConnectivityException, Exception {
+    public List<Episode> retrieveEpisodes(int episodesType,final User user) throws InternetConnectivityException, Exception {
         String encryptedPassword = encryptPassword(user.getPassword());
-        URL feedUrl = buildUnwatchedEpisodesUrl(user.getUsername(), encryptedPassword);
+        URL feedUrl = buildEpisodesUrl(episodesType, user.getUsername(), encryptedPassword);
+        
         RssFeedParser rssFeedParser = new SaxRssFeedParser();
         Feed rssFeed;
 		rssFeed = rssFeedParser.parseFeed(feedUrl);
@@ -94,6 +109,8 @@ public class MyEpisodesService {
 	                episode.setAirDate(parseDate(episodeInfo[3].trim()));
 	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
 	                episode.setId();
+	                
+	                Log.d(LOG_TAG, "Airing date from feed: " + episode.getShowName() + " - S" + episode.getSeasonString() + "E" + episode.getEpisodeString());
 	                
 	                episodes.add(episode);
 	            } else if (episodeInfo.length == FEED_TITLE_EPISODE_FIELDS - 1) {
@@ -120,13 +137,31 @@ public class MyEpisodesService {
         HttpClient httpClient = new DefaultHttpClient();
 
         login(httpClient, user.getUsername(), user.getPassword());
-        markAsSeen(httpClient, episode);
+        markAnEpisode(0, httpClient, episode);
         
         httpClient.getConnectionManager().shutdown();
     }
-
-    private void markAsSeen(HttpClient httpClient, Episode episode) throws ShowUpdateFailedException, InternetConnectivityException {
-        String urlRep = MYEPISODES_UPDATE_PAGE;
+    
+    public void acquireEpisode(Episode episode, User user) throws LoginFailedException
+		    , ShowUpdateFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		login(httpClient, user.getUsername(), user.getPassword());
+		markAnEpisode(1, httpClient, episode);
+		
+		httpClient.getConnectionManager().shutdown();
+		}
+    
+    private void markAnEpisode(int EpisodeStatus, HttpClient httpClient, Episode episode) throws ShowUpdateFailedException, InternetConnectivityException {
+    	String urlRep = "";
+    	if(EpisodeStatus == 0)
+        {
+        	urlRep = MYEPISODES_UPDATE_WATCH;
+        }
+        else if(EpisodeStatus == 1)
+        {
+        	urlRep = MYEPISODES_UPDATE_ACQUIRE;
+        }
         urlRep = urlRep.replace(MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT, String.valueOf(episode.getEpisode()));
         urlRep = urlRep.replace(MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT, String.valueOf(episode.getSeason()));
         urlRep = urlRep.replace(MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT, episode.getMyEpisodeID());
@@ -213,7 +248,7 @@ public class MyEpisodesService {
     }
 
     private Date parseDate(String date) {
-        Log.d(LOG_TAG, "Airing date from feed: " + date);
+        //Log.d(LOG_TAG, "Airing date from feed: " + date);
         try {
             return DATEFORMAT.parse(date);
         } catch (ParseException e) {
@@ -227,9 +262,19 @@ public class MyEpisodesService {
         episode.setSeason(Integer.parseInt(episodeInfoNumber[0].trim()));
         episode.setEpisode(Integer.parseInt(episodeInfoNumber[1].trim()));;
     }
-
-    private URL buildUnwatchedEpisodesUrl(final String username, final String encryptedPassword) throws FeedUrlBuildingFaildException {
-        String urlRep = UNWATCHED_EPISODES_URL;
+    
+    private URL buildEpisodesUrl(int episodesType,final String username, final String encryptedPassword) throws FeedUrlBuildingFaildException {
+    	String urlRep = "";
+    	switch(episodesType)
+        {
+	        case 0: urlRep = UNWATCHED_EPISODES_URL;
+	        break;
+	        case 1: urlRep = UNAQUIRED_EPISODES_URL;
+	        break;  
+	        case 2: urlRep = COMING_EPISODES_URL;
+	        break; 
+        }
+    	
         urlRep = urlRep.replace(UID_REPLACEMENT_STRING, username);
         urlRep = urlRep.replace(PWD_REPLACEMENT_STRING, encryptedPassword);
 

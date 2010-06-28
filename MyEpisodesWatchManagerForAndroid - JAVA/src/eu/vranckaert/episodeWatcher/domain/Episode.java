@@ -73,6 +73,22 @@ public class Episode implements Serializable {
         return season;
     }
 
+    /**
+     * Gets the season number of the episode in String.
+     *
+     * @return The season number of the episode.
+     */    
+    public String getSeasonString() {
+        if (season < 10)
+        {
+        	return "0" + season;
+        }
+        else
+        {
+        	return "" + season;
+        }
+    }
+
     /***
      * Sets the season number of the episode.
      *
@@ -89,6 +105,22 @@ public class Episode implements Serializable {
      */
     public int getEpisode() {
         return episode;
+    }
+    
+    /**
+     * Gets the number of the episode of a season in String.
+     *
+     * @return The number of the episode of a season.
+     */
+    public String getEpisodeString() {
+        if (episode < 10)
+        {
+        	return "0" + episode;
+        }
+        else
+        {
+        	return "" + episode;
+        }
     }
 
     /**
@@ -138,6 +170,6 @@ public class Episode implements Serializable {
 
     @Override
     public String toString() {
-        return showName + " S" + season + "E" + episode + " - " + name + " (" + myEpisodeID + ") (" + airDate + ")";
+        return showName + " S" + getSeasonString() + "E" + getEpisodeString() + " - " + name + " (" + myEpisodeID + ") (" + airDate + ")";
     }
 }

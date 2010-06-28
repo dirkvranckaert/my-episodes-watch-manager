@@ -19,8 +19,13 @@
     <string name="loginLoginFailed">Could not login to MyEpisodes.com, check internet connection and login details before trying again!</string>
 
     <!-- watchtlist -->
+    <string name="Watch">Watch</string>
+    <string name="Acquire">Acquire</string>
+    <string name="Coming">Coming</string>
     <string name="watchListTitle">List of shows/episodes</string>
-    <string name="watchListSubTitle">%d episodes to watch</string>
+    <string name="watchListSubTitleWatch">%d episodes to watch</string>
+    <string name="watchListSubTitleAquire">%d episodes to acquire</string>
+    <string name="watchListSubTitleComing">%d feature episodes</string>
     <string name="watchListEmpty">No episodes found.</string>
 
     <!-- progressDialog -->
@@ -60,6 +65,7 @@
     <string name="episodeDetailsSeasonLabel">Season: </string>
     <string name="episodeDetailsEpisodeLabel">Episode: </string>
     <string name="episodeDetailsAirDateLabel">Airdate: </string>
+    <string name="menuEpisodeMarkAcquired">Mark Acquired</string>
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
 
     <!-- preferences Dialog -->
