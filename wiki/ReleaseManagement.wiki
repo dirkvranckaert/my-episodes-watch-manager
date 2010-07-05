@@ -11,6 +11,7 @@ Content: Features, Bugfixes
   * Issue 52 (Tabs for episodes list)
   * Issue 55 (High res issue listView)
   * Issue 58 (Missing episodes)
+  * Issue 59 (Large collections of episodes)
 
 === Market Releases ===
 ====Version 1.5.1====
