@@ -25,7 +25,7 @@
     <string name="watchListTitle">List of shows/episodes</string>
     <string name="watchListSubTitleWatch">%d episodes to watch</string>
     <string name="watchListSubTitleAquire">%d episodes to acquire</string>
-    <string name="watchListSubTitleComing">%d feature episodes</string>
+    <string name="watchListSubTitleComing">%d future episodes</string>
     <string name="watchListEmpty">No episodes found.</string>
 
     <!-- progressDialog -->
