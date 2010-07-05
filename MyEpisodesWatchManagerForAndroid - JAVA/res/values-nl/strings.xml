@@ -20,7 +20,7 @@
 
     <!-- watchtlist -->
     <string name="watchListTitle">Lijst series/afleveringen</string>
-    <string name="watchListSubTitle">%d afleveringen te bekijken</string>
+    <string name="watchListSubTitleWatch">%d afleveringen te bekijken</string>
     <string name="watchListEmpty">Geen afleveringen gevonden.</string>
 
     <!-- progressDialog -->
