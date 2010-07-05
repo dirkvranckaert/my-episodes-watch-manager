@@ -7,6 +7,6 @@ Version 1.6.0:
   * watch
   * acquire
   * coming
-  * watchListSubTitleWatch
+  * change watchListSubTitle to watchListSubTitleWatch
   * watchListSubTitleAquire
   * watchListSubTitleComing
