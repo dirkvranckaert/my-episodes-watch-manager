@@ -110,7 +110,7 @@ public class MyEpisodesService {
 	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
 	                episode.setId();
 	                
-	                Log.d(LOG_TAG, "Airing date from feed: " + episode.getShowName() + " - S" + episode.getSeasonString() + "E" + episode.getEpisodeString());
+	                Log.d(LOG_TAG, "Episode from feed: " + episode.getShowName() + " - S" + episode.getSeasonString() + "E" + episode.getEpisodeString());
 	                
 	                episodes.add(episode);
 	            } else if (episodeInfo.length == FEED_TITLE_EPISODE_FIELDS - 1) {
