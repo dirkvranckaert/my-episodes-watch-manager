@@ -10,3 +10,6 @@ Version 1.6.0:
   * change watchListSubTitle to watchListSubTitleWatch
   * watchListSubTitleAquire
   * watchListSubTitleComing
+  * watchListSubTitleWatchPlural
+  * watchListSubTitleAquirePlural
+  * watchListSubTitleComingPlural
