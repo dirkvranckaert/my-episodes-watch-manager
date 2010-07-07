@@ -23,9 +23,12 @@
     <string name="acquire">Acquire</string>
     <string name="coming">Coming</string>
     <string name="watchListTitle">List of shows/episodes</string>
-    <string name="watchListSubTitleWatch">%d episodes to watch</string>
-    <string name="watchListSubTitleAquire">%d episodes to acquire</string>
-    <string name="watchListSubTitleComing">%d future episodes</string>
+    <string name="watchListSubTitleWatch">%d episode to watch</string>
+    <string name="watchListSubTitleAquire">%d episode to acquire</string>
+    <string name="watchListSubTitleComing">%d feature episode</string>
+    <string name="watchListSubTitleWatchPlural">%d episodes to watch</string>
+    <string name="watchListSubTitleAquirePlural">%d episodes to acquire</string>
+    <string name="watchListSubTitleComingPlural">%d feature episodes</string>
     <string name="watchListEmpty">No episodes found.</string>
 
     <!-- progressDialog -->

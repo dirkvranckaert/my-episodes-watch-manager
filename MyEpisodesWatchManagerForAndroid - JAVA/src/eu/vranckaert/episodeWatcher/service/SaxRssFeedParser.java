@@ -25,6 +25,7 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
 	private static final String LOG_TAG = "SaxRssFeedParser";
 	
     boolean inItem = false;
+    boolean recordTitleString = false;
     StringBuilder tempTitle = new StringBuilder();
     StringBuilder nodeValue = null;
     Feed feed = new Feed();
@@ -85,6 +86,7 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
         }
         if (inItem && localName.equals("title")) {
             item.setTitle(tempTitle.toString());
+            //System.out.println("" + tempTitle.toString());
             tempTitle = new StringBuilder();
         }
         if (inItem && localName.equals("link")) {
@@ -97,9 +99,33 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        nodeValue = new StringBuilder(new String(ch, start, length));
-        if (nodeValue.length() > 1 && nodeValue.substring(0,2).equals("[ ")) {
-            tempTitle.append(nodeValue);
+    	nodeValue = new StringBuilder(new String(ch, start, length));
+        if(recordTitleString)
+        {
+        	if (nodeValue.length() > 1 && nodeValue.substring(nodeValue.length()-2,nodeValue.length()).equals(" ]"))
+        	{
+        		tempTitle.append(nodeValue);
+        		recordTitleString = false;
+        	}
+        	else
+        	{
+        		tempTitle.append(nodeValue);
+        	}
+        }
+        else
+        {
+        	if (nodeValue.length() > 1 && nodeValue.substring(0,2).equals("[ ")) {
+            	if(nodeValue.length() > 1 && nodeValue.substring(nodeValue.length()-2,nodeValue.length()).equals(" ]"))
+            	{
+            		tempTitle.append(nodeValue);
+            		recordTitleString = false;
+            	}
+            	else
+            	{
+            		tempTitle.append(nodeValue);
+            		recordTitleString = true;
+            	}
+            }
         }
     }
 }

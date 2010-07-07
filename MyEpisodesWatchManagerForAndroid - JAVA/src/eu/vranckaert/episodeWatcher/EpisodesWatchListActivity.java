@@ -261,17 +261,35 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			countEpisodes += show.getNumberEpisodes();
 		}
 		subTitle = (TextView) findViewById(R.id.watchListSubTitle);
-		switch(episodesType)
+		if (countEpisodes < 2)
 		{
-		case 0:
-	        subTitle.setText(getString(R.string.watchListSubTitleWatch, countEpisodes));
-	        break;
-		case 1:
-		    subTitle.setText(getString(R.string.watchListSubTitleAquire, countEpisodes));
-		    break;
-		case 2:
-	        subTitle.setText(getString(R.string.watchListSubTitleComing, countEpisodes));
-	        break;
+			switch(episodesType)
+			{
+			case 0:
+		        subTitle.setText(getString(R.string.watchListSubTitleWatch, countEpisodes));
+		        break;
+			case 1:
+			    subTitle.setText(getString(R.string.watchListSubTitleAquire, countEpisodes));
+			    break;
+			case 2:
+		        subTitle.setText(getString(R.string.watchListSubTitleComing, countEpisodes));
+		        break;
+			}
+		}
+		else
+		{
+			switch(episodesType)
+			{
+			case 0:
+		        subTitle.setText(getString(R.string.watchListSubTitleWatchPlural, countEpisodes));
+		        break;
+			case 1:
+			    subTitle.setText(getString(R.string.watchListSubTitleAquirePlural, countEpisodes));
+			    break;
+			case 2:
+		        subTitle.setText(getString(R.string.watchListSubTitleComingPlural, countEpisodes));
+		        break;
+			}
 		}
 	}
 	
@@ -313,11 +331,6 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         Intent preferencesActivity = new Intent(this.getApplicationContext(), PreferencesActivity.class);
         startActivity(preferencesActivity);
     }
-    
-    public static String TestSomething() {
-        System.out.println("test Tab2");
-        return null;
-    }
 
 	private void openEpisodeDetails(Episode episode, int episodesType2) {
 		Intent episodeDetailsSubActivity = new Intent(this.getApplicationContext(), EpisodeDetailsSubActivity.class);
@@ -351,6 +364,9 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	            else if (markEpisode.equals("acquire")) {
 	                //tracker.trackEvent("MarkAsAcquire", "MenuButton-DetailsSubActivity", "", 0);
 	            	markEpisodes(1, episode);
+	            	TabMain tabmain = new TabMain();
+	            	tabmain.refreshTabs(1);
+	            	//this.tabController.getTabMain().setCurrentTab(0);
 	            }
 			}
 		} else {
@@ -367,7 +383,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[1]);
     }
 
-    private void reloadEpisodes() {
+    public void reloadEpisodes() {
 		showDialog(EPISODE_LOADING_DIALOG);
 		viewEpisodes = new Runnable() {
 			@Override
