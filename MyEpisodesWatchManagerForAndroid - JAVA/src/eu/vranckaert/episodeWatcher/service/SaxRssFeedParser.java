@@ -86,23 +86,27 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
         }
         if (inItem && localName.equals("title")) {
             item.setTitle(tempTitle.toString());
-            //System.out.println("" + tempTitle.toString());
             tempTitle = new StringBuilder();
         }
         if (inItem && localName.equals("link")) {
             item.setLink(nodeValue.toString());
         }
         if (inItem && localName.equals("description")) {
-            item.setDescription(""); //TODO check why only the char '<' is placed in the descirption (something with html in the RSS feed!)
+            item.setDescription(""); //TODO check why only the char '<' is placed in the description (something with html in the RSS feed!)
         }
     }
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
     	nodeValue = new StringBuilder(new String(ch, start, length));
-        if(recordTitleString)
+    	if(recordTitleString)
         {
-        	if (nodeValue.length() > 1 && nodeValue.substring(nodeValue.length()-2,nodeValue.length()).equals(" ]"))
+        	if (nodeValue.length() == 1 && nodeValue.toString().equals("]"))
+        	{
+        		tempTitle.append(nodeValue);
+        		recordTitleString = false;
+        	}	
+        	else if (nodeValue.length() > 1 && nodeValue.substring(nodeValue.length()-2,nodeValue.length()).equals(" ]"))
         	{
         		tempTitle.append(nodeValue);
         		recordTitleString = false;
@@ -118,7 +122,6 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
             	if(nodeValue.length() > 1 && nodeValue.substring(nodeValue.length()-2,nodeValue.length()).equals(" ]"))
             	{
             		tempTitle.append(nodeValue);
-            		recordTitleString = false;
             	}
             	else
             	{

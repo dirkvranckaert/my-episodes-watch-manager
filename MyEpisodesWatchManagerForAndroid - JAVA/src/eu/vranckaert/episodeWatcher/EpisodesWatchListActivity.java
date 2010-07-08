@@ -218,6 +218,10 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 				tracker.trackEvent("MarkAsWatched", "ContextMenu-EpisodesWatchListActivity", "", 0);
 				markEpisodes(0, shows.get(groupid).getEpisodes().get(childid));
 				return true;
+			case R.id.episodeMenuAcquired:
+				tracker.trackEvent("MarkAsAcquire", "ContextMenu-EpisodesWatchListActivity", "", 0);
+				markEpisodes(1, shows.get(groupid).getEpisodes().get(childid));
+				return true;
 			case R.id.episodeMenuDetails:
 				tracker.trackPageView("/episodeDetailsSubActivity");
 				openEpisodeDetails(shows.get(groupid).getEpisodes().get(childid), episodesType);
@@ -362,11 +366,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	                markEpisodes(0, episode);
 	            }
 	            else if (markEpisode.equals("acquire")) {
-	                //tracker.trackEvent("MarkAsAcquire", "MenuButton-DetailsSubActivity", "", 0);
+	                tracker.trackEvent("MarkAsAcquired", "MenuButton-DetailsSubActivity", "", 0);
 	            	markEpisodes(1, episode);
-	            	TabMain tabmain = new TabMain();
-	            	tabmain.refreshTabs(1);
-	            	//this.tabController.getTabMain().setCurrentTab(0);
 	            }
 			}
 		} else {
@@ -383,7 +384,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[1]);
     }
 
-    public void reloadEpisodes() {
+    private void reloadEpisodes() {
 		showDialog(EPISODE_LOADING_DIALOG);
 		viewEpisodes = new Runnable() {
 			@Override
