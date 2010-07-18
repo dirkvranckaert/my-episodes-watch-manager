@@ -176,8 +176,10 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         tracker = GoogleAnalyticsTracker.getInstance();
         tracker.start("UA-3183255-2", 30, this);
         
+		TabMain tabMain = (TabMain) getParent();
         Bundle data = this.getIntent().getExtras();
         episodesType = (Integer) data.getSerializable("Type");
+        tabMain.clearRefreshTab(episodesType);
         init();
         checkPreferences();
         openLoginActivity();
@@ -525,6 +527,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			else if (EpisodeStatus == 1)
 			{
 				myEpisodesService.acquireEpisode(episode, user);
+				TabMain tabMain = (TabMain) getParent();
+				tabMain.refreshWatchTab();
 			}
 		} catch (InternetConnectivityException e) {
 			String message = "Could not connect to host";
@@ -568,6 +572,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		tracker.trackEvent("Logout", "MenuButton-EpisodesWatchListActivity", "", 0);
 		Preferences.removePreference(this, User.USERNAME);
 		Preferences.removePreference(this, User.PASSWORD);
+		TabMain tabMain = (TabMain) getParent();
+		tabMain.refreshAllTabs(episodesType);
 		openLoginActivity();
 	}
 	
