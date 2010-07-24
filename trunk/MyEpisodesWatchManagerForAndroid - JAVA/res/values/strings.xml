@@ -104,7 +104,13 @@
     <string name="watchListUnableToMarkWatched">Failed to mark this episode watched!\nCheck internet connection or refresh the list!</string>
 
     <string name="changelogTitle">What\'s changed</string>
-    <string name="changelogText">Version 1.5.1\n
+    <string name="changelogText">Version 1.6.0\n
+    ***********\n
+    Full MyEpisodes.com mobile application including episodes to watch, episodes to aqcuire and upcoming episodes\n
+    Fixed bug that some episodes where not listed\n
+    Fixed bug for large collections issue in episodes lists\n
+    Fixed bug in episodes with special characters\n
+    Version 1.5.1\n
     ***********\n
     Better Google Analytics statistics\n
     \n
