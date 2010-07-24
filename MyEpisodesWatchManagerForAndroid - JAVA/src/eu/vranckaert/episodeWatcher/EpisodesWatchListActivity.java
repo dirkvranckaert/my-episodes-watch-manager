@@ -267,7 +267,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			countEpisodes += show.getNumberEpisodes();
 		}
 		subTitle = (TextView) findViewById(R.id.watchListSubTitle);
-		if (countEpisodes < 2)
+		if (countEpisodes == 1)
 		{
 			switch(episodesType)
 			{
