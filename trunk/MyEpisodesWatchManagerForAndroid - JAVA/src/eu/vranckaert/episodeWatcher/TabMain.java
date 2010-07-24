@@ -28,7 +28,7 @@ public class TabMain extends TabActivity {
         					 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         // Initialize a TabSpec for each tab and add it to the TabHost
         spec = tabHost.newTabSpec("" + R.string.watch)
-        			  .setIndicator("Watch", res.getDrawable(R.drawable.tabwatched))
+        			  .setIndicator(getString(R.string.watch), res.getDrawable(R.drawable.tabwatched))
         			  .setContent(intentWatch);
         tabHost.addTab(spec);
         
@@ -36,7 +36,7 @@ public class TabMain extends TabActivity {
         					 .putExtra("Type", 1)
         					 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         spec = tabHost.newTabSpec("" + R.string.acquire)
-        			  .setIndicator("Acquire", res.getDrawable(R.drawable.tabacquired))
+        			  .setIndicator(getString(R.string.acquire), res.getDrawable(R.drawable.tabacquired))
         			  .setContent(intentAcquire);
         tabHost.addTab(spec);
 		
@@ -44,7 +44,7 @@ public class TabMain extends TabActivity {
         					 .putExtra("Type", 2)
         					 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         spec = tabHost.newTabSpec("" + R.string.coming)
-        			  .setIndicator("Coming", res.getDrawable(R.drawable.tabcoming))
+        			  .setIndicator(getString(R.string.coming), res.getDrawable(R.drawable.tabcoming))
         			  .setContent(intentComing);
         tabHost.addTab(spec);
         
