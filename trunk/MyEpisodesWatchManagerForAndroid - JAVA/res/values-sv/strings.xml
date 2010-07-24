@@ -20,7 +20,7 @@
 
     <!-- watchtlist -->
     <string name="watchListTitle">TV-Serier/Avsnitt</string>
-    <string name="watchListSubTitle">%d avsnitt att se</string>
+    <string name="watchListSubTitleWatch">%d avsnitt att se</string>
     <string name="watchListEmpty">Inga avsnitt hittade.</string>
 
     <!-- progressDialog -->
