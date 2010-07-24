@@ -20,7 +20,7 @@
 
     <!-- watchtlist -->
     <string name="watchListTitle">표시목록/에피소드</string>
-    <string name="watchListSubTitle">%d 에피소드 시청</string>
+    <string name="watchListSubTitleWatch">%d 에피소드 시청</string>
     <string name="watchListEmpty">에피소드가 없습니다.</string>
 
     <!-- progressDialog -->
