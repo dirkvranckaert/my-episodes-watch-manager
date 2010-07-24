@@ -13,3 +13,4 @@ Version 1.6.0:
   * watchListSubTitleWatchPlural
   * watchListSubTitleAquirePlural
   * watchListSubTitleComingPlural
+  * menuEpisodeMarkAcquired
