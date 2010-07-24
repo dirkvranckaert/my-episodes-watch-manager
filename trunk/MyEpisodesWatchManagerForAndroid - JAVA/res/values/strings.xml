@@ -25,10 +25,10 @@
     <string name="watchListTitle">List of shows/episodes</string>
     <string name="watchListSubTitleWatch">%d episode to watch</string>
     <string name="watchListSubTitleAquire">%d episode to acquire</string>
-    <string name="watchListSubTitleComing">%d feature episode</string>
+    <string name="watchListSubTitleComing">%d future episode</string>
     <string name="watchListSubTitleWatchPlural">%d episodes to watch</string>
     <string name="watchListSubTitleAquirePlural">%d episodes to acquire</string>
-    <string name="watchListSubTitleComingPlural">%d feature episodes</string>
+    <string name="watchListSubTitleComingPlural">%d future episodes</string>
     <string name="watchListEmpty">No episodes found.</string>
 
     <!-- progressDialog -->
