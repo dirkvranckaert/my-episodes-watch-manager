@@ -104,7 +104,13 @@
     <string name="watchListUnableToMarkWatched">Kan deze episode niet markeren als gezien!\nKijk uw internetverbinding na of herlaad de lijst!</string>
 
     <string name="changelogTitle">Veranderingen</string>
-    <string name="changelogText">Versie 1.5.1\n
+    <string name="changelogText">Versie 1.6.0\n
+    ***********\n
+    Volledige MyEpisodes.com mobiele applicatie met afleveringen te bekijken, afleveringen te verkrijgen en aankomende afleveringen\n
+    Het probleem dat sommige afleveringen niet in de lijst kwamen is opgelost\n
+    Het probleem met grote lijsten van afleveringen is opgelost\n
+    Het probleem met speciale karakters in afleveringen is opgelost\n
+    Versie 1.5.1\n
     ***********\n
     Betere Google Analytics statistieken\n
     \n
