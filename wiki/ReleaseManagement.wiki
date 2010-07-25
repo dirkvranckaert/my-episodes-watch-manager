@@ -5,13 +5,18 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
+====Version 1.6.1====
+Release Date: 15th August 2010<br>
+Content: Features, Bugfixes
+  * Issue 61 (Change language in settings)
+
 ====Version 1.6.0====
-Release Date: 11th Juny 2010<br>
+Release Date: 1th August 2010<br>
 Content: Features, Bugfixes
   * Issue 52 (Tabs for episodes list)
-  * Issue 55 (High res issue listView)
   * Issue 58 (Missing episodes)
   * Issue 59 (Large collections of episodes)
+  * Issue 60 (Problem with show Grey's Anatomy - From Market comments)
 
 === Market Releases ===
 ====Version 1.5.1====
