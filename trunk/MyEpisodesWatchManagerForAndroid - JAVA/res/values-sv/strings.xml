@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Revision #93 -->
 <resources>
     <string name="app_name">MyEpisodes Watch Manager</string>
@@ -19,8 +19,16 @@
     <string name="loginLoginFailed">Kunde inte logga in på MyEpisodes.com, kontrollera nätverksanslutning och inloggningsuppgifter!</string>
 
     <!-- watchtlist -->
+    <string name="watch">Se</string>
+    <string name="acquire">Hämta</string>
+    <string name="coming">Kommer</string>
     <string name="watchListTitle">TV-Serier/Avsnitt</string>
     <string name="watchListSubTitleWatch">%d avsnitt att se</string>
+    <string name="watchListSubTitleAquire">%d avsnitt att hämta</string>
+    <string name="watchListSubTitleComing">%d framtida avsnitt</string>
+    <string name="watchListSubTitleWatchPlural">%d avsnitt att se</string>
+    <string name="watchListSubTitleAquirePlural">%d avsnitt att hämta</string>
+    <string name="watchListSubTitleComingPlural">%d framtida avsnitt</string>
     <string name="watchListEmpty">Inga avsnitt hittade.</string>
 
     <!-- progressDialog -->
@@ -60,7 +68,8 @@
     <string name="episodeDetailsSeasonLabel">Säsong: </string>
     <string name="episodeDetailsEpisodeLabel">Avsnitt: </string>
     <string name="episodeDetailsAirDateLabel">Sändes: </string>
-    <string name="menuEpisodeMarkWatched">Markera som sett</string>
+    <string name="menuEpisodeMarkAcquired">Markera som "Hämtat"</string>
+    <string name="menuEpisodeMarkWatched">Markera som "Sett"</string>
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">För att spara inställningarna, starta om programmet, eller ladda om listan med avsnitt.</string>
@@ -95,17 +104,25 @@
     <string name="watchListUnableToMarkWatched">Misslyckades att markera avsnitt som sett!\nKontrollera nätverksanslutning eller uppdatera listan!</string>
 
     <string name="changelogTitle">Ändringar</string>
-    <string name="changelogText">Version 1.5.1\n
+    <string name="changelogText">Version 1.6.0\n
+    ***********\n
+    Full MyEpisodes.com mobil app - markera avsnitt som "Sett"/"Hämtat" och se framtida avsnitt\n
+    Bug fixad vissa avsnitt visades inte i listan\n
+    Bug fixad avs problem med stora samligar av avsnitt\n
+    Bug fixad avsnittsnamn med ej standard teckenuppsättning\n
+    Version 1.5.1\n
+    ***********\n
     Bättre Google Analytics statistik\n
     \n
     Version 1.5.0\n
+    ***********\n
     Android 2.2 (Froyo) kompatibelt\n
     Inställningsdialog\n
     Kom ihåg lösenord\n
     Sortering av serier\n
     Sortering av avsnitt\n
     Förbättrad meny\n
-    Bug fixad när visning av avsnitt i listan\n
+    Bug fixad avs visning av avsnitt i listan\n
     Bug vid inloggning fixad\n
     Fransk översättning av Daniel De Luca\n
     Italiensk översättning av Daniel De Luca\n
