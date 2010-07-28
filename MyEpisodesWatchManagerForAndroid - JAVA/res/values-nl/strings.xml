@@ -70,7 +70,7 @@
     <string name="menuEpisodeMarkWatched">Markeer als bekeken</string>
 
     <!-- preferences Dialog -->
-    <string name="applyPreferences">Om de aanpassingen te kunnen doorvoeren dient u de applicatie te herstarten of de list van series en aflveringen te herladen</string>
+    <string name="applyPreferences">Om de aanpassingen te kunnen doorvoeren dient u de applicatie te herstarten of de lijst van series en afleveringen te herladen</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Sortering series</string>
     <string-array name="showOrderOptions">
