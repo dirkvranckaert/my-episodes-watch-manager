@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Revision #93 -->
 <resources>
-    <string name="app_name">MyEpisodes Watch Manager</string>
-
     <!-- default values -->
     <string name="yes">Si</string>
     <string name="no">No</string>

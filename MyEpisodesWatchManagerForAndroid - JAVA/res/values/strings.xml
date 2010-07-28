@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Revision #93 -->
 <resources>
-    <string name="app_name">MyEpisodes Watch Manager</string>
-
     <!-- default values -->
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -173,6 +171,8 @@
 
     <!-- The tags beneath may never be translated or will cause an application failure!!! -->
     <!-- The tags shouldn't even be copied to the other translation files. -->
+    <!-- Application Name -->
+    <string name="app_name">MyEpisodes Manager</string>    
     <!-- Preferences -->
     <string-array name="showOrderOptionsValues">
         <item>show_myepisodes_default_sort</item>
