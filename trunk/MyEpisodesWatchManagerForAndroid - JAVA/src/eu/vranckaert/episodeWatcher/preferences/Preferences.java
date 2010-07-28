@@ -6,7 +6,7 @@ import android.content.SharedPreferences.Editor;
 import eu.vranckaert.episodeWatcher.utils.StringUtils;
 
 public class Preferences {
-	public static final String LOG_TAG = "MyEpisodesWatchManager";
+	public static final String LOG_TAG = "MyEpisodesManager";
 	public static final String PREF_NAME = "mewmfacred";
 
     private static final SharedPreferences getSharedPreferences(Activity ac) {
