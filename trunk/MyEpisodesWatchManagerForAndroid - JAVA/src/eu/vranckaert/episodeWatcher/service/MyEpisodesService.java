@@ -2,7 +2,6 @@ package eu.vranckaert.episodeWatcher.service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -47,12 +46,12 @@ public class MyEpisodesService {
                                                             "&uid=" + UID_REPLACEMENT_STRING +
                                                             "&pwdmd5=" + PWD_REPLACEMENT_STRING;
     private static final String UNAQUIRED_EPISODES_URL = "http://www.myepisodes.com/rss.php?feed=unacquired" +
-    														"&showignored=0" + SHOW_IGNORED +
+    														"&showignored=" + SHOW_IGNORED +
 															"&uid=" + UID_REPLACEMENT_STRING +
 															"&pwdmd5=" + PWD_REPLACEMENT_STRING;
     private static final String COMING_EPISODES_URL = "http://www.myepisodes.com/rss.php?feed=mylist" +
-    														"&showignored=0" + SHOW_IGNORED +
-    														"&onlyunacquired=1&sort=asc" +
+    														"&showignored=" + SHOW_IGNORED +
+    														"&onlyunacquired=1" +
 															"&uid=" + UID_REPLACEMENT_STRING +
 															"&pwdmd5=" + PWD_REPLACEMENT_STRING;  
     private static final String PASSWORD_ENCRYPTION_TYPE = "MD5";
@@ -60,6 +59,8 @@ public class MyEpisodesService {
     private static final String SEASON_EPISODE_NUMBER_SEPERATOR = "x";
     private static final int FEED_TITLE_EPISODE_FIELDS = 4;
     private static final DateFormat DATEFORMAT = new SimpleDateFormat("dd-MMM-yyyy", Locale.US);
+    private static final DateFormat DATEFORMAT2 = new SimpleDateFormat("dd-mm-yyyy", Locale.US);
+    private static final DateFormat DATEFORMAT3 = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
     private static final String MYEPISODES_LOGIN_PAGE = "http://www.myepisodes.com/login.php";
     private static final String MYEPISODES_LOGIN_PAGE_PARAM_USERNAME = "username";
     private static final String MYEPISODES_LOGIN_PAGE_PARAM_PASSWORD = "password";
@@ -248,12 +249,19 @@ public class MyEpisodesService {
     }
 
     private Date parseDate(String date) {
-        //Log.d(LOG_TAG, "Airing date from feed: " + date);
         try {
             return DATEFORMAT.parse(date);
         } catch (ParseException e) {
-            Log.i(LOG_TAG, "Date could not be parsed, using default date", e);
-            return new Date();
+        	try {
+				return DATEFORMAT2.parse(date);
+			} catch (ParseException e1) {
+				try {
+					return DATEFORMAT3.parse(date);
+				} catch (ParseException e2) {
+					Log.i(LOG_TAG, "Date could not be parsed, using default date", e2);
+		            return new Date();
+				}
+			}
         }
     }
 
