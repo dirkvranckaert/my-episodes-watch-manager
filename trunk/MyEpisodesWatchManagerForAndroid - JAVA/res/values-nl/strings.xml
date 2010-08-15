@@ -22,11 +22,11 @@
     <string name="coming">Binnenkort</string>
     <string name="watchListTitle">Lijst series/afleveringen</string>
     <string name="watchListSubTitleWatch">%d aflevering te bekijken</string>
-    <string name="watchListSubTitleAquire">%d aflevering te verwerven</string>
-    <string name="watchListSubTitleComing">%d komende aflervering</string>
+    <string name="watchListSubTitleAcquire">%d aflevering te verwerven</string>
+    <string name="watchListSubTitleComing">%d komende aflevering</string>
     <string name="watchListSubTitleWatchPlural">%d afleveringen te bekijken</string>
-    <string name="watchListSubTitleAquirePlural">%d afleveringen te verwerven</string>
-    <string name="watchListSubTitleComingPlural">%d komende aflerveringen</string>
+    <string name="watchListSubTitleAcquirePlural">%d afleveringen te verwerven</string>
+    <string name="watchListSubTitleComingPlural">%d komende afleveringen</string>
     <string name="watchListEmpty">Geen afleveringen gevonden.</string>
 
     <!-- progressDialog -->
