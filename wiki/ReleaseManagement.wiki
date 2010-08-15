@@ -6,19 +6,21 @@
 == Release management ==
 === Scheduled releases ===
 ====Version 1.6.1====
-Release Date: 15th August 2010<br>
-Content: Features, Bugfixes
+Scheduled Release Date: 30th August 2010<br>
+Content: Feature, Bugfixes
   * Issue 61 (Change language in settings)
+  * Issue 68 (Spanish translations)
+  * Issue 65
+  * Issue 66
 
+=== Market Releases ===
 ====Version 1.6.0====
-Release Date: 1th August 2010<br>
-Content: Features, Bugfixes
+Release Date: 28th July 2010<br>
   * Issue 52 (Tabs for episodes list)
   * Issue 58 (Missing episodes)
   * Issue 59 (Large collections of episodes)
   * Issue 60 (Problem with show Grey's Anatomy - From Market comments)
 
-=== Market Releases ===
 ====Version 1.5.1====
 Release Date: 3th June 2010<br>
   * Issue 51 (Improve Google Analytics reports)
