@@ -22,10 +22,10 @@
     <string name="coming">Kommer</string>
     <string name="watchListTitle">TV-Serier/Avsnitt</string>
     <string name="watchListSubTitleWatch">%d avsnitt att se</string>
-    <string name="watchListSubTitleAquire">%d avsnitt att hämta</string>
+    <string name="watchListSubTitleAcquire">%d avsnitt att hämta</string>
     <string name="watchListSubTitleComing">%d framtida avsnitt</string>
     <string name="watchListSubTitleWatchPlural">%d avsnitt att se</string>
-    <string name="watchListSubTitleAquirePlural">%d avsnitt att hämta</string>
+    <string name="watchListSubTitleAcquirePlural">%d avsnitt att hämta</string>
     <string name="watchListSubTitleComingPlural">%d framtida avsnitt</string>
     <string name="watchListEmpty">Inga avsnitt hittade.</string>
 

@@ -9,4 +9,5 @@ public class PreferencesKeys {
     public static final String EPISODE_SORTING_KEY = "episode_sorting_order";
     public static final String SHOW_SORTING_KEY = "show_sorting_order";
     public static final String STORE_PASSWORD_KEY = "store_password";
+    public static final String LANGUAGE_KEY = "language";
 }

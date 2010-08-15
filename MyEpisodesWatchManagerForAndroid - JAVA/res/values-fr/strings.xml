@@ -22,10 +22,10 @@
     <string name="coming">A venir</string>
     <string name="watchListTitle">Liste des séries/épisodes</string>
     <string name="watchListSubTitleWatch">%d épisode a regardé</string>
-    <string name="watchListSubTitleAquire">%d épisode a acquérir</string>
+    <string name="watchListSubTitleAcquire">%d épisode a acquérir</string>
     <string name="watchListSubTitleComing">%d futur épisode</string>
     <string name="watchListSubTitleWatchPlural">%d épisodes a regarder</string>
-    <string name="watchListSubTitleAquirePlural">%d épisodes a acquérir</string>
+    <string name="watchListSubTitleAcquirePlural">%d épisodes a acquérir</string>
     <string name="watchListSubTitleComingPlural">%d futurs épisodes</string>
     <string name="watchListEmpty">Aucun épisode trouvé.</string>
 

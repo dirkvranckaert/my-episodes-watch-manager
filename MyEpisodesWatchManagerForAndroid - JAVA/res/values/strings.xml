@@ -16,16 +16,16 @@
     <string name="loginSuccessfullLogin">Successfull logged in</string>
     <string name="loginLoginFailed">Could not login to MyEpisodes.com, check internet connection and login details before trying again!</string>
 
-    <!-- watchtlist -->
+    <!-- watchlist -->
     <string name="watch">Watch</string>
     <string name="acquire">Acquire</string>
     <string name="coming">Coming</string>
     <string name="watchListTitle">List of shows/episodes</string>
     <string name="watchListSubTitleWatch">%d episode to watch</string>
-    <string name="watchListSubTitleAquire">%d episode to acquire</string>
+    <string name="watchListSubTitleAcquire">%d episode to acquire</string>
     <string name="watchListSubTitleComing">%d future episode</string>
     <string name="watchListSubTitleWatchPlural">%d episodes to watch</string>
-    <string name="watchListSubTitleAquirePlural">%d episodes to acquire</string>
+    <string name="watchListSubTitleAcquirePlural">%d episodes to acquire</string>
     <string name="watchListSubTitleComingPlural">%d future episodes</string>
     <string name="watchListEmpty">No episodes found.</string>
 
@@ -72,6 +72,7 @@
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">In order to apply the preferences restart the application or reload the list of shows and episodes</string>
+    <string name="applyLanguagePreferences">Application needs to be restarted for all translations.</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Order of shows</string>
     <string-array name="showOrderOptions">
@@ -88,6 +89,16 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Store password</string>
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Change Language</string>
+    <string-array name="showLanguageOptions">
+        <item>English</item>
+        <item>French</item>
+        <item>Italian</item>
+        <item>Korean</item>
+        <item>Dutch</item>
+        <item>Swedish</item>
+    </string-array>
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
@@ -183,5 +194,13 @@
     <string-array name="episodeOrderOptionsValues">
         <item>oldest_on_top</item>
         <item>newest_on_top</item>
+    </string-array>
+    <string-array name="showLanguageOptionsValues">
+        <item>en</item>
+        <item>fr</item>
+        <item>it</item>
+        <item>ko</item>
+        <item>nl</item>
+        <item>sv</item>
     </string-array>
 </resources>

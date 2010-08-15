@@ -22,10 +22,10 @@
     <string name="coming">Por emitir</string>
     <string name="watchListTitle">Lista de series/capítulos</string>
     <string name="watchListSubTitleWatch">%d capítulo por ver</string>
-    <string name="watchListSubTitleAquire">%d capítulo por adquirir</string>
+    <string name="watchListSubTitleAcquire">%d capítulo por adquirir</string>
     <string name="watchListSubTitleComing">%d próximo capítulo</string>
     <string name="watchListSubTitleWatchPlural">%d capítulos por ver</string>
-    <string name="watchListSubTitleAquirePlural">%d capítulos por adquirir</string>
+    <string name="watchListSubTitleAcquirePlural">%d capítulos por adquirir</string>
     <string name="watchListSubTitleComingPlural">%d próximos capítulos</string>
     <string name="watchListEmpty">No hay capítulos</string>
 

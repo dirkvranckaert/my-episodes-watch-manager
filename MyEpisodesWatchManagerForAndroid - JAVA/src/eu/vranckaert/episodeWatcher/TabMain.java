@@ -1,5 +1,9 @@
 package eu.vranckaert.episodeWatcher;
 
+import java.util.Locale;
+
+import eu.vranckaert.episodeWatcher.preferences.Preferences;
+import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -13,6 +17,7 @@ public class TabMain extends TabActivity {
 	private Intent intentAcquire;  // Reusable Intent for each tab
 	private Intent intentComing;  // Reusable Intent for each tab
 	private Resources res; // Resource object to get Drawables
+	private android.content.res.Configuration conf;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -22,6 +27,14 @@ public class TabMain extends TabActivity {
         
         tabHost = getTabHost();  // The activity TabHost
         res = getResources();
+        conf = res.getConfiguration();
+        
+        Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
+        
+        String languageCode = Preferences.getPreference(this, PreferencesKeys.LANGUAGE_KEY);
+        conf.locale = new Locale(languageCode);
+        res.updateConfiguration(conf, null);
+        
         // Create an Intent to launch an Activity for the tab (to be reused)
         intentWatch = new Intent().setClass(this, EpisodesWatchListActivity.class)
         					 .putExtra("Type", 0)
@@ -83,6 +96,13 @@ public class TabMain extends TabActivity {
     	{
     		intentComing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	}
+    }
+    
+    public void refreshAllTabs()
+    {
+		intentWatch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intentAcquire.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intentComing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }
     
     public void refreshWatchTab()

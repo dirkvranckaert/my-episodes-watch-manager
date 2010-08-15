@@ -20,6 +20,7 @@ import android.app.ExpandableListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
@@ -56,6 +57,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     private Runnable markEpisode;
     private Integer exceptionMessageResId = null;
     private int episodesType;
+	private Resources res; // Resource object to get Drawables
+	private android.content.res.Configuration conf;
     
     private GoogleAnalyticsTracker tracker;
 	
@@ -172,13 +175,14 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+                
         tracker = GoogleAnalyticsTracker.getInstance();
         tracker.start("UA-3183255-2", 30, this);
         
 		TabMain tabMain = (TabMain) getParent();
         Bundle data = this.getIntent().getExtras();
         episodesType = (Integer) data.getSerializable("Type");
+        
         tabMain.clearRefreshTab(episodesType);
         init();
         checkPreferences();
@@ -245,6 +249,13 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	private void init() {
 		setContentView(R.layout.watchlist);
         episodes = new ArrayList<Episode>();
+        
+        res = getResources();
+        conf = res.getConfiguration();
+        
+        String LanguageCode = Preferences.getPreference(this, PreferencesKeys.LANGUAGE_KEY);
+        conf.locale = new Locale(LanguageCode);
+        res.updateConfiguration(conf, null);
 		
 		episodeAdapter = new SimpleExpandableListAdapter(
 	                this,
@@ -275,7 +286,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		        subTitle.setText(getString(R.string.watchListSubTitleWatch, countEpisodes));
 		        break;
 			case 1:
-			    subTitle.setText(getString(R.string.watchListSubTitleAquire, countEpisodes));
+			    subTitle.setText(getString(R.string.watchListSubTitleAcquire, countEpisodes));
 			    break;
 			case 2:
 		        subTitle.setText(getString(R.string.watchListSubTitleComing, countEpisodes));
@@ -290,7 +301,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		        subTitle.setText(getString(R.string.watchListSubTitleWatchPlural, countEpisodes));
 		        break;
 			case 1:
-			    subTitle.setText(getString(R.string.watchListSubTitleAquirePlural, countEpisodes));
+			    subTitle.setText(getString(R.string.watchListSubTitleAcquirePlural, countEpisodes));
 			    break;
 			case 2:
 		        subTitle.setText(getString(R.string.watchListSubTitleComingPlural, countEpisodes));
@@ -383,7 +394,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         Preferences.checkDefaultPreference(this, PreferencesKeys.EPISODE_SORTING_KEY, episodeOrderOptions[0]);
         //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
         String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
-        Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[1]);
+        Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[0]);
+        Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
     }
 
     private void reloadEpisodes() {
@@ -427,8 +439,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 					AddEpisodeToShow(ep);
 				}
 			} else {
-				subTitle = (TextView) findViewById(R.id.watchListSubTitle);
-				subTitle.setText("");
+				Log.d(LOG_TAG, "Episode can't be added to show.");
 			}
 
             sortShows(shows);
