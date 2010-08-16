@@ -8,10 +8,11 @@
 ====Version 1.6.1====
 Scheduled Release Date: 30th August 2010<br>
 Content: Feature, Bugfixes
+  * Issue 55 (Lines between tv show on WVGA800)
   * Issue 61 (Change language in settings)
+  * Issue 65 (Date not correct)
+  * Issue 66 (Date in coming tab)
   * Issue 68 (Spanish translations)
-  * Issue 65
-  * Issue 66
 
 === Market Releases ===
 ====Version 1.6.0====
