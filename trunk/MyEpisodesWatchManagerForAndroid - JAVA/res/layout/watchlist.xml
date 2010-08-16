@@ -10,7 +10,6 @@
 			  android:layout_height="wrap_content" 
 			  android:gravity="center"
 			  android:text="@string/watchListTitle" 
-			  android:textSize="18px"
 	/>
 
 	<TextView android:id="@+id/watchListSubTitle" 
@@ -26,7 +25,6 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:choiceMode="singleChoice"
-		android:dividerHeight="1.5px"
 	></ExpandableListView>
 	
 </LinearLayout>

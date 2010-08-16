@@ -93,6 +93,7 @@
     <string name="showLanguagePrompt">Change Language</string>
     <string-array name="showLanguageOptions">
         <item>English</item>
+        <item>Español</item>
         <item>French</item>
         <item>Italian</item>
         <item>Korean</item>
@@ -197,6 +198,7 @@
     </string-array>
     <string-array name="showLanguageOptionsValues">
         <item>en</item>
+        <item>es</item>
         <item>fr</item>
         <item>it</item>
         <item>ko</item>
