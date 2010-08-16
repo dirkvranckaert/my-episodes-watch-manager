@@ -5,3 +5,6 @@ Beneath is a list of all version and the items in the internationalization files
 
 Version 1.6.1:
   * aboutText
+  * applyLanguagePreferences
+  * showLanguagePrompt
+  * showLanguageOptions
