@@ -6,14 +6,15 @@
 	>
    	<TextView
         android:id="@+id/episodeRowChildTitle"
-        android:paddingLeft="50px"
+        android:paddingLeft="20px"
         android:paddingTop="6px"
+        android:textStyle="bold"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
     />
     <TextView
         android:id="@+id/episodeRowChildDetail"
-        android:paddingLeft="50px"
+        android:paddingLeft="20px"
         android:paddingBottom="6px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
