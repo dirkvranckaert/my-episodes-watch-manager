@@ -71,8 +71,7 @@
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
 
     <!-- preferences Dialog -->
-    <string name="applyPreferences">In order to apply the preferences restart the application or reload the list of shows and episodes</string>
-    <string name="applyLanguagePreferences">Application needs to be restarted for all translations.</string>
+    <string name="applyPreferences">Because settings are change, the episodes will be refreshed now!</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Order of shows</string>
     <string-array name="showOrderOptions">

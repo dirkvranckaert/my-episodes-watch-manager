@@ -3,6 +3,7 @@ package eu.vranckaert.episodeWatcher;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -24,9 +25,7 @@ import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
  */
 public class PreferencesActivity extends PreferenceActivity {
     private static final int RELAOD_DIALOG = 0;
-    private static final int LANGUAGE_DIALOG = RELAOD_DIALOG + 1;
     private boolean refreshDialog;
-    private boolean languageDialog;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,7 +49,7 @@ public class PreferencesActivity extends PreferenceActivity {
         super.onCreate(savedInstance);
         
         refreshDialog = false;
-        languageDialog = false;
+        super.setTitle(R.string.preferences);
         
         getPreferenceManager().setSharedPreferencesName(Preferences.PREF_NAME);
         setPreferenceScreen(createPreferenceScreen());
@@ -98,7 +97,7 @@ public class PreferencesActivity extends PreferenceActivity {
         showLanguagePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				languageDialog = true;
+				refreshDialog = true;
 				return true;
 			}
         });
@@ -123,23 +122,10 @@ public class PreferencesActivity extends PreferenceActivity {
 					   .setPositiveButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				                dialog.cancel();
-                                exit();
+				                StartTabMain();
 				           }
 				       });
 				dialog = builder.create();
-				break;
-			case LANGUAGE_DIALOG:
-				AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-				builder2.setTitle(R.string.attention)
-					   .setMessage(R.string.applyLanguagePreferences)
-					   .setCancelable(false)
-					   .setPositiveButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
-				           public void onClick(DialogInterface dialog, int id) {
-				                dialog.cancel();
-				                exit();
-				           }
-				       });
-				dialog = builder2.create();
 				break;
 			default:
 				dialog = super.onCreateDialog(id);
@@ -151,11 +137,8 @@ public class PreferencesActivity extends PreferenceActivity {
     @Override
     public void finish() {
         Log.d("PreferencesActivity", "Closing the preferences screen!");
-        if (languageDialog)
-        {
-        	showDialog(LANGUAGE_DIALOG);
-        }
-        else if (refreshDialog)
+        
+        if (refreshDialog)
         {
         	showDialog(RELAOD_DIALOG);
         }
@@ -167,5 +150,12 @@ public class PreferencesActivity extends PreferenceActivity {
     
     private void exit() {
     	super.finish();
+    }
+    
+    private void StartTabMain() {
+    	super.finish();
+    	Intent mainActivity = new Intent(this.getApplicationContext(), TabMain.class);
+    	mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+    	startActivity(mainActivity);
     }
 }
