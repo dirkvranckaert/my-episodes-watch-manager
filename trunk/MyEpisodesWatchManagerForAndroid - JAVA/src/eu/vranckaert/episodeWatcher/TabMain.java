@@ -25,11 +25,11 @@ public class TabMain extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tabmain);
         
-        tabHost = getTabHost();  // The activity TabHost
+        tabHost = getTabHost();  // The activity TabHost        
         res = getResources();
         conf = res.getConfiguration();
         
-        Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
+    	Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
         
         String languageCode = Preferences.getPreference(this, PreferencesKeys.LANGUAGE_KEY);
         conf.locale = new Locale(languageCode);

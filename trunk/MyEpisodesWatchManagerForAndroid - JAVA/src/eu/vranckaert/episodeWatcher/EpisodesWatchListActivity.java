@@ -51,6 +51,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     private MyEpisodesService myEpisodesService;
     private List<Episode> episodes = new ArrayList<Episode>();
     private List<Show> shows = new ArrayList<Show>();
+    private TextView Title;
     private TextView subTitle;
     private SimpleExpandableListAdapter episodeAdapter;
     private Runnable viewEpisodes;
@@ -277,7 +278,10 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		{
 			countEpisodes += show.getNumberEpisodes();
 		}
+		Title = (TextView) findViewById(R.id.watchListTitle);
+		Title.setText(getString(R.string.watchListTitle));
 		subTitle = (TextView) findViewById(R.id.watchListSubTitle);
+		
 		if (countEpisodes == 1)
 		{
 			switch(episodesType)
