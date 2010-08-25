@@ -10,6 +10,7 @@ Scheduled Release Date: 30th August 2010<br>
 Content: Feature, Bugfixes
   * Issue 55 (Lines between tv show on WVGA800)
   * Issue 61 (Change language in settings)
+  * Issue 62 (Register new users)
   * Issue 65 (Date not correct)
   * Issue 66 (Date in coming tab)
   * Issue 68 (Spanish translations)
