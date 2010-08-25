@@ -525,7 +525,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		markEpisode = new Runnable() {
 			@Override
 			public void run() {
-					markEpisode(EpisodeStatus, episode);
+				markEpisode(EpisodeStatus, episode);
 			}
 		};
         

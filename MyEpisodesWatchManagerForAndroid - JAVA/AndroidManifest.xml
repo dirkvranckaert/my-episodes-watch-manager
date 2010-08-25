@@ -17,6 +17,8 @@
         		  android:theme="@android:style/Theme.Light"/>
         <activity android:name=".LoginSubActivity"
         		  android:theme="@android:style/Theme.Light"/>
+        <activity android:name=".RegisterSubActivity"
+        		  android:theme="@android:style/Theme.Light"/>
         <activity android:name=".EpisodeDetailsSubActivity"
         		  android:theme="@android:style/Theme.Light"/>
         <activity android:name=".PreferencesActivity"

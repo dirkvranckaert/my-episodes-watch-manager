@@ -7,81 +7,77 @@ import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 
-public class LoginSubActivity extends Activity {
-    private Button loginButton;
-    private TextView register;
+public class RegisterSubActivity extends Activity {
+    private Button registerButton;
     private MyEpisodesService myEpisodesService;
     private User user;
     
-    private static final String LOG_TAG = "LoginSubActivity";
+    private static final String LOG_TAG = "RegisterSubActivity";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         init();
         
         if (!checkLoginCredentials()) {
         	GoogleAnalyticsTracker tracker = GoogleAnalyticsTracker.getInstance();
-        	tracker.trackPageView("loginSubActivity");
+        	tracker.trackPageView("registerSubActivity");
         	
-	        setContentView(R.layout.login);
+	        setContentView(R.layout.register);
 	        
-	    	register = (TextView) findViewById(R.id.registerForm);
-	    	register.setOnClickListener(new View.OnClickListener() {
+	        registerButton = (Button) findViewById(R.id.registerRegister);
+	        registerButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-			    	openRegisterScreen();
-				}
-			});
-	        
-	        loginButton = (Button) findViewById(R.id.loginLogin);
-	        loginButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-                    String username = ((EditText) findViewById(R.id.loginUsername)).getText().toString();
-				    String password = ((EditText) findViewById(R.id.loginPassword)).getText().toString();
-
-                    if( (username != null && username.length()>0) && (password != null && password.length()>0) ) {
+                    String username = ((EditText) findViewById(R.id.registerUsername)).getText().toString();
+				    String password = ((EditText) findViewById(R.id.registerPassword)).getText().toString();
+				    String email = ((EditText) findViewById(R.id.registerEmail)).getText().toString();
+                    if( (username!= null && username.length()>0) && (password != null && password.length()>0) && (email != null && email.length()>0)) {
                         user = new User(
                                 username, password
                         );
 
-                        Toast.makeText(LoginSubActivity.this, R.string.loginStartLogin, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterSubActivity.this, R.string.registerStart, Toast.LENGTH_SHORT).show();
                         try {
-                            boolean loginStatus = myEpisodesService.login(user);
-                            if(loginStatus)
+                            boolean registerStatus = myEpisodesService.register(user, email);
+                            if(registerStatus)
                             {
-                                Toast.makeText(LoginSubActivity.this, R.string.loginSuccessfullLogin, Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterSubActivity.this, R.string.registerSuccessfull, Toast.LENGTH_LONG).show();
                                 storeLoginCredentials(user);
                                 finalizeLogin();
+                            } else {
+                            	Toast.makeText(RegisterSubActivity.this, R.string.registerFailed, Toast.LENGTH_LONG).show();
+                                ((EditText) findViewById(R.id.registerUsername)).setText("");
+                                ((EditText) findViewById(R.id.registerPassword)).setText("");
+                                ((EditText) findViewById(R.id.registerEmail)).setText("");
                             }
                         } catch (InternetConnectivityException e) {
+                            ((EditText) findViewById(R.id.registerUsername)).setText("");
+                            ((EditText) findViewById(R.id.registerPassword)).setText("");
+                            ((EditText) findViewById(R.id.registerEmail)).setText("");
                             String message = "Could not connect to host";
                             Log.e(LOG_TAG, message, e);
-                            Toast.makeText(LoginSubActivity.this, R.string.internetConnectionFailureTryAgain, Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterSubActivity.this, R.string.internetConnectionFailureTryAgain, Toast.LENGTH_LONG).show();
                         } catch (LoginFailedException e) {
-                            String message = "Login failed";
-                            ((EditText) findViewById(R.id.loginUsername)).setText("");
-                            ((EditText) findViewById(R.id.loginPassword)).setText("");
+                            String message = "Register failed";
                             Log.e(LOG_TAG, message, e);
-                            Toast.makeText(LoginSubActivity.this, R.string.loginLoginFailed, Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterSubActivity.this, R.string.registerFailed, Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
                             String message = "Some Exception occured";
                             Log.e(LOG_TAG, message, e);
-                            Toast.makeText(LoginSubActivity.this, R.string.defaultExceptionMessage, Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterSubActivity.this, R.string.defaultExceptionMessage, Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(LoginSubActivity.this, R.string.fillInAllFields, Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterSubActivity.this, R.string.fillInAllFields, Toast.LENGTH_LONG).show();
                     }
 				}
 			});
@@ -114,9 +110,4 @@ public class LoginSubActivity extends Activity {
     private void init() {
     	this.myEpisodesService = new MyEpisodesService();
     }
-    
-	private void openRegisterScreen() {
-    	Intent registerActivity = new Intent(this.getApplicationContext(), RegisterSubActivity.class);
-    	startActivity(registerActivity);
-	}
 }

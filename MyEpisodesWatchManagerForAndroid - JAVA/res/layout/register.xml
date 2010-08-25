@@ -24,48 +24,45 @@
 	/>
 
 	<TextView
-		android:id="@+id/loginFormTitle"
+		android:id="@+id/registerFormTitle"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center"
 		android:padding="15px"
-		android:text="@string/loginFormTitle"
+		android:text="@string/registerFormTitle"
 	/>
 	
 	<EditText
-		android:id="@+id/loginUsername"
+		android:id="@+id/registerUsername"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:password="false"
-		android:hint="@string/loginUsernameHint"
+		android:hint="@string/registerUsernameHint"
 	/>
 
 	<EditText
-		android:id="@+id/loginPassword"
+		android:id="@+id/registerPassword"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:password="true"
-		android:hint="@string/loginPasswordHint"
+		android:hint="@string/registerPasswordHint"
+	/>
+	
+	<EditText
+		android:id="@+id/registerEmail"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:password="false"
+		android:hint="@string/registerEmailHint"
 	/>
 	
 	<Button
-		android:id="@+id/loginLogin"
+		android:id="@+id/registerRegister"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:text="@string/loginLoginBtn"
+		android:text="@string/registerBtn"
 	/>
-	
-	<TextView
-		android:id="@+id/registerForm"
-		android:paddingTop="5px"
-		android:paddingRight="15px"
-		android:textSize="12px"
-		android:gravity="right"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:text="@string/loginFormRegister"
-	/>
-	
-</LinearLayout>
+
+	</LinearLayout>
 	</ScrollView>
 </LinearLayout>
