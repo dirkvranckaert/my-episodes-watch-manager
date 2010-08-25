@@ -8,3 +8,13 @@ Version 1.6.1:
   * showLanguagePrompt
   * showLanguageOptions
   * applyPreferences (other text)
+  * loginFormRegister
+  * loginLoginFailed (other text)
+  * registerFormTitle
+  * registerUsernameHint
+  * registerPasswordHint
+  * registerEmailHint
+  * registerBtn
+  * registerStart
+  * registerSuccessfull
+  * registerFailed
