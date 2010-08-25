@@ -33,6 +33,7 @@ import eu.vranckaert.episodeWatcher.exception.RegisterFailedException;
 import eu.vranckaert.episodeWatcher.exception.PasswordEnctyptionFailedException;
 import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
+import org.pojava.datetime.DateTime;
 
 public class MyEpisodesService {
 	private static final String LOG_TAG = MyEpisodesService.class.getName();
@@ -316,20 +317,8 @@ public class MyEpisodesService {
     }
 
     private Date parseDate(String date) {
-        try {
-            return DATEFORMAT.parse(date);
-        } catch (ParseException e) {
-        	try {
-				return DATEFORMAT2.parse(date);
-			} catch (ParseException e1) {
-				try {
-					return DATEFORMAT3.parse(date);
-				} catch (ParseException e2) {
-					Log.i(LOG_TAG, "Date could not be parsed, using default date", e2);
-		            return new Date();
-				}
-			}
-        }
+        DateTime parsedDate = new DateTime(date);
+        return parsedDate.toDate();
     }
 
     private void getSeasonAndEpisodeNumber(String seasonEpisodeNumber, Episode episode) {
