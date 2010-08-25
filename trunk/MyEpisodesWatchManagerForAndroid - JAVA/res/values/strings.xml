@@ -9,13 +9,24 @@
 
     <!-- login form -->
     <string name="loginFormTitle">Provide your user details for the MyEpisodes.com website below.</string>
+    <string name="loginFormRegister">No account? Click here!</string>
     <string name="loginUsernameHint">Username</string>
     <string name="loginPasswordHint">Password</string>
     <string name="loginLoginBtn">Login</string>
     <string name="loginStartLogin">Logging in to MyEpisodes.com</string>
     <string name="loginSuccessfullLogin">Successfull logged in</string>
-    <string name="loginLoginFailed">Could not login to MyEpisodes.com, check internet connection and login details before trying again!</string>
-
+    <string name="loginLoginFailed">Username or password incorrect, please try again!</string>
+    
+	<!-- register form -->
+    <string name="registerFormTitle">Register here, fill in all your user details and click on register.</string>
+    <string name="registerUsernameHint">Username</string>
+    <string name="registerPasswordHint">Password</string>
+    <string name="registerEmailHint">Email</string>
+    <string name="registerBtn">Register</string>
+    <string name="registerStart">Creating user for MyEpisodes.com</string>
+    <string name="registerSuccessfull">Successfull created user!</string>
+    <string name="registerFailed">Username already exists, please choose another username.</string>	
+	
     <!-- watchlist -->
     <string name="watch">Watch</string>
     <string name="acquire">Acquire</string>

@@ -29,6 +29,7 @@ import android.util.Log;
 import eu.vranckaert.episodeWatcher.exception.FeedUrlBuildingFaildException;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
+import eu.vranckaert.episodeWatcher.exception.RegisterFailedException;
 import eu.vranckaert.episodeWatcher.exception.PasswordEnctyptionFailedException;
 import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
@@ -61,6 +62,12 @@ public class MyEpisodesService {
     private static final DateFormat DATEFORMAT = new SimpleDateFormat("dd-MMM-yyyy", Locale.US);
     private static final DateFormat DATEFORMAT2 = new SimpleDateFormat("dd-mm-yyyy", Locale.US);
     private static final DateFormat DATEFORMAT3 = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
+    private static final String MYEPISODES_REGISTER_PAGE = "http://www.myepisodes.com/register.php";
+    private static final String MYEPISODES_REGISTER_PAGE_PARAM_USERNAME = "username";
+    private static final String MYEPISODES_REGISTER_PAGE_PARAM_PASSWORD = "password";
+    private static final String MYEPISODES_REGISTER_PAGE_PARAM_EMAIL = "user_email";
+    private static final String MYEPISODES_REGISTER_PAGE_PARAM_ACTION = "action";    
+    private static final String MYEPISODES_REGISTER_PAGE_PARAM_ACTION_VALUE = "Register";
     private static final String MYEPISODES_LOGIN_PAGE = "http://www.myepisodes.com/login.php";
     private static final String MYEPISODES_LOGIN_PAGE_PARAM_USERNAME = "username";
     private static final String MYEPISODES_LOGIN_PAGE_PARAM_PASSWORD = "password";
@@ -200,6 +207,18 @@ public class MyEpisodesService {
         return status;
     }
     
+    public boolean register(User user, String email) throws LoginFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
+        HttpClient httpClient = new DefaultHttpClient();
+    	boolean status = false;
+		try {
+			status = RegisterUser(httpClient, user.getUsername(), user.getPassword(), email);
+		} catch (RegisterFailedException e) {
+			e.printStackTrace();
+		}
+        httpClient.getConnectionManager().shutdown();
+        return status;
+    }
+    
     private boolean login(HttpClient httpClient, String username, String password) throws LoginFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
     	HttpPost post = new HttpPost(MYEPISODES_LOGIN_PAGE);
 
@@ -243,6 +262,54 @@ public class MyEpisodesService {
             throw new LoginFailedException(message);
         } else {
             Log.i(LOG_TAG, "Successfull login to " + MYEPISODES_LOGIN_PAGE);
+            result = true;
+        }
+        return result;
+    }
+    
+    private boolean RegisterUser(HttpClient httpClient, String username, String password, String email) throws RegisterFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
+    	HttpPost post = new HttpPost(MYEPISODES_REGISTER_PAGE);
+
+    	List <NameValuePair> nvps = new ArrayList <NameValuePair>();
+        nvps.add(new BasicNameValuePair(MYEPISODES_REGISTER_PAGE_PARAM_USERNAME, username));
+        nvps.add(new BasicNameValuePair(MYEPISODES_REGISTER_PAGE_PARAM_PASSWORD, password));
+        nvps.add(new BasicNameValuePair(MYEPISODES_REGISTER_PAGE_PARAM_EMAIL, email));
+        nvps.add(new BasicNameValuePair(MYEPISODES_REGISTER_PAGE_PARAM_ACTION, MYEPISODES_REGISTER_PAGE_PARAM_ACTION_VALUE));
+
+        try {
+			post.setEntity(new UrlEncodedFormEntity(nvps));
+		} catch (UnsupportedEncodingException e) {
+			String message = "Could not start logon because the HTTP post encoding is not supported";
+			Log.e(LOG_TAG, message, e);
+			throw new UnsupportedHttpPostEncodingException(message, e);
+		}
+		
+		boolean result = false;
+		String responsePage = "";
+        HttpResponse response;
+        try {
+            response = httpClient.execute(post);
+            responsePage = EntityUtils.toString(response.getEntity());
+        } catch (ClientProtocolException e) {
+            String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
+        } catch (UnknownHostException e) {
+			String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
+		} catch (IOException e) {
+            String message = "Login to MyEpisodes failed.";
+            Log.w(LOG_TAG, message, e);
+            throw new RegisterFailedException(message, e);
+        }
+
+        if (responsePage.contains("Username already exists, please choose another username.")) {
+            String message = "Username already exists!";
+            Log.w(LOG_TAG, message);
+            throw new RegisterFailedException(message);
+        } else {
+            Log.i(LOG_TAG, "User succesfully created in. " + MYEPISODES_REGISTER_PAGE);
             result = true;
         }
         return result;
