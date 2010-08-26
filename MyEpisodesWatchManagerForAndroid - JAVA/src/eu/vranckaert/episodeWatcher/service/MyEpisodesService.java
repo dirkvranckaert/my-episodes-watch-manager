@@ -60,9 +60,6 @@ public class MyEpisodesService {
     private static final String FEED_TITLE_SEPERATOR = " \\]\\[ ";
     private static final String SEASON_EPISODE_NUMBER_SEPERATOR = "x";
     private static final int FEED_TITLE_EPISODE_FIELDS = 4;
-    private static final DateFormat DATEFORMAT = new SimpleDateFormat("dd-MMM-yyyy", Locale.US);
-    private static final DateFormat DATEFORMAT2 = new SimpleDateFormat("dd-mm-yyyy", Locale.US);
-    private static final DateFormat DATEFORMAT3 = new SimpleDateFormat("yyyy-mm-dd", Locale.US);
     private static final String MYEPISODES_REGISTER_PAGE = "http://www.myepisodes.com/register.php";
     private static final String MYEPISODES_REGISTER_PAGE_PARAM_USERNAME = "username";
     private static final String MYEPISODES_REGISTER_PAGE_PARAM_PASSWORD = "password";
