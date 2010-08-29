@@ -9,8 +9,7 @@
 		android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_gravity="center"
-	    android:scaleType="fitCenter"
-	    android:src="@drawable/header"
+	    android:background="@drawable/header"
 	/>
 
 	<TextView android:textSize="23px"

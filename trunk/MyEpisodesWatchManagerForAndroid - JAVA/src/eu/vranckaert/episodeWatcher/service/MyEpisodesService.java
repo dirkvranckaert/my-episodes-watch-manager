@@ -7,9 +7,6 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import eu.vranckaert.episodeWatcher.domain.*;
@@ -22,7 +19,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import android.util.Log;
@@ -86,8 +82,7 @@ public class MyEpisodesService {
     														"&season=" + MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT +
     														"&episode=" + MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT +
     														"&seen=" + MYEPISODES_UPDATE_PAGE_UNSEEN;
-	private static final String HTTP_POST_ENCODING = HTTP.UTF_8;
-
+	
     public List<Episode> retrieveEpisodes(int episodesType,final User user) throws InternetConnectivityException, Exception {
         String encryptedPassword = encryptPassword(user.getPassword());
         URL feedUrl = buildEpisodesUrl(episodesType, user.getUsername(), encryptedPassword);
