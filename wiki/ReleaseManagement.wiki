@@ -16,6 +16,8 @@ Content: Feature, Bugfixes
   * Issue 68 (Spanish translations)
   * Issue 70 (Application failure after login)
   * Issue 71 (Date Format)
+  * Issue 72 (Better way of showing the loading dialogs)
+  * Issue 73 (Do not reload data when changing oriëntation)
 
 === Market Releases ===
 ====Version 1.6.0====
