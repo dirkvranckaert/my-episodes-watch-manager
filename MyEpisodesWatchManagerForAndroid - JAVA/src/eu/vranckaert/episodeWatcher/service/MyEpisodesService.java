@@ -314,9 +314,18 @@ public class MyEpisodesService {
     }
 
     private void getSeasonAndEpisodeNumber(String seasonEpisodeNumber, Episode episode) {
-        String[] episodeInfoNumber = seasonEpisodeNumber.split(SEASON_EPISODE_NUMBER_SEPERATOR);
-        episode.setSeason(Integer.parseInt(episodeInfoNumber[0].trim()));
-        episode.setEpisode(Integer.parseInt(episodeInfoNumber[1].trim()));;
+    	if (seasonEpisodeNumber.startsWith("S"))
+    	{
+    		String[] episodeInfoNumber = seasonEpisodeNumber.split("E");
+    		episode.setSeason(Integer.parseInt(episodeInfoNumber[0].replace("S", "").trim()));
+    		episode.setEpisode(Integer.parseInt(episodeInfoNumber[1].trim()));
+    	}
+    	else
+    	{
+	        String[] episodeInfoNumber = seasonEpisodeNumber.split(SEASON_EPISODE_NUMBER_SEPERATOR);
+	        episode.setSeason(Integer.parseInt(episodeInfoNumber[0].trim()));
+	        episode.setEpisode(Integer.parseInt(episodeInfoNumber[1].trim()));
+    	}
     }
     
     private URL buildEpisodesUrl(int episodesType,final String username, final String encryptedPassword) throws FeedUrlBuildingFaildException {
