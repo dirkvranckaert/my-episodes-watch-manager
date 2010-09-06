@@ -21,6 +21,7 @@ Content: Features, Bugfixes
 Scheduled Release Date: Unknown<br>
 Content: Features, Bugfixes
   * Issue 62 (Register feature enabled)
+  * Issue 63 (Add/Remove and Ignore/Unignore shows feature)
   * Issue 66 (Date in coming tab)
 
 === Market Releases ===
