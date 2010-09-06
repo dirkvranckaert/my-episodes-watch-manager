@@ -23,6 +23,7 @@ Content: Features, Bugfixes
   * Issue 62 (Register feature enabled)
   * Issue 63 (Add/Remove and Ignore/Unignore shows feature)
   * Issue 66 (Date in coming tab)
+  * Issue 74 (Aboutdialog and Changelog-dialog make-over)
 
 === Market Releases ===
 ====Version 1.6.0====
