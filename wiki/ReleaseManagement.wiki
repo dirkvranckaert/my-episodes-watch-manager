@@ -7,7 +7,7 @@
 === Scheduled releases ===
 ====Version 1.6.1====
 Scheduled Release Date: 30th August 2010<br>
-Content: Feature, Bugfixes
+Content: Features, Bugfixes
   * Issue 55 (Lines between tv show on WVGA800)
   * Issue 61 (Change language in settings)
   * Issue 62 (Register new users)
@@ -18,6 +18,10 @@ Content: Feature, Bugfixes
   * Issue 71 (Date Format)
   * Issue 72 (Better way of showing the loading dialogs)
   * Issue 73 (Do not reload data when changing oriëntation)
+====Version 1.7.0====
+Scheduled Release Date: Unknown<br>
+Content: Features, Bugfixes
+  * Issue 62 (Register feature enabled)
 
 === Market Releases ===
 ====Version 1.6.0====
