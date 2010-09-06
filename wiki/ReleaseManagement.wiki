@@ -10,7 +10,6 @@ Scheduled Release Date: 17th September 2010<br>
 Content: Features, Bugfixes
   * Issue 55 (Lines between tv show on WVGA800)
   * Issue 61 (Change language in settings)
-  * Issue 62 (Register new users)
   * Issue 65 (Date not correct)
   * Issue 68 (Spanish translations)
   * Issue 70 (Application failure after login)
@@ -21,7 +20,7 @@ Content: Features, Bugfixes
 ====Version 1.7.0====
 Scheduled Release Date: 31th October 2010<br>
 Content: Features, Bugfixes
-  * Issue 62 (Register feature enabled)
+  * Issue 62 (Register new users)
   * Issue 63 (Add/Remove and Ignore/Unignore shows feature)
   * Issue 66 (Date in coming tab)
   * Issue 74 (Aboutdialog and Changelog-dialog make-over)
