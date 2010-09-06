@@ -6,7 +6,7 @@
 == Release management ==
 === Scheduled releases ===
 ====Version 1.6.1====
-Scheduled Release Date: 30th August 2010<br>
+Scheduled Release Date: 17th September 2010<br>
 Content: Features, Bugfixes
   * Issue 55 (Lines between tv show on WVGA800)
   * Issue 61 (Change language in settings)
@@ -18,7 +18,7 @@ Content: Features, Bugfixes
   * Issue 72 (Better way of showing the loading dialogs)
   * Issue 73 (Do not reload data when changing oriëntation)
 ====Version 1.7.0====
-Scheduled Release Date: Unknown<br>
+Scheduled Release Date: 31th October 2010<br>
 Content: Features, Bugfixes
   * Issue 62 (Register feature enabled)
   * Issue 63 (Add/Remove and Ignore/Unignore shows feature)
