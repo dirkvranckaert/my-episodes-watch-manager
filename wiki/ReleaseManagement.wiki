@@ -12,7 +12,6 @@ Content: Features, Bugfixes
   * Issue 61 (Change language in settings)
   * Issue 62 (Register new users)
   * Issue 65 (Date not correct)
-  * Issue 66 (Date in coming tab)
   * Issue 68 (Spanish translations)
   * Issue 70 (Application failure after login)
   * Issue 71 (Date Format)
@@ -22,6 +21,7 @@ Content: Features, Bugfixes
 Scheduled Release Date: Unknown<br>
 Content: Features, Bugfixes
   * Issue 62 (Register feature enabled)
+  * Issue 66 (Date in coming tab)
 
 === Market Releases ===
 ====Version 1.6.0====
