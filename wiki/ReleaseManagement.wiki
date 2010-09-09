@@ -20,6 +20,7 @@ Content: Features, Bugfixes
 ====Version 1.7.0====
 Scheduled Release Date: 31th October 2010<br>
 Content: Features, Bugfixes
+  * Issue 38 (Mark several episodes as "Watched" at once)
   * Issue 62 (Register new users)
   * Issue 63 (Add/Remove and Ignore/Unignore shows feature)
   * Issue 66 (Date in coming tab)
