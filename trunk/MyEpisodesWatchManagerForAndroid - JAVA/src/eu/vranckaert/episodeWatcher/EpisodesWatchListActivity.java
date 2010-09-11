@@ -2,6 +2,7 @@ package eu.vranckaert.episodeWatcher;
 
 import java.util.*;
 
+import android.os.AsyncTask;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 import eu.vranckaert.episodeWatcher.domain.*;
@@ -39,14 +40,14 @@ import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 public class EpisodesWatchListActivity extends ExpandableListActivity {
 	private static final int LOGIN_REQUEST_CODE = 0;
 	private static final int EPISODE_DETAILS_REQUEST_CODE = 1;
-	
+
 	private static final int EPISODE_LOADING_DIALOG = 0;
 	private static final int EXCEPTION_DIALOG = 1;
 	private static final int ABOUT_DIALOG = 2;
 	private static final int CHANGELOG_DIALOG = 3;
 	private static final int LOGOUT_DIALOG = 4;
 	private static final String LOG_TAG = "EpisodeWatchListActivity";
-	
+
 	private User user;
     private MyEpisodesService myEpisodesService;
     private List<Episode> episodes = new ArrayList<Episode>();
@@ -54,45 +55,44 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     private TextView Title;
     private TextView subTitle;
     private SimpleExpandableListAdapter episodeAdapter;
-    private Runnable viewEpisodes;
     private Runnable markEpisode;
     private Integer exceptionMessageResId = null;
     private int episodesType;
 	private Resources res; // Resource object to get Drawables
 	private android.content.res.Configuration conf;
-    
+
     private GoogleAnalyticsTracker tracker;
-	
+
 	public EpisodesWatchListActivity() {
 		super();
 		this.user = new User("myUsername", "myPassword");
 		this.myEpisodesService = new MyEpisodesService();
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.watchlistmenu, menu);
 		return true;
 	}
-	
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		ExpandableListView.ExpandableListContextMenuInfo info = (ExpandableListView.ExpandableListContextMenuInfo) menuInfo;
 		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
-		
+
 		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
 			int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
 			int childid = ExpandableListView.getPackedPositionChild(info.packedPosition);
-			
-			menu.setHeaderTitle(shows.get(groupid).getEpisodes().get(childid).getShowName() + 
-					" S" + shows.get(groupid).getEpisodes().get(childid).getSeasonString() + 
+
+			menu.setHeaderTitle(shows.get(groupid).getEpisodes().get(childid).getShowName() +
+					" S" + shows.get(groupid).getEpisodes().get(childid).getSeasonString() +
 					"E" + shows.get(groupid).getEpisodes().get(childid).getEpisodeString() + "\n" +
 					shows.get(groupid).getEpisodes().get(childid).getName());
 			MenuInflater inflater = getMenuInflater();
 			inflater.inflate(R.menu.episodemenu, menu);
-			if (episodesType != 1) 
+			if (episodesType != 1)
 			{
 				menu.removeItem(R.id.episodeMenuAcquired);
 			}
@@ -111,6 +111,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 				ProgressDialog progressDialog = new ProgressDialog(this);
 				progressDialog.setMessage(this.getString(R.string.progressLoadingTitle));
 				//progressDialog.setTitle(R.string.progressLoadingTitle);
+                progressDialog.setCancelable(false);
 				dialog = progressDialog;
 				break;
 			case EXCEPTION_DIALOG:
@@ -176,20 +177,20 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-                
+
         tracker = GoogleAnalyticsTracker.getInstance();
         tracker.start("UA-3183255-2", 30, this);
-        
+
 		TabMain tabMain = (TabMain) getParent();
         Bundle data = this.getIntent().getExtras();
         episodesType = (Integer) data.getSerializable("Type");
-        
+
         tabMain.clearRefreshTab(episodesType);
         init();
         checkPreferences();
         openLoginActivity();
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
@@ -218,7 +219,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
 		int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
 		int childid = ExpandableListView.getPackedPositionChild(info.packedPosition);
-		
+
 		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
 			switch(item.getItemId()) {
 			case R.id.episodeMenuWatched:
@@ -246,18 +247,18 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		openEpisodeDetails(shows.get(groupPosition).getEpisodes().get(childPosition), episodesType);
 		return true;
 	}
-	
+
 	private void init() {
 		setContentView(R.layout.watchlist);
         episodes = new ArrayList<Episode>();
-        
+
         res = getResources();
         conf = res.getConfiguration();
-        
+
         String LanguageCode = Preferences.getPreference(this, PreferencesKeys.LANGUAGE_KEY);
         conf.locale = new Locale(LanguageCode);
         res.updateConfiguration(conf, null);
-		
+
 		episodeAdapter = new SimpleExpandableListAdapter(
 	                this,
 	                createGroups(),
@@ -272,7 +273,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		setListAdapter(episodeAdapter);
 		episodeAdapter.notifyDataSetChanged();
 		registerForContextMenu(getExpandableListView());
-		
+
 		int countEpisodes = 0;
 		for(Show show : shows)
 		{
@@ -281,7 +282,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		Title = (TextView) findViewById(R.id.watchListTitle);
 		Title.setText(getString(R.string.watchListTitle));
 		subTitle = (TextView) findViewById(R.id.watchListSubTitle);
-		
+
 		if (countEpisodes == 1)
 		{
 			switch(episodesType)
@@ -313,10 +314,10 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			}
 		}
 	}
-	
+
 	private List<? extends Map<String, ?>> createGroups() {
 		List output = new ArrayList();
-		
+
 		for(Show show : shows) {
 				HashMap map = new HashMap();
 				map.put("episodeRowTitle", show.getShowName() + " ( " + show.getNumberEpisodes() + " )");
@@ -325,7 +326,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
 		return output;
 	}
-	
+
 	private List<? extends List<? extends Map<String, ?>>> createChilds() {
 		List subList = new ArrayList();
 		for (Show show : shows) {
@@ -359,7 +360,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		episodeDetailsSubActivity.putExtra("episodesType", episodesType2);
         startActivityForResult(episodeDetailsSubActivity, EPISODE_DETAILS_REQUEST_CODE);
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == LOGIN_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -377,7 +378,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	            Bundle intentData = data.getExtras();
 	            String markEpisode = intentData.getString("markEpisode");
 	            Episode episode = (Episode) intentData.getSerializable("episode");
-	
+
 	            if (markEpisode.equals("watch")) {
 	                tracker.trackEvent("MarkAsWatched", "MenuButton-DetailsSubActivity", "", 0);
 	                markEpisodes(0, episode);
@@ -403,18 +404,27 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     }
 
     private void reloadEpisodes() {
-		showDialog(EPISODE_LOADING_DIALOG);
-		viewEpisodes = new Runnable() {
-			@Override
-			public void run() {
-				getEpisodes();
-			}
-		};
-        
-		Thread thread =  new Thread(null, viewEpisodes, "EpisodeRetrievalBackground");
-		thread.start();
+        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+            @Override
+            protected void onPreExecute() {
+                showDialog(EPISODE_LOADING_DIALOG);
+            }
+
+            @Override
+            protected Object doInBackground(Object... objects) {
+                getEpisodes();
+                return 100L;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                returnEpisodes();
+                dismissDialog(EPISODE_LOADING_DIALOG);
+            }
+        };
+        asyncTask.execute();
 	}
-	
+
 	private void getEpisodes() {
 		try {
 			episodes = myEpisodesService.retrieveEpisodes(episodesType, user);
@@ -431,66 +441,57 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			Log.e(LOG_TAG, message, e);
 			exceptionMessageResId = R.string.defaultExceptionMessage;
 		}
-		runOnUiThread(returnEpisodes);
 	}
 
-	private Runnable returnEpisodes = new Runnable() {
-		@Override
-		public void run() {
-			shows = new ArrayList<Show>();
-			if (episodes != null && episodes.size() > 0) {
-				for (Episode ep : episodes) {
-					AddEpisodeToShow(ep);
-				}
-			} else {
-				Log.d(LOG_TAG, "Episode can't be added to show.");
-			}
+	private void returnEpisodes() {
+        shows = new ArrayList<Show>();
+        if (episodes != null && episodes.size() > 0) {
+            for (Episode ep : episodes) {
+                AddEpisodeToShow(ep);
+            }
+        } else {
+            Log.d(LOG_TAG, "Episode can't be added to show.");
+        }
 
-            sortShows(shows);
-            sortEpisodesOfShows(shows);
+        sortShows(shows);
+        sortEpisodesOfShows(shows);
 
-			dismissDialog(EPISODE_LOADING_DIALOG);
-			init();
-			
+        init();
 
-			if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
-				showDialog(EXCEPTION_DIALOG);
-				exceptionMessageResId = null;
-			}
-		}
 
-		private void AddEpisodeToShow(Episode episode) {
-			Show returnShow = CheckShowDublicate(episode.getShowName());
-			if (returnShow == null)
-			{
-				Show tempShow = new Show(episode.getShowName());
-				tempShow.addEpisode(episode);
-				shows.add(tempShow);
-			}
-			else
-			{
-				for(Show show : shows)
-				{
-					if (show.getShowName().equals(returnShow.getShowName()))
-					{
-						show.addEpisode(episode);
-					}
-				}
-			}
-		}
-		
-		private Show CheckShowDublicate(String episode)
-		{
-			for(Show show : shows)
-			{
-				if (show.getShowName().equals(episode))
-				{
-					return show;
-				}
-			}
-			return null;
-		}
-	};
+        if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
+            showDialog(EXCEPTION_DIALOG);
+            exceptionMessageResId = null;
+        }
+    }
+
+    private void AddEpisodeToShow(Episode episode) {
+        Show returnShow = CheckShowDublicate(episode.getShowName());
+        if (returnShow == null) {
+            Show tempShow = new Show(episode.getShowName());
+            tempShow.addEpisode(episode);
+            shows.add(tempShow);
+        }
+        else {
+            for(Show show : shows)
+            {
+                if (show.getShowName().equals(returnShow.getShowName())) {
+                    show.addEpisode(episode);
+                }
+            }
+        }
+    }
+
+    private Show CheckShowDublicate(String episode)
+    {
+        for(Show show : shows)
+        {
+            if (show.getShowName().equals(episode)) {
+                return show;
+            }
+        }
+        return null;
+    }
 
     private void sortShows(List<Show> showList) {
         String sorting = Preferences.getPreference(this, PreferencesKeys.SHOW_SORTING_KEY);
@@ -528,11 +529,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 				markEpisode(EpisodeStatus, episode);
 			}
 		};
-        
+
 		Thread thread =  new Thread(null, markEpisode, "EpisodeMarkWatchedBackground");
 		thread.start();
 	}
-	
+
 	private void markEpisode(int EpisodeStatus, Episode episode) {
 		try {
 			if (EpisodeStatus == 0)
@@ -568,21 +569,21 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		}
 		runOnUiThread(delegateEpisodeReloading);
 	}
-	
+
 	private Runnable delegateEpisodeReloading = new Runnable() {
 		@Override
 		public void run() {
 			dismissDialog(EPISODE_LOADING_DIALOG);
-			
+
 			if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
 				showDialog(EXCEPTION_DIALOG);
 				exceptionMessageResId = null;
-			} else {			
+			} else {
 				reloadEpisodes();
 			}
 		}
 	};
-	
+
 	private void logout() {
 		tracker.trackEvent("Logout", "MenuButton-EpisodesWatchListActivity", "", 0);
 		Preferences.removePreference(this, User.USERNAME);
@@ -591,11 +592,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		tabMain.refreshAllTabs(episodesType);
 		openLoginActivity();
 	}
-	
+
 	private void exit() {
 		finish();
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
