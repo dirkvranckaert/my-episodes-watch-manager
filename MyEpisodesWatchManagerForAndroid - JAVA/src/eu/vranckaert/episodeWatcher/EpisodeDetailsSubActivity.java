@@ -1,10 +1,5 @@
 package eu.vranckaert.episodeWatcher;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import eu.vranckaert.episodeWatcher.domain.Episode;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
+
+import java.util.Date;
 
 public class EpisodeDetailsSubActivity extends Activity {
 	Episode episode = null;
@@ -46,7 +44,7 @@ public class EpisodeDetailsSubActivity extends Activity {
         if (airdate == null) {
         	airdate = new Date();
         }
-        String formattedAirDate = DateUtil.formatDate(airdate, this);
+        String formattedAirDate = DateUtil.formatDateLong(airdate, this);
         
         airdateText.setText(" " + formattedAirDate);
         
