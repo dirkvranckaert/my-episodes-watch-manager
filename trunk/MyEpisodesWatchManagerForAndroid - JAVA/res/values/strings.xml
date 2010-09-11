@@ -125,7 +125,17 @@
     <string name="watchListUnableToMarkWatched">Failed to mark this episode watched!\nCheck internet connection or refresh the list!</string>
 
     <string name="changelogTitle">What\'s changed</string>
-    <string name="changelogText">Version 1.6.0\n
+    <string name="changelogText">Version 1.6.1\n
+    ***********\n
+    New application logo\n
+    Change default language in settings\n
+    Supporting most custom date settings from myEpisodes.com config screen\n
+    Airdates now shown in the format of your language\n
+    Some code-optimalizations\n
+    No reload of data required when changing orientation\n
+    Application translated into Spanish\n
+    \n
+    Version 1.6.0\n
     ***********\n
     Full MyEpisodes.com mobile application including episodes to watch, episodes to aqcuire and upcoming episodes\n
     Fixed bug that some episodes where not listed\n

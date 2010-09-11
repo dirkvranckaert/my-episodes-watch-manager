@@ -125,7 +125,17 @@
     <string name="watchListUnableToMarkWatched">Kan deze episode niet markeren als gezien!\nKijk uw internetverbinding na of herlaad de lijst!</string>
 
     <string name="changelogTitle">Veranderingen</string>
-    <string name="changelogText">Versie 1.6.0\n
+    <string name="changelogText">Versie 1.6.1\n
+    ***********\n
+    Niew logo voor de applicatie\n
+    Pas de standaard-taal aan in de instellingen\n
+    Ondersteuning voor de meeste datum-instellingen uit het myEpisodes.com configuratiescherm\n
+    Uitzendatums van afleveringen worden nu getoond in het formaat van uw taal\n
+    Code-optimalisaties\n
+    Data wordt niet langer herladen bij het veranderen van de oriëntatie van het toestel\n
+    Applicatie vertaald naar Spaans\n
+    \n
+    Versie 1.6.0\n
     ***********\n
     Volledige MyEpisodes.com mobiele applicatie met afleveringen te bekijken, afleveringen te verkrijgen en aankomende afleveringen\n
     Het probleem dat sommige afleveringen niet in de lijst kwamen is opgelost\n
