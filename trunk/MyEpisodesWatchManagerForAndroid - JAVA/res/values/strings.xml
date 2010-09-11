@@ -82,7 +82,7 @@
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
 
     <!-- preferences Dialog -->
-    <string name="applyPreferences">Because settings are change, the episodes will be refreshed now!</string>
+    <string name="applyPreferences">Because settings are changed, the episodes will be refreshed now!</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Order of shows</string>
     <string-array name="showOrderOptions">
