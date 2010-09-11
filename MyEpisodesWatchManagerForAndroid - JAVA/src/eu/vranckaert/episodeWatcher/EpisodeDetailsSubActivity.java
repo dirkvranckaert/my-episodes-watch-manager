@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import eu.vranckaert.episodeWatcher.utils.DateUtil;
 
 public class EpisodeDetailsSubActivity extends Activity {
 	Episode episode = null;
@@ -45,8 +46,7 @@ public class EpisodeDetailsSubActivity extends Activity {
         if (airdate == null) {
         	airdate = new Date();
         }
-        DateFormat formatter = SimpleDateFormat.getDateInstance(DateFormat.SHORT);
-        String formattedAirDate = formatter.format(airdate);
+        String formattedAirDate = DateUtil.formatDate(airdate, this);
         
         airdateText.setText(" " + formattedAirDate);
         
