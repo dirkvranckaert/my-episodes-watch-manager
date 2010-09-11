@@ -522,16 +522,35 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     }
 
     private void markEpisodes(final int EpisodeStatus, final Episode episode) {
-		showDialog(EPISODE_LOADING_DIALOG);
-		markEpisode = new Runnable() {
-			@Override
-			public void run() {
-				markEpisode(EpisodeStatus, episode);
-			}
-		};
+        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
 
-		Thread thread =  new Thread(null, markEpisode, "EpisodeMarkWatchedBackground");
-		thread.start();
+            @Override
+            protected void onPreExecute() {
+                showDialog(EPISODE_LOADING_DIALOG);
+            }
+
+            @Override
+            protected Object doInBackground(Object... objects) {
+                markEpisode(EpisodeStatus, episode);
+                if (exceptionMessageResId == null && exceptionMessageResId.equals("")) {
+                    getEpisodes();
+                }
+                return 100L;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
+                    dismissDialog(EPISODE_LOADING_DIALOG);
+                    showDialog(EXCEPTION_DIALOG);
+                    exceptionMessageResId = null;
+                } else {
+                    returnEpisodes();
+                    dismissDialog(EPISODE_LOADING_DIALOG);
+                }
+            }
+        };
+        asyncTask.execute();
 	}
 
 	private void markEpisode(int EpisodeStatus, Episode episode) {
@@ -567,22 +586,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			Log.e(LOG_TAG, message, e);
 			exceptionMessageResId = R.string.defaultExceptionMessage;
 		}
-		runOnUiThread(delegateEpisodeReloading);
 	}
-
-	private Runnable delegateEpisodeReloading = new Runnable() {
-		@Override
-		public void run() {
-			dismissDialog(EPISODE_LOADING_DIALOG);
-
-			if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
-				showDialog(EXCEPTION_DIALOG);
-				exceptionMessageResId = null;
-			} else {
-				reloadEpisodes();
-			}
-		}
-	};
 
 	private void logout() {
 		tracker.trackEvent("Logout", "MenuButton-EpisodesWatchListActivity", "", 0);
