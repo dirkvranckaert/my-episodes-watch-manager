@@ -9,12 +9,23 @@
 
     <!-- login form -->
     <string name="loginFormTitle">Vul uw logingegevens voor de MyEpisodes.com hieronder in.</string>
+    <string name="loginFormRegister">Nieuwe gebruiker?</string>
     <string name="loginUsernameHint">Gebruikersnaam</string>
     <string name="loginPasswordHint">Wachtwoord</string>
     <string name="loginLoginBtn">Aanmelden</string>
     <string name="loginStartLogin">Bezig met aanmelen bij MyEpisodes.com</string>
     <string name="loginSuccessfullLogin">Aanmelden gelukt</string>
-    <string name="loginLoginFailed">Aanmelden bij MyEpisodes.com is mislukt. Kijk uw aanmeldingsgegevens en connectie met internet na vooraleer opnieuw te proberen!</string>
+    <string name="loginLoginFailed">Gebruikers of wachtwoord zijn niet juist, probeer opnieuw!</string>
+
+	<!-- register form -->
+    <string name="registerFormTitle">Registreer u hier. Vul alle gebruikersgegevens in en klik op registreer.</string>
+    <string name="registerUsernameHint">Gebruikersnaam</string>
+    <string name="registerPasswordHint">Wachtwoord</string>
+    <string name="registerEmailHint">Email</string>
+    <string name="registerBtn">Registreer</string>
+    <string name="registerStart">Gebruiker voor MyEpisodes.com aan het aanmaken.</string>
+    <string name="registerSuccessfull">Gebruiker met success aangemaakt!</string>
+    <string name="registerFailed">Deze gebruikersnaam wordt reeds gebruikt, gelieve een andere te kiezen.</string>	
 
     <!-- watchtlist -->
     <string name="watch">Te Bekijken</string>
@@ -71,7 +82,7 @@
     <string name="menuEpisodeMarkWatched">Markeer als bekeken</string>
 
     <!-- preferences Dialog -->
-    <string name="applyPreferences">Om de aanpassingen te kunnen doorvoeren dient u de applicatie te herstarten of de lijst van series en afleveringen te herladen</string>
+    <string name="applyPreferences">Door het aanpassen van de instellingen zullen de afleveringen nu herladen worden!</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Sortering series</string>
     <string-array name="showOrderOptions">
@@ -88,6 +99,17 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Automatisch aanmelden</string>
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Verander de taal</string>
+    <string-array name="showLanguageOptions">
+        <item>Engels</item>
+        <item>Spaans</item>
+        <item>Frans</item>
+        <item>Italiaans</item>
+        <item>Koreaans</item>
+        <item>Nederlands</item>
+        <item>Zweeds</item>
+    </string-array>
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>

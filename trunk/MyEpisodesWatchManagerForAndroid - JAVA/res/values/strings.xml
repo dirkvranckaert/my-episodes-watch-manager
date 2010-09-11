@@ -9,7 +9,7 @@
 
     <!-- login form -->
     <string name="loginFormTitle">Provide your user details for the MyEpisodes.com website below.</string>
-    <string name="loginFormRegister">No account? Click here!</string>
+    <string name="loginFormRegister">New user?</string>
     <string name="loginUsernameHint">Username</string>
     <string name="loginPasswordHint">Password</string>
     <string name="loginLoginBtn">Login</string>
