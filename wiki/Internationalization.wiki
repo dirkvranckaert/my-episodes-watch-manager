@@ -14,6 +14,8 @@
     * Daniel De Lica
   * French
     * Daniel De Luca
+  * Spanish
+    * Sergio Travieso
 
 == How To Translate ==
 As base for the translations of the languages listed above we provide an English i18n file. When something changes to the English translations file a mail will be sent out to the translators listed above. This mail will contain following information:
