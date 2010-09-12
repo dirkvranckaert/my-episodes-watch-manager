@@ -6,10 +6,15 @@ import java.util.List;
 public class Show {
 	private String showName;
 	private List<Episode> episodes = new ArrayList<Episode>(0);
+    private String myEpisodeID;
 
-	public Show(String showName)
-	{
+	public Show(String showName) {
 		this.showName = showName;
+	}
+
+    public Show(String showName, String myEpisodeID) {
+		this.showName = showName;
+        this.myEpisodeID = myEpisodeID;
 	}
 	
     /**
@@ -41,4 +46,12 @@ public class Show {
 	public int getNumberEpisodes() {
 		return episodes.size();
 	}
+
+    public String getMyEpisodeID() {
+        return myEpisodeID;
+    }
+
+    public void setMyEpisodeID(String myEpisodeID) {
+        this.myEpisodeID = myEpisodeID;
+    }
 }

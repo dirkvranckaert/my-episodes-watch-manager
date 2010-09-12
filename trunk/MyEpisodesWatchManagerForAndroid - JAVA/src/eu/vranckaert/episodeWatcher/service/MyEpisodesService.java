@@ -1,15 +1,9 @@
 package eu.vranckaert.episodeWatcher.service;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.UnknownHostException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.*;
-
+import android.util.Log;
 import eu.vranckaert.episodeWatcher.domain.*;
+import eu.vranckaert.episodeWatcher.exception.*;
+import eu.vranckaert.episodeWatcher.utils.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -20,16 +14,18 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-
-import android.util.Log;
-import eu.vranckaert.episodeWatcher.exception.FeedUrlBuildingFaildException;
-import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
-import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
-import eu.vranckaert.episodeWatcher.exception.RegisterFailedException;
-import eu.vranckaert.episodeWatcher.exception.PasswordEnctyptionFailedException;
-import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
-import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import org.pojava.datetime.DateTime;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class MyEpisodesService {
 	private static final String LOG_TAG = MyEpisodesService.class.getName();
@@ -56,16 +52,15 @@ public class MyEpisodesService {
     private static final String FEED_TITLE_SEPERATOR = " \\]\\[ ";
     private static final String SEASON_EPISODE_NUMBER_SEPERATOR = "x";
     private static final int FEED_TITLE_EPISODE_FIELDS = 4;
+    private static final String MYEPISODES_FORM_PARAM_ACTION = "action";
     private static final String MYEPISODES_REGISTER_PAGE = "http://www.myepisodes.com/register.php";
     private static final String MYEPISODES_REGISTER_PAGE_PARAM_USERNAME = "username";
     private static final String MYEPISODES_REGISTER_PAGE_PARAM_PASSWORD = "password";
     private static final String MYEPISODES_REGISTER_PAGE_PARAM_EMAIL = "user_email";
-    private static final String MYEPISODES_REGISTER_PAGE_PARAM_ACTION = "action";    
     private static final String MYEPISODES_REGISTER_PAGE_PARAM_ACTION_VALUE = "Register";
     private static final String MYEPISODES_LOGIN_PAGE = "http://www.myepisodes.com/login.php";
     private static final String MYEPISODES_LOGIN_PAGE_PARAM_USERNAME = "username";
     private static final String MYEPISODES_LOGIN_PAGE_PARAM_PASSWORD = "password";
-    private static final String MYEPISODES_LOGIN_PAGE_PARAM_ACTION = "action";
     private static final String MYEPISODES_LOGIN_PAGE_PARAM_ACTION_VALUE = "Login";
     private static final String MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT = "[ID]";
     private static final String MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT = "[S]";
@@ -82,6 +77,12 @@ public class MyEpisodesService {
     														"&season=" + MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT +
     														"&episode=" + MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT +
     														"&seen=" + MYEPISODES_UPDATE_PAGE_UNSEEN;
+    private static final String MYEPISODES_SEARCH_PAGE = "http://www.myepisodes.com/search.php";
+    private static final String MYEPISODES_SEARCH_PAGE_PARAM_SHOW = "tvshow";
+    private static final String MYEPISODES_SEARCH_PAGE_PARAM_ACTION_VALUE = "Search myepisodes.com";
+    private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_SEARCH_RESULTS = "Search results:";
+    private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TABLE_END_TAG = "</table>";
+    private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TD_START_TAG = "<td width=\"50%\"><a ";
 	
     public List<Episode> retrieveEpisodes(int episodesType,final User user) throws InternetConnectivityException, Exception {
         String encryptedPassword = encryptPassword(user.getPassword());
@@ -218,7 +219,7 @@ public class MyEpisodesService {
     	List <NameValuePair> nvps = new ArrayList <NameValuePair>();
         nvps.add(new BasicNameValuePair(MYEPISODES_LOGIN_PAGE_PARAM_USERNAME, username));
         nvps.add(new BasicNameValuePair(MYEPISODES_LOGIN_PAGE_PARAM_PASSWORD, password));
-        nvps.add(new BasicNameValuePair(MYEPISODES_LOGIN_PAGE_PARAM_ACTION, MYEPISODES_LOGIN_PAGE_PARAM_ACTION_VALUE));
+        nvps.add(new BasicNameValuePair(MYEPISODES_FORM_PARAM_ACTION, MYEPISODES_LOGIN_PAGE_PARAM_ACTION_VALUE));
 
         try {
 			post.setEntity(new UrlEncodedFormEntity(nvps));
@@ -267,7 +268,7 @@ public class MyEpisodesService {
         nvps.add(new BasicNameValuePair(MYEPISODES_REGISTER_PAGE_PARAM_USERNAME, username));
         nvps.add(new BasicNameValuePair(MYEPISODES_REGISTER_PAGE_PARAM_PASSWORD, password));
         nvps.add(new BasicNameValuePair(MYEPISODES_REGISTER_PAGE_PARAM_EMAIL, email));
-        nvps.add(new BasicNameValuePair(MYEPISODES_REGISTER_PAGE_PARAM_ACTION, MYEPISODES_REGISTER_PAGE_PARAM_ACTION_VALUE));
+        nvps.add(new BasicNameValuePair(MYEPISODES_FORM_PARAM_ACTION, MYEPISODES_REGISTER_PAGE_PARAM_ACTION_VALUE));
 
         try {
 			post.setEntity(new UrlEncodedFormEntity(nvps));
@@ -379,5 +380,85 @@ public class MyEpisodesService {
         }
         Log.d(LOG_TAG, "The encrypted password is " + encryptedPwd);
         return encryptedPwd;
+    }
+
+    public List<Show> searchEpisode(String search, User user) throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
+        HttpClient httpClient = new DefaultHttpClient();
+        String username = user.getUsername();
+        login(httpClient, username, user.getPassword());
+
+    	HttpPost post = new HttpPost(MYEPISODES_SEARCH_PAGE);
+
+    	List <NameValuePair> nvps = new ArrayList <NameValuePair>();
+        nvps.add(new BasicNameValuePair(MYEPISODES_SEARCH_PAGE_PARAM_SHOW, search));
+        nvps.add(new BasicNameValuePair(MYEPISODES_FORM_PARAM_ACTION, MYEPISODES_SEARCH_PAGE_PARAM_ACTION_VALUE));
+
+        try {
+			post.setEntity(new UrlEncodedFormEntity(nvps));
+		} catch (UnsupportedEncodingException e) {
+			String message = "Could not start search because the HTTP post encoding is not supported";
+			Log.e(LOG_TAG, message, e);
+			throw new UnsupportedHttpPostEncodingException(message, e);
+		}
+
+		String responsePage = "";
+        HttpResponse response;
+        try {
+            response = httpClient.execute(post);
+            responsePage = EntityUtils.toString(response.getEntity());
+        } catch (ClientProtocolException e) {
+            String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
+        } catch (UnknownHostException e) {
+			String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
+		} catch (IOException e) {
+            String message = "Search on MyEpisodes failed.";
+            Log.w(LOG_TAG, message, e);
+            throw new LoginFailedException(message, e);
+        }
+
+        List<Show> shows = extractSearchResults(responsePage);
+
+        Log.d(LOG_TAG, shows.size() + " shows found for search value " + search);
+
+        return shows;
+    }
+
+    /**
+     * Extract a list of shows from the MyEpisodes.com HTML output!
+     * @param html The MyEpisodes.com HTML output
+     * @return A List of {@link eu.vranckaert.episodeWatcher.domain.Show} instances.
+     */
+    private List<Show> extractSearchResults(String html) {
+        List<Show> shows = new ArrayList<Show>();
+        String[] split = html.split(MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_SEARCH_RESULTS);
+        if(split.length == 2) {
+            split = split[1].split(MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TABLE_END_TAG);
+            if(split.length > 0) {
+                split = split[0].split(MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TD_START_TAG);
+                for(int i=0; i<split.length; i++) {
+                    if(i>0) {
+                        String showName = "";
+                        String showId = "";
+
+                        String htmlPart = split[i];
+                        htmlPart = htmlPart.replace("href=\"views.php?type=epsbyshow&showid=", "");
+                        //Get the showid
+                        String showSeperator = "\">";
+                        int showIdSeperatorIndex = StringUtils.indexOf(htmlPart, showSeperator);
+                        showId = htmlPart.substring(0, showIdSeperatorIndex);
+                        htmlPart = htmlPart.replace(showId + showSeperator, "");
+                        //Get the showName
+                        showName = htmlPart.substring(0, StringUtils.indexOf(htmlPart, "</a></td>"));
+
+                        shows.add(new Show(showName, showId));
+                    }
+                }
+            }
+        }
+        return shows;
     }
 }
