@@ -6,7 +6,7 @@
 == Release management ==
 === Scheduled releases ===
 ====Version 1.6.1====
-Scheduled Release Date: 17th September 2010<br>
+Scheduled Release Date: 14th September 2010<br>
 Content: Features, Bugfixes, Stability fixes
   * Issue 55 (Lines between tv show on WVGA800)
   * Issue 61 (Change language in settings)
