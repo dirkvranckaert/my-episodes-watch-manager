@@ -1,25 +1,22 @@
 package eu.vranckaert.episodeWatcher.service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.UnknownHostException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
+import android.util.Log;
 import eu.vranckaert.episodeWatcher.domain.Feed;
 import eu.vranckaert.episodeWatcher.domain.FeedItem;
 import eu.vranckaert.episodeWatcher.exception.FeedUrlParsingException;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.RssFeedParserException;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
-import android.util.Log;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.UnknownHostException;
 
 public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
 	private static final String LOG_TAG = "SaxRssFeedParser";
@@ -92,7 +89,7 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
             item.setLink(nodeValue.toString());
         }
         if (inItem && localName.equals("description")) {
-            item.setDescription(""); //TODO check why only the char '<' is placed in the description (something with html in the RSS feed!)
+            item.setDescription("");
         }
     }
 
