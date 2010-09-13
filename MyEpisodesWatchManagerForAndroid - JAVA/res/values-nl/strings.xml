@@ -15,7 +15,7 @@
     <string name="loginLoginBtn">Aanmelden</string>
     <string name="loginStartLogin">Bezig met aanmelen bij MyEpisodes.com</string>
     <string name="loginSuccessfullLogin">Aanmelden gelukt</string>
-    <string name="loginLoginFailed">Gebruikers of wachtwoord zijn niet juist, probeer opnieuw!</string>
+    <string name="loginLoginFailed">Gebruikersnaam of wachtwoord zijn niet juist, probeer opnieuw!</string>
 
 	<!-- register form -->
     <string name="registerFormTitle">Registreer u hier. Vul alle gebruikersgegevens in en klik op registreer.</string>
