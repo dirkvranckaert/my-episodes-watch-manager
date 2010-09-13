@@ -1,13 +1,7 @@
 #summary Screenshots
 
 == Screenshots september 13th @ 11:00 PM ==
-http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2245.png http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2248-00.png
-http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2285-01.png http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2248-02.png
-http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2250-00.png http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2250-01.png
-http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2250-02.png http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2251-00.png
-http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2251-01.png http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2251-02.png
-http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2251-03.png http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2252.png
-http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2254.png
+http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/
 
 == Screenshots august 17th @ 09:00 AM ==
 http://img836.imageshack.us/img836/4104/device1c.png
