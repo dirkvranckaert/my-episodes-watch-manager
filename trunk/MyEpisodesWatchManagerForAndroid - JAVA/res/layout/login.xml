@@ -61,7 +61,6 @@
 		android:paddingRight="15px"
 		android:textSize="12px"
 		android:gravity="right"
-		android:visibility="invisible"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:text="@string/loginFormRegister"
