@@ -9,13 +9,24 @@
 
     <!-- login form -->
     <string name="loginFormTitle">Por favor, indica tus datos de usuarios de Myepisodes.com.</string>
-    <string name="loginUsernameHint">Nombre de usuario</string>
+     <string name="loginFormRegister">¿Aún no eres usuario?</string>
+	<string name="loginUsernameHint">Nombre de usuario</string>
     <string name="loginPasswordHint">Contraseña</string>
     <string name="loginLoginBtn">Acceder</string>
     <string name="loginStartLogin">Accediendo a MyEpisodes.com</string>
     <string name="loginSuccessfullLogin">Acceso correcto</string>
-    <string name="loginLoginFailed">No se ha podido acceder a MyEpisodes.com, por favor comprueba tu conexión a Internet y los datos de acceso para volver a intentarlo</string>
-
+    <string name="loginLoginFailed">Usuario o contraseña incorrectos. Por favor, prueba de nuevo</string>
+  
+	<!-- register form -->
+    <string name="registerFormTitle">Regístrate aquí. Rellena todos tus datos de usuarop y haz click en Registrar.</string>
+    <string name="registerUsernameHint">Uusario</string>
+    <string name="registerPasswordHint">Contraseña</string>
+    <string name="registerEmailHint">Email</string>
+    <string name="registerBtn">Registrar</string>
+    <string name="registerStart">Creando usario para MyEpisodes.com</string>
+    <string name="registerSuccessfull">¡Usuario creado con éxito!</string>
+    <string name="registerFailed">El nombre de usuario ya existe. Pro favor, elige otro.</string>	
+		
     <!-- watchtlist -->
     <string name="watch">Por ver</string>
     <string name="acquire">Por adquirir</string>
@@ -44,6 +55,7 @@
     * Fredrik Nohrborg (Sueco)\n
     * Daniel De Luca (Francés, Italiano)\n
     * Hyeon Tae Jeon (Coreano)\n
+	* Sergio Travieso (Spanish)\n
     Licencia: GNU GPL V3 License\n
     Website del proyecto: http://code.google.com/p/my-episodes-watch-manager\n
     Contacto del proyecto: dirkvranckaert@gmail.com\n
@@ -70,7 +82,7 @@
     <string name="menuEpisodeMarkWatched">Marcar como Visto</string>
 
     <!-- preferences Dialog -->
-    <string name="applyPreferences">Para aplicar las preferencias, reinicia la aplicación o recarga la lista de series y capítulos</string>
+    <string name="applyPreferences">Las preferencias se han cambiado. La lista de episodios se recargará ahora.</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Orden de las series</string>
     <string-array name="showOrderOptions">
@@ -87,8 +99,19 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Guardar contraseña</string>
-
-    <!-- Basic Dialog -->
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Cambiar el idioma</string>
+    <string-array name="showLanguageOptions">
+        <item>Inglés</item>
+        <item>Español</item>
+        <item>Francés</item>
+        <item>Italiano</item>
+        <item>Coreano</item>
+        <item>Alemán</item>
+        <item>Sueco</item>
+    </string-array>
+	
+	<!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
 
     <!-- Exception handling for dialogs -->
@@ -102,7 +125,17 @@
     <string name="watchListUnableToMarkWatched">¡Error al marcar este capítulo como Visto! \nComprueba tu conexión a Internet o recarga la lista</string>
 
     <string name="changelogTitle">Qué ha cambiado</string>
-    <string name="changelogText">Versión 1.6.0\n
+    <string name="changelogText">Versión 1.6.1\n
+    ***********\n
+    Nuevo logo\n
+    Posibilidad de cambiar el idioma en ajustes\n
+    Se soporta la mayoría de los ajustes de fecha de la pantalla de configuración de myEpisodes.com\n
+    Las fechas de lanzamiento de las series ahora aparecen en el formato de tu idioma\n
+    Algunas mejoras de código\n
+    No se recargan los datos cuando se cambia la orientación\n
+    Aplicación traducida al Español\n
+    \n
+    Version 1.6.0\n
     ***********\n
     Aplicación móvil completa de MyEpisodes.com, incluyendo capítulos por ver, por adquirir y futuros capítulos\n
     Arreglado el fallo por el que algunos capítulos no se listaban\n
@@ -168,19 +201,4 @@
     ***********\n
     Solucionados fallos de conexión de red\n
     Añadidos detalles de formateo de fechas en capítulos</string>
-
-    <!-- The tags beneath may never be translated or will cause an application failure!!! -->
-    <!-- The tags shouldn't even be copied to the other translation files. -->
-    <!-- Application Name -->
-    <string name="app_name">MyEpisodes Manager</string>    
-    <!-- Preferences -->
-    <string-array name="showOrderOptionsValues">
-        <item>show_myepisodes_default_sort</item>
-        <item>show_ascending_sort</item>
-        <item>show_descending_sort</item>
-    </string-array>
-    <string-array name="episodeOrderOptionsValues">
-        <item>oldest_on_top</item>
-        <item>newest_on_top</item>
-    </string-array>
 </resources>

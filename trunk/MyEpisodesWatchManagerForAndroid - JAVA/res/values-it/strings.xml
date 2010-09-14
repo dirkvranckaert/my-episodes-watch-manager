@@ -9,12 +9,23 @@
 
     <!-- login form -->
     <string name="loginFormTitle">Fornire i vostri dati utente di MyEpisodes.com qui sotto.</string>
+    <string name="loginFormRegister">Nuovo utente?</string>
     <string name="loginUsernameHint">Utente</string>
     <string name="loginPasswordHint">Password</string>
     <string name="loginLoginBtn">Entra</string>
     <string name="loginStartLogin">Entrando su MyEpisodes.com</string>
     <string name="loginSuccessfullLogin">Utente riconosciuto</string>
-    <string name="loginLoginFailed">Errore entrando su MyEpisodes.com, controllare i dati utente e il collegamento a Internet prima di ripristinare !</string>
+    <string name="loginLoginFailed">Utente o password sbagliato. Prova di nuovo !</string>
+
+    <!-- register form -->
+    <string name="registerFormTitle">Registrati qui, compila il modulo poi scegliere registrati.</string>
+    <string name="registerUsernameHint">Utente</string>
+    <string name="registerPasswordHint">Password</string>
+    <string name="registerEmailHint">Email</string>
+    <string name="registerBtn">Registrati</string>
+    <string name="registerStart">Creare utente per MyEpisodes.com</string>
+    <string name="registerSuccessfull">Utente creato!</string>
+    <string name="registerFailed">Utente già esistente, si prega di scegliere un altro utente.</string>	
 
     <!-- watchtlist -->
     <string name="watch">Guardare</string>
@@ -44,6 +55,7 @@
     * Fredrik Nohrborg (Svedese)\n
     * Daniel De Luca (Francese, Italiano)\n
     * Hyeon Tae Jeon (Coreano)\n
+    * Sergio Travieso (Spagnolo)\n
     Licenza: GNU GPL V3 License\n
     Sito Internet del progetto: http://code.google.com/p/my-episodes-watch-manager\n
     Contatto del progetto: dirkvranckaert@gmail.com\n
@@ -70,7 +82,7 @@
     <string name="menuEpisodeMarkWatched">Contrassegna guardato</string>
 
     <!-- preferences Dialog -->
-    <string name="applyPreferences">Per usare le preferenze ripristina l\'applicazione o ricarica la lista delle serie e degli episodi</string>
+    <string name="applyPreferences">Impostazioni cambiate, episodi verrano ripristinati</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Ordine delle serie</string>
     <string-array name="showOrderOptions">
@@ -87,6 +99,18 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Registrare la password</string>
+
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Cambiare di lingua</string>
+    <string-array name="showLanguageOptions">
+        <item>Inglese</item>
+        <item>Coreano</item>
+        <item>Spagnolo</item>
+        <item>Francese</item>
+        <item>Italiano</item>
+        <item>Hollandese</item>
+        <item>Svedese</item>
+    </string-array>
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
@@ -105,7 +129,17 @@
 
     <!-- changelogDialog -->
     <string name="changelogTitle">Che cosa è cambiato</string>
-    <string name="changelogText">Version 1.6.0\n
+    <string name="changelogText">Version 1.6.1\n
+    ***********\n
+    Nuovo logo applicativo\n
+    Cambiare la lingua di base nelle impostazioni\n
+    Sopporto impostazioni di myEpisodes.com riguardando le impostazioni delle date\n
+    Data di trasmissione nella disposizione della lingua\n
+    Ottimalizzazioni del codice\n
+    Nessuna ricarica di dati durante il cambiamento dell'orientamento\n
+    Traduzione spagnola\n
+    \n
+    Version 1.6.0\n
     ***********\n
     Applicazione mobile MyEpisodes.com incluendo episodi da guardare, da acquistare, ed episodi a venire\n
     Risoluzione problema : Episodi non riferiti nelle liste\n
