@@ -18,7 +18,7 @@
     <string name="loginLoginFailed">Fel användarnamn eller lösenord, försök igen!</string>
     
 	<!-- register form -->
-    <string name="loginLoginFailed">Kunde inte logga in på MyEpisodes.com, kontrollera nätverksanslutning och inloggningsuppgifter!</string>
+    <string name="registerFormTitle">Register here, fill in all your user details and click on register.</string><!-- TODO Translate -->
     <string name="registerUsernameHint">Användarnamn</string>
     <string name="registerPasswordHint">Lösenord</string>
     <string name="registerEmailHint">Email</string>
