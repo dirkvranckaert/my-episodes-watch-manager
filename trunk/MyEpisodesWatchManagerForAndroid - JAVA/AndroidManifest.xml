@@ -5,6 +5,7 @@
       android:versionCode="19"
       android:versionName="1.7.0-NightlyBuild">
     <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <!-- Comment the line above and uncomment the line beneath in order to create a nightlyBuild -->
     <!--<application android:icon="@drawable/icon" android:label="MyEpisodesManager-NightlyBuild">-->
         <activity android:name=".TabMain"
                   android:label="@string/app_name"
