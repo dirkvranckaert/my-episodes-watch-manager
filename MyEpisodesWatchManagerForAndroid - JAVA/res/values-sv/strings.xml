@@ -9,12 +9,23 @@
 
     <!-- login form -->
     <string name="loginFormTitle">Ange inloggningsuppgifter för MyEpisodes.com.</string>
+    <string name="loginFormRegister">Ny användare?</string>
     <string name="loginUsernameHint">Användarnamn</string>
     <string name="loginPasswordHint">Lösenord</string>
     <string name="loginLoginBtn">Inloggning</string>
     <string name="loginStartLogin">Loggar in på MyEpisodes.com</string>
     <string name="loginSuccessfullLogin">Inloggningen lyckades</string>
+    <string name="loginLoginFailed">Fel användarnamn eller lösenord, försök igen!</string>
+    
+	<!-- register form -->
     <string name="loginLoginFailed">Kunde inte logga in på MyEpisodes.com, kontrollera nätverksanslutning och inloggningsuppgifter!</string>
+    <string name="registerUsernameHint">Användarnamn</string>
+    <string name="registerPasswordHint">Lösenord</string>
+    <string name="registerEmailHint">Email</string>
+    <string name="registerBtn">Regitrera</string>
+    <string name="registerStart">Skapar användarnamn för MyEpisodes.com</string>
+    <string name="registerSuccessfull">Användarnamn skapat!</string>
+    <string name="registerFailed">Användarnamnet upptaget, vänligen välj ett annat.</string>	
 
     <!-- watchtlist -->
     <string name="watch">Se</string>
@@ -44,6 +55,7 @@
     * Fredrik Nohrborg (Svenska)\n
     * Daniel De Luca (Franska, Italienska)\n
     * Hyeon Tae Jeon (Koreanska)\n
+    * Sergio Travieso (Spanska)\n
     Lisens: GNU GPL V3 License\n
     Projekt websida: http://code.google.com/p/my-episodes-watch-manager\n
     Projekt kontakt: dirkvranckaert@gmail.com\n
@@ -87,6 +99,17 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Lagra lösenord</string>
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Ändra språk</string>
+    <string-array name="showLanguageOptions">
+        <item>Engelska</item>
+        <item>Spanska</item>
+        <item>Franska</item>
+        <item>Italienska</item>
+        <item>Koreanska</item>
+        <item>Holländska</item>
+        <item>Svenska</item>
+    </string-array>
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
@@ -102,7 +125,17 @@
     <string name="watchListUnableToMarkWatched">Misslyckades att markera avsnitt som sett!\nKontrollera nätverksanslutning eller uppdatera listan!</string>
 
     <string name="changelogTitle">Ändringar</string>
-    <string name="changelogText">Version 1.6.0\n
+    <string name="changelogText">Version 1.6.1\n
+    ***********\n
+    Ny logo\n
+    Ändra språk i inställningarna\n
+    Stöd för de flesta användardefinierade datumformat i myEpisodes.com config\n
+    Datum visas nu i språkets format\n
+    Kodoptimering\n
+    Behöver inte ladda om data vid ändrad skärmorientering\n
+    Spansk översättning\n
+    \n
+    Version 1.6.0\n
     ***********\n
     Full MyEpisodes.com mobil app - markera avsnitt som "Sett"/"Hämtat" och se framtida avsnitt\n
     Bug fixad vissa avsnitt visades inte i listan\n
