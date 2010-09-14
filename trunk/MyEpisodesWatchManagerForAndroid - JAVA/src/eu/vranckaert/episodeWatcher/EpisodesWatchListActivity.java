@@ -1,20 +1,5 @@
 package eu.vranckaert.episodeWatcher;
 
-import java.util.*;
-
-import android.os.AsyncTask;
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
-import eu.vranckaert.episodeWatcher.domain.*;
-import eu.vranckaert.episodeWatcher.exception.FeedUrlParsingException;
-import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
-import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
-import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
-import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
-import eu.vranckaert.episodeWatcher.preferences.Preferences;
-import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
-
-import eu.vranckaert.episodeWatcher.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ExpandableListActivity;
@@ -22,20 +7,24 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+import eu.vranckaert.episodeWatcher.domain.*;
+import eu.vranckaert.episodeWatcher.exception.*;
+import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
+import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
+
+import java.util.*;
 
 public class EpisodesWatchListActivity extends ExpandableListActivity {
 	private static final int LOGIN_REQUEST_CODE = 0;
@@ -532,7 +521,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
             @Override
             protected Object doInBackground(Object... objects) {
                 markEpisode(EpisodeStatus, episode);
-                if (exceptionMessageResId == null && exceptionMessageResId.equals("")) {
+                if (exceptionMessageResId == null || exceptionMessageResId.equals("")) {
                     getEpisodes();
                 }
                 return 100L;
