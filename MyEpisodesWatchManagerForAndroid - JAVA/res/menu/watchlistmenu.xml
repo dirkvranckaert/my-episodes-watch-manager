@@ -1,5 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/refresh" android:title="@string/refresh" android:enabled="true" android:visible="true" android:icon="@drawable/menu_refresh"/>
+    <item android:id="@+id/manageEpisodes" android:title="@string/manageEpisodes" android:enabled="true" android:visible="true" android:icon="@android:drawable/ic_menu_edit"/>
     <item android:id="@+id/preferences" android:title="@string/preferences" android:enabled="true" android:visible="true" android:icon="@android:drawable/ic_menu_preferences"/>
 	<item android:id="@+id/logout" android:title="@string/logout" android:enabled="true" android:visible="true" android:icon="@drawable/menu_logout"/>
 	<item android:id="@+id/changelog" android:title="@string/changelog" android:enabled="true" android:visible="true" android:icon="@drawable/menu_show_list"/>
