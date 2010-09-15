@@ -69,6 +69,7 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Refresh</string>
+    <string name="manageEpisodes">Manage Episodes</string>
     <string name="about">About</string>
     <string name="logout">Logout</string>
     <string name="changelog">What\'s changed</string>
