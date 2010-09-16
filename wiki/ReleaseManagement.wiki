@@ -28,6 +28,7 @@ Content: Features, Bugfixes
   * Issue 76 (Mark all episodes of a show as watched or acquired)
   * Issue 77 (Loading dialogs on login and register)
   * Issue 78 (Error messages in dialogs for login and register instead of Toast messages)
+  * Issue 85 (Default tab preference)
 
 === Market Releases ===
 ====Version 1.6.0====
