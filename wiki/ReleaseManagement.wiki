@@ -5,18 +5,6 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
-====Version 1.6.1====
-Scheduled Release Date: 14th September 2010<br>
-Content: Features, Bugfixes, Stability fixes
-  * Issue 55 (Lines between tv show on WVGA800)
-  * Issue 61 (Change language in settings)
-  * Issue 65 (Date not correct)
-  * Issue 68 (Spanish translations)
-  * Issue 70 (Application failure after login)
-  * Issue 71 (Date Format)
-  * Issue 72 (Better way of showing the loading dialogs)
-  * Issue 73 (Do not reload data when changing oriëntation)
-  * Issue 75 (New application logo)
 ====Version 1.7.0====
 Scheduled Release Date: 15th November 2010<br>
 Content: Features, Bugfixes
@@ -31,6 +19,18 @@ Content: Features, Bugfixes
   * Issue 85 (Default tab preference)
 
 === Market Releases ===
+====Version 1.6.1====
+Release Date: 14th September 2010<br>
+  * Issue 55 (Lines between tv show on WVGA800)
+  * Issue 61 (Change language in settings)
+  * Issue 65 (Date not correct)
+  * Issue 68 (Spanish translations)
+  * Issue 70 (Application failure after login)
+  * Issue 71 (Date Format)
+  * Issue 72 (Better way of showing the loading dialogs)
+  * Issue 73 (Do not reload data when changing oriëntation)
+  * Issue 75 (New application logo)
+
 ====Version 1.6.0====
 Release Date: 28th July 2010<br>
   * Issue 52 (Tabs for episodes list)
