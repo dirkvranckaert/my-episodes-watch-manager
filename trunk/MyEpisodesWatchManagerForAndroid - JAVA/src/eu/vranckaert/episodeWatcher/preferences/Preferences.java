@@ -55,4 +55,9 @@ public class Preferences {
             setPreference(ac, key, defaultValue);
         }
     }
+
+    public static int getPreferenceInt(Activity ac, String key) {
+        String result = getSharedPreferences(ac).getString(key, "0");
+        return Integer.parseInt(result);
+    }
 }

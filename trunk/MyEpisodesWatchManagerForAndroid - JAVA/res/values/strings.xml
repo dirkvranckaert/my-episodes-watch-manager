@@ -98,6 +98,14 @@
         <item>Oldest first</item>
         <item>Newest first</item>
     </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Default tab to open</string>
+    <string name="openDefaultPromptExtra">Default tab to select when opening the application</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Watch</item>
+            <item>Acquire</item>
+            <item>Coming</item>
+    </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Store password</string>
     <!-- Change Language -->
@@ -216,6 +224,11 @@
     <string-array name="episodeOrderOptionsValues">
         <item>oldest_on_top</item>
         <item>newest_on_top</item>
+    </string-array>
+    <string-array name="openDefaultTabValues">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
     </string-array>
     <string-array name="showLanguageOptionsValues">
         <item>en</item>
