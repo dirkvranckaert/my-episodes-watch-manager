@@ -5,12 +5,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
+import android.preference.*;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -92,6 +88,15 @@ public class PreferencesActivity extends PreferenceActivity {
         episodeOrderingPref.setEntries(R.array.episodeOrderOptions);
         episodeOrderingPref.setEntryValues(R.array.episodeOrderOptionsValues);
         root.addPreference(episodeOrderingPref);
+
+        ListPreference openDefaultTabPref = new ListPreference(this);
+        openDefaultTabPref.setKey(PreferencesKeys.OPEN_DEFAULT_TAB_KEY);
+        openDefaultTabPref.setTitle(R.string.openDefaultPrompt);
+        openDefaultTabPref.setSummary(R.string.openDefaultPromptExtra);
+        openDefaultTabPref.setEntries(R.array.openDefaultTabOptions);
+        openDefaultTabPref.setEntryValues(R.array.openDefaultTabValues);
+        openDefaultTabPref.setDefaultValue("0");
+        root.addPreference(openDefaultTabPref);
         
         ListPreference showLanguagePref = new ListPreference(this);
         showLanguagePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -122,7 +127,7 @@ public class PreferencesActivity extends PreferenceActivity {
 					   .setPositiveButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				                dialog.cancel();
-				                StartTabMain();
+				                startTabMain();
 				           }
 				       });
 				dialog = builder.create();
@@ -152,7 +157,7 @@ public class PreferencesActivity extends PreferenceActivity {
     	super.finish();
     }
     
-    private void StartTabMain() {
+    private void startTabMain() {
     	super.finish();
     	Intent mainActivity = new Intent(this.getApplicationContext(), TabMain.class);
     	mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 

@@ -1,14 +1,14 @@
 package eu.vranckaert.episodeWatcher;
 
-import java.util.Locale;
-
-import eu.vranckaert.episodeWatcher.preferences.Preferences;
-import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
+import eu.vranckaert.episodeWatcher.preferences.Preferences;
+import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
+
+import java.util.Locale;
 
 public class TabMain extends TabActivity {
 	private TabHost tabHost;
@@ -61,9 +61,8 @@ public class TabMain extends TabActivity {
         			  .setContent(intentComing);
         tabHost.addTab(spec);
         
-        //tabHost.setCurrentTab(2);
-        //tabHost.setCurrentTab(1);
-        tabHost.setCurrentTab(0);
+        int preferedTab = Preferences.getPreferenceInt(this, PreferencesKeys.OPEN_DEFAULT_TAB_KEY);
+        tabHost.setCurrentTab(preferedTab);
     }
     
     public void clearRefreshTab(int episodesType)
