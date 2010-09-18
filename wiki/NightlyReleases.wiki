@@ -1,4 +1,5 @@
 #summary Nightly/unstable releases
+#labels Deprecated
 
 =Nightly Releases=
 *Version 0.2.1*
