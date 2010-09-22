@@ -77,12 +77,14 @@ public class MyEpisodesService {
     														"&season=" + MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT +
     														"&episode=" + MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT +
     														"&seen=" + MYEPISODES_UPDATE_PAGE_UNSEEN;
+
     private static final String MYEPISODES_SEARCH_PAGE = "http://www.myepisodes.com/search.php";
     private static final String MYEPISODES_SEARCH_PAGE_PARAM_SHOW = "tvshow";
     private static final String MYEPISODES_SEARCH_PAGE_PARAM_ACTION_VALUE = "Search myepisodes.com";
     private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_SEARCH_RESULTS = "Search results:";
     private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TABLE_END_TAG = "</table>";
     private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TD_START_TAG = "<td width=\"50%\"><a ";
+    private static final String MYEPISODES_FAVO_IGNORE_PAGE = "http://myepisodes.com/shows.php";
 	
     public List<Episode> retrieveEpisodes(int episodesType,final User user) throws InternetConnectivityException, Exception {
         String encryptedPassword = encryptPassword(user.getPassword());
@@ -382,7 +384,7 @@ public class MyEpisodesService {
         return encryptedPwd;
     }
 
-    public List<Show> searchEpisode(String search, User user) throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
+    public List<Show> searchShows(String search, User user) throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
         HttpClient httpClient = new DefaultHttpClient();
         String username = user.getUsername();
         login(httpClient, username, user.getPassword());
@@ -434,6 +436,9 @@ public class MyEpisodesService {
      */
     private List<Show> extractSearchResults(String html) {
         List<Show> shows = new ArrayList<Show>();
+        if(html.contains("No results found.")) {
+            return shows;
+        }
         String[] split = html.split(MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_SEARCH_RESULTS);
         if(split.length == 2) {
             split = split[1].split(MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TABLE_END_TAG);
@@ -461,4 +466,34 @@ public class MyEpisodesService {
         }
         return shows;
     }
+
+    //TODO uncomment and test further!!!
+//    public void getFavoriteShows(User user) throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
+//        HttpClient httpClient = new DefaultHttpClient();
+//        String username = user.getUsername();
+//        login(httpClient, username, user.getPassword());
+//
+//        HttpGet get = new HttpGet(MYEPISODES_FAVO_IGNORE_PAGE);
+////        HttpParams params = .getDefaultParams();
+////        get.setParams();
+//
+//		String responsePage = "";
+//        HttpResponse response;
+//        try {
+//            response = httpClient.execute(get);
+//            responsePage = EntityUtils.toString(response.getEntity());
+//        } catch (ClientProtocolException e) {
+//            String message = "Could not connect to host.";
+//			Log.e(LOG_TAG, message, e);
+//			throw new InternetConnectivityException(message, e);
+//        } catch (UnknownHostException e) {
+//			String message = "Could not connect to host.";
+//			Log.e(LOG_TAG, message, e);
+//			throw new InternetConnectivityException(message, e);
+//		} catch (IOException e) {
+//            String message = "Search on MyEpisodes failed.";
+//            Log.w(LOG_TAG, message, e);
+//            throw new LoginFailedException(message, e);
+//        }
+//    }
 }

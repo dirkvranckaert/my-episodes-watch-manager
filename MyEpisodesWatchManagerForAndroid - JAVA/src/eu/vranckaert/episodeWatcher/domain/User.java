@@ -1,6 +1,8 @@
 package eu.vranckaert.episodeWatcher.domain;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 	public static final String USERNAME = "USERNAME";
 	public static final String PASSWORD = "PASSWORD";
 	

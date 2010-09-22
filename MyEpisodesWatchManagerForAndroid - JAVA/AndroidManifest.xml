@@ -30,7 +30,14 @@
                   android:configChanges="orientation|keyboardHidden"
                   android:label="@string/preferences"
                   android:theme="@android:style/Theme.Light"/>
-
+        <activity android:name=".ManageActivity"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:label="@string/manageShows"
+                  android:theme="@android:style/Theme.Light"/>
+        <activity android:name=".ShowSearchActivity"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:theme="@android:style/Theme.Light">
+        </activity>
     </application>
     <uses-sdk android:minSdkVersion="4" />
     
