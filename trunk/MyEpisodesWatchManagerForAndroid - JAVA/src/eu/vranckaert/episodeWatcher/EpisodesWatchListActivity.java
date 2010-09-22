@@ -44,7 +44,6 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     private TextView Title;
     private TextView subTitle;
     private SimpleExpandableListAdapter episodeAdapter;
-    private Runnable markEpisode;
     private Integer exceptionMessageResId = null;
     private int episodesType;
 	private Resources res; // Resource object to get Drawables
@@ -185,6 +184,9 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		switch(item.getItemId()) {
             case R.id.refresh:
                 reloadEpisodes();
+                return true;
+            case R.id.manageShows:
+                openManageShowsActivity();
                 return true;
             case R.id.preferences:
                 openPreferencesActivity();
@@ -341,6 +343,12 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         tracker.trackPageView("/generalPreferences");
         Intent preferencesActivity = new Intent(this.getApplicationContext(), PreferencesActivity.class);
         startActivity(preferencesActivity);
+    }
+
+    private void openManageShowsActivity() {
+        //tracker.trackPageView("/manageShows"); //TODO enable tracking
+        Intent manageShowsActivity = new Intent(this.getApplicationContext(), ManageActivity.class);
+        startActivity(manageShowsActivity);
     }
 
 	private void openEpisodeDetails(Episode episode, int episodesType2) {
