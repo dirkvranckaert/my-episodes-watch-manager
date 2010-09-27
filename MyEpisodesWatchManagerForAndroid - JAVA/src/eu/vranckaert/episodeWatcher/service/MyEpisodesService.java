@@ -84,6 +84,7 @@ public class MyEpisodesService {
     private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_SEARCH_RESULTS = "Search results:";
     private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TABLE_END_TAG = "</table>";
     private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TD_START_TAG = "<td width=\"50%\"><a ";
+    private static final String MYEPISODES_ADD_SHOW_PAGE = "http://myepisodes.com/views.php?type=manageshow&mode=add&showid=";
     private static final String MYEPISODES_FAVO_IGNORE_PAGE = "http://myepisodes.com/shows.php";
 	
     public List<Episode> retrieveEpisodes(int episodesType,final User user) throws InternetConnectivityException, Exception {
@@ -154,7 +155,7 @@ public class MyEpisodesService {
 		markAnEpisode(1, httpClient, episode);
 		
 		httpClient.getConnectionManager().shutdown();
-		}
+	}
     
     private void markAnEpisode(int EpisodeStatus, HttpClient httpClient, Episode episode) throws ShowUpdateFailedException, InternetConnectivityException {
     	String urlRep = "";
@@ -420,6 +421,8 @@ public class MyEpisodesService {
             String message = "Search on MyEpisodes failed.";
             Log.w(LOG_TAG, message, e);
             throw new LoginFailedException(message, e);
+        } finally {
+            httpClient.getConnectionManager().shutdown();
         }
 
         List<Show> shows = extractSearchResults(responsePage);
@@ -465,6 +468,50 @@ public class MyEpisodesService {
             }
         }
         return shows;
+    }
+
+    public void addShow(String myEpsidodesShowId, User user) throws InternetConnectivityException, LoginFailedException, UnsupportedHttpPostEncodingException, ShowAddFailedException {
+        Log.d(LOG_TAG, "SHWOID: " + myEpsidodesShowId);
+
+        String url0 = "http://myepisodes.com/views.php?type=epsbyshow&showid=" + myEpsidodesShowId;
+        String url = MYEPISODES_ADD_SHOW_PAGE + myEpsidodesShowId + "&page=L3ZpZXdzLnBocD90eXBlPWVwc2J5c2hvdyZzaG93aWQ9MjU5MQ==";
+
+        Log.d(LOG_TAG, "Username: " + user.getUsername() + ", password: " + user.getPassword());
+
+        HttpClient httpClient = new DefaultHttpClient();
+        boolean login = login(httpClient, user.getUsername(), user.getPassword());
+
+        HttpGet get0 = new HttpGet(url0);
+        HttpGet get = new HttpGet(url);
+
+
+        int status = 200;
+
+        try {
+            HttpResponse response0 = httpClient.execute(get0);
+        	HttpResponse response = httpClient.execute(get);
+            String html = EntityUtils.toString(response.getEntity());
+            Log.d(LOG_TAG, "HTML: " + html);
+        	status = response.getStatusLine().getStatusCode();
+        } catch (UnknownHostException e) {
+			String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
+		} catch (IOException e) {
+            String message = "Adding the show status failed for URL " + url;
+            Log.w(LOG_TAG, message, e);
+            throw new ShowAddFailedException(message, e);
+        } finally {
+            httpClient.getConnectionManager().shutdown();
+        }
+
+        if (status != 200) {
+            String message = "Adding the show status failed with status code " + status + " for URL " + url;
+            Log.w(LOG_TAG, message);
+            throw new ShowAddFailedException(message);
+        } else {
+            Log.i(LOG_TAG, "Successfully added the show from url " + url + " (" + myEpsidodesShowId + ")");
+        }
     }
 
     //TODO uncomment and test further!!!

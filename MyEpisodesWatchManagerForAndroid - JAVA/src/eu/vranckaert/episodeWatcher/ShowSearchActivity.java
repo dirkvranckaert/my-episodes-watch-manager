@@ -18,6 +18,7 @@ import eu.vranckaert.episodeWatcher.domain.Show;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
+import eu.vranckaert.episodeWatcher.exception.ShowAddFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
@@ -84,6 +85,24 @@ public class ShowSearchActivity extends ListActivity {
         showAdapter.notifyDataSetChanged();
     }
 
+    private void updateNumberOfResults() {
+        TextView numberOfResults = (TextView) findViewById(R.id.showNameSearchNumberOfResults);
+
+        if(shows.size() > 0) {
+            String text = shows.size() + " ";
+
+            if(shows.size() == 1) {
+                text += getText(R.string.showSearchOneFound);
+            } else {
+                text += getText(R.string.showSearchMoreFound);
+            }
+            numberOfResults.setText(text);
+            numberOfResults.setVisibility(TextView.VISIBLE);
+        } else {
+            numberOfResults.setVisibility(TextView.GONE);
+        }
+    }
+
     @Override
 	protected Dialog onCreateDialog(int id) {
 		Dialog dialog = null;
@@ -113,6 +132,7 @@ public class ShowSearchActivity extends ListActivity {
 
             @Override
             protected void onPostExecute(Object o) {
+                updateNumberOfResults();
                 updateShowList();
                 dismissDialog(SEARCH_DIALOG);
             }
@@ -149,7 +169,8 @@ public class ShowSearchActivity extends ListActivity {
         }
 
         @Override
-        public View getView(int posistion, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, ViewGroup parent) {
+            final int i = position;
             View row = convertView;
             if (row==null) {
                 LayoutInflater inflater = getLayoutInflater();
@@ -158,10 +179,33 @@ public class ShowSearchActivity extends ListActivity {
 
             TextView topText = (TextView) row.findViewById(R.id.showNameSearchResult);
 
-            Show show = shows.get(posistion);
+            Show show = shows.get(position);
             topText.setText(show.getShowName());
 
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    addShowByListPosition(i);
+                }
+            });
+
             return row;
+        }
+    }
+
+    private void addShowByListPosition(int position) {
+        Show show = shows.get(position);
+        try {
+            Log.d(LOG_TAG, "Adding show with id " + show.getMyEpisodeID() + " to the account of user " + user.getUsername());
+            service.addShow(show.getMyEpisodeID(), user);
+        } catch (InternetConnectivityException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (LoginFailedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (UnsupportedHttpPostEncodingException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (ShowAddFailedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }
 }
