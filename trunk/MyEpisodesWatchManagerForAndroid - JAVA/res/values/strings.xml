@@ -43,7 +43,9 @@
     <!-- Show management -->
     <!-- Show searching -->
     <string name="showSearchHint">Enter a show name...</string>
-    <string name="noSearchResults">No search results</string>
+    <string name="showSearchNoSearchResults">No shows found</string>
+    <string name="showSearchOneFound">show found</string>
+    <string name="showSearchMoreFound">shows found</string>
 
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Loading...</string>
