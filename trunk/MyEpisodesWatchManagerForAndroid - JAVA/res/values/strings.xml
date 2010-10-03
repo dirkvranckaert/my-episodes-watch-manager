@@ -44,7 +44,7 @@
     <string name="episodeDetailsSeasonLabel">Season: </string>
     <string name="episodeDetailsEpisodeLabel">Episode: </string>
     <string name="episodeDetailsAirDateLabel">Airdate: </string>
-    <string name="episodeDetailsAirDateLabelDateNotFound">The airdate is not found for this episode!</string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">The airdate is unavailable for this episode. Please report a bug for this issue!</string>
 
     <!-- Show management -->
     <!-- Show searching -->
