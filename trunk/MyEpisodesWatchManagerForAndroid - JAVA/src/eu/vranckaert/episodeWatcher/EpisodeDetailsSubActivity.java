@@ -41,10 +41,12 @@ public class EpisodeDetailsSubActivity extends Activity {
         
         //Air date in specifc format
         Date airdate = episode.getAirDate();
-        if (airdate == null) {
-        	airdate = new Date();
+        String formattedAirDate = null;
+        if (airdate != null) {
+        	formattedAirDate = DateUtil.formatDateLong(airdate, this);
+        } else {
+            formattedAirDate = getText(R.string.episodeDetailsAirDateLabelDateNotFound).toString();
         }
-        String formattedAirDate = DateUtil.formatDateLong(airdate, this);
         
         airdateText.setText(" " + formattedAirDate);
         
