@@ -3,6 +3,7 @@ package eu.vranckaert.episodeWatcher.service;
 import android.util.Log;
 import eu.vranckaert.episodeWatcher.domain.*;
 import eu.vranckaert.episodeWatcher.exception.*;
+import eu.vranckaert.episodeWatcher.utils.DateUtil;
 import eu.vranckaert.episodeWatcher.utils.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -111,7 +112,14 @@ public class MyEpisodesService {
 	                episode.setShowName(episodeInfo[0].trim());
 	                getSeasonAndEpisodeNumber(episodeInfo[1], episode);
 	                episode.setName(episodeInfo[2].trim());
-	                episode.setAirDate(parseDate(episodeInfo[3].trim()));
+                    String airDateString = episodeInfo[3].trim();
+                    Date airDate = null;
+                    try {
+                        airDate = parseDate(airDateString);
+                    } catch (Exception e) {
+                        airDate = DateUtil.convertToDate(airDateString);
+                    }
+	                episode.setAirDate(airDate);
 	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
 	                episode.setId();
 	                

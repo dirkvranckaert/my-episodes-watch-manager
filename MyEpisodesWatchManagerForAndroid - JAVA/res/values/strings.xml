@@ -40,6 +40,12 @@
     <string name="watchListSubTitleComingPlural">%d future episodes</string>
     <string name="watchListEmpty">No episodes found.</string>
 
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Season: </string>
+    <string name="episodeDetailsEpisodeLabel">Episode: </string>
+    <string name="episodeDetailsAirDateLabel">Airdate: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">The airdate is not found for this episode!</string>
+
     <!-- Show management -->
     <!-- Show searching -->
     <string name="showSearchHint">Enter a show name...</string>
@@ -83,9 +89,6 @@
     <string name="preferences">Preferences</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Details</string>
-    <string name="episodeDetailsSeasonLabel">Season: </string>
-    <string name="episodeDetailsEpisodeLabel">Episode: </string>
-    <string name="episodeDetailsAirDateLabel">Airdate: </string>
     <string name="menuEpisodeMarkAcquired">Mark Acquired</string>
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
     <!-- shows manage specific menu -->
