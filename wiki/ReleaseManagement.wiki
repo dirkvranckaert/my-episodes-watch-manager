@@ -20,6 +20,7 @@ Content: Features, Bugfixes
   * Issue 87 (PHP dateformat d-m-Y parse error)
   * Issue 88 (German Translation)
   * Issue 91 (Brazilian Portuguese Translations)
+  * Issue 92 (Latvian Translations)
 
 === Market Releases ===
 ====Version 1.6.1====
