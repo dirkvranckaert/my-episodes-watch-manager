@@ -463,27 +463,22 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     }
 
     private void AddEpisodeToShow(Episode episode) {
-        Show returnShow = CheckShowDublicate(episode.getShowName());
-        if (returnShow == null) {
+        Show currentShow = CheckShowDublicate(episode.getShowName());
+        if (currentShow == null) {
             Show tempShow = new Show(episode.getShowName());
             tempShow.addEpisode(episode);
             shows.add(tempShow);
         }
         else {
-            for(Show show : shows)
-            {
-                if (show.getShowName().equals(returnShow.getShowName())) {
-                    show.addEpisode(episode);
-                }
-            }
+        	currentShow.addEpisode(episode);
         }
     }
 
-    private Show CheckShowDublicate(String episode)
+    private Show CheckShowDublicate(String episodename)
     {
         for(Show show : shows)
         {
-            if (show.getShowName().equals(episode)) {
+            if (show.getShowName().equals(episodename)) {
                 return show;
             }
         }
