@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
@@ -52,6 +53,8 @@ public class EpisodeDetailsSubActivity extends Activity {
         
         Button markAsAcquiredButton = (Button) findViewById(R.id.markAsAcquiredButton);
         Button markAsSeenButton = (Button) findViewById(R.id.markAsSeenButton);
+        ImageButton twitterButton = (ImageButton) findViewById(R.id.twitterButton);
+        
         
         if (episodesType != 1)
         {
@@ -73,6 +76,13 @@ public class EpisodeDetailsSubActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				closeAndMarkWatched(episode);
+			}
+		});
+        
+        twitterButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				tweetThis();
 			}
 		});
     }
@@ -113,6 +123,14 @@ public class EpisodeDetailsSubActivity extends Activity {
     	setResult(RESULT_OK, intent);
 		finish();
 	}
+    
+    private void tweetThis() {
+    	Intent sendIntent = new Intent(Intent.ACTION_SEND); 
+    	String tweet = episode.getShowName() + " S" + episode.getSeason() + "E" + episode.getEpisode();
+    	sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.Tweet, tweet)); 
+    	sendIntent.setType("application/twitter");   
+    	startActivity(Intent.createChooser(sendIntent, null)); 
+    }
     
     private void closeAndMarkWatched(Episode episode) {
     	Intent intent = new Intent();

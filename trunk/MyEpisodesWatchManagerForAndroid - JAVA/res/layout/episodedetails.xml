@@ -96,5 +96,13 @@
 		android:layout_height="wrap_content"
 	/>
 
-
+<LinearLayout android:id="@+id/LinearLayout02" 
+			  android:layout_width="fill_parent"
+			  android:layout_height="wrap_content">
+    <ImageButton android:id="@+id/twitterButton"
+	      android:src="@drawable/twitterlogo"
+	      android:layout_width="wrap_content"
+	      android:layout_height="wrap_content"
+    />	  
+</LinearLayout>
 </LinearLayout>

@@ -181,7 +181,6 @@ public class ShowSearchActivity extends ListActivity {
 
             Show show = shows.get(position);
             topText.setText(show.getShowName());
-
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

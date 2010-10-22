@@ -85,8 +85,8 @@ public class MyEpisodesService {
     private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_SEARCH_RESULTS = "Search results:";
     private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TABLE_END_TAG = "</table>";
     private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TD_START_TAG = "<td width=\"50%\"><a ";
-    private static final String MYEPISODES_ADD_SHOW_PAGE = "http://myepisodes.com/views.php?type=manageshow&mode=add&showid=";
-    private static final String MYEPISODES_FAVO_IGNORE_PAGE = "http://myepisodes.com/shows.php";
+    private static final String MYEPISODES_ADD_SHOW_PAGE = "http://www.myepisodes.com/views.php?type=manageshow&mode=add&showid=";
+    private static final String MYEPISODES_FAVO_IGNORE_PAGE = "http://www.myepisodes.com/shows.php";
 	
     public List<Episode> retrieveEpisodes(int episodesType,final User user) throws InternetConnectivityException, Exception {
         String encryptedPassword = encryptPassword(user.getPassword());
@@ -167,14 +167,9 @@ public class MyEpisodesService {
     
     private void markAnEpisode(int EpisodeStatus, HttpClient httpClient, Episode episode) throws ShowUpdateFailedException, InternetConnectivityException {
     	String urlRep = "";
-    	if(EpisodeStatus == 0)
-        {
-        	urlRep = MYEPISODES_UPDATE_WATCH;
-        }
-        else if(EpisodeStatus == 1)
-        {
-        	urlRep = MYEPISODES_UPDATE_ACQUIRE;
-        }
+    	
+    	urlRep = EpisodeStatus == 0 ? MYEPISODES_UPDATE_WATCH : MYEPISODES_UPDATE_ACQUIRE;
+
         urlRep = urlRep.replace(MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT, String.valueOf(episode.getEpisode()));
         urlRep = urlRep.replace(MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT, String.valueOf(episode.getSeason()));
         urlRep = urlRep.replace(MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT, episode.getMyEpisodeID());
@@ -488,27 +483,15 @@ public class MyEpisodesService {
     }
 
     public void addShow(String myEpsidodesShowId, User user) throws InternetConnectivityException, LoginFailedException, UnsupportedHttpPostEncodingException, ShowAddFailedException {
-        Log.d(LOG_TAG, "SHWOID: " + myEpsidodesShowId);
-
-        String url0 = "http://myepisodes.com/views.php?type=epsbyshow&showid=" + myEpsidodesShowId;
-        String url = MYEPISODES_ADD_SHOW_PAGE + myEpsidodesShowId + "&page=L3ZpZXdzLnBocD90eXBlPWVwc2J5c2hvdyZzaG93aWQ9MjU5MQ==";
-
-        Log.d(LOG_TAG, "Username: " + user.getUsername() + ", password: " + user.getPassword());
-
         HttpClient httpClient = new DefaultHttpClient();
-        boolean login = login(httpClient, user.getUsername(), user.getPassword());
-
-        HttpGet get0 = new HttpGet(url0);
+        login(httpClient, user.getUsername(), user.getPassword());
+        String url = MYEPISODES_ADD_SHOW_PAGE + myEpsidodesShowId;
         HttpGet get = new HttpGet(url);
-
 
         int status = 200;
 
         try {
-            HttpResponse response0 = httpClient.execute(get0);
-        	HttpResponse response = httpClient.execute(get);
-            String html = EntityUtils.toString(response.getEntity());
-            Log.d(LOG_TAG, "HTML: " + html);
+            HttpResponse response = httpClient.execute(get);
         	status = response.getStatusLine().getStatusCode();
         } catch (UnknownHostException e) {
 			String message = "Could not connect to host.";
@@ -527,37 +510,37 @@ public class MyEpisodesService {
             Log.w(LOG_TAG, message);
             throw new ShowAddFailedException(message);
         } else {
-            Log.i(LOG_TAG, "Successfully added the show from url " + url + " (" + myEpsidodesShowId + ")");
+            Log.i(LOG_TAG, "Successfully added the show from url " + url);
         }
     }
 
-    //TODO uncomment and test further!!!
-//    public void getFavoriteShows(User user) throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
-//        HttpClient httpClient = new DefaultHttpClient();
-//        String username = user.getUsername();
-//        login(httpClient, username, user.getPassword());
-//
-//        HttpGet get = new HttpGet(MYEPISODES_FAVO_IGNORE_PAGE);
-////        HttpParams params = .getDefaultParams();
-////        get.setParams();
-//
-//		String responsePage = "";
-//        HttpResponse response;
-//        try {
-//            response = httpClient.execute(get);
-//            responsePage = EntityUtils.toString(response.getEntity());
-//        } catch (ClientProtocolException e) {
-//            String message = "Could not connect to host.";
-//			Log.e(LOG_TAG, message, e);
-//			throw new InternetConnectivityException(message, e);
-//        } catch (UnknownHostException e) {
-//			String message = "Could not connect to host.";
-//			Log.e(LOG_TAG, message, e);
-//			throw new InternetConnectivityException(message, e);
-//		} catch (IOException e) {
-//            String message = "Search on MyEpisodes failed.";
-//            Log.w(LOG_TAG, message, e);
-//            throw new LoginFailedException(message, e);
-//        }
-//    }
+    //TODO: test further!!!
+    public void getFavoriteShows(User user) throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
+        HttpClient httpClient = new DefaultHttpClient();
+        String username = user.getUsername();
+        login(httpClient, username, user.getPassword());
+
+        HttpGet get = new HttpGet(MYEPISODES_FAVO_IGNORE_PAGE);
+//        HttpParams params = .getDefaultParams();
+//        get.setParams();
+
+		String responsePage = "";
+        HttpResponse response;
+        try {
+            response = httpClient.execute(get);
+            responsePage = EntityUtils.toString(response.getEntity());
+        } catch (ClientProtocolException e) {
+            String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
+        } catch (UnknownHostException e) {
+			String message = "Could not connect to host.";
+			Log.e(LOG_TAG, message, e);
+			throw new InternetConnectivityException(message, e);
+		} catch (IOException e) {
+            String message = "Search on MyEpisodes failed.";
+            Log.w(LOG_TAG, message, e);
+            throw new LoginFailedException(message, e);
+        }
+    }
 }
