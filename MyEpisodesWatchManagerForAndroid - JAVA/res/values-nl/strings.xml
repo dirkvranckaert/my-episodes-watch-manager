@@ -13,7 +13,7 @@
     <string name="loginUsernameHint">Gebruikersnaam</string>
     <string name="loginPasswordHint">Wachtwoord</string>
     <string name="loginLoginBtn">Aanmelden</string>
-    <string name="loginStartLogin">Bezig met aanmelen bij MyEpisodes.com</string>
+    <string name="loginStartLogin">Bezig met aanmelden bij MyEpisodes.com</string>
     <string name="loginSuccessfullLogin">Aanmelden gelukt</string>
     <string name="loginLoginFailed">Gebruikersnaam of wachtwoord zijn niet juist, probeer opnieuw!</string>
 

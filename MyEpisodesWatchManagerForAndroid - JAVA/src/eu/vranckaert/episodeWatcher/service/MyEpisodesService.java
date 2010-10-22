@@ -313,7 +313,16 @@ public class MyEpisodesService {
             String message = "Username already exists!";
             Log.w(LOG_TAG, message);
             throw new RegisterFailedException(message);
-        } else {
+        } else if (responsePage.contains("Please fill in all fields.")) {
+            String message = "Not all fields!";
+            Log.w(LOG_TAG, message);
+            throw new RegisterFailedException(message);
+        } else if (responsePage.contains("Email already exists, please choose another email.")) {   
+            String message = "Email already excists";
+            Log.w(LOG_TAG, message);
+            throw new RegisterFailedException(message);
+        }
+        else {
             Log.i(LOG_TAG, "User succesfully created in. " + MYEPISODES_REGISTER_PAGE);
             result = true;
         }
