@@ -19,6 +19,7 @@ Content: Features, Bugfixes
   * Issue 85 (Default tab preference)
   * Issue 87 (PHP dateformat d-m-Y parse error)
   * Issue 88 (German Translation)
+  * Issue 97 (Brazilian Portuguese Translations)
 
 === Market Releases ===
 ====Version 1.6.1====
