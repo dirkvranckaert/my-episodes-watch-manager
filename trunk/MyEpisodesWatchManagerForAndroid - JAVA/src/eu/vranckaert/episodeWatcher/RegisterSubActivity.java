@@ -5,8 +5,14 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
+import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +25,12 @@ public class RegisterSubActivity extends Activity {
     private Button registerButton;
     private MyEpisodesService myEpisodesService;
     private User user;
+    private boolean registerStatus;
+    private String email;
     
+    private static final int MY_EPISODES_REGISTER_DIALOG = 0;
+    private static final int MY_EPISODES_ERROR_DIALOG = 1;
+    private static final int MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS = 2;
     private static final String LOG_TAG = "RegisterSubActivity";
 	
     @Override
@@ -40,50 +51,98 @@ public class RegisterSubActivity extends Activity {
 				public void onClick(View v) {
                     String username = ((EditText) findViewById(R.id.registerUsername)).getText().toString();
 				    String password = ((EditText) findViewById(R.id.registerPassword)).getText().toString();
-				    String email = ((EditText) findViewById(R.id.registerEmail)).getText().toString();
+				    email = ((EditText) findViewById(R.id.registerEmail)).getText().toString();
                     if( (username!= null && username.length()>0) && (password != null && password.length()>0) && (email != null && email.length()>0)) {
                         user = new User(
                                 username, password
                         );
+                        registerStatus = false;
 
-                        Toast.makeText(RegisterSubActivity.this, R.string.registerStart, Toast.LENGTH_SHORT).show();
-                        try {
-                            boolean registerStatus = myEpisodesService.register(user, email);
-                            if(registerStatus)
-                            {
-                                Toast.makeText(RegisterSubActivity.this, R.string.registerSuccessfull, Toast.LENGTH_LONG).show();
-                                storeLoginCredentials(user);
-                                finalizeLogin();
-                            } else {
-                            	Toast.makeText(RegisterSubActivity.this, R.string.registerFailed, Toast.LENGTH_LONG).show();
-                                ((EditText) findViewById(R.id.registerUsername)).setText("");
-                                ((EditText) findViewById(R.id.registerPassword)).setText("");
-                                ((EditText) findViewById(R.id.registerEmail)).setText("");
+                        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+                            @Override
+                            protected void onPreExecute() {
+                                showDialog(MY_EPISODES_REGISTER_DIALOG);
                             }
-                        } catch (InternetConnectivityException e) {
-                            ((EditText) findViewById(R.id.registerUsername)).setText("");
-                            ((EditText) findViewById(R.id.registerPassword)).setText("");
-                            ((EditText) findViewById(R.id.registerEmail)).setText("");
-                            String message = "Could not connect to host";
-                            Log.e(LOG_TAG, message, e);
-                            Toast.makeText(RegisterSubActivity.this, R.string.internetConnectionFailureTryAgain, Toast.LENGTH_LONG).show();
-                        } catch (LoginFailedException e) {
-                            String message = "Register failed";
-                            Log.e(LOG_TAG, message, e);
-                            Toast.makeText(RegisterSubActivity.this, R.string.registerFailed, Toast.LENGTH_LONG).show();
-                        } catch (Exception e) {
-                            String message = "Some Exception occured";
-                            Log.e(LOG_TAG, message, e);
-                            Toast.makeText(RegisterSubActivity.this, R.string.defaultExceptionMessage, Toast.LENGTH_LONG).show();
-                        }
+
+                            @Override
+                            protected Object doInBackground(Object... objects) {
+									try {
+										registerStatus = register(user);
+							        } catch (InternetConnectivityException e) {
+							            String message = "Could not connect to host";
+							            Log.e(LOG_TAG, message, e);
+							        } catch (LoginFailedException e) {
+							            String message = "Login failed";
+							            Log.e(LOG_TAG, message, e);
+							        } catch (Exception e) {
+							            String message = "Some Exception occured";
+							            Log.e(LOG_TAG, message, e);
+							        }
+                                if(registerStatus) {
+                                    storeLoginCredentials(user);
+                                }
+                                return 100L;
+                            }
+
+							@Override
+                            protected void onPostExecute(Object o) {
+                                dismissDialog(MY_EPISODES_REGISTER_DIALOG);
+                                if(registerStatus) {
+                                    Toast.makeText(RegisterSubActivity.this, R.string.registerSuccessfull, Toast.LENGTH_LONG).show();
+                                    finalizeLogin();
+                                } else {
+                                    ((EditText) findViewById(R.id.registerUsername)).setText("");
+                                    ((EditText) findViewById(R.id.registerPassword)).setText("");
+                                    ((EditText) findViewById(R.id.registerEmail)).setText("");
+                                    showDialog(MY_EPISODES_ERROR_DIALOG);
+                                }
+                            }
+                        };
+                        asyncTask.execute();
                     } else {
-                        Toast.makeText(RegisterSubActivity.this, R.string.fillInAllFields, Toast.LENGTH_LONG).show();
+                    	showDialog(MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS);
                     }
 				}
 			});
         } else {
         	finalizeLogin();
         }
+    }
+    
+    @Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dialog = null;
+		switch (id) {
+			case MY_EPISODES_REGISTER_DIALOG:
+				ProgressDialog progressDialog = new ProgressDialog(this);
+				progressDialog.setMessage(this.getString(R.string.registerStart));
+                progressDialog.setCancelable(false);
+				dialog = progressDialog;
+				break;
+            case MY_EPISODES_ERROR_DIALOG:
+                AlertDialog errorDialog = new AlertDialog.Builder(this)
+                        .setMessage(R.string.registerFailed)
+                        .setCancelable(false)
+                        .setNeutralButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        }).create();
+                dialog = errorDialog;
+                break;
+            case MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS:
+                AlertDialog validationRequiredAllFieldsDialog = new AlertDialog.Builder(this)
+                        .setMessage(R.string.fillInAllFields)
+                        .setCancelable(false)
+                        .setNeutralButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        }).create();
+                dialog = validationRequiredAllFieldsDialog;
+                break;
+		}
+		return dialog;
     }
     
     private boolean checkLoginCredentials() {
@@ -95,6 +154,10 @@ public class RegisterSubActivity extends Activity {
 		} else {
 			return true;
 		}
+	}
+    
+    private boolean register(User user) throws LoginFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
+    	return myEpisodesService.register(user, email);
 	}
     
     private void storeLoginCredentials(User user) {
