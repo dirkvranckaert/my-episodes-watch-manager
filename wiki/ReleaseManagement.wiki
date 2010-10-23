@@ -25,6 +25,7 @@ Content: Features, Bugfixes
   * Issue 89 (Automating build process)
   * Issue 91 (Brazilian Portuguese Translations)
   * Issue 92 (Latvian Translations)
+  * Issue 93 (Dark color scheme option)
 
 === Market Releases ===
 ====Version 1.6.1====
