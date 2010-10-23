@@ -20,6 +20,7 @@ Content: Features, Bugfixes
   * Issue 85 (Default tab preference)
   * Issue 87 (PHP dateformat d-m-Y parse error)
   * Issue 88 (German Translation)
+  * Issue 89 (Automating build process)
   * Issue 91 (Brazilian Portuguese Translations)
   * Issue 92 (Latvian Translations)
 
