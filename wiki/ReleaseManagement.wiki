@@ -16,6 +16,7 @@ Content: Features, Bugfixes
   * Issue 76 (Mark all episodes of a show as watched or acquired)
   * Issue 77 (Loading dialogs on login and register)
   * Issue 78 (Error messages in dialogs for login and register instead of Toast messages)
+  * Issue 80 (Social Networking integration)
   * Issue 85 (Default tab preference)
   * Issue 87 (PHP dateformat d-m-Y parse error)
   * Issue 88 (German Translation)
