@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.domain.Episode;
+import eu.vranckaert.episodeWatcher.preferences.Preferences;
+import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
 
 import java.util.Date;
@@ -21,9 +23,9 @@ public class EpisodeDetailsSubActivity extends Activity {
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.episodedetails);
-        
         Bundle data = this.getIntent().getExtras();
         
         TextView showNameText = (TextView) findViewById(R.id.episodeDetShowName);
