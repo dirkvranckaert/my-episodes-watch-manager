@@ -119,6 +119,13 @@
             <item>Acquire</item>
             <item>Coming</item>
     </string-array>
+    <!-- Default opening tab -->
+    <string name="ThemePrompt">Choose Theme</string>
+    <string name="ThemePromptExtra">Select your theme</string>
+    <string-array name="ThemeOptions">
+            <item>Light</item>
+            <item>Dark</item>
+    </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Store password</string>
     <!-- Change Language -->
@@ -242,6 +249,10 @@
             <item>0</item>
             <item>1</item>
             <item>2</item>
+    </string-array>
+    <string-array name="ThemeValues">
+            <item>0</item>
+            <item>1</item>
     </string-array>
     <string-array name="showLanguageOptionsValues">
         <item>en</item>

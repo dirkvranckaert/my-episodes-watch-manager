@@ -21,6 +21,7 @@ import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.exception.ShowAddFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
+import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 
 import java.util.ArrayList;
@@ -60,7 +61,8 @@ public class ShowSearchActivity extends ListActivity {
     }
 
     private void init(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
+    	super.onCreate(savedInstanceState);
         setContentView(R.layout.showsearch);
 
         service = new MyEpisodesService();

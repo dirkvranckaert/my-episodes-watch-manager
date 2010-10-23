@@ -1,5 +1,7 @@
 package eu.vranckaert.episodeWatcher;
 
+import eu.vranckaert.episodeWatcher.preferences.Preferences;
+import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,11 +19,12 @@ public class ManageActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        init(savedInstanceState);
+    	init(savedInstanceState);
     }
 
     private void init(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
+    	super.onCreate(savedInstanceState);
         setContentView(R.layout.dummy);
     }
 

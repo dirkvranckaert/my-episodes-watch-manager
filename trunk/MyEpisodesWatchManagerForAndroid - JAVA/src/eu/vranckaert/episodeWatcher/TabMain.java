@@ -22,7 +22,8 @@ public class TabMain extends TabActivity {
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);
+    	super.onCreate(savedInstanceState);
         setContentView(R.layout.tabmain);
         
         tabHost = getTabHost();  // The activity TabHost        

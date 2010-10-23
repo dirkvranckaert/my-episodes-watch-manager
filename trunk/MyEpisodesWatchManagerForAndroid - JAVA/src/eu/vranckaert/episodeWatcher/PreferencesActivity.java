@@ -42,7 +42,8 @@ public class PreferencesActivity extends PreferenceActivity {
 
     @Override
     public void onCreate(Bundle savedInstance) {
-        super.onCreate(savedInstance);
+    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
+    	super.onCreate(savedInstance);
         
         refreshDialog = false;
         super.setTitle(R.string.preferences);
@@ -97,6 +98,22 @@ public class PreferencesActivity extends PreferenceActivity {
         openDefaultTabPref.setEntryValues(R.array.openDefaultTabValues);
         openDefaultTabPref.setDefaultValue("0");
         root.addPreference(openDefaultTabPref);
+        
+        ListPreference openThemePref = new ListPreference(this);
+        openThemePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				refreshDialog = true;
+				return true;
+			}
+        });
+        openThemePref.setKey(PreferencesKeys.THEME_KEY);
+        openThemePref.setTitle(R.string.ThemePrompt);
+        openThemePref.setSummary(R.string.ThemePromptExtra);
+        openThemePref.setEntries(R.array.ThemeOptions);
+        openThemePref.setEntryValues(R.array.ThemeValues);
+        openThemePref.setDefaultValue("0");
+        root.addPreference(openThemePref);
         
         ListPreference showLanguagePref = new ListPreference(this);
         showLanguagePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
