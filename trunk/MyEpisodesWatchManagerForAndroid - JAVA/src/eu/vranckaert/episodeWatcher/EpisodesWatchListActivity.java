@@ -88,6 +88,19 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			{
 				menu.removeItem(R.id.episodeMenuWatched);
 			}
+		} else {
+			int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
+			menu.setHeaderTitle(shows.get(groupid).getShowName());
+			MenuInflater inflater = getMenuInflater();
+			inflater.inflate(R.menu.groupmenu, menu);
+			if (episodesType != 1)
+			{
+				menu.removeItem(R.id.showMenuAcquired);
+			}
+			if (episodesType == 2)
+			{
+				menu.removeItem(R.id.showMenuWatched);
+			}
 		}
 	}
 
@@ -207,11 +220,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) item.getMenuInfo();
-		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
 		int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
 		int childid = ExpandableListView.getPackedPositionChild(info.packedPosition);
-
-		if (type == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
 			switch(item.getItemId()) {
 			case R.id.episodeMenuWatched:
 				tracker.trackEvent("MarkAsWatched", "ContextMenu-EpisodesWatchListActivity", "", 0);
@@ -225,11 +235,15 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 				tracker.trackPageView("/episodeDetailsSubActivity");
 				openEpisodeDetails(shows.get(groupid).getEpisodes().get(childid), episodesType);
 				return true;
+			case R.id.showMenuWatched:
+				markShowEpisodes(0, shows.get(groupid));
+				return true;
+			case R.id.showMenuAcquired:
+				markShowEpisodes(1, shows.get(groupid));
+				return true;
 			default:
 				return false;
 			}
-		}
-		return false;
 	}
 
 	@Override
@@ -524,6 +538,41 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
             @Override
             protected Object doInBackground(Object... objects) {
                 markEpisode(EpisodeStatus, episode);
+                if (exceptionMessageResId == null || exceptionMessageResId.equals("")) {
+                    getEpisodes();
+                }
+                return 100L;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
+                    dismissDialog(EPISODE_LOADING_DIALOG);
+                    showDialog(EXCEPTION_DIALOG);
+                    exceptionMessageResId = null;
+                } else {
+                    returnEpisodes();
+                    dismissDialog(EPISODE_LOADING_DIALOG);
+                }
+            }
+        };
+        asyncTask.execute();
+	}
+    
+    private void markShowEpisodes(final int EpisodeStatus, final Show show) {
+        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+
+            @Override
+            protected void onPreExecute() {
+                showDialog(EPISODE_LOADING_DIALOG);
+            }
+
+            @Override
+            protected Object doInBackground(Object... objects) {
+                for (Episode tempEp : show.getEpisodes())
+                {
+                	markEpisode(EpisodeStatus, tempEp);
+                }
                 if (exceptionMessageResId == null || exceptionMessageResId.equals("")) {
                     getEpisodes();
                 }

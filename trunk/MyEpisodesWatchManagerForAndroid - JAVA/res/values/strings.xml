@@ -88,6 +88,9 @@
     <string name="logout">Logout</string>
     <string name="changelog">What\'s changed</string>
     <string name="preferences">Preferences</string>
+    <!-- show specific menu -->
+    <string name="menuShowMarkAcquired">Mark all episodes as Acquired</string>
+    <string name="menuShowMarkWatched">Mark all episodes as Watched</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Details</string>
     <string name="menuEpisodeMarkAcquired">Mark Acquired</string>
