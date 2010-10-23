@@ -504,6 +504,7 @@ public class MyEpisodesService {
         } finally {
             httpClient.getConnectionManager().shutdown();
         }
+        
 
         if (status != 200) {
             String message = "Adding the show status failed with status code " + status + " for URL " + url;
