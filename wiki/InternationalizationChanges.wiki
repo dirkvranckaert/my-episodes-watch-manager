@@ -17,6 +17,8 @@ Version 1.7.0:
   * ThemePrompt
   * ThemePromptExtra
   * ThemeOptions
+  * menuShowMarkAcquired
+  * menuShowMarkWatched
 
 Version 1.6.1:
   * aboutText (new text)
