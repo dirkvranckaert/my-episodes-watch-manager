@@ -13,6 +13,10 @@ Version 1.7.0:
   * openDefaultPromptExtra
   * openDefaultTabOptions
   * episodeDetailsAirDateLabelDateNotFound
+  * Tweet
+  * ThemePrompt
+  * ThemePromptExtra
+  * ThemeOptions
 
 Version 1.6.1:
   * aboutText (new text)
