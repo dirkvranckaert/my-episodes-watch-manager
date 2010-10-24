@@ -6,6 +6,8 @@
     <string name="no">No</string>
     <string name="close">Close</string>
     <string name="attention">Attention</string>
+    <string name="done">Done</string>
+    <string name="search">Search</string>
 
     <!-- login form -->
     <string name="loginFormTitle">Provide your user details for the MyEpisodes.com website below.</string>
@@ -53,6 +55,8 @@
     <string name="showSearchNoSearchResults">No shows found</string>
     <string name="showSearchOneFound">show found</string>
     <string name="showSearchMoreFound">shows found</string>
+    <string name="showSearchAddShow">Are you sure you want to add this show to your list of shows?</string>    
+    <string name="showSearchFinished">Are you done adding shows or do you want to continue?</string>
 
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Loading...</string>
@@ -155,6 +159,7 @@
     <string name="networkIssues">Network error!\nCheck you network settings and try refreshing manually.</string>
     <string name="watchListUnableToReadFeed">Network error!\nTry to refresh manually.</string>
     <string name="watchListUnableToMarkWatched">Failed to mark this episode watched!\nCheck internet connection or refresh the list!</string>
+    <string name="searchShowUnabletoAdd">Failed to add the show. Try again later. If this error keeps showing up please log an issue!</string>
 
     <string name="changelogTitle">What\'s changed</string>
     <string name="changelogText">Version 1.6.1\n

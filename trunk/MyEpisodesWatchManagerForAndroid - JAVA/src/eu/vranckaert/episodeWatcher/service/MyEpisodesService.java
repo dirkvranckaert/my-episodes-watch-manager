@@ -147,21 +147,40 @@ public class MyEpisodesService {
 
     public void watchedEpisode(Episode episode, User user) throws LoginFailedException
             , ShowUpdateFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
+        List<Episode> episodes = new ArrayList<Episode>();
+        episodes.add(episode);
+        watchedEpisodes(episodes, user);
+    }
+
+    public void watchedEpisodes(List<Episode> episodes, User user) throws LoginFailedException
+            , ShowUpdateFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
         HttpClient httpClient = new DefaultHttpClient();
 
         login(httpClient, user.getUsername(), user.getPassword());
-        markAnEpisode(0, httpClient, episode);
-        
+
+        for(Episode episode : episodes) {
+            markAnEpisode(0, httpClient, episode);
+        }
+
         httpClient.getConnectionManager().shutdown();
     }
     
     public void acquireEpisode(Episode episode, User user) throws LoginFailedException
 		    , ShowUpdateFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
+		List<Episode> episodes = new ArrayList<Episode>();
+        episodes.add(episode);
+        acquireEpisodes(episodes, user);
+	}
+
+    public void acquireEpisodes(List<Episode> episodes, User user) throws LoginFailedException
+		    , ShowUpdateFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
 		HttpClient httpClient = new DefaultHttpClient();
-		
+
 		login(httpClient, user.getUsername(), user.getPassword());
-		markAnEpisode(1, httpClient, episode);
-		
+        for(Episode episode : episodes) {
+		    markAnEpisode(1, httpClient, episode);
+        }
+
 		httpClient.getConnectionManager().shutdown();
 	}
     
@@ -504,7 +523,6 @@ public class MyEpisodesService {
         } finally {
             httpClient.getConnectionManager().shutdown();
         }
-        
 
         if (status != 200) {
             String message = "Adding the show status failed with status code " + status + " for URL " + url;

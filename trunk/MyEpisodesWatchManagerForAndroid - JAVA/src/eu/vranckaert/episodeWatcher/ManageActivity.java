@@ -17,6 +17,8 @@ import android.view.MenuItem;
 public class ManageActivity extends Activity {
     private static final String LOG_TAG = "ManageActivity";
 
+    private static final int SEARCH_ACTIVITY_REQUEST_CODE = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	init(savedInstanceState);
@@ -47,6 +49,13 @@ public class ManageActivity extends Activity {
 
     private void openSearchActivity() {
         Intent searchIntent = new Intent(this.getApplicationContext(), ShowSearchActivity.class);
-        startActivity(searchIntent);
+        startActivityForResult(searchIntent, SEARCH_ACTIVITY_REQUEST_CODE);
+    }
+
+    @Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == SEARCH_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            //new shows have been added so reload this screen!
+        }
     }
 }

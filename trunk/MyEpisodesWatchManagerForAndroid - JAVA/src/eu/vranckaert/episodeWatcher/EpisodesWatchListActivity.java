@@ -559,7 +559,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         asyncTask.execute();
 	}
     
-    private void markShowEpisodes(final int EpisodeStatus, final Show show) {
+    private void markShowEpisodes(final int episodeStatus, final Show show) {
         AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
 
             @Override
@@ -569,10 +569,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
             @Override
             protected Object doInBackground(Object... objects) {
-                for (Episode tempEp : show.getEpisodes())
-                {
-                	markEpisode(EpisodeStatus, tempEp);
-                }
+                markAllEpisodes(episodeStatus, show.getEpisodes());
                 if (exceptionMessageResId == null || exceptionMessageResId.equals("")) {
                     getEpisodes();
                 }
@@ -616,6 +613,41 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			exceptionMessageResId = R.string.networkIssues;
 		} catch (ShowUpdateFailedException e) {
 			String message = "Marking the show watched failed (" + episode + ")";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.watchListUnableToMarkWatched;
+		} catch (UnsupportedHttpPostEncodingException e) {
+			String message = "Network issues";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.networkIssues;
+		} catch (Exception e) {
+			String message = "Unknown exception occured";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.defaultExceptionMessage;
+		}
+	}
+
+    private void markAllEpisodes(int EpisodeStatus, List<Episode> episodes) {
+		try {
+			if (EpisodeStatus == 0)
+			{
+				myEpisodesService.watchedEpisodes(episodes, user);
+			}
+			else if (EpisodeStatus == 1)
+			{
+				myEpisodesService.acquireEpisodes(episodes, user);
+				TabMain tabMain = (TabMain) getParent();
+				tabMain.refreshWatchTab();
+			}
+		} catch (InternetConnectivityException e) {
+			String message = "Could not connect to host";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.networkIssues;
+		} catch (LoginFailedException e) {
+			String message = "Login failure";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.networkIssues;
+		} catch (ShowUpdateFailedException e) {
+			String message = "Marking shows watched failed";
 			Log.e(LOG_TAG, message, e);
 			exceptionMessageResId = R.string.watchListUnableToMarkWatched;
 		} catch (UnsupportedHttpPostEncodingException e) {

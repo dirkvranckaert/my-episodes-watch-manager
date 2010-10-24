@@ -1,9 +1,11 @@
 package eu.vranckaert.episodeWatcher;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,12 +37,18 @@ import java.util.List;
 public class ShowSearchActivity extends ListActivity {
     private static final String LOG_TAG = "SHOW_SEARCH_AVTIVITY";
 
-    private static final int SEARCH_DIALOG = 0;
+    private static final int DIALOG_LOADING = 0;
+    private static final int DIALOG_EXCEPTION = 1;
+    private static final int DIALOG_FINISHED = 2;
+    private static final int DIALOG_ADD_SHOW = 3;
 
     private MyEpisodesService service;
     private User user;
     private ShowAdapter showAdapter;
     private List<Show> shows = new ArrayList<Show>(0);
+
+    private Integer exceptionMessageResId = null;
+    private Integer showListPosition = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,9 +60,9 @@ public class ShowSearchActivity extends ListActivity {
             public void onClick(View view) {
                 CharSequence query = ((EditText) findViewById(R.id.searchQuery)).getText();
                 if(query.length() > 0) {
-                    ShowSearchActivity.this.searchShows();
+                    ShowSearchActivity.this.searchShows(query.toString());
                 } else {
-                    //TODO show message: enter a show name to search for!!
+                    //TODO show message: enter a show name to search for!! Use a toast-message for this purpose!
                 }
             }
         });
@@ -109,56 +117,118 @@ public class ShowSearchActivity extends ListActivity {
 	protected Dialog onCreateDialog(int id) {
 		Dialog dialog = null;
 		switch (id) {
-			case SEARCH_DIALOG:
+			case DIALOG_LOADING: {
 				ProgressDialog progressDialog = new ProgressDialog(this);
 				progressDialog.setMessage(this.getString(R.string.progressLoadingTitle));
                 progressDialog.setCancelable(false);
 				dialog = progressDialog;
 				break;
+            }
+            case DIALOG_EXCEPTION: {
+				if (exceptionMessageResId == null) {
+					exceptionMessageResId = R.string.defaultExceptionMessage;
+				}
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle(R.string.exceptionDialogTitle)
+					   .setMessage(exceptionMessageResId)
+					   .setCancelable(false)
+					   .setPositiveButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				                dialog.cancel();
+				           }
+				       });
+				dialog = builder.create();
+                exceptionMessageResId = null;
+                break;
+            }
+            case DIALOG_FINISHED: {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(R.string.showSearchFinished)
+                       .setCancelable(false)
+                       .setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				               dialog.cancel();
+                               setResult(RESULT_OK);
+                               finish();
+				           }
+				       })
+                       .setNegativeButton(R.string.search, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				               dialog.cancel();
+				           }
+				       });
+                dialog = builder.create();
+                break;
+            }
+            case DIALOG_ADD_SHOW: {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(shows.get(showListPosition).getShowName())
+                       .setMessage(R.string.showSearchAddShow)
+                       .setCancelable(false)
+                       .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				               dialog.cancel();
+                               addShowByListPosition(showListPosition);
+				           }
+				       })
+                       .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				               dialog.cancel();
+				           }
+				       });
+                showListPosition = null;
+                dialog = builder.create();
+                break;
+            }
         }
         return dialog;
     }
 
-    private void searchShows() {
+    private void searchShows(final String query) {
         AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
             @Override
             protected void onPreExecute() {
-                showDialog(SEARCH_DIALOG);
+                showDialog(DIALOG_LOADING);
             }
 
             @Override
             protected Object doInBackground(Object... objects) {
-                doSearch(); //TODO handle excpetions
+                doSearch(query);
                 return 100L;
             }
 
             @Override
             protected void onPostExecute(Object o) {
-                updateNumberOfResults();
-                updateShowList();
-                dismissDialog(SEARCH_DIALOG);
+                if(exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
+                    dismissDialog(DIALOG_LOADING);
+                    showDialog(DIALOG_EXCEPTION);
+                } else {
+                    updateNumberOfResults();
+                    updateShowList();
+                    dismissDialog(DIALOG_LOADING);
+                }
             }
         };
         asyncTask.execute();
     }
 
-    private void doSearch() {
-        CharSequence query = ((EditText) findViewById(R.id.searchQuery)).getText();
+    private void doSearch(String query) {
         try {
             shows = service.searchShows(query.toString(), user);
             Log.d(LOG_TAG, shows.size() + " show(s) found!!!");
+            exceptionMessageResId = null;
         } catch (UnsupportedHttpPostEncodingException e) {
             String message = "Network issues";
 			Log.e(LOG_TAG, message, e);
-			//exceptionMessageResId = R.string.networkIssues;
+			exceptionMessageResId = R.string.networkIssues;
         } catch (InternetConnectivityException e) {
             String message = "Could not connect to host";
 			Log.e(LOG_TAG, message, e);
-			//exceptionMessageResId = R.string.internetConnectionFailureReload;
+			exceptionMessageResId = R.string.internetConnectionFailureReload;
         } catch (LoginFailedException e) {
             String message = "Login failure";
 			Log.e(LOG_TAG, message, e);
-			//exceptionMessageResId = R.string.networkIssues;
+			exceptionMessageResId = R.string.networkIssues;
         }
     }
 
@@ -186,7 +256,9 @@ public class ShowSearchActivity extends ListActivity {
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    addShowByListPosition(i);
+                    //TODO show popup requesting if the user really wants to add the show or not!
+                    showListPosition = i;
+                    showDialog(DIALOG_ADD_SHOW);
                 }
             });
 
@@ -194,19 +266,53 @@ public class ShowSearchActivity extends ListActivity {
         }
     }
 
-    private void addShowByListPosition(int position) {
-        Show show = shows.get(position);
+    private void addShowByListPosition(final int position) {
+        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+            @Override
+            protected void onPreExecute() {
+                showDialog(DIALOG_LOADING);
+            }
+
+            @Override
+            protected Object doInBackground(Object... objects) {
+                Show show = shows.get(position);
+                addShow(show);
+                return 100L;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                dismissDialog(DIALOG_LOADING);
+                if(exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
+                    showDialog(DIALOG_EXCEPTION);
+                } else {
+                    showDialog(DIALOG_FINISHED);
+                }
+            }
+        };
+        asyncTask.execute();
+    }
+
+    private void addShow(Show show) {
         try {
             Log.d(LOG_TAG, "Adding show with id " + show.getMyEpisodeID() + " to the account of user " + user.getUsername());
             service.addShow(show.getMyEpisodeID(), user);
         } catch (InternetConnectivityException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            String message = "Could not connect to host";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.internetConnectionFailureReload;
         } catch (LoginFailedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            String message = "Login failure";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.networkIssues;
         } catch (UnsupportedHttpPostEncodingException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            String message = "Network issues";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.networkIssues;
         } catch (ShowAddFailedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            String message = "Could not add show";
+			Log.e(LOG_TAG, message, e);
+			exceptionMessageResId = R.string.searchShowUnabletoAdd;
         }
     }
 }
