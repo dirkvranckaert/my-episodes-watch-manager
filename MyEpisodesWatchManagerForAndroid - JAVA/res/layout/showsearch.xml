@@ -5,7 +5,6 @@
               android:layout_width="fill_parent">
     <RelativeLayout android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
-                    android:background="@android:color/white"
                     android:layout_marginBottom="10dp"
                     style="@android:style/ButtonBar">
         <ImageButton android:id="@+id/searchButton"
@@ -20,7 +19,8 @@
                   android:layout_height="wrap_content"
                   android:layout_centerVertical="true"
                   android:singleLine="true"
-                  android:layout_toLeftOf="@id/searchButton"/>
+                  android:layout_toLeftOf="@id/searchButton"
+                  android:layout_marginTop="4dp"/>
     </RelativeLayout>
     <TextView android:id="@+id/showNameSearchNumberOfResults"
               android:layout_width="fill_parent"
