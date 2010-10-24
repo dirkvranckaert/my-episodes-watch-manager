@@ -26,6 +26,7 @@ Content: Features, Bugfixes
   * Issue 91 (Brazilian Portuguese Translations)
   * Issue 92 (Latvian Translations)
   * Issue 93 (Dark color scheme option)
+  * Issue 94 (New logo)
 
 === Market Releases ===
 ====Version 1.6.1====
