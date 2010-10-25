@@ -1,13 +1,19 @@
 package eu.vranckaert.episodeWatcher;
 
-import eu.vranckaert.episodeWatcher.preferences.Preferences;
-import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.enums.ShowType;
+import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
+import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
+import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
+import eu.vranckaert.episodeWatcher.preferences.Preferences;
+import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
+import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 
 /**
  * @author Dirk Vranckaert
@@ -15,19 +21,35 @@ import android.view.MenuItem;
  *         Time: 13:09:05
  */
 public class ManageActivity extends Activity {
-    private static final String LOG_TAG = "ManageActivity";
+    private static final String LOG_TAG = ManageActivity.class.getSimpleName();
 
-    private static final int SEARCH_ACTIVITY_REQUEST_CODE = 0;
+    private MyEpisodesService myEpisodesService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	init(savedInstanceState);
+
+        //TODO TEMP FOR TESTING
+        User user = new User(
+            Preferences.getPreference(this, User.USERNAME),
+            Preferences.getPreference(this, User.PASSWORD)
+        );
+        try {
+            myEpisodesService.getFavoriteOrIgnoredShows(user, ShowType.FAVORITE_SHOW);
+        } catch (UnsupportedHttpPostEncodingException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InternetConnectivityException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (LoginFailedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 
     private void init(Bundle savedInstanceState) {
     	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
     	super.onCreate(savedInstanceState);
-        setContentView(R.layout.dummy);
+        setContentView(R.layout.showmanagement);
+        myEpisodesService = new MyEpisodesService();
     }
 
     @Override
@@ -49,13 +71,6 @@ public class ManageActivity extends Activity {
 
     private void openSearchActivity() {
         Intent searchIntent = new Intent(this.getApplicationContext(), ShowSearchActivity.class);
-        startActivityForResult(searchIntent, SEARCH_ACTIVITY_REQUEST_CODE);
-    }
-
-    @Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == SEARCH_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            //new shows have been added so reload this screen!
-        }
+        startActivity(searchIntent);
     }
 }

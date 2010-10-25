@@ -50,6 +50,8 @@ public class ShowSearchActivity extends ListActivity {
     private Integer exceptionMessageResId = null;
     private Integer showListPosition = null;
 
+    private boolean showsAdded = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         init(savedInstanceState);
@@ -148,7 +150,6 @@ public class ShowSearchActivity extends ListActivity {
                        .setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				               dialog.cancel();
-                               setResult(RESULT_OK);
                                finish();
 				           }
 				       })
@@ -297,6 +298,7 @@ public class ShowSearchActivity extends ListActivity {
         try {
             Log.d(LOG_TAG, "Adding show with id " + show.getMyEpisodeID() + " to the account of user " + user.getUsername());
             service.addShow(show.getMyEpisodeID(), user);
+            showsAdded = true;
         } catch (InternetConnectivityException e) {
             String message = "Could not connect to host";
 			Log.e(LOG_TAG, message, e);
@@ -314,5 +316,15 @@ public class ShowSearchActivity extends ListActivity {
 			Log.e(LOG_TAG, message, e);
 			exceptionMessageResId = R.string.searchShowUnabletoAdd;
         }
+    }
+
+    @Override
+    public void finish() {
+        if(showsAdded) {
+            setResult(RESULT_OK);
+        } else {
+            setResult(RESULT_CANCELED);
+        }
+        super.finish();
     }
 }
