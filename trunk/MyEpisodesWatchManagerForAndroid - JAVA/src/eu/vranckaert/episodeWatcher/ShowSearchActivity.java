@@ -170,14 +170,15 @@ public class ShowSearchActivity extends ListActivity {
 				           public void onClick(DialogInterface dialog, int id) {
 				               dialog.cancel();
                                addShowByListPosition(showListPosition);
+                               showListPosition = null;
 				           }
 				       })
                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
+                               showListPosition = null;
 				               dialog.cancel();
 				           }
 				       });
-                showListPosition = null;
                 dialog = builder.create();
                 break;
             }
@@ -257,7 +258,6 @@ public class ShowSearchActivity extends ListActivity {
             row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO show popup requesting if the user really wants to add the show or not!
                     showListPosition = i;
                     showDialog(DIALOG_ADD_SHOW);
                 }
