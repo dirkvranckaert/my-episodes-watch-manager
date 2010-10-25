@@ -608,7 +608,7 @@ public class MyEpisodesService {
                 break;
             }
 
-            Show show = new Show(values[0], values[1]);
+            Show show = new Show(values[0].trim(), values[1].trim());
             shows.add(show);
         }
 
