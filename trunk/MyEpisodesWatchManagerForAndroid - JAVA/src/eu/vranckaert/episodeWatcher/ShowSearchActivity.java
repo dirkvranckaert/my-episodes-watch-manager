@@ -136,11 +136,11 @@ public class ShowSearchActivity extends ListActivity {
 					   .setCancelable(false)
 					   .setPositiveButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				                dialog.cancel();
+                                exceptionMessageResId = null;
+                                removeDialog(DIALOG_ADD_SHOW);
 				           }
 				       });
 				dialog = builder.create();
-                exceptionMessageResId = null;
                 break;
             }
             case DIALOG_FINISHED: {
@@ -149,13 +149,13 @@ public class ShowSearchActivity extends ListActivity {
                        .setCancelable(false)
                        .setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				               dialog.cancel();
+                               removeDialog(DIALOG_ADD_SHOW);
                                finish();
 				           }
 				       })
                        .setNegativeButton(R.string.search, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				               dialog.cancel();
+                               removeDialog(DIALOG_ADD_SHOW);
 				           }
 				       });
                 dialog = builder.create();
@@ -168,7 +168,7 @@ public class ShowSearchActivity extends ListActivity {
                        .setCancelable(false)
                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				               dialog.cancel();
+                               removeDialog(DIALOG_ADD_SHOW);
                                addShowByListPosition(showListPosition);
                                showListPosition = null;
 				           }
@@ -176,7 +176,7 @@ public class ShowSearchActivity extends ListActivity {
                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
                                showListPosition = null;
-				               dialog.cancel();
+                               removeDialog(DIALOG_ADD_SHOW);
 				           }
 				       });
                 dialog = builder.create();
@@ -202,12 +202,12 @@ public class ShowSearchActivity extends ListActivity {
             @Override
             protected void onPostExecute(Object o) {
                 if(exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
-                    dismissDialog(DIALOG_LOADING);
+                    removeDialog(DIALOG_LOADING);
                     showDialog(DIALOG_EXCEPTION);
                 } else {
                     updateNumberOfResults();
                     updateShowList();
-                    dismissDialog(DIALOG_LOADING);
+                    removeDialog(DIALOG_LOADING);
                 }
             }
         };
@@ -283,7 +283,7 @@ public class ShowSearchActivity extends ListActivity {
 
             @Override
             protected void onPostExecute(Object o) {
-                dismissDialog(DIALOG_LOADING);
+                removeDialog(DIALOG_LOADING);
                 if(exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
                     showDialog(DIALOG_EXCEPTION);
                 } else {
