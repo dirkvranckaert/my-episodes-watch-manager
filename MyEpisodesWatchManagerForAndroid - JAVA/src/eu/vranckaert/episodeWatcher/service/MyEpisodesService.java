@@ -2,6 +2,7 @@ package eu.vranckaert.episodeWatcher.service;
 
 import android.util.Log;
 import eu.vranckaert.episodeWatcher.domain.*;
+import eu.vranckaert.episodeWatcher.enums.ShowType;
 import eu.vranckaert.episodeWatcher.exception.*;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
 import eu.vranckaert.episodeWatcher.utils.StringUtils;
@@ -86,7 +87,7 @@ public class MyEpisodesService {
     private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TABLE_END_TAG = "</table>";
     private static final String MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TD_START_TAG = "<td width=\"50%\"><a ";
     private static final String MYEPISODES_ADD_SHOW_PAGE = "http://www.myepisodes.com/views.php?type=manageshow&mode=add&showid=";
-    private static final String MYEPISODES_FAVO_IGNORE_PAGE = "http://www.myepisodes.com/shows.php";
+    private static final String MYEPISODES_FAVO_IGNORE_PAGE = "http://www.myepisodes.com/shows.php?type=manage";
 	
     public List<Episode> retrieveEpisodes(int episodesType,final User user) throws InternetConnectivityException, Exception {
         String encryptedPassword = encryptPassword(user.getPassword());
@@ -533,15 +534,11 @@ public class MyEpisodesService {
         }
     }
 
-    //TODO: test further!!!
-    public void getFavoriteShows(User user) throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
+    public List<Show> getFavoriteOrIgnoredShows(User user, ShowType showType) throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
         HttpClient httpClient = new DefaultHttpClient();
-        String username = user.getUsername();
-        login(httpClient, username, user.getPassword());
+        login(httpClient, user.getUsername(), user.getPassword());
 
         HttpGet get = new HttpGet(MYEPISODES_FAVO_IGNORE_PAGE);
-//        HttpParams params = .getDefaultParams();
-//        get.setParams();
 
 		String responsePage = "";
         HttpResponse response;
@@ -561,5 +558,60 @@ public class MyEpisodesService {
             Log.w(LOG_TAG, message, e);
             throw new LoginFailedException(message, e);
         }
+
+        Log.d(LOG_TAG, "favorite episodes" + responsePage);
+
+        List<Show> shows = parseShowsHtml(responsePage, showType);
+
+        return shows;
+    }
+
+    private List<Show> parseShowsHtml(String html, ShowType showType) {
+        List<Show> shows = new ArrayList<Show>();
+
+        String startTag = "<select id=\"";
+        String endTag = "</select>";
+
+        String optionStartTag = "<option value=\"";
+        String optionEndTag = "</option>";
+
+        switch(showType) {
+            case FAVORITE_SHOW:
+                startTag += "shows\"";
+                break;
+            case IGNORED_SHOW:
+                startTag += "ignored_shows\"";
+                break;
+        }
+        int startPosition = html.indexOf(startTag);
+        int endPosition = html.indexOf(endTag);
+
+        if(startPosition == -1 || endPosition == -1) {
+            return shows;
+        }
+
+        String selectTag = html.substring(startPosition, endPosition);
+
+        while(selectTag.length() > 0) {
+            int startPosistionOption = selectTag.indexOf(optionStartTag);
+            int endPositionOption = selectTag.indexOf(optionEndTag);
+
+            if(startPosistionOption == -1 || endPositionOption == -1 || endPositionOption < startPosistionOption) {
+                break;
+            }
+
+            String optionTag = selectTag.substring(startPosistionOption + optionStartTag.length(), endPositionOption);
+            selectTag = selectTag.replace(optionStartTag+optionTag+optionEndTag, "");
+
+            String[] values = optionTag.split("\">");
+            if(values.length != 2) {
+                break;
+            }
+
+            Show show = new Show(values[0], values[1]);
+            shows.add(show);
+        }
+
+        return shows;
     }
 }
