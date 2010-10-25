@@ -11,8 +11,6 @@ Content: Features, Bugfixes
   * Issue 38 (Mark several episodes as "Watched" at once)
   * Issue 62 (Register new users)
   * Issue 63 (Add/Remove and Ignore/Unignore shows feature)
-  * Issue 66 (Date in coming tab)
-  * Issue 67 (Calendar view)
   * Issue 74 (Aboutdialog and Changelog-dialog make-over)
   * Issue 76 (Mark all episodes of a show as watched or acquired)
   * Issue 77 (Loading dialogs on login and register)
