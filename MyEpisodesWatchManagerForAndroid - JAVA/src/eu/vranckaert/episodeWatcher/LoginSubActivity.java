@@ -28,7 +28,7 @@ public class LoginSubActivity extends Activity {
     private MyEpisodesService myEpisodesService;
     private int exceptionMessageResId = -1;
 
-    private static final int MY_EPISODES_LOGIN_DIALOG = 0;
+    private static final int MY_EPISODES_LOGIN_DIALOG_LOADING = 0;
     private static final int MY_EPISODES_ERROR_DIALOG = 1;
     private static final int MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS = 2;
     
@@ -71,7 +71,7 @@ public class LoginSubActivity extends Activity {
 
                             @Override
                             protected void onPreExecute() {
-                                showDialog(MY_EPISODES_LOGIN_DIALOG);
+                                showDialog(MY_EPISODES_LOGIN_DIALOG_LOADING);
                             }
 
                             @Override
@@ -85,7 +85,7 @@ public class LoginSubActivity extends Activity {
 
                             @Override
                             protected void onPostExecute(Object o) {
-                                dismissDialog(MY_EPISODES_LOGIN_DIALOG);
+                                removeDialog(MY_EPISODES_LOGIN_DIALOG_LOADING);
                                 if(loginStatus) {
                                     Toast.makeText(LoginSubActivity.this, R.string.loginSuccessfullLogin, Toast.LENGTH_LONG).show();
                                     finalizeLogin();
@@ -111,7 +111,7 @@ public class LoginSubActivity extends Activity {
 	protected Dialog onCreateDialog(int id) {
 		Dialog dialog = null;
 		switch (id) {
-			case MY_EPISODES_LOGIN_DIALOG:
+			case MY_EPISODES_LOGIN_DIALOG_LOADING:
 				ProgressDialog progressDialog = new ProgressDialog(this);
 				progressDialog.setMessage(this.getString(R.string.loginStartLogin));
                 progressDialog.setCancelable(false);
@@ -123,7 +123,7 @@ public class LoginSubActivity extends Activity {
                         .setCancelable(false)
                         .setNeutralButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
+                                removeDialog(MY_EPISODES_ERROR_DIALOG);
                             }
                         }).create();
                 dialog = errorDialog;

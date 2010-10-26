@@ -1,12 +1,5 @@
 package eu.vranckaert.episodeWatcher;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
-import eu.vranckaert.episodeWatcher.domain.User;
-import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
-import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
-import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
-import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,8 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
+import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
+import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
+import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
 
 public class RegisterSubActivity extends Activity {
     private Button registerButton;
@@ -29,7 +28,7 @@ public class RegisterSubActivity extends Activity {
     private boolean registerStatus;
     private String email;
     
-    private static final int MY_EPISODES_REGISTER_DIALOG = 0;
+    private static final int MY_EPISODES_REGISTER_DIALOG_LOADING = 0;
     private static final int MY_EPISODES_ERROR_DIALOG = 1;
     private static final int MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS = 2;
     private static final String LOG_TAG = "RegisterSubActivity";
@@ -63,7 +62,7 @@ public class RegisterSubActivity extends Activity {
                         AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
                             @Override
                             protected void onPreExecute() {
-                                showDialog(MY_EPISODES_REGISTER_DIALOG);
+                                showDialog(MY_EPISODES_REGISTER_DIALOG_LOADING);
                             }
 
                             @Override
@@ -88,7 +87,7 @@ public class RegisterSubActivity extends Activity {
 
 							@Override
                             protected void onPostExecute(Object o) {
-                                dismissDialog(MY_EPISODES_REGISTER_DIALOG);
+                                removeDialog(MY_EPISODES_REGISTER_DIALOG_LOADING);
                                 if(registerStatus) {
                                     Toast.makeText(RegisterSubActivity.this, R.string.registerSuccessfull, Toast.LENGTH_LONG).show();
                                     finalizeLogin();
@@ -115,7 +114,7 @@ public class RegisterSubActivity extends Activity {
 	protected Dialog onCreateDialog(int id) {
 		Dialog dialog = null;
 		switch (id) {
-			case MY_EPISODES_REGISTER_DIALOG:
+			case MY_EPISODES_REGISTER_DIALOG_LOADING:
 				ProgressDialog progressDialog = new ProgressDialog(this);
 				progressDialog.setMessage(this.getString(R.string.registerStart));
                 progressDialog.setCancelable(false);

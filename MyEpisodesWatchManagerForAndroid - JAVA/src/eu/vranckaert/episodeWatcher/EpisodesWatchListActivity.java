@@ -125,7 +125,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 					   .setCancelable(false)
 					   .setPositiveButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				                dialog.cancel();
+				                removeDialog(EXCEPTION_DIALOG);
 				           }
 				       });
 				dialog = builder.create();
@@ -430,7 +430,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
             @Override
             protected void onPostExecute(Object o) {
                 returnEpisodes();
-                dismissDialog(EPISODE_LOADING_DIALOG);
+                removeDialog(EPISODE_LOADING_DIALOG);
             }
         };
         asyncTask.execute();
@@ -547,12 +547,12 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
             @Override
             protected void onPostExecute(Object o) {
                 if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
-                    dismissDialog(EPISODE_LOADING_DIALOG);
+                    removeDialog(EPISODE_LOADING_DIALOG);
                     showDialog(EXCEPTION_DIALOG);
                     exceptionMessageResId = null;
                 } else {
                     returnEpisodes();
-                    dismissDialog(EPISODE_LOADING_DIALOG);
+                    removeDialog(EPISODE_LOADING_DIALOG);
                 }
             }
         };
@@ -579,12 +579,12 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
             @Override
             protected void onPostExecute(Object o) {
                 if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
-                    dismissDialog(EPISODE_LOADING_DIALOG);
+                    removeDialog(EPISODE_LOADING_DIALOG);
                     showDialog(EXCEPTION_DIALOG);
                     exceptionMessageResId = null;
                 } else {
                     returnEpisodes();
-                    dismissDialog(EPISODE_LOADING_DIALOG);
+                    removeDialog(EPISODE_LOADING_DIALOG);
                 }
             }
         };
