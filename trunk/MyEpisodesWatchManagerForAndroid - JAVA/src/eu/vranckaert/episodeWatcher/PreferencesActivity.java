@@ -166,12 +166,8 @@ public class PreferencesActivity extends PreferenceActivity {
         }
         else
         {
-        	exit();
+        	super.finish();
         }
-    }
-    
-    private void exit() {
-    	super.finish();
     }
     
     private void startTabMain() {

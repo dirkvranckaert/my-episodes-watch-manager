@@ -149,13 +149,13 @@ public class ShowSearchActivity extends ListActivity {
                        .setCancelable(false)
                        .setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-                               removeDialog(DIALOG_ADD_SHOW);
+                               dialog.dismiss();
                                finish();
 				           }
 				       })
                        .setNegativeButton(R.string.search, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-                               removeDialog(DIALOG_ADD_SHOW);
+                               dialog.dismiss();
 				           }
 				       });
                 dialog = builder.create();
