@@ -3,11 +3,16 @@
 	 	android:orientation="vertical"
 	  	xmlns:android="http://schemas.android.com/apk/res/android"
 	 >
-
+	<ScrollView android:id="@+id/ScrollView01" 
+				android:layout_width="fill_parent" 
+				android:layout_height="fill_parent">
+	<LinearLayout android:id="@+id/LinearLayout03" 
+				  android:orientation="vertical"
+				  android:layout_width="fill_parent" 
+				  android:layout_height="fill_parent">
 	<ImageView android:id="@+id/ImageView01"
 		android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_gravity="center"
 	    android:background="@drawable/header"
 	/>
 
@@ -86,8 +91,8 @@
 	<Button android:text="@string/menuEpisodeMarkAcquired" 
 			android:id="@+id/markAsAcquiredButton" 
 			android:layout_width="fill_parent" 
-			android:layout_height="wrap_content">
-	</Button>
+			android:layout_height="wrap_content"
+	/>
 	
 	<Button android:id="@+id/markAsSeenButton" 
 		android:text="@string/menuEpisodeMarkWatched" 
@@ -95,7 +100,7 @@
 		android:layout_height="wrap_content"
 	/>
 
-<LinearLayout android:id="@+id/LinearLayout02" 
+	<LinearLayout android:id="@+id/LinearLayout02" 
 			  android:layout_width="fill_parent"
 			  android:layout_height="wrap_content">
     <ImageButton android:id="@+id/twitterButton"
@@ -103,5 +108,7 @@
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
     />	  
+	</LinearLayout>
 </LinearLayout>
+</ScrollView>
 </LinearLayout>
