@@ -47,6 +47,7 @@
     <string name="episodeDetailsEpisodeLabel">Episode: </string>
     <string name="episodeDetailsAirDateLabel">Airdate: </string>
     <string name="episodeDetailsAirDateLabelDateNotFound">The airdate is unavailable for this episode. Please report a bug for this issue!</string>
+	<string name="TweetTitle">Share</string>
     <string name="Tweet">I have watched \'%s\' #MyEpisodesManager #Android</string>
 
     <!-- Show management -->

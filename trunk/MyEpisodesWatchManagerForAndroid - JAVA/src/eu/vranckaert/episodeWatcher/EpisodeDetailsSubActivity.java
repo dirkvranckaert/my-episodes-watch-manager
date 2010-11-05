@@ -127,11 +127,11 @@ public class EpisodeDetailsSubActivity extends Activity {
 	}
     
     private void tweetThis() {
-    	Intent sendIntent = new Intent(Intent.ACTION_SEND); 
-    	String tweet = episode.getShowName() + " S" + episode.getSeason() + "E" + episode.getEpisode();
-    	sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.Tweet, tweet)); 
-    	sendIntent.setType("application/twitter");   
-    	startActivity(Intent.createChooser(sendIntent, null)); 
+    	String tweet = episode.getShowName() + " S" + episode.getSeasonString() + "E" + episode.getEpisodeString();
+    	Intent i = new Intent(android.content.Intent.ACTION_SEND);
+    	i.setType("text/plain");
+    	i.putExtra(Intent.EXTRA_TEXT, getString(R.string.Tweet, tweet));
+    	startActivity(Intent.createChooser(i, getString(R.string.TweetTitle)));
     }
     
     private void closeAndMarkWatched(Episode episode) {
