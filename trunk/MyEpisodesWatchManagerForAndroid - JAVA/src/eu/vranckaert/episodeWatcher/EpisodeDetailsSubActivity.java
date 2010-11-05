@@ -127,7 +127,7 @@ public class EpisodeDetailsSubActivity extends Activity {
 	}
     
     private void tweetThis() {
-    	String tweet = episode.getShowName() + " S" + episode.getSeasonString() + "E" + episode.getEpisodeString();
+    	String tweet = episode.getShowName() + " S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName();
     	Intent i = new Intent(android.content.Intent.ACTION_SEND);
     	i.setType("text/plain");
     	i.putExtra(Intent.EXTRA_TEXT, getString(R.string.Tweet, tweet));
