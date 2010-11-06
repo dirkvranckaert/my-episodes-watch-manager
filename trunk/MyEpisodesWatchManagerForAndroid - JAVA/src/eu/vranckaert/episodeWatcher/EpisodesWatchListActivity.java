@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.view.*;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -22,7 +21,7 @@ import eu.vranckaert.episodeWatcher.domain.*;
 import eu.vranckaert.episodeWatcher.exception.*;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
-import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
+import eu.vranckaert.episodeWatcher.service.EpisodesService;
 
 import java.util.*;
 
@@ -32,13 +31,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
 	private static final int EPISODE_LOADING_DIALOG = 0;
 	private static final int EXCEPTION_DIALOG = 1;
-	private static final int ABOUT_DIALOG = 2;
-	private static final int CHANGELOG_DIALOG = 3;
 	private static final int LOGOUT_DIALOG = 4;
 	private static final String LOG_TAG = "EpisodeWatchListActivity";
 
 	private User user;
-    private MyEpisodesService myEpisodesService;
+    private EpisodesService service;
     private List<Episode> episodes = new ArrayList<Episode>();
     private List<Show> shows = new ArrayList<Show>();
     private TextView Title;
@@ -54,7 +51,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	public EpisodesWatchListActivity() {
 		super();
 		this.user = new User("myUsername", "myPassword");
-		this.myEpisodesService = new MyEpisodesService();
+		this.service = new EpisodesService();
 	}
 
 	@Override
@@ -130,24 +127,6 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 				       });
 				dialog = builder.create();
 				break;
-			case ABOUT_DIALOG:
-				tracker.trackPageView("/aboutDialog");
-				dialog = new Dialog(this);
-				dialog.setContentView(R.layout.informationsdialog);
-				dialog.setTitle(R.string.aboutTitle);
-				TextView aboutText = (TextView) dialog.findViewById(R.id.informationtext);
-				aboutText.setText(R.string.aboutText);
-				Linkify.addLinks(aboutText, Linkify.ALL);
-				break;
-			case CHANGELOG_DIALOG:
-				tracker.trackPageView("/changeLogDialog");
-				dialog = new Dialog(this);
-				dialog.setContentView(R.layout.informationsdialog);
-				dialog.setTitle(R.string.changelogTitle);
-				TextView changelogText = (TextView) dialog.findViewById(R.id.informationtext);
-				changelogText.setText(R.string.changelogText);
-				Linkify.addLinks(changelogText, Linkify.ALL);
-				break;
 			case LOGOUT_DIALOG:
 				AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
 				alertBuilder.setTitle(R.string.logoutDialogTitle)
@@ -189,6 +168,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         tabMain.clearRefreshTab(episodesType);
         init();
         checkPreferences();
+
         openLoginActivity();
 	}
 
@@ -205,13 +185,15 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
                 openPreferencesActivity();
                 return true;
             case R.id.about:
-                showDialog(ABOUT_DIALOG);
+                Intent aboutIntent = new Intent(this.getApplicationContext(), AboutActivity.class);
+                startActivity(aboutIntent);
                 return true;
             case R.id.logout:
                 showDialog(LOGOUT_DIALOG);
                 return true;
-            case R.id.changelog:
-                showDialog(CHANGELOG_DIALOG);
+            case R.id.whatsnew:
+                Intent whatsNewIntent = new Intent(this.getApplicationContext(), WhatsNewActivity.class);
+                startActivity(whatsNewIntent);
                 return true;
 		}
 		return false;
@@ -361,7 +343,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
     private void openManageShowsActivity() {
         //tracker.trackPageView("/manageShows"); //TODO enable tracking
-        Intent manageShowsActivity = new Intent(this.getApplicationContext(), ManageActivity.class);
+        Intent manageShowsActivity = new Intent(this.getApplicationContext(), ShowManagementActivity.class);
         startActivity(manageShowsActivity);
     }
 
@@ -438,7 +420,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
 	private void getEpisodes() {
 		try {
-			episodes = myEpisodesService.retrieveEpisodes(episodesType, user);
+			episodes = service.retrieveEpisodes(episodesType, user);
 		} catch (InternetConnectivityException e) {
 			String message = "Could not connect to host";
 			Log.e(LOG_TAG, message, e);
@@ -595,11 +577,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		try {
 			if (EpisodeStatus == 0)
 			{
-				myEpisodesService.watchedEpisode(episode, user);
+				service.watchedEpisode(episode, user);
 			}
 			else if (EpisodeStatus == 1)
 			{
-				myEpisodesService.acquireEpisode(episode, user);
+				service.acquireEpisode(episode, user);
 				TabMain tabMain = (TabMain) getParent();
 				tabMain.refreshWatchTab();
 			}
@@ -630,11 +612,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		try {
 			if (EpisodeStatus == 0)
 			{
-				myEpisodesService.watchedEpisodes(episodes, user);
+				service.watchedEpisodes(episodes, user);
 			}
 			else if (EpisodeStatus == 1)
 			{
-				myEpisodesService.acquireEpisodes(episodes, user);
+				service.acquireEpisodes(episodes, user);
 				TabMain tabMain = (TabMain) getParent();
 				tabMain.refreshWatchTab();
 			}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:paddingTop="5dp"
+              android:paddingLeft="5dp"
+              android:paddingRight="5dp"
+              android:orientation="vertical">
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/icon32"
+                   android:paddingRight="5dp"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/whatsNewTitle"
+                  android:layout_gravity="center_vertical"
+                  android:textSize="25dp"/>
+    </LinearLayout>
+    <ScrollView android:id="@+id/scrollview"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <TableLayout android:layout_width="fill_parent"
+                         android:layout_height="wrap_content">
+                <TableRow>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/whatsNewVersion"/>
+                    <TextView android:id="@+id/whatsNewVersion"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:paddingLeft="5dp"
+                              android:paddingRight="5dp"/>
+                </TableRow>
+            </TableLayout>
+            <!-- Website -->
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text=""/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/whatsNewText"/>
+            <LinearLayout android:layout_width="fill_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:id="@+id/whatsNewTextEntries"/>
+        </LinearLayout>
+	</ScrollView>
+</LinearLayout>

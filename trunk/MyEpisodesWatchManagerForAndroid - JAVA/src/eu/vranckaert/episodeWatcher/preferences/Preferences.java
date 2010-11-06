@@ -3,6 +3,7 @@ package eu.vranckaert.episodeWatcher.preferences;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import eu.vranckaert.episodeWatcher.utils.ApplicationUtil;
 import eu.vranckaert.episodeWatcher.utils.StringUtils;
 
 public class Preferences {
@@ -59,5 +60,25 @@ public class Preferences {
     public static int getPreferenceInt(Activity ac, String key) {
         String result = getSharedPreferences(ac).getString(key, "0");
         return Integer.parseInt(result);
+    }
+
+    public static boolean isFirstTime(Activity ac) {
+        String currentVersion = ApplicationUtil.getCurrentApplicationVersion(ac.getApplicationContext());
+        boolean isFirstTime = false;
+
+        SharedPreferences preferences = getSharedPreferences(ac);
+        String knownApplicationVersion = preferences.getString(PreferencesKeys.APPLICATION_VERSION_KEY, null);
+        if(knownApplicationVersion == null) {
+            isFirstTime = true;
+        } else {
+            if(!knownApplicationVersion.equals(currentVersion)) {
+                isFirstTime = true;
+            }
+        }
+
+        Editor editor = preferences.edit();
+        editor.putString(PreferencesKeys.APPLICATION_VERSION_KEY, currentVersion);
+        editor.commit();
+        return isFirstTime;
     }
 }

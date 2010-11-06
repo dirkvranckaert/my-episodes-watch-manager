@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:paddingTop="5dp"
+              android:paddingLeft="5dp"
+              android:paddingRight="5dp"
+              android:orientation="vertical">
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/icon32"
+                   android:paddingRight="5dp"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/aboutTitle"
+                  android:layout_gravity="center_vertical"
+                  android:textSize="25dp"/>
+    </LinearLayout>
+    <ScrollView android:id="@+id/scrollview"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <TableLayout android:layout_width="fill_parent"
+                         android:layout_height="wrap_content">
+                <TableRow>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/aboutVersion"/>
+                    <TextView android:id="@+id/aboutVersion"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:paddingLeft="5dp"
+                              android:paddingRight="5dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/aboutLicense"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/aboutLicenseValue"
+                              android:paddingLeft="5dp"
+                              android:paddingRight="5dp"/>
+                </TableRow>
+                <TableRow>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/aboutOriginalIdea"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="@string/aboutOriginalIdeaValue"
+                              android:paddingLeft="5dp"
+                              android:paddingRight="5dp"/>
+                </TableRow>
+            </TableLayout>
+            <!-- Website -->
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text=""/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/aboutWebsite"/>
+            <TextView android:id="@+id/aboutWebsite"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/aboutWebsiteValue"/>
+
+            <!-- Email -->
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text=""/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/aboutEmail"/>
+            <TextView android:id="@+id/aboutEmail"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/aboutEmailValue"/>
+        </LinearLayout>
+	</ScrollView>
+</LinearLayout>

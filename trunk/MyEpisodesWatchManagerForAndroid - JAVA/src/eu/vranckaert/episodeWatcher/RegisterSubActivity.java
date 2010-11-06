@@ -19,11 +19,11 @@ import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
-import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
+import eu.vranckaert.episodeWatcher.service.UserService;
 
 public class RegisterSubActivity extends Activity {
     private Button registerButton;
-    private MyEpisodesService myEpisodesService;
+    private UserService service;
     private User user;
     private boolean registerStatus;
     private String email;
@@ -158,7 +158,7 @@ public class RegisterSubActivity extends Activity {
 	}
     
     private boolean register(User user) throws LoginFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
-    	return myEpisodesService.register(user, email);
+    	return service.register(user, email);
 	}
     
     private void storeLoginCredentials(User user) {
@@ -172,6 +172,6 @@ public class RegisterSubActivity extends Activity {
     }
     
     private void init() {
-    	this.myEpisodesService = new MyEpisodesService();
+    	this.service = new UserService();
     }
 }

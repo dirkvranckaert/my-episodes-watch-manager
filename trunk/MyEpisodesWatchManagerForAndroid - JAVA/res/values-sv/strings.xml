@@ -18,7 +18,7 @@
     <string name="loginLoginFailed">Fel användarnamn eller lösenord, försök igen!</string>
     
 	<!-- register form -->
-    <string name="registerFormTitle">Register here, fill in all your user details and click on register.</string><!-- TODO Translate -->
+    <string name="registerFormTitle">Registrering. Fyll i användaruppgifter och välj Registrera.</string>
     <string name="registerUsernameHint">Användarnamn</string>
     <string name="registerPasswordHint">Lösenord</string>
     <string name="registerEmailHint">Email</string>

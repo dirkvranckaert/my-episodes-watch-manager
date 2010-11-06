@@ -12,4 +12,5 @@ public class PreferencesKeys {
     public static final String THEME_KEY = "theme_key";
     public static final String STORE_PASSWORD_KEY = "store_password";
     public static final String LANGUAGE_KEY = "language";
+    public static final String APPLICATION_VERSION_KEY = "app_version";
 }

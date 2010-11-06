@@ -3,7 +3,7 @@
       package="eu.vranckaert.episodeWatcher"
       android:installLocation="auto"
       android:versionCode="19"
-      android:versionName="1.6.1">
+      android:versionName="1.7.0 - Beta">
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name=".TabMain"
                   android:label="@string/app_name"
@@ -24,12 +24,18 @@
         <activity android:name=".PreferencesActivity"
                   android:configChanges="orientation|keyboardHidden"
                   android:label="@string/preferences"/>
-        <activity android:name=".ManageActivity"
+        <activity android:name=".ShowManagementActivity"
+                  android:label="@string/manageShows"/>
+        <activity android:name=".ShowFavosAndIngoredManagementActivity"
                   android:configChanges="orientation|keyboardHidden"
                   android:label="@string/manageShows"/>
         <activity android:name=".ShowSearchActivity"
-                  android:configChanges="orientation|keyboardHidden">
-        </activity>
+                  android:configChanges="orientation|keyboardHidden"
+                  android:label="@string/manageShows"/>
+        <activity android:name=".AboutActivity"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".WhatsNewActivity"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
 
         <uses-library android:name="android.test.runner" />
     </application>

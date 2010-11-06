@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,7 +25,7 @@ import eu.vranckaert.episodeWatcher.exception.ShowAddFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
-import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
+import eu.vranckaert.episodeWatcher.service.ShowService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class ShowSearchActivity extends ListActivity {
     private static final int DIALOG_FINISHED = 2;
     private static final int DIALOG_ADD_SHOW = 3;
 
-    private MyEpisodesService service;
+    private ShowService service;
     private User user;
     private ShowAdapter showAdapter;
     private List<Show> shows = new ArrayList<Show>(0);
@@ -62,6 +63,8 @@ public class ShowSearchActivity extends ListActivity {
             public void onClick(View view) {
                 CharSequence query = ((EditText) findViewById(R.id.searchQuery)).getText();
                 if(query.length() > 0) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                     ShowSearchActivity.this.searchShows(query.toString());
                 } else {
                     //TODO show message: enter a show name to search for!! Use a toast-message for this purpose!
@@ -75,7 +78,7 @@ public class ShowSearchActivity extends ListActivity {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.showsearch);
 
-        service = new MyEpisodesService();
+        service = new ShowService();
         user = new User(
             Preferences.getPreference(this, User.USERNAME),
             Preferences.getPreference(this, User.PASSWORD)
@@ -137,7 +140,7 @@ public class ShowSearchActivity extends ListActivity {
 					   .setPositiveButton(R.string.dialogOK, new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
                                 exceptionMessageResId = null;
-                                removeDialog(DIALOG_ADD_SHOW);
+                                removeDialog(DIALOG_EXCEPTION);
 				           }
 				       });
 				dialog = builder.create();

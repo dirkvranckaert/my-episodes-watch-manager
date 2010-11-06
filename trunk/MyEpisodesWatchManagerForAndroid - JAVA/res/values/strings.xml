@@ -51,6 +51,10 @@
     <string name="Tweet">I have watched \'%s\' #MyEpisodesManager #Android</string>
 
     <!-- Show management -->
+    <!-- Show Panel -->
+    <string name="addShow">Add Show</string>
+    <string name="favouriteShows">Favourite Shows</string>
+    <string name="ignoredShows">Ignored Shows</string>
     <!-- Show searching -->
     <string name="showSearchHint">Enter a show name...</string>
     <string name="showSearchNoSearchResults">No shows found</string>
@@ -58,6 +62,10 @@
     <string name="showSearchMoreFound">shows found</string>
     <string name="showSearchAddShow">Are you sure you want to add this show to your list of shows?</string>    
     <string name="showSearchFinished">Are you done adding shows or do you want to continue?</string>
+    <!-- Favo and ingored shows -->
+    <string name="favoIgnoredDeleteShow">Delete show</string>
+    <string name="favoIgnoredIgnoreShow">Ignore show</string>
+    <string name="favoIgnoredUnignoreShow">Unignore show</string>
 
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Loading...</string>
@@ -65,22 +73,33 @@
 
     <!-- aboutDialog -->
     <string name="aboutTitle">About...</string>
-    <string name="aboutText">Written by: Dirk Vranckaert\n
-    Maintained by:\n
-    * Dirk Vranckaert\n
-    * Ivo Janssen\n
-    Translations by:\n
-    * Dirk Vranckaert (English, Dutch)\n
-    * Fredrik Nohrborg (Swedish)\n
-    * Daniel De Luca (French, Italian)\n
-    * Hyeon Tae Jeon (Korean)\n
-    * Sergio Travieso (Spanish)\n
-    License: GNU GPL V3 License\n
-    Project website: http://code.google.com/p/my-episodes-watch-manager\n
-    Project contact: dirkvranckaert@gmail.com\n
-    \n
-    Mange the episodes you follow using MyEpisodes.com (registration required) and watch directly on your mobile what\'s the next episode you have to watch.</string>
-
+    <string name="aboutVersion">Version:</string>
+    <string name="aboutLicense">License:</string>
+    <string name="aboutWebsite">Website:</string>
+    <string name="aboutEmail">Email:</string>
+    <string name="aboutOriginalIdea">Original idea:</string>
+    <!-- whatsNewDialog -->
+    <string name="whatsNewTitle">What\'s new</string>
+    <string name="whatsNewVersion">Version:</string>
+    <string name="whatsNewText">What has changed:</string>
+    <string-array name="whatsNewValues">
+        <!-- TODO update! -->
+        <item>Registration for new users</item>
+        <item>Show Management</item>
+        <item>Twitter Integration</item>
+        <item>German translations</item>
+        <item>Latvian translations</item>
+        <item>Portuguese translations</item>
+        <item>New logo</item>
+        <item>Dark colored scheme</item>
+        <item>Mark all episodes of a show (group) watched or acquired</item>
+        <item>Select a tab to open by default</item>
+        <item>Loading dialogs (no ANR anymore)</item>
+        <item>Date issues solved</item>
+        <item>No more Korean language support</item>
+        <item>New about dialog</item>
+        <item>New \'What\'s new\' dialog</item>
+    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Are you sure?</string>
     <string name="logoutDialogMessage">Your credentials will no longer be stored on the device.</string>
@@ -91,7 +110,7 @@
     <string name="manageShows">Manage Shows</string>
     <string name="about">About</string>
     <string name="logout">Logout</string>
-    <string name="changelog">What\'s changed</string>
+    <string name="whatsNew">What\'s new</string>
     <string name="preferences">Preferences</string>
     <!-- show specific menu -->
     <string name="menuShowMarkAcquired">Mark all episodes as Acquired</string>
@@ -100,8 +119,6 @@
     <string name="menuEpisodeDetails">Details</string>
     <string name="menuEpisodeMarkAcquired">Mark Acquired</string>
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
-    <!-- shows manage specific menu -->
-    <string name="addShow">Add Show</string>
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">Because settings are changed, the episodes will be refreshed now!</string>
@@ -127,7 +144,7 @@
             <item>Acquire</item>
             <item>Coming</item>
     </string-array>
-    <!-- Default opening tab -->
+    <!-- Change Theme -->
     <string name="ThemePrompt">Choose Theme</string>
     <string name="ThemePromptExtra">Select your theme</string>
     <string-array name="ThemeOptions">
@@ -138,15 +155,6 @@
     <string name="storePasswordPrompt">Store password</string>
     <!-- Change Language -->
     <string name="showLanguagePrompt">Change Language</string>
-    <string-array name="showLanguageOptions">
-        <item>English</item>
-        <item>Español</item>
-        <item>French</item>
-        <item>Italian</item>
-        <item>Korean</item>
-        <item>Dutch</item>
-        <item>Swedish</item>
-    </string-array>
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
@@ -162,88 +170,17 @@
     <string name="watchListUnableToMarkWatched">Failed to mark this episode watched!\nCheck internet connection or refresh the list!</string>
     <string name="searchShowUnabletoAdd">Failed to add the show. Try again later. If this error keeps showing up please log an issue!</string>
 
-    <string name="changelogTitle">What\'s changed</string>
-    <string name="changelogText">Version 1.6.1\n
-    ***********\n
-    New application logo\n
-    Change default language in settings\n
-    Supporting most custom date settings from myEpisodes.com config screen\n
-    Airdates now shown in the format of your language\n
-    Some code-optimalizations\n
-    No reload of data required when changing orientation\n
-    Application translated into Spanish\n
-    \n
-    Version 1.6.0\n
-    ***********\n
-    Full MyEpisodes.com mobile application including episodes to watch, episodes to aqcuire and upcoming episodes\n
-    Fixed bug that some episodes where not listed\n
-    Fixed bug for large collections issue in episodes lists\n
-    Fixed bug in episodes with special characters\n
-    Version 1.5.1\n
-    ***********\n
-    Better Google Analytics statistics\n
-    \n
-    Version 1.5.0\n
-    ***********\n
-    Android 2.2 aka Froyo compatible\n
-    Preferences screen\n
-    Remember password preference\n
-    Sort shows preference\n
-    Sort episodes preference\n
-    Better context menu\n
-    Bug in showing episode title in list solved\n
-    Login bug solved\n
-    French translations by Daniel De Luca\n
-    Italian translations by Daniel De Luca\n
-    Korean translations by Hyeon Tae Jeon\n
-    \n
-    Version 1.4.1\n
-    ***********\n
-    Swedish translation by Fredrik Nohrborg\n
-    \n
-    Version 1.4.0\n
-    ***********\n
-    Grouping of episodes\n
-    \n
-    Version 1.3.5\n
-    ***********\n
-    Update login screen and procedure\n
-    Layout modifications (header)\n
-    Bugs in white theme solved\n
-    \n
-    Version 1.3.4\n
-    ***********\n
-    Implemented white theme suggested by Ivo Janssen\n
-    \n
-    Version 1.3.3\n
-    ***********\n
-    Implemented Question dialog when logging out\n
-    \n
-    Version 1.3.2\n
-    ***********\n
-    Added Google Analytics for statics\n
-    Solved issue with to long episode names\n
-    \n
-    Version 1.3.1\n
-    ***********\n
-    Added about dialog\n
-    Added changelog dialog\n
-    Tested compatibility with Android 2.0\n
-    Internationalization (i18n: English, Dutch)\n
-    \n
-    Version 1.3.0\n
-    ***********\n
-    Bugfixing release\n
-    \n
-    Version 1.2.0\n
-    ***********\n
-    Network connction issues solved\n
-    Date formatting in episode details</string>
-
     <!-- The tags beneath may never be translated or will cause an application failure!!! -->
     <!-- The tags shouldn't even be copied to the other translation files. -->
     <!-- Application Name -->
-    <string name="app_name">MyEpisodes Manager</string>    
+    <string name="app_name">MyEpisodes Manager</string>
+    <!-- About Dialog -->
+    <string name="aboutLicenseValue">GNU GPL V3 License</string>
+    <string name="aboutOriginalIdeaValue">Dirk Vranckaert</string>
+    <string name="aboutWebsiteValue">http://code.google.com/p/my-episodes-watch-manager</string>
+    <string name="aboutEmailValue">android-dev@vranckaert.eu</string>
+    <!-- What's new Dialog -->
+    <string name="whatsNewListPrefix">-</string>
     <!-- Preferences -->
     <string-array name="showOrderOptionsValues">
         <item>show_myepisodes_default_sort</item>
@@ -263,13 +200,27 @@
             <item>0</item>
             <item>1</item>
     </string-array>
+    <!-- Next two arrays should be in the same order always!!! -->
     <string-array name="showLanguageOptionsValues">
+        <item>nl</item>
         <item>en</item>
         <item>es</item>
         <item>fr</item>
+        <item>de</item>
         <item>it</item>
-        <item>ko</item>
-        <item>nl</item>
+        <item>lv</item>
+        <item>pt</item>
         <item>sv</item>
+    </string-array>
+    <string-array name="showLanguageOptions">
+        <item>Dutch</item>
+        <item>English</item>
+        <item>Español</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Italian</item>
+        <item>Latvian</item>
+        <item>Portuguese</item>
+        <item>Swedish</item>
     </string-array>
 </resources>

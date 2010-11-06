@@ -6,50 +6,47 @@
     <TableLayout android:layout_width="wrap_content"
                  android:layout_height="wrap_content">
         <TableRow>
-            <LinearLayout android:orientation="vertical"
+            <LinearLayout android:orientation="horizontal"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:padding="10dp"
                           android:id="@+id/selectionPanelFavoShows">
                 <ImageView android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
-                             android:src="@drawable/ic_menu_favorite"
-                             android:layout_gravity="center_horizontal"/>
+                             android:src="@drawable/ic_menu_favorite"/>
                 <TextView android:layout_height="wrap_content"
                           android:layout_width="wrap_content"
                           android:text="@string/favouriteShows"
-                          android:layout_gravity="center_horizontal"/>
+                          android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
-            <LinearLayout android:orientation="vertical"
+            <LinearLayout android:orientation="horizontal"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:padding="10dp"
                           android:id="@+id/selectionPanelIgnoredShows">
                 <ImageView android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
-                             android:src="@drawable/ic_menu_stop"
-                             android:layout_gravity="center_horizontal"/>
+                             android:src="@drawable/ic_menu_stop"/>
                 <TextView android:layout_height="wrap_content"
                           android:layout_width="wrap_content"
                           android:text="@string/ignoredShows"
-                          android:layout_gravity="center_horizontal"/>
+                          android:layout_gravity="center_vertical"/>
             </LinearLayout>
         </TableRow>
         <TableRow>
-            <LinearLayout android:orientation="vertical"
+            <LinearLayout android:orientation="horizontal"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:padding="10dp"
                           android:id="@+id/selectionPanelAddShows">
                 <ImageView android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
-                             android:src="@android:drawable/ic_menu_add"
-                             android:layout_gravity="center_horizontal"/>
+                             android:src="@android:drawable/ic_menu_add"/>
                 <TextView android:layout_height="wrap_content"
                           android:layout_width="wrap_content"
                           android:text="@string/addShow"
-                          android:layout_gravity="center_horizontal"/>
+                          android:layout_gravity="center_vertical"/>
             </LinearLayout>
         </TableRow>
     </TableLayout>
