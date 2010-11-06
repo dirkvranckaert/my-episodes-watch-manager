@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Revision #93 -->
+<resources>
+    <!-- default values -->
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="close">Fechar</string>
+    <string name="attention">Atenção</string>
+
+    <!-- login form -->
+    <string name="loginFormTitle">Forneça abaixo os seus dados de acesso para o site MyEpisodes.com.</string>
+    <string name="loginFormRegister">Novo Usuário?</string>
+    <string name="loginUsernameHint">Usuário</string>
+    <string name="loginPasswordHint">Senha</string>
+    <string name="loginLoginBtn">Acessar</string>
+    <string name="loginStartLogin">Acessando o MyEpisodes.com</string>
+    <string name="loginSuccessfullLogin">Acesso realizado com sucesso</string>
+    <string name="loginLoginFailed">Usuário ou senha incorretos, por favor, tente novamente!</string>
+    
+        <!-- register form -->
+    <string name="registerFormTitle">Cadastre-se aqui, preencha todos os dados e clique em Cadastrar.</string>
+    <string name="registerUsernameHint">Usuário</string>
+    <string name="registerPasswordHint">Senha</string>
+    <string name="registerEmailHint">Email</string>
+    <string name="registerBtn">Cadastrar</string>
+    <string name="registerStart">Criando usuário no MyEpisodes.com</string>
+    <string name="registerSuccessfull">Usuário criado com sucesso!</string>
+    <string name="registerFailed">Nome de Usuário já existente, por favor, utilize outro Nome de Usuário.</string>     
+        
+    <!-- watchlist -->
+    <string name="watch">Assistir</string>
+    <string name="acquire">Adquirir</string>
+    <string name="coming">Em breve</string>
+    <string name="watchListTitle">Lista de seriados/episódios</string>
+    <string name="watchListSubTitleWatch">%d episódio para assistir</string>
+    <string name="watchListSubTitleAcquire">%d episódio para adquirir</string>
+    <string name="watchListSubTitleComing">%d episódio em breve</string>
+    <string name="watchListSubTitleWatchPlural">%d episódios para assistir</string>
+    <string name="watchListSubTitleAcquirePlural">%d episódios para adquirir</string>
+    <string name="watchListSubTitleComingPlural">%d episódios em breve</string>
+    <string name="watchListEmpty">Nenhum episódio encontrado.</string>
+
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Temporada: </string>
+    <string name="episodeDetailsEpisodeLabel">Episódio: </string>
+    <string name="episodeDetailsAirDateLabel">Data de Estréia: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">A data de estréia deste episódio não esta disponível. Por favor, encaminhe um relatório de erro sobre esse assunto!</string>
+
+    <!-- Show management -->
+    <!-- Show searching -->
+    <string name="showSearchHint">Entre com o nome de um seriado...</string>
+    <string name="showSearchNoSearchResults">Nenhum seriado encontrado</string>
+    <string name="showSearchOneFound">seriado encontrado</string>
+    <string name="showSearchMoreFound">seriados encontrados</string>
+
+    <!-- progressDialog -->
+    <string name="progressLoadingTitle">Carregando...</string>
+    <string name="progressLoadingBody">Enviando/Recebendo informações</string>
+
+    <!-- aboutDialog -->
+    <string name="aboutTitle">Sobre...</string>
+    <string name="aboutText">Escrito por: Dirk Vranckaert\n
+    Desenvolvido por:\n
+    * Dirk Vranckaert\n
+    * Ivo Janssen\n
+    Traduções por:\n
+    * Dirk Vranckaert (English, Dutch)\n
+    * Fredrik Nohrborg (Swedish)\n
+    * Daniel De Luca (French, Italian)\n
+    * Hyeon Tae Jeon (Korean)\n
+    * Sergio Travieso (Spanish)\n
+    License: GNU GPL V3 License\n
+    Website do projeto: http://code.google.com/p/my-episodes-watch-manager\n
+    Contato sobre o projeto: dirkvranckaert@gmail.com\n
+    \n
+    Administre os episódios que você segue em MyEpisodes.com (cadastro requerido) e veja em diretamente em seu aparelho móvel qual o próximo episódio que você tem para assistir.</string>
+
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Você tem certeza?</string>
+    <string name="logoutDialogMessage">Seus dados cadastrais não serão mais armazenados no seu dispositivo.</string>
+
+    <!-- menu's -->
+    <!-- main menu -->
+    <string name="refresh">Recarregar</string>
+    <string name="manageShows">Administrar Seriados</string>
+    <string name="about">Sobre</string>
+    <string name="logout">Desconectar</string>
+    <string name="changelog">O que mudou</string>
+    <string name="preferences">Opções</string>
+    <!-- episode specific menu -->
+    <string name="menuEpisodeDetails">Detalhes</string>
+    <string name="menuEpisodeMarkAcquired">Marcar como Adquirido</string>
+    <string name="menuEpisodeMarkWatched">Marcar como Assistido</string>
+    <!-- shows manage specific menu -->
+    <string name="addShow">Adicionar Seriado</string>
+
+    <!-- preferences Dialog -->
+    <string name="applyPreferences">Devido a alteração de opções, os episódios vão ser recarregados agora!</string>
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Ordem dos seriados</string>
+    <string-array name="showOrderOptions">
+        <item>Padrão</item>
+        <item>Ascendente</item>
+        <item>Descendente</item>
+    </string-array>
+    <!-- Episode sorting -->
+    <string name="episodeOrderPrompt">Ordem dos episódios</string>
+    <string name="episodeOrderPromptExtra">Mais antigo ou mais novo primeiro...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Mais antigo primeiro</item>
+        <item>Mais novo primeiro</item>
+    </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Painel padrão</string>
+    <string name="openDefaultPromptExtra">Quando abrir a aplicação qual o painel que deve ser selecionado por padrão.</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Assistir</item>
+            <item>Adquirir</item>
+            <item>Em breve</item>
+    </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Lembrar senha</string>
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Alterar Idioma</string>
+    <string-array name="showLanguageOptions">
+        <item>Inglês</item>
+        <item>Espanhol</item>
+        <item>Frances</item>
+        <item>Italiano</item>
+        <item>Koreano</item>
+        <item>Holandês</item>
+        <item>Suiço</item>
+    </string-array>
+
+    <!-- Basic Dialog -->
+    <string name="dialogOK">OK</string>
+
+    <!-- Exception handling for dialogs -->
+    <string name="fillInAllFields">Todos os campos precisam ser preenchidos!</string>
+    <string name="exceptionDialogTitle">Ooops...</string>
+    <string name="defaultExceptionMessage">Algo deu errado. Tente reiniciar a aplicação e verifique sua conexão com a Internet. Se você continuar a ter esse problema, preencha um relatório de erro em http://code.google.com/p/my-episodes-watch-manager/.</string>
+    <string name="internetConnectionFailureTryAgain">Não foi possível estabelecer uma conexão com a Internet. Por favor, tente novamente!</string>
+    <string name="internetConnectionFailureReload">Não foi possível estabelecer uma conexão com a Internet. Use a opção de Recarregar no Menu para tentar novamente.</string>
+    <string name="networkIssues">Erro de Rede!\nVerifique suas opções de rede e tente recarregar manualmente.</string>
+    <string name="watchListUnableToReadFeed">Erro de Rede!\nTente recarregar manualmente.</string>
+    <string name="watchListUnableToMarkWatched">Falha ao marcar este episódio como assistido!\nVerifique sua conexão com a Internet e tente recarregar a lista!</string>
+
+    <string name="changelogTitle">O que mudou</string>
+    <string name="changelogText">Version 1.6.1\n
+    ***********\n
+    New application logo\n
+    Change default language in settings\n
+    Supporting most custom date settings from myEpisodes.com config screen\n
+    Airdates now shown in the format of your language\n
+    Some code-optimalizations\n
+    No reload of data required when changing orientation\n
+    Application translated into Spanish\n
+    \n
+    Version 1.6.0\n
+    ***********\n
+    Full MyEpisodes.com mobile application including episodes to watch, episodes to aqcuire and upcoming episodes\n
+    Fixed bug that some episodes where not listed\n
+    Fixed bug for large collections issue in episodes lists\n
+    Fixed bug in episodes with special characters\n
+    Version 1.5.1\n
+    ***********\n
+    Better Google Analytics statistics\n
+    \n
+    Version 1.5.0\n
+    ***********\n
+    Android 2.2 aka Froyo compatible\n
+    Preferences screen\n
+    Remember password preference\n
+    Sort shows preference\n
+    Sort episodes preference\n
+    Better context menu\n
+    Bug in showing episode title in list solved\n
+    Login bug solved\n
+    French translations by Daniel De Luca\n
+    Italian translations by Daniel De Luca\n
+    Korean translations by Hyeon Tae Jeon\n
+    \n
+    Version 1.4.1\n
+    ***********\n
+    Swedish translation by Fredrik Nohrborg\n
+    \n
+    Version 1.4.0\n
+    ***********\n
+    Grouping of episodes\n
+    \n
+    Version 1.3.5\n
+    ***********\n
+    Update login screen and procedure\n
+    Layout modifications (header)\n
+    Bugs in white theme solved\n
+    \n
+    Version 1.3.4\n
+    ***********\n
+    Implemented white theme suggested by Ivo Janssen\n
+    \n
+    Version 1.3.3\n
+    ***********\n
+    Implemented Question dialog when logging out\n
+    \n
+    Version 1.3.2\n
+    ***********\n
+    Added Google Analytics for statics\n
+    Solved issue with to long episode names\n
+    \n
+    Version 1.3.1\n
+    ***********\n
+    Added about dialog\n
+    Added changelog dialog\n
+    Tested compatibility with Android 2.0\n
+    Internationalization (i18n: English, Dutch)\n
+    \n
+    Version 1.3.0\n
+    ***********\n
+    Bugfixing release\n
+    \n
+    Version 1.2.0\n
+    ***********\n
+    Network connction issues solved\n
+    Date formatting in episode details</string>
+
+    <!-- The tags beneath may never be translated or will cause an application failure!!! -->
+    <!-- The tags shouldn't even be copied to the other translation files. -->
+    <!-- Application Name -->
+    <string name="app_name">MyEpisodes Manager</string>    
+    <!-- Preferences -->
+    <string-array name="showOrderOptionsValues">
+        <item>show_myepisodes_default_sort</item>
+        <item>show_ascending_sort</item>
+        <item>show_descending_sort</item>
+    </string-array>
+    <string-array name="episodeOrderOptionsValues">
+        <item>oldest_on_top</item>
+        <item>newest_on_top</item>
+    </string-array>
+    <string-array name="openDefaultTabValues">
+            <item>0</item>
+            <item>1</item>
+            <item>2</item>
+    </string-array>
+    <string-array name="showLanguageOptionsValues">
+        <item>en</item>
+        <item>es</item>
+        <item>fr</item>
+        <item>it</item>
+        <item>ko</item>
+        <item>nl</item>
+        <item>sv</item>
+    </string-array>
+</resources>

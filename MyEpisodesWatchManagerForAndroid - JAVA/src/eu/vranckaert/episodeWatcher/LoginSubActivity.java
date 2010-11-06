@@ -20,13 +20,15 @@ import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
-import eu.vranckaert.episodeWatcher.service.MyEpisodesService;
+import eu.vranckaert.episodeWatcher.service.UserService;
 
 public class LoginSubActivity extends Activity {
     private Button loginButton;
     private TextView register;
-    private MyEpisodesService myEpisodesService;
+    private UserService service;
     private int exceptionMessageResId = -1;
+
+    private static final int WHATS_NEW_INTENT_REQUEST_CODE = 0;
 
     private static final int MY_EPISODES_LOGIN_DIALOG_LOADING = 0;
     private static final int MY_EPISODES_ERROR_DIALOG = 1;
@@ -39,13 +41,30 @@ public class LoginSubActivity extends Activity {
     	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);        
     	super.onCreate(savedInstanceState);
         init();
-        
+
+        if(Preferences.isFirstTime(this)) {
+            Log.d(LOG_TAG, "First time launching the application for this version!");
+            Intent intent = new Intent(getApplicationContext(), WhatsNewActivity.class);
+            startActivityForResult(intent, WHATS_NEW_INTENT_REQUEST_CODE);
+        } else {
+            continueLoginExecution();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == WHATS_NEW_INTENT_REQUEST_CODE) {
+            continueLoginExecution();
+        }
+    }
+
+    private void continueLoginExecution() {
         if (!checkLoginCredentials()) {
         	GoogleAnalyticsTracker tracker = GoogleAnalyticsTracker.getInstance();
         	tracker.trackPageView("loginSubActivity");
-        	
+
 	        setContentView(R.layout.login);
-	        
+
 	    	register = (TextView) findViewById(R.id.registerForm);
 	    	register.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -53,7 +72,7 @@ public class LoginSubActivity extends Activity {
 			    	openRegisterScreen();
 				}
 			});
-	        
+
 	        loginButton = (Button) findViewById(R.id.loginLogin);
 	        loginButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -149,7 +168,7 @@ public class LoginSubActivity extends Activity {
     private boolean login(User user) {
         boolean loginStatus = false;
         try {
-            loginStatus = myEpisodesService.login(user);
+            loginStatus = service.login(user);
         } catch (InternetConnectivityException e) {
             String message = "Could not connect to host";
             Log.e(LOG_TAG, message, e);
@@ -188,7 +207,7 @@ public class LoginSubActivity extends Activity {
     }
     
     private void init() {
-    	this.myEpisodesService = new MyEpisodesService();
+    	this.service = new UserService();
     }
     
 	private void openRegisterScreen() {

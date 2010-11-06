@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Revision #93 -->
+<resources>
+    <!-- default values -->
+    <string name="yes">Jā</string>
+    <string name="no">Nē</string>
+    <string name="close">Aizvērt</string>
+    <string name="attention">Uzmanību</string>
+
+    <!-- login form -->
+    <string name="loginFormTitle">Sniedz savu MyEpisodes.com lietotāja iformāciju zemāk.</string>
+    <string name="loginFormRegister">Neesi reģistrējies? Spied šeit!</string>
+    <string name="loginUsernameHint">Lietotājvārds</string>
+    <string name="loginPasswordHint">Parole</string>
+    <string name="loginLoginBtn">Ieiet</string>
+    <string name="loginStartLogin">Notiek autorizācija MyEpisodes.com</string>
+    <string name="loginSuccessfullLogin">Autorizācija notika veiksmīgi!</string>
+    <string name="loginLoginFailed">Lietotājvārds vai parole nav pareizi, mēģini vēlreiz!</string>
+    
+	<!-- register form -->
+    <string name="registerFormTitle">Reģistrējies šeit! Ievadi visus personas datus un piespied reģistrēties. </string>
+    <string name="registerUsernameHint">Lietotājvārds</string>
+    <string name="registerPasswordHint">Parole</string>
+    <string name="registerEmailHint">E-pasta adrese</string>
+    <string name="registerBtn">Reģistrēties</string>
+    <string name="registerStart">Tiek radīts tavs MyEpisodes.com lietotājs</string>
+    <string name="registerSuccessfull">Darbība veiksmīga, lietotājs radīts!</string>
+    <string name="registerFailed">Lietotājvārds jau eksistē, lūdzu izvēlies citu lietotājvārdu!</string>	
+	
+    <!-- watchlist -->
+    <string name="watch">Jāapskata</string>
+    <string name="acquire">Jāiegūst</string>
+    <string name="coming">Drīzumā</string>
+    <string name="watchListTitle">Pārraižu un sēriju saraksts</string>
+    <string name="watchListSubTitleWatch">%d apskatāmā sērija</string>
+    <string name="watchListSubTitleAcquire">%d iegūstamā sērija</string>
+    <string name="watchListSubTitleComing">%d drīzumā sērija</string>
+    <string name="watchListSubTitleWatchPlural">%d apskatāmās sērijas</string>
+    <string name="watchListSubTitleAcquirePlural">%d iegūstamās sērijas</string>
+    <string name="watchListSubTitleComingPlural">%d drīzumā sērijas</string>
+    <string name="watchListEmpty">Neviena sērija nav atrasta.</string>
+
+    <!-- progressDialog -->
+    <string name="progressLoadingTitle">Ielāde...</string>
+    <string name="progressLoadingBody">Dati tiek nosūtīti/saņemti</string>
+
+    <!-- aboutDialog -->
+    <string name="aboutTitle">Informācija par programmu...</string>
+    <string name="aboutText">Autors: Dirk Vranckaert\n
+    Uzturēšana:\n
+    * Dirk Vranckaert\n
+    * Ivo Janssen\n
+    Tulkojumi:\n
+    * Dirk Vranckaert (Angliski, Dāniski)\n
+    * Fredrik Nohrborg (Zviedriski)\n
+    * Daniel De Luca (Franciski, Itāliski)\n
+    * Hyeon Tae Jeon (Korejiešu)\n
+    * Sergio Travieso (Spāniski)\n
+    * Artūrs Vikmanis (Latviski)
+    Licence: GNU GPL V3 License\n
+    Projekta mājas lapa: http://code.google.com/p/my-episodes-watch-manager\n
+    Sazināties ar projekta kontaktpersonu: dirkvranckaert@gmail.com\n
+    \n
+    Seko līdzi saviem iecienītākajiem seriāliem ar MyEpisodes.com (nepieciešama reģistrācija) un uzzini pirmais no sava telefona, kura ir nākamā sērija, kura tev ir jāapskata nākamā.</string>
+
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Vai esi pārliecināts?</string>
+    <string name="logoutDialogMessage">Tavi dati netiks saglabāti mobilās ierīces atmiņā.</string>
+
+    <!-- menu's -->
+    <!-- main menu -->
+    <string name="refresh">Atjaunināt</string>
+    <string name="about">Par programmu</string>
+    <string name="logout">Izeja</string>
+    <string name="changelog">Jaunās versijas izmaiņas</string>
+    <string name="preferences">Papildiespējas</string>
+    <!-- episode specific menu -->
+    <string name="menuEpisodeDetails">Sīkāk</string>
+    <string name="episodeDetailsSeasonLabel">Sezona: </string>
+    <string name="episodeDetailsEpisodeLabel">Sērija: </string>
+    <string name="episodeDetailsAirDateLabel">Ētera datums: </string>
+    <string name="menuEpisodeMarkAcquired">Atzīmēt kā iegūtu</string>
+    <string name="menuEpisodeMarkWatched">Atzīmēt kā apskatītu</string>
+
+    <!-- preferences Dialog -->
+    <string name="applyPreferences">Ņemot vērā to, ka tika veiktas izmaiņas, sēriju saraksts tiks atjaunināts!</string>
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Raidījumu secība</string>
+    <string-array name="showOrderOptions">
+        <item>Sākotnējā</item>
+        <item>Augoša</item>
+        <item>Dilstoša</item>
+    </string-array>
+    <!-- Episode sorting -->
+    <string name="episodeOrderPrompt">Sēriju secība</string>
+    <string name="episodeOrderPromptExtra">Sākt ar jaunāko vai vecāko...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Sākt ar vecāko</item>
+        <item>Sākt ar jaunāko</item>
+    </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Saglabāt paroli</string>
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Nomainīt valodu</string>
+    <string-array name="showLanguageOptions">
+        <item>English</item>
+        <item>Español</item>
+        <item>French</item>
+        <item>Italian</item>
+        <item>Korean</item>
+        <item>Dutch</item>
+        <item>Swedish</item>
+        <item>Latviski</item>
+    </string-array>
+
+    <!-- Basic Dialog -->
+    <string name="dialogOK">Labi</string>
+
+    <!-- Exception handling for dialogs -->
+    <string name="fillInAllFields">Visiem laukiem ir jābūt aizpildītiem!</string>
+    <string name="exceptionDialogTitle">Vai vai vai...</string>
+    <string name="defaultExceptionMessage">Kaut kas nogāja greizi. Mēģini pārstartēt programmu un pārbaudi vai strādā internets. Ja atkārtoti redzi šo kļūdu, ziņo par to: http://code.google.com/p/my-episodes-watch-manager/.</string>
+    <string name="internetConnectionFailureTryAgain">Neveiksmīgs interneta savienojums. Mēģini vēlreiz!</string>
+    <string name="internetConnectionFailureReload">Neveiksmīgs interneta savienojums. Izmanto izvēlni, lai atjauninātu un mēģinātu vēlreiz.</string>
+    <string name="networkIssues">Savienojuma kļūda!\nPārbaudi sava savienojuma iestatījumus un mēģini atjaunināt manuāli.</string>
+    <string name="watchListUnableToReadFeed">Savienojuma kļūda!\nMēģini atjaunināt manuāli.</string>
+    <string name="watchListUnableToMarkWatched">Šo sēriju atzīmēt kā apskatītu nav izdevies!\nPārbaudi interneta pieejamību un atjaunini sarakstu!</string>
+
+    <string name="changelogTitle">Kādas ir izmaiņas jaunajā versijā</string>
+    <string name="changelogText">Versija 1.6.1\n
+    ***********\n
+    Pilnā MyEpisodes.com mobilā programma ar iespēju atzīmēt apskatāmās, iegustamās un sērijas kuras iznāks drīzumā\n
+    Izlabota kļūda, kur dažas sērijas netika iekļautas sarakstā\n
+    Izlabota kļūda, kura saistīta ar lieliem sēriju sarakstiem\n
+    Izlabota kļūda, kurā nekorekti tika attēloti sēriju nosaukumi ar īpašiem simboliem\n
+    \n
+    Version 1.6.0\n
+    ***********\n
+    Pilna MyEpisodes.com mobilā aplikācija iekļaujot apskatāmās, iegūstamās un sērijas drīzumā\n
+    Izlabota kļūda, ka dažas sērijas netika iekļautas sarakstā\n
+    Izlabota kļūda ar lieliem sēriju sarakstiem\n
+    Izlabota kļūda ar īpašajiem simboliem sēriju nosaukumos\n
+    Version 1.5.1\n
+    ***********\n
+    Uzlabota Google Analytics statistika\n
+    \n
+    Versija 1.5.0\n
+    ***********\n
+    Android 2.2 aka Froyo savietojams\n
+    Papildiespēju izvēlne\n
+    Iespēja paroles saglabāšanai\n
+    Pārraišu šķirošanas iespēja\n
+    Sēriju šķirošanas iespēja\n
+    Ulzabota kontekstuālā izvēlne\n
+    Izlabota kļūda, kur nepareizi tika attēlots sērijas nosaukums sarakstā\n
+    Izlabota kļūda ar ieiešanu\n
+    Tulkojums Franču valodā sadarbībā ar Daniel De Luca\n
+    Tulkojums Itāļu valodā sadarbībā ar Daniel De Luca\n
+    Tulkojums Korejiešu valodā sadarbībā ar Hyeon Tae Jeon\n
+    \n
+    Versija 1.4.1\n
+    ***********\n
+    Tulkojums Zviedru valodā sadarbībā ar Fredrik Nohrborg\n
+    \n
+    Versija 1.4.0\n
+    ***********\n
+    Sēriju grupēšana\n
+    \n
+    Versija 1.3.5\n
+    ***********\n
+    Uzlabots ieiešanas interfeiss un procedūra\n
+    Izvietojuma modifikācija (galvgalis)\n
+    Izlabotas kļūdas baltajā tēmā\n
+    \n
+    Versija 1.3.4\n
+    ***********\n
+    Ieviesta baltā tēma pēc Ivo Janssen ieteikuma\n
+    \n
+    Versija 1.3.3\n
+    ***********\n
+    Ieviests iziešanas dialoga interfeiss\n
+    \n
+    Versija 1.3.2\n
+    ***********\n
+    Pievienots Google Analytics statistikas ievākšanai\n
+    Izlabota kļūda, kura saistīta ar garajiem sēriju nosaukumiem\n
+    \n
+    Versija 1.3.1\n
+    ***********\n
+    Pievienots informācijas par programmu logs\n
+    Pievienots programmas izmaiņu logs\n
+    Pārbaudīta savietojamība ar Android 2.0\n
+    Internacionalizācija (i18n: Angliski, Dāniski)\n
+    \n
+    Versija 1.3.0\n
+    ***********\n
+    Kļūdu labojumu izlaidums\n
+    \n
+    Versija 1.2.0\n
+    ***********\n
+    Tīkla savienojuma kļūdu labojums\n
+    Izmainīts veids kā attēlojās datumi sēriju papildinformācijā</string>
+</resources>
