@@ -171,7 +171,7 @@
     <string name="searchShowUnabletoAdd">Failed to add the show. Try again later. If this error keeps showing up please log an issue!</string>
 
     <!-- The tags beneath may never be translated or will cause an application failure!!! -->
-    <!-- The tags shouldn't even be copied to the other translation files. -->
+    <!-- The tags shouldn't even be copied to the custom translation files. -->
     <!-- Application Name -->
     <string name="app_name">MyEpisodes Manager</string>
     <!-- About Dialog -->
