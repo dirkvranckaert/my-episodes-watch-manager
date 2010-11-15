@@ -12,7 +12,6 @@ import java.util.Locale;
 
 public class TabMain extends TabActivity {
 	private TabHost tabHost;
-	private TabHost.TabSpec spec;
 	private Intent intentWatch;  // Reusable Intent for each tab
 	private Intent intentAcquire;  // Reusable Intent for each tab
 	private Intent intentComing;  // Reusable Intent for each tab
@@ -41,29 +40,41 @@ public class TabMain extends TabActivity {
         					 .putExtra("Type", 0)
         					 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         // Initialize a TabSpec for each tab and add it to the TabHost
-        spec = tabHost.newTabSpec("" + R.string.watch)
+        TabHost.TabSpec watchSpec = tabHost.newTabSpec("" + R.string.watch)
         			  .setIndicator(getString(R.string.watch), res.getDrawable(R.drawable.tabwatched))
         			  .setContent(intentWatch);
-        tabHost.addTab(spec);
-        
+
         intentAcquire = new Intent().setClass(this, EpisodesWatchListActivity.class)
         					 .putExtra("Type", 1)
         					 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        spec = tabHost.newTabSpec("" + R.string.acquire)
+        TabHost.TabSpec acquireSpec = tabHost.newTabSpec("" + R.string.acquire)
         			  .setIndicator(getString(R.string.acquire), res.getDrawable(R.drawable.tabacquired))
         			  .setContent(intentAcquire);
-        tabHost.addTab(spec);
-		
+
         intentComing = new Intent().setClass(this, EpisodesWatchListActivity.class)
         					 .putExtra("Type", 2)
         					 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        spec = tabHost.newTabSpec("" + R.string.coming)
+        TabHost.TabSpec comingSpec = tabHost.newTabSpec("" + R.string.coming)
         			  .setIndicator(getString(R.string.coming), res.getDrawable(R.drawable.tabcoming))
         			  .setContent(intentComing);
-        tabHost.addTab(spec);
 
         int preferedTab = Preferences.getPreferenceInt(this, PreferencesKeys.OPEN_DEFAULT_TAB_KEY);
-        tabHost.setCurrentTab(preferedTab);
+
+        if(preferedTab == 1) {
+            tabHost.addTab(acquireSpec);
+            tabHost.addTab(watchSpec);
+            tabHost.addTab(comingSpec);
+        } else if(preferedTab == 2) {
+            tabHost.addTab(comingSpec);
+            tabHost.addTab(watchSpec);
+            tabHost.addTab(acquireSpec);
+        } else {
+            tabHost.addTab(watchSpec);
+            tabHost.addTab(acquireSpec);
+            tabHost.addTab(comingSpec);
+        }
+
+        tabHost.setCurrentTab(0);
     }
     
     public void clearRefreshTab(int episodesType)
