@@ -16,7 +16,8 @@ import java.util.Locale;
  */
 public final class DateUtil {
     private static final String LOG_TAG = DateUtil.class.getName();
-    private static final String DATE_FORMAT = "d/m/yy";
+    //http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html#rfc822timezone
+    private static final String[] dateFormats = {"dd-MM-yyyy"};
 
     /**
      * Formats a given date in the {@link java.text.DateFormat#LONG} format.
@@ -26,7 +27,27 @@ public final class DateUtil {
      */
     public static final String formatDateLong(Date date, Context context) {
         Locale locale = getCurrentLocale(context);
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG, locale);
+        return formatDateLong(date, locale);
+    }
+
+    /**
+     * Formats a given date in the {@link java.text.DateFormat#LONG} format.
+     * @param date The date to format.
+     * @param locale The locale to use to format the date.
+     * @return The date representation in a string.
+     */
+    public static final String formatDateLong(Date date, Locale locale) {
+        DateFormat dateFormat = dateFormat = DateFormat.getDateInstance(DateFormat.LONG, locale);
+        return dateFormat.format(date);
+    }
+
+    /**
+     * Formats a given date in the {@link java.text.DateFormat#LONG} format.
+     * @param date The date to format.
+     * @return The date representation in a string.
+     */
+    public static final String formatDateLong(Date date) {
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG);
         return dateFormat.format(date);
     }
 
@@ -45,10 +66,6 @@ public final class DateUtil {
      * @return A date instance. Null if the date pattern could not be determined!
      */
     public static Date convertToDate(String dateString) {
-        //http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html#rfc822timezone
-
-        String[] dateFormats = {"dd-MM-yyyy"};
-
         for(String dateFormat : dateFormats) {
             DateFormat format = new SimpleDateFormat(dateFormat);
             format.setLenient(false);
@@ -60,6 +77,9 @@ public final class DateUtil {
             }
         }
 
+        //TODO uncomment next lines when the error reporting util is working just fine!
+        //Log.e(LOG_TAG, "No dateformat found for " + dateString);
+        //ErrorReportUtil.reportUnsupportedDateformat(dateString, dateFormats);
         return null;
     }
 }
