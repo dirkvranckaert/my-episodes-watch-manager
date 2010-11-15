@@ -91,6 +91,13 @@ public class PreferencesActivity extends PreferenceActivity {
         root.addPreference(episodeOrderingPref);
 
         ListPreference openDefaultTabPref = new ListPreference(this);
+        openDefaultTabPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				refreshDialog = true;
+				return true;
+			}
+        });
         openDefaultTabPref.setKey(PreferencesKeys.OPEN_DEFAULT_TAB_KEY);
         openDefaultTabPref.setTitle(R.string.openDefaultPrompt);
         openDefaultTabPref.setSummary(R.string.openDefaultPromptExtra);
