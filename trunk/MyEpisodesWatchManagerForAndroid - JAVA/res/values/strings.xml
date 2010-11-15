@@ -46,7 +46,7 @@
     <string name="episodeDetailsSeasonLabel">Season: </string>
     <string name="episodeDetailsEpisodeLabel">Episode: </string>
     <string name="episodeDetailsAirDateLabel">Airdate: </string>
-    <string name="episodeDetailsAirDateLabelDateNotFound">The airdate is unavailable for this episode. Please report a bug for this issue!</string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">Unsupported date format!</string>
 	<string name="TweetTitle">Share</string>
     <string name="Tweet">I have watched \'%s\' #MyEpisodesManager #Android</string>
 
@@ -66,6 +66,9 @@
     <string name="favoIgnoredDeleteShow">Delete show</string>
     <string name="favoIgnoredIgnoreShow">Ignore show</string>
     <string name="favoIgnoredUnignoreShow">Unignore show</string>
+    <string name="favoIgnoredConfirmationDeleteMessage">Are you sure you want to delete this show?</string>
+    <string name="favoIgnoredConfirmationIgnoreMessage">Are you sure you want to ingore this show?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">Are you sure you want to unignore this show?</string>
 
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Loading...</string>

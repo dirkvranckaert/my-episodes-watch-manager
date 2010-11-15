@@ -35,7 +35,9 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
     private ShowAdapter showAdapter;
     private List<Show> shows = new ArrayList<Show>(0);
 
-    private int showListPosition = -1;
+    private int selectedShow = -1;
+    private ShowAction showAction = null;
+    private int confirmationMessageResId = -1;
     private Integer exceptionMessageResId = null;
 
     private static final int DIALOG_LOADING = 0;
@@ -44,6 +46,7 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
     private static final int CONTEXT_MENU_DELETE = 0;
     private static final int CONTEXT_MENU_UNIGNORE = 1;
     private static final int CONTEXT_MENU_IGNORE = 2;
+    private static final int CONFIRMATION_DIALOG = 3;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,7 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
     @Override
 	protected Dialog onCreateDialog(int id) {
 		Dialog dialog = null;
+
 		switch (id) {
 			case DIALOG_LOADING: {
 				ProgressDialog progressDialog = new ProgressDialog(this);
@@ -102,6 +106,34 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
 				           }
 				       });
 				dialog = builder.create();
+                break;
+            }
+            case CONFIRMATION_DIALOG: {
+                if(selectedShow > -1) {
+                    final Show show = shows.get(selectedShow);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle(show.getShowName())
+                           .setMessage(confirmationMessageResId)
+                           .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    selectedShow = -1;
+                                    confirmationMessageResId = -1;
+                                    showAction = null;
+                                    removeDialog(CONFIRMATION_DIALOG);
+                                }
+                           })
+                           .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    removeDialog(CONFIRMATION_DIALOG);
+                                    markShow(show, showAction);
+
+                                    selectedShow = -1;
+                                    confirmationMessageResId = -1;
+                                    showAction = null;
+                                }
+                            });
+				    dialog = builder.create();
+                }
                 break;
             }
         }
@@ -189,6 +221,13 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
             Show show = shows.get(position);
             topText.setText(show.getShowName());
 
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    openContextMenu(view);
+                }
+            });
+
             return row;
         }
     }
@@ -212,21 +251,29 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Show show = shows.get(info.position);
+        selectedShow = info.position;
         switch(item.getItemId()) {
             case CONTEXT_MENU_IGNORE:
-                markShow(show, ShowAction.IGNORE);
+                showDialog(CONFIRMATION_DIALOG, info.position, ShowAction.IGNORE, R.string.favoIgnoredConfirmationIgnoreMessage);
                 break;
             case CONTEXT_MENU_UNIGNORE:
-                markShow(show, ShowAction.UNIGNORE);
+                showDialog(CONFIRMATION_DIALOG, info.position, ShowAction.UNIGNORE, R.string.favoIgnoredConfirmationUnignoreMessage);
                 break;
             case CONTEXT_MENU_DELETE:
-                markShow(show, ShowAction.DELETE);
+                showDialog(CONFIRMATION_DIALOG, info.position, ShowAction.DELETE, R.string.favoIgnoredConfirmationDeleteMessage);
                 break;
             default:
                 return false;
         }
         return true;
+    }
+
+    private void showDialog(int dialogId, int listPosition, ShowAction action, int messageId) {
+        this.selectedShow = listPosition;
+        this.showAction = action;
+        this.confirmationMessageResId = messageId;
+
+        showDialog(dialogId);
     }
 
     private void markShow(final Show show, final ShowAction action) {

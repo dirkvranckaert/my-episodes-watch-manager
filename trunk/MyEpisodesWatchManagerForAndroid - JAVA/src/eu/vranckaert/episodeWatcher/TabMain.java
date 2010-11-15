@@ -61,7 +61,7 @@ public class TabMain extends TabActivity {
         			  .setIndicator(getString(R.string.coming), res.getDrawable(R.drawable.tabcoming))
         			  .setContent(intentComing);
         tabHost.addTab(spec);
-        
+
         int preferedTab = Preferences.getPreferenceInt(this, PreferencesKeys.OPEN_DEFAULT_TAB_KEY);
         tabHost.setCurrentTab(preferedTab);
     }
