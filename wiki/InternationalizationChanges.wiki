@@ -4,23 +4,55 @@
 Beneath is a list of all version and the items in the internationalization files that have changed for each version. This is used to keep track of all items (keys in the XML file) which should be translated (again) and will make it much more easier to manage the internationalization process.
 
 Version 1.7.0:
-  * showLanguageOptions (not translated anymore!)
-
+- Tags to remove:
+  * showLanguageOptions
+  * changelogTitle
+  * changelogText
+- Tags modified:
   * episodeDetailsSeasonLabel (place in file changed!)
   * episodeDetailsEpisodeLabel (place in file changed!)
   * episodeDetailsAirDateLabel (place in file changed!)
-
+  * whatsNew (old tag-name was changelog)
+- New tags:
+  * done
+  * search
+  * episodeDetailsAirDateLabelDateNotFound
+  * TweetTitle
+  * Tweet
+  * addShow
+  * favouriteShows
+  * ignoredShows
+  * showSearchHint
+  * showSearchNoSearchResults
+  * showSearchOneFound
+  * showSearchMoreFound
+  * showSearchAddShow
+  * showSearchFinished
+  * favoIgnoredDeleteShow
+  * favoIgnoredIgnoreShow
+  * favoIgnoredUnignoreShow
+  * favoIgnoredConfirmationDeleteMessage
+  * favoIgnoredConfirmationIgnoreMessage
+  * favoIgnoredConfirmationUnignoreMessage
+  * aboutVersion
+  * aboutLicense
+  * aboutWebsite
+  * aboutEmail
+  * aboutOriginalIdea
+  * whatsNewTitle
+  * whatsNewVersion
+  * whatsNewText
+  * whatsNewValues
   * manageShows
+  * menuShowMarkAcquired
+  * menuShowMarkWatched
   * openDefaultPrompt
   * openDefaultPromptExtra
   * openDefaultTabOptions
-  * episodeDetailsAirDateLabelDateNotFound
-  * Tweet
   * ThemePrompt
   * ThemePromptExtra
-  * ThemeOptions
-  * menuShowMarkAcquired
-  * menuShowMarkWatched
+  * ThemeOptions (do not change the order of the values)
+  * searchShowUnabletoAdd
 
 Version 1.6.1:
   * aboutText (new text)
