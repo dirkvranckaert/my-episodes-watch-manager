@@ -6,6 +6,8 @@
     <string name="no">Nee</string>
     <string name="close">Sluiten</string>
     <string name="attention">Aandacht</string>
+    <string name="done">Gereed</string>
+    <string name="search">Zoeken</string>
 
     <!-- login form -->
     <string name="loginFormTitle">Vul uw logingegevens voor de MyEpisodes.com hieronder in.</string>
@@ -40,27 +42,66 @@
     <string name="watchListSubTitleComingPlural">%d komende afleveringen</string>
     <string name="watchListEmpty">Geen afleveringen gevonden.</string>
 
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Seizoen: </string>
+    <string name="episodeDetailsEpisodeLabel">Aflevering: </string>
+    <string name="episodeDetailsAirDateLabel">Uitzend-datum: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">Niet ondersteund datum-formaat!</string>
+	<string name="TweetTitle">Delen</string>
+    <string name="Tweet">Ik heb zonet naar \'%s\' gekeken #MyEpisodesManager #Android</string>
+
+    <!-- Show management -->
+    <!-- Show Panel -->
+    <string name="addShow">Serie toevoegen</string>
+    <string name="favouriteShows">Favoriete Series</string>
+    <string name="ignoredShows">Geblokkeerde series</string>
+    <!-- Show searching -->
+    <string name="showSearchHint">Vul een naam van een serie in...</string>
+    <string name="showSearchNoSearchResults">Geen series gevonden</string>
+    <string name="showSearchOneFound">serie gevonden</string>
+    <string name="showSearchMoreFound">series gevonden</string>
+    <string name="showSearchAddShow">Weet u zeker dat u deze serie wilt toevoegen aan uw lijst van series?</string>
+    <string name="showSearchFinished">Bent u gereed met toevoegen of wilt u verder zoeken?</string>
+    <!-- Favo and ingored shows -->
+    <string name="favoIgnoredDeleteShow">Serie verwijderen</string>
+    <string name="favoIgnoredIgnoreShow">Serie blokkeren</string>
+    <string name="favoIgnoredUnignoreShow">Serie deblokkeren</string>
+    <string name="favoIgnoredConfirmationDeleteMessage">Weet u zeker dat u deze serie wilt verwijderen?</string>
+    <string name="favoIgnoredConfirmationIgnoreMessage">Weet u zeker dat u deze serie wilt blokkeren?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">Weet u zeker dat u deze serie wilt deblokkeren?</string>
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Laden...</string>
     <string name="progressLoadingBody">Verzenden/Ontvangen data</string>
 
     <!-- aboutDialog -->
     <string name="aboutTitle">Over...</string>
-    <string name="aboutText">Geschreven door: Dirk Vranckaert\n
-    Onderhouden door:\n
-    * Dirk Vranckaert\n
-    * Ivo Janssen\n
-    Vertalingen door:\n
-    * Dirk Vranckaert (Engels, Nederlands)\n
-    * Fredrik Nohrborg (Zweeds)\n
-    * Daniel De Luca (Frans, Italiaans)\n
-    * Hyeon Tae Jeon (Koreaans)\n
-    * Sergio Travieso (Spaans)\n
-    Licentie: GNU GPL V3 License\n
-    Project website: http://code.google.com/p/my-episodes-watch-manager\n
-    Project contact: dirkvranckaert@gmail.com\n
-    \n
-    Beheer alle series die u volgt gebruik makende van MyEpisodes.com (registratie verplicht) en ga op je mobiele telefoon meteen na wat de volgende aflevering is de je nog moet bekijken.</string>
+    <string name="aboutVersion">Versie:</string>
+    <string name="aboutLicense">Licentie:</string>
+    <string name="aboutWebsite">Website:</string>
+    <string name="aboutEmail">Email:</string>
+    <string name="aboutOriginalIdea">Oorspronkelijk idee:</string>
+    <!-- whatsNewDialog -->
+    <string name="whatsNewTitle">Nieuwigheden...</string>
+    <string name="whatsNewVersion">Versie:</string>
+    <string name="whatsNewText">Wat is veranderd:</string>
+    <string-array name="whatsNewValues">
+        <item>Registratie voor nieuwe gebruikers</item>
+        <item>Beheer van series</item>
+        <item>Twitter integratie</item>
+        <item>Duitse veratlingen</item>
+        <item>Letse vertalingen</item>
+        <item>Portugese vertalingen</item>
+        <item>Nieuw logo</item>
+        <item>Donker kleuren schema</item>
+        <item>Alle afleveringen van een serie markeren als bekeken of verkregen</item>
+        <item>Selecteer een standaard tabblad om te openen</item>
+        <item>Dialoogvensters voor het laden van data</item>
+        <item>Datum probleem opgelost</item>
+        <item>Geen Koreaanse taalondersteuning meer</item>
+        <item>Nieuw \'over\' dialoogvenster</item>
+        <item>Nieuw \'Nieuwigheden\' dialoogvenster</item>
+    </string-array>
 
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Bent u zeker?</string>
@@ -69,15 +110,16 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Vernieuwen</string>
+    <string name="manageShows">Beheer Series</string>    
     <string name="about">Over</string>
     <string name="logout">Afmelden</string>
-    <string name="changelog">Veranderingen</string>
+    <string name="whatsNew">Nieuwigheden</string>    
     <string name="preferences">Voorkeuren</string>
+    <!-- show specific menu -->
+    <string name="menuShowMarkAcquired">Markeer alle afleveringen als verworven</string>
+    <string name="menuShowMarkWatched">Markeer alle afleveringen als bekeken</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Details</string>
-    <string name="episodeDetailsSeasonLabel">Seizoen: </string>
-    <string name="episodeDetailsEpisodeLabel">Aflevering: </string>
-    <string name="episodeDetailsAirDateLabel">Uitzend-datum: </string>
     <string name="menuEpisodeMarkAcquired">Markeer als verworven</string>
     <string name="menuEpisodeMarkWatched">Markeer als bekeken</string>
 
@@ -97,19 +139,25 @@
         <item>Oudste eerst</item>
         <item>Nieuwste eerst</item>
     </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Standaard tabblad</string>
+    <string name="openDefaultPromptExtra">Standaard tabblad bij het openen van de applicatie</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Te bekijken</item>
+            <item>Te verwerven</item>
+            <item>Binnenkort</item>
+    </string-array>
+    <!-- Change Theme -->
+    <string name="ThemePrompt">Kies een thema</string>
+    <string name="ThemePromptExtra">Selecteer uw thema</string>
+    <string-array name="ThemeOptions">
+            <item>Licht</item>
+            <item>Donker</item>
+    </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Automatisch aanmelden</string>
     <!-- Change Language -->
     <string name="showLanguagePrompt">Verander de taal</string>
-    <string-array name="showLanguageOptions">
-        <item>Engels</item>
-        <item>Spaans</item>
-        <item>Frans</item>
-        <item>Italiaans</item>
-        <item>Koreaans</item>
-        <item>Nederlands</item>
-        <item>Zweeds</item>
-    </string-array>
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
@@ -123,82 +171,5 @@
     <string name="networkIssues">Netwerk probleem!\nControleer je netwerkinstellingen en probeer handmatig te vernieuwen.</string>
     <string name="watchListUnableToReadFeed">Netwerk probleem!\nProbeer handmatig te vernieuwen.</string>
     <string name="watchListUnableToMarkWatched">Kan deze episode niet markeren als gezien!\nKijk uw internetverbinding na of herlaad de lijst!</string>
-
-    <string name="changelogTitle">Veranderingen</string>
-    <string name="changelogText">Versie 1.6.1\n
-    ***********\n
-    Niew logo voor de applicatie\n
-    Pas de standaard-taal aan in de instellingen\n
-    Ondersteuning voor de meeste datum-instellingen uit het myEpisodes.com configuratiescherm\n
-    Uitzendatums van afleveringen worden nu getoond in het formaat van uw taal\n
-    Code-optimalisaties\n
-    Data wordt niet langer herladen bij het veranderen van de oriëntatie van het toestel\n
-    Applicatie vertaald naar Spaans\n
-    \n
-    Versie 1.6.0\n
-    ***********\n
-    Volledige MyEpisodes.com mobiele applicatie met afleveringen te bekijken, afleveringen te verkrijgen en aankomende afleveringen\n
-    Het probleem dat sommige afleveringen niet in de lijst kwamen is opgelost\n
-    Het probleem met grote lijsten van afleveringen is opgelost\n
-    Het probleem met speciale karakters in afleveringen is opgelost\n
-    Versie 1.5.1\n
-    ***********\n
-    Betere Google Analytics statistieken\n
-    \n
-    Versie 1.5.0\n
-    ***********\n
-    Android 2.2 aka Froyo compatibel\n
-    Voorkeuren scherm\n
-    \'Passwoord onthouden\' optie\n
-    \'Sortering series\' optie\n
-    \'Sortering afleveringen\' optie\n
-    Beter episode-optie menu\n
-    Probleem met het tonen van de titel van alfeveringen opelost\n
-    Probleem bij het aanmelden opgelost\n
-    Franse vertalingen door Daniel De Luca\n
-    Italiaanse vertalingen door Daniel De Luca\n
-    Koreaanse vertalingen door Hyeon Tae Jeon\n
-    \n
-    Versie 1.4.1\n
-    ***********\n
-    Zweedse vertalingen door Fredrik Nohrborg\n
-    \n
-    Versie 1.4.0\n
-    ***********\n
-    Groeperen van afleveringen\n
-    \n
-    Versie 1.3.5\n
-    ***********\n
-    Update aanmeldscherm en -procedure\n
-    Aanpassingen layout (hoofding)\n
-    Problemen met witte thema opgelost\n
-    \n
-    Versie 1.3.4\n
-    ***********\n
-    Witte theme geïnstalleerd zoals voorgesteld door Ivo Janssen\n
-    \n
-    Versie 1.3.3\n
-    ***********\n
-    Dialoogvenster met vraag of u zeker bent dat u wilt uitloggen\n
-    \n
-    Versie 1.3.2\n
-    ***********\n
-    Google Analytics statistieken toegevoegd\n
-    Probleem met te lange episode namen opgelost\n
-    \n
-    Versie 1.3.1\n
-    ***********\n
-    Het \'Over\' scherm toegevoegd\n
-    Het \'Veranderingen\' scherm toegevoegd\n
-    Compatibiliteit met Android 2.0 getest\n
-    Internationalisatie (i18n: engels, nederlands)\n
-    \n
-    Versie 1.3.0\n
-    ***********\n
-    Probleemoplossende release\n
-    \n
-    Versie 1.2.0\n
-    ***********\n
-    Probleem met netwerk connectiviteit opelost\n
-    Datum formatteringen in de details van afleveringen opgelost</string>
+    <string name="searchShowUnabletoAdd">Kan deze serie niet toevoegen. Probeer het later eens opnieuw. Indien dit probleem zich blijft voordoen gelieve een bug te registreren!</string>
 </resources>
