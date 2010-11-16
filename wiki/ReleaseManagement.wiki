@@ -8,7 +8,6 @@
 ====Version 1.7.0====
 Scheduled Release Date: 23th November 2010<br>
 Content: Features, Bugfixes
-  * Issue 38 (Mark several episodes as "Watched" at once)
   * Issue 62 (Register new users)
   * Issue 63 (Add/Remove and Ignore/Unignore shows feature)
   * Issue 74 (Aboutdialog and Changelog-dialog make-over)
@@ -18,9 +17,7 @@ Content: Features, Bugfixes
   * Issue 80 (Social Networking integration)
   * Issue 83 (Stop Korean language support)
   * Issue 85 (Default tab preference)
-  * Issue 87 (PHP dateformat d-m-Y parse error)
   * Issue 88 (German Translation)
-  * Issue 89 (Automating build process)
   * Issue 91 (Brazilian Portuguese Translations)
   * Issue 92 (Latvian Translations)
   * Issue 93 (Dark color scheme option)
