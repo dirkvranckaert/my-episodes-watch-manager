@@ -66,8 +66,6 @@ public class ShowSearchActivity extends ListActivity {
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                     ShowSearchActivity.this.searchShows(query.toString());
-                } else {
-                    //TODO show message: enter a show name to search for!! Use a toast-message for this purpose!
                 }
             }
         });

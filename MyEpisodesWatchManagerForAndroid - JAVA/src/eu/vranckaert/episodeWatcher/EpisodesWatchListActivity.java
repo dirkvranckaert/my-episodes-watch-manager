@@ -342,7 +342,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     }
 
     private void openManageShowsActivity() {
-        //tracker.trackPageView("/manageShows"); //TODO enable tracking
+        tracker.trackPageView("/manageShows");
         Intent manageShowsActivity = new Intent(this.getApplicationContext(), ShowManagementActivity.class);
         startActivity(manageShowsActivity);
     }
