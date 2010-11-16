@@ -50,6 +50,11 @@
                           android:layout_height="wrap_content"
                           android:orientation="vertical"
                           android:id="@+id/whatsNewTextEntries"/>
+            <Button android:id="@+id/whatsnewclose"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/close"
+                    android:paddingTop="5dip"/>
         </LinearLayout>
 	</ScrollView>
 </LinearLayout>
