@@ -6,6 +6,8 @@
     <string name="no">Nej</string>
     <string name="close">Stäng</string>
     <string name="attention">Varning</string>
+    <string name="done">Klar</string>
+    <string name="search">Sök</string>
 
     <!-- login form -->
     <string name="loginFormTitle">Ange inloggningsuppgifter för MyEpisodes.com.</string>
@@ -26,8 +28,8 @@
     <string name="registerStart">Skapar användarnamn för MyEpisodes.com</string>
     <string name="registerSuccessfull">Användarnamn skapat!</string>
     <string name="registerFailed">Användarnamnet upptaget, vänligen välj ett annat.</string>	
-
-    <!-- watchtlist -->
+	
+    <!-- watchlist -->
     <string name="watch">Se</string>
     <string name="acquire">Hämta</string>
     <string name="coming">Kommer</string>
@@ -40,28 +42,66 @@
     <string name="watchListSubTitleComingPlural">%d framtida avsnitt</string>
     <string name="watchListEmpty">Inga avsnitt hittade.</string>
 
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Säsong: </string>
+    <string name="episodeDetailsEpisodeLabel">Avsnitt: </string>
+    <string name="episodeDetailsAirDateLabel">Sändes: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">Datumformat stöds ej!</string>
+	<string name="TweetTitle">Dela via Twitter</string>
+    <string name="Tweet">Jag har sett \'%s\' #MyEpisodesManager #Android</string>
+
+    <!-- Show management -->
+    <!-- Show Panel -->
+    <string name="addShow">Lägg till serie</string>
+    <string name="favouriteShows">Favoriter</string>
+    <string name="ignoredShows">Ignorerade</string>
+    <!-- Show searching -->
+    <string name="showSearchHint">Namn på TV-serie...</string>
+    <string name="showSearchNoSearchResults">Ingen TV-serie hittades</string>
+    <string name="showSearchOneFound">TV-serie hittades</string>
+    <string name="showSearchMoreFound">TV-serier hittades</string>
+    <string name="showSearchAddShow">Är du säker på att du vill lägga till TV-serien till din lista?</string>    
+    <string name="showSearchFinished">Är du färdig, eller vill du lägga till flera?</string>
+    <!-- Favo and ingored shows -->
+    <string name="favoIgnoredDeleteShow">Ta bort TV-serie</string>
+    <string name="favoIgnoredIgnoreShow">Ignorera TV-serie</string>
+    <string name="favoIgnoredUnignoreShow">\"Av\"-igorera TV-serie</string>
+    <string name="favoIgnoredConfirmationDeleteMessage">Är du säker på att du vill ta bort denna TV-serie?</string>
+    <string name="favoIgnoredConfirmationIgnoreMessage">Är du säker på att du vill ignorera denna TV-serie?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">Är du säker på att du vill \"av\"-ignorera denna TV-serie?</string>
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Laddar...</string>
     <string name="progressLoadingBody">Skickar/Tar emot data</string>
 
     <!-- aboutDialog -->
     <string name="aboutTitle">Om...</string>
-    <string name="aboutText">Skrivet av: Dirk Vranckaert\n
-    Underhålls av:\n
-    * Dirk Vranckaert\n
-    * Ivo Janssen\n
-    Översättningar av:\n
-    * Dirk Vranckaert (Engelska, Holländska)\n
-    * Fredrik Nohrborg (Svenska)\n
-    * Daniel De Luca (Franska, Italienska)\n
-    * Hyeon Tae Jeon (Koreanska)\n
-    * Sergio Travieso (Spanska)\n
-    Lisens: GNU GPL V3 License\n
-    Projekt websida: http://code.google.com/p/my-episodes-watch-manager\n
-    Projekt kontakt: dirkvranckaert@gmail.com\n
-    \n
-    Organisera TV-serierna du följer på MyEpisodes.com (registrering krävs) och se direkt i mobilen vilka avsnitt du inte sett.</string>
-
+    <string name="aboutVersion">Version:</string>
+    <string name="aboutLicense">Lisens:</string>
+    <string name="aboutWebsite">Website:</string>
+    <string name="aboutEmail">Email:</string>
+    <string name="aboutOriginalIdea">Ursprunglig idé:</string>
+    <!-- whatsNewDialog -->
+    <string name="whatsNewTitle">Nyheter</string>
+    <string name="whatsNewVersion">Version:</string>
+    <string name="whatsNewText">Förändringar:</string>
+    <string-array name="whatsNewValues">
+        <item>Registrering av ny användare</item>
+        <item>Hantering av TV-serier</item>
+        <item>Twitterintegrering</item>
+        <item>Tysk översättning</item>
+        <item>Lettisk översättning</item>
+        <item>Portugisisk översättning</item>
+        <item>Ny logo</item>
+        <item>Mörkt tema</item>
+        <item>Markera alla avsnitt (grupp) som sedda eller hämtade</item>
+        <item>Välja default tab vid start</item>
+        <item>Laddning av dialoger (ingen mer ANR)</item>
+        <item>Fix av datumbug</item>
+        <item>Koreanska överättningen stöds inte längre</item>
+        <item>Ny \"Om\"-dialog</item>
+        <item>Ny \"Nyheter\"-dialog</item>
+    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Är du säker?</string>
     <string name="logoutDialogMessage">Dina uppgifter kommer inte längre lagras i mobilen.</string>
@@ -69,17 +109,18 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Uppdatera</string>
+    <string name="manageShows">Hantera TV-serier</string>
     <string name="about">Om</string>
     <string name="logout">Logga ut</string>
-    <string name="changelog">Ändringar</string>
+    <string name="whatsNew">Nyheter</string>
     <string name="preferences">Inställningar</string>
+    <!-- show specific menu -->
+    <string name="menuShowMarkAcquired">Markera alla som \"Hämtat\"</string>
+    <string name="menuShowMarkWatched">Markera alla som \"Sett\"</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Detaljer</string>
-    <string name="episodeDetailsSeasonLabel">Säsong: </string>
-    <string name="episodeDetailsEpisodeLabel">Avsnitt: </string>
-    <string name="episodeDetailsAirDateLabel">Sändes: </string>
-    <string name="menuEpisodeMarkAcquired">Markera som "Hämtat"</string>
-    <string name="menuEpisodeMarkWatched">Markera som "Sett"</string>
+    <string name="menuEpisodeMarkAcquired">Markera som \"Hämtat\"</string>
+    <string name="menuEpisodeMarkWatched">Markera som \"Sett\"</string>
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">För att spara inställningarna, starta om programmet, eller ladda om listan med avsnitt.</string>
@@ -97,19 +138,25 @@
         <item>Äldst först</item>
         <item>Nyaste först</item>
     </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Default flik att öppna</string>
+    <string name="openDefaultPromptExtra">Default flik vid start av app</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Se</item>
+            <item>Hämta</item>
+            <item>Kommer</item>
+    </string-array>
+    <!-- Change Theme -->
+    <string name="ThemePrompt">Välj tema</string>
+    <string name="ThemePromptExtra">Välj ditt tema</string>
+    <string-array name="ThemeOptions">
+            <item>Ljus</item>
+            <item>Mörk</item>
+    </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Lagra lösenord</string>
     <!-- Change Language -->
     <string name="showLanguagePrompt">Ändra språk</string>
-    <string-array name="showLanguageOptions">
-        <item>Engelska</item>
-        <item>Spanska</item>
-        <item>Franska</item>
-        <item>Italienska</item>
-        <item>Koreanska</item>
-        <item>Holländska</item>
-        <item>Svenska</item>
-    </string-array>
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
@@ -123,82 +170,5 @@
     <string name="networkIssues">Nätverksfel!\nKontrollera nätveksinställningarna och försök uppdatera manuellt.</string>
     <string name="watchListUnableToReadFeed">Nätverksfel!\nFörsök uppdatera manuellt.</string>
     <string name="watchListUnableToMarkWatched">Misslyckades att markera avsnitt som sett!\nKontrollera nätverksanslutning eller uppdatera listan!</string>
-
-    <string name="changelogTitle">Ändringar</string>
-    <string name="changelogText">Version 1.6.1\n
-    ***********\n
-    Ny logo\n
-    Ändra språk i inställningarna\n
-    Stöd för de flesta användardefinierade datumformat i myEpisodes.com config\n
-    Datum visas nu i språkets format\n
-    Kodoptimering\n
-    Behöver inte ladda om data vid ändrad skärmorientering\n
-    Spansk översättning\n
-    \n
-    Version 1.6.0\n
-    ***********\n
-    Full MyEpisodes.com mobil app - markera avsnitt som "Sett"/"Hämtat" och se framtida avsnitt\n
-    Bug fixad vissa avsnitt visades inte i listan\n
-    Bug fixad avs problem med stora samligar av avsnitt\n
-    Bug fixad avsnittsnamn med ej standard teckenuppsättning\n
-    Version 1.5.1\n
-    ***********\n
-    Bättre Google Analytics statistik\n
-    \n
-    Version 1.5.0\n
-    ***********\n
-    Android 2.2 (Froyo) kompatibelt\n
-    Inställningsdialog\n
-    Kom ihåg lösenord\n
-    Sortering av serier\n
-    Sortering av avsnitt\n
-    Förbättrad meny\n
-    Bug fixad avs visning av avsnitt i listan\n
-    Bug vid inloggning fixad\n
-    Fransk översättning av Daniel De Luca\n
-    Italiensk översättning av Daniel De Luca\n
-    Koreansk översättning av Hyeon Tae Jeon\n
-    \n
-    Version 1.4.1\n
-    ***********\n
-    Svensk översättning av Fredrik Nohrborg\n
-    \n
-    Version 1.4.0\n
-    ***********\n
-    Gruppering av avsnitt\n
-    \n
-    Version 1.3.5\n
-    ***********\n
-    Uppdatering av inloggningsrutin\n
-    Ändrad layout (header)\n
-    Buggar i vitt tema löst\n
-    \n
-    Version 1.3.4\n
-    ***********\n
-    Infört vitt tema på förslag från Ivo Janssen\n
-    \n
-    Version 1.3.3\n
-    ***********\n
-    Infört dialog vid utloggning\n
-    \n
-    Version 1.3.2\n
-    ***********\n
-    Lagt till Google Analytics för statistik\n
-    Löst problem med långa avsnittsnamn\n
-    \n
-    Version 1.3.1\n
-    ***********\n
-    Tillägg Om...\n
-    Tillägg Förändringar...\n
-    Testat kompatibilitet med Android 2.0\n
-    Internationalisering (i18n: Engelska, Holländska)\n
-    \n
-    Version 1.3.0\n
-    ***********\n
-    Bugfixar\n
-    \n
-    Version 1.2.0\n
-    ***********\n
-    Anslutningsproblem löst\n
-    Datumformat i detaljvy</string>
+    <string name="searchShowUnabletoAdd">Misslykades att lägga till TV-serie. Försök igen senare. Om detta fel återkommer, vänligen felrapportera till oss.</string>
 </resources>
