@@ -70,6 +70,7 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
             inItem = true;
             inDescription = false;
         } else if(localName.equals("description")) {
+            //Fix for issue 96: If we ignore the description tag the issue is solved!
             inDescription = true;
             nodeValue = null;
         } else {
@@ -103,6 +104,7 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
+        //Fix for issue 96: If we ignore the description tag the issue is solved!
         if(!inDescription) {
             nodeValue = new StringBuilder(new String(ch, start, length));
             if(recordTitleString)
