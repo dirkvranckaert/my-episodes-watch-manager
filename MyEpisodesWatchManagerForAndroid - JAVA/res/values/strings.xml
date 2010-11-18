@@ -86,7 +86,7 @@
     <string name="whatsNewVersion">Version:</string>
     <string name="whatsNewText">What has changed:</string>
     <string-array name="whatsNewValues">
-        <!-- todo update -->
+        <!-- TODO update! -->
         <item>Registration for new users</item>
         <item>Show Management</item>
         <item>Twitter Integration</item>
