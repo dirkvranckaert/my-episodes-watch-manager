@@ -5,21 +5,18 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
-====Version 1.7.4====
-Scheduled Release Date: Unknown<br>
-Content: Features, Bugfixes
-  * Issue 90 (Keep collapsable lists opened)
 ====Version 1.7.3====
 Scheduled Release Date: Unknown<br>
 Content: Features, Bugfixes
   * Issue 67 (Calender View)
+  * Issue 90 (Keep collapsable lists opened)
 ====Version 1.7.2====
-Scheduled Release Date: Unknown<br>
+Scheduled Release Date: 30th December 2010<br>
 Content: Features, Bugfixes
   * Issue 38 (Mark several episodes as "Watched" at once)
   * Issue 86 (Layout the application)
 ====Version 1.7.1====
-Scheduled Release Date: Unknown<br>
+Scheduled Release Date: 5th December 2010<br>
 Content: Features, Bugfixes
   * Issue 66 (Change request: For upcoming shows, show date and time)
   * Issue 98 (Error reporting)
