@@ -41,24 +41,7 @@ public class LoginSubActivity extends Activity {
     	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);        
     	super.onCreate(savedInstanceState);
         init();
-
-        if(Preferences.isFirstTime(this)) {
-            Log.d(LOG_TAG, "First time launching the application for this version!");
-            Intent intent = new Intent(getApplicationContext(), WhatsNewActivity.class);
-            startActivityForResult(intent, WHATS_NEW_INTENT_REQUEST_CODE);
-        } else {
-            continueLoginExecution();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == WHATS_NEW_INTENT_REQUEST_CODE) {
-            continueLoginExecution();
-        }
-    }
-
-    private void continueLoginExecution() {
+        
         if (!checkLoginCredentials()) {
         	GoogleAnalyticsTracker tracker = GoogleAnalyticsTracker.getInstance();
         	tracker.trackPageView("loginSubActivity");
