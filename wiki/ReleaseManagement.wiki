@@ -6,7 +6,7 @@
 == Release management ==
 === Scheduled releases ===
 ====Version 1.7.3====
-Scheduled Release Date: Unknown<br>
+Scheduled Release Date: 31th January 2010<br>
 Content: Features, Bugfixes
   * Issue 67 (Calender View)
   * Issue 90 (Keep collapsable lists opened)
