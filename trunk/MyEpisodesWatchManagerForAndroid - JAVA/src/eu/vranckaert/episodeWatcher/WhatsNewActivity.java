@@ -3,8 +3,6 @@ package eu.vranckaert.episodeWatcher;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
@@ -30,14 +28,6 @@ public class WhatsNewActivity extends Activity {
 
         TextView version = (TextView) findViewById(R.id.whatsNewVersion);
         version.setText(ApplicationUtil.getCurrentApplicationVersion(getApplicationContext()));
-
-        Button closeButton = (Button) findViewById(R.id.whatsnewclose);
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
     }
 
     private void init(Bundle savedInstanceState) {
