@@ -5,6 +5,24 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
+====Version 1.7.4====
+Scheduled Release Date: Unknown<br>
+Content: Features, Bugfixes
+  * Issue 90 (Keep collapsable lists opened)
+====Version 1.7.3====
+Scheduled Release Date: Unknown<br>
+Content: Features, Bugfixes
+  * Issue 67 (Calender View)
+====Version 1.7.2====
+Scheduled Release Date: Unknown<br>
+Content: Features, Bugfixes
+  * Issue 38 (Mark several episodes as "Watched" at once)
+  * Issue 86 (Layout the application)
+====Version 1.7.1====
+Scheduled Release Date: Unknown<br>
+Content: Features, Bugfixes
+  * Issue 66 (Change request: For upcoming shows, show date and time)
+  * Issue 98 (Error reporting)
 ====Version 1.7.0====
 Scheduled Release Date: 23th November 2010<br>
 Content: Features, Bugfixes
@@ -17,11 +35,13 @@ Content: Features, Bugfixes
   * Issue 80 (Social Networking integration)
   * Issue 83 (Stop Korean language support)
   * Issue 85 (Default tab preference)
+  * Issue 87 (dateformat cannot be parsed)
   * Issue 88 (German Translation)
   * Issue 91 (Brazilian Portuguese Translations)
   * Issue 92 (Latvian Translations)
   * Issue 93 (Dark color scheme option)
   * Issue 94 (New logo)
+  * Issue 96 (Last Episode of first Bones Season won't show up correctly)
 
 === Market Releases ===
 ====Version 1.6.1====
