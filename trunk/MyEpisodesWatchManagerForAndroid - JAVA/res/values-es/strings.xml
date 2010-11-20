@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Revision #93 -->
 <resources>
     <!-- default values -->
@@ -6,27 +6,29 @@
     <string name="no">No</string>
     <string name="close">Cerrar</string>
     <string name="attention">Atención</string>
+    <string name="done">Hecho</string>
+    <string name="search">Buscar</string>
 
     <!-- login form -->
     <string name="loginFormTitle">Por favor, indica tus datos de usuarios de Myepisodes.com.</string>
-     <string name="loginFormRegister">¿Aún no eres usuario?</string>
+    <string name="loginFormRegister">¿Aún no eres usuario?</string>
 	<string name="loginUsernameHint">Nombre de usuario</string>
     <string name="loginPasswordHint">Contraseña</string>
     <string name="loginLoginBtn">Acceder</string>
     <string name="loginStartLogin">Accediendo a MyEpisodes.com</string>
     <string name="loginSuccessfullLogin">Acceso correcto</string>
     <string name="loginLoginFailed">Usuario o contraseña incorrectos. Por favor, prueba de nuevo</string>
-  
+    
 	<!-- register form -->
-    <string name="registerFormTitle">Regístrate aquí. Rellena todos tus datos de usuarop y haz click en Registrar.</string>
-    <string name="registerUsernameHint">Uusario</string>
+    <string name="registerFormTitle">Regístrate aquí. Rellena todos tus datos de usuario y haz click en Registrar.</string>
+    <string name="registerUsernameHint">Usuario</string>
     <string name="registerPasswordHint">Contraseña</string>
     <string name="registerEmailHint">Email</string>
     <string name="registerBtn">Registrar</string>
     <string name="registerStart">Creando usario para MyEpisodes.com</string>
     <string name="registerSuccessfull">¡Usuario creado con éxito!</string>
-    <string name="registerFailed">El nombre de usuario ya existe. Pro favor, elige otro.</string>	
-		
+    <string name="registerFailed">El nombre de usuario ya existe. Pro favor, elige otro.</string>
+	
     <!-- watchtlist -->
     <string name="watch">Por ver</string>
     <string name="acquire">Por adquirir</string>
@@ -40,28 +42,66 @@
     <string name="watchListSubTitleComingPlural">%d próximos capítulos</string>
     <string name="watchListEmpty">No hay capítulos</string>
 
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Temporada: </string>
+    <string name="episodeDetailsEpisodeLabel">Episodio: </string>
+    <string name="episodeDetailsAirDateLabel">Fecha de emisión: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">¡Formato de fecha no soportado!</string>
+	<string name="TweetTitle">Compartir</string>
+    <string name="Tweet">He visto \'%s\' #MyEpisodesManager #Android</string>
+
+    <!-- Show management -->
+    <!-- Show Panel -->
+    <string name="addShow">Añadir serie</string>
+    <string name="favouriteShows">Series favoritas</string>
+    <string name="ignoredShows">Series ignoradas</string>
+    <!-- Show searching -->
+    <string name="showSearchHint">Introduce el nombre de una serie...</string>
+    <string name="showSearchNoSearchResults">No se ha encontrado ninguna serie</string>
+    <string name="showSearchOneFound">Encontrada serie</string>
+    <string name="showSearchMoreFound">Encontradas series</string>
+    <string name="showSearchAddShow">¿Estás seguro que quieres añadir esta serie a tu lista?</string>    
+    <string name="showSearchFinished">¿Has finalizado o quieres añadir otra serie?</string>
+    <!-- Favo and ingored shows -->
+    <string name="favoIgnoredDeleteShow">Borrar serie</string>
+    <string name="favoIgnoredIgnoreShow">Ignorar serie</string>
+    <string name="favoIgnoredUnignoreShow">Designorar serie</string>
+    <string name="favoIgnoredConfirmationDeleteMessage">¿Está seguro que quieres borrar esta serie?</string>
+    <string name="favoIgnoredConfirmationIgnoreMessage">¿Está seguro que quieres ignorar esta serie?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">¿Está seguro que quieres designorar esta serie?</string>
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Cargando...</string>
-    <string name="progressLoadingBody">Enviando/Recibiendo datos</string>
+    <string name="progressLoadingBody">Enviando / Recibiendo datos</string>
 
     <!-- aboutDialog -->
     <string name="aboutTitle">Sobre...</string>
-    <string name="aboutText">Escrito por: Dirk Vranckaert\n
-    Mantenido por:\n
-    * Dirk Vranckaert\n
-    * Ivo Janssen\n
-    Trducciones:\n
-    * Dirk Vranckaert (Inglés, Alemán)\n
-    * Fredrik Nohrborg (Sueco)\n
-    * Daniel De Luca (Francés, Italiano)\n
-    * Hyeon Tae Jeon (Coreano)\n
-	* Sergio Travieso (Spanish)\n
-    Licencia: GNU GPL V3 License\n
-    Website del proyecto: http://code.google.com/p/my-episodes-watch-manager\n
-    Contacto del proyecto: dirkvranckaert@gmail.com\n
-    \n
-    Controla las series y episodios que sigues usando MyEpisodes.com (se necesita registro previo) y comprueba directamente en tu móvil cuál es el próximo episodio que tienes que ver.</string>
-
+    <string name="aboutVersion">Versión:</string>
+    <string name="aboutLicense">Licencia:</string>
+    <string name="aboutWebsite">Website:</string>
+    <string name="aboutEmail">Email:</string>
+    <string name="aboutOriginalIdea">Idea original de:</string>
+    <!-- whatsNewDialog -->
+    <string name="whatsNewTitle">Novedades:</string>
+    <string name="whatsNewVersion">Versión:</string>
+    <string name="whatsNewText">Qué ha cambiado:</string>
+    <string-array name="whatsNewValues">
+        <item>Registro de nuevos usuarios</item>
+        <item>Gestión de series</item>
+        <item>Integración con Twitter</item>
+        <item>Traducción al Alemán</item>
+        <item>Traducción al Letón</item>
+        <item>Traducción al Portugués</item>
+        <item>Nuevo logo</item>
+        <item>Tema oscuro</item>
+        <item>Marcar todo los capítulos de una serie como vistos o adquiridos</item>
+        <item>Seleccionar qué pestaña abrir por defecto</item>
+        <item>Diálogos de carga (no saldrá ANR más)</item>
+        <item>Fallos de fechas solucionados</item>
+        <item>Sin soporte para Coreano</item>
+        <item>Nuevo diálogo "Sobre"</item>
+        <item>Nuevo diálogo "Novedades"</item>
+    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">¿Estás seguro?</string>
     <string name="logoutDialogMessage">Tus credenciales no quedarán guardadas en el móvil.</string>
@@ -69,15 +109,16 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Recargar</string>
+    <string name="manageShows">Gestionar series</string>
     <string name="about">Sobre</string>
     <string name="logout">Cerrar sesión</string>
-    <string name="changelog">Qué ha cambiado</string>
+    <string name="whatsNew">Novedades</string>
     <string name="preferences">Preferencias</string>
+    <!-- show specific menu -->
+    <string name="menuShowMarkAcquired">Marcar todos los episodios como Adquiridos</string>
+    <string name="menuShowMarkWatched">Marcar todos los episodios como Vistos</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Detalles</string>
-    <string name="episodeDetailsSeasonLabel">Temporada: </string>
-    <string name="episodeDetailsEpisodeLabel">Capítulo: </string>
-    <string name="episodeDetailsAirDateLabel">Fecha de emisión: </string>
     <string name="menuEpisodeMarkAcquired">Marcar como Adquirido</string>
     <string name="menuEpisodeMarkWatched">Marcar como Visto</string>
 
@@ -97,21 +138,27 @@
         <item>Primero los más antiguos</item>
         <item>Primero los más nuevos</item>
     </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Pestaña por defecto</string>
+    <string name="openDefaultPromptExtra">Selecciona la pestaña que quieres que se vea al comenzar la aplicación</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Ver</item>
+            <item>Adquirir</item>
+            <item>Por emitir</item>
+    </string-array>
+    <!-- Change Theme -->
+    <string name="ThemePrompt">Elige el tema</string>
+    <string name="ThemePromptExtra">Selecciona el tema</string>
+    <string-array name="ThemeOptions">
+            <item>Luminoso</item>
+            <item>Oscuro</item>
+    </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Guardar contraseña</string>
     <!-- Change Language -->
     <string name="showLanguagePrompt">Cambiar el idioma</string>
-    <string-array name="showLanguageOptions">
-        <item>Inglés</item>
-        <item>Español</item>
-        <item>Francés</item>
-        <item>Italiano</item>
-        <item>Coreano</item>
-        <item>Alemán</item>
-        <item>Sueco</item>
-    </string-array>
-	
-	<!-- Basic Dialog -->
+
+    <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
 
     <!-- Exception handling for dialogs -->
@@ -123,82 +170,5 @@
     <string name="networkIssues">¡Error de Red! Comprueba tus ajustes de red y prueba a recargar manualmente.</string>
     <string name="watchListUnableToReadFeed">¡Error de Red! \nPrueba a recargar manualmente.</string>
     <string name="watchListUnableToMarkWatched">¡Error al marcar este capítulo como Visto! \nComprueba tu conexión a Internet o recarga la lista</string>
-
-    <string name="changelogTitle">Qué ha cambiado</string>
-    <string name="changelogText">Versión 1.6.1\n
-    ***********\n
-    Nuevo logo\n
-    Posibilidad de cambiar el idioma en ajustes\n
-    Se soporta la mayoría de los ajustes de fecha de la pantalla de configuración de myEpisodes.com\n
-    Las fechas de lanzamiento de las series ahora aparecen en el formato de tu idioma\n
-    Algunas mejoras de código\n
-    No se recargan los datos cuando se cambia la orientación\n
-    Aplicación traducida al Español\n
-    \n
-    Version 1.6.0\n
-    ***********\n
-    Aplicación móvil completa de MyEpisodes.com, incluyendo capítulos por ver, por adquirir y futuros capítulos\n
-    Arreglado el fallo por el que algunos capítulos no se listaban\n
-    Arreglado el fallo: el tema de las largas colecciones en listados de capítulos\n
-    Arreglado el fallo en capítulos con caracteres especiales\n
-    Versión 1.5.1\n
-    ***********\n
-    Mejores Estadísticas de Google Analytics\n
-    \n
-    Versión 1.5.0\n
-    ***********\n
-    Compatible con Android 2.2 (Froyo)\n
-    Pantalla de Preferencias\n
-    Añadida preferencia para rewcordar la contraseña\n
-    Añadida preferencia para elegir el orden de las series\n
-    Añadida preferencia para elegir el orden de los capítulos\n
-    Mejor menú contextual\n
-    Arreglado el fallo del título del capítulo en los listados\n
-    Solucionado el fallo de inicio de sesión\n
-    Traducción al Francés por Daniel De Luca\n
-    Traducción al Italiano por Daniel De Luca\n
-    Traducción al Coreano por Hyeon Tae Jeon\n
-    \n
-    Versión 1.4.1\n
-    ***********\n
-    Traducción al Sueco por Fredrik Nohrborg\n
-    \n
-    Versión 1.4.0\n
-    ***********\n
-    Afrupamiento de capítulos por series\n
-    \n
-    Versión 1.3.5\n
-    ***********\n
-    Actualización de la pantalla de inicio\n
-    Modificaciones de diseño (cabecera)\n
-    Solucionado el fallo en el tema Blanco\n
-    \n
-    Versión 1.3.4\n
-    ***********\n
-    Implementado tema Blanco sugerido por Ivo Janssen\n
-    \n
-    Versión 1.3.3\n
-    ***********\n
-    Implementado el aviso de cierre cuando se cierra la sesión\n
-    \n
-    Versión 1.3.2\n
-    ***********\n
-    Añadido Google Analytics para comprobar las estadísticas\n
-    Arreglado el fallo con los nombres largos de los capítulos\n
-    \n
-    Versión 1.3.1\n
-    ***********\n
-    Añadido "Sobre"\n
-    Añádido "Qué ha cambiado"\n
-    Comprobada la compatibilidad con Android 2.0\n
-    Internationalización (i18n: Inglés, Alemán)\n
-    \n
-    Versión 1.3.0\n
-    ***********\n
-    Lanzamiento libre de fallos\n
-    \n
-    Versión 1.2.0\n
-    ***********\n
-    Solucionados fallos de conexión de red\n
-    Añadidos detalles de formateo de fechas en capítulos</string>
+	<string name="searchShowUnabletoAdd">Error al añadir la serie. Por favor, inténtalo de nuevo. Si el error continúa, por favor manda un informe</string>
 </resources>
