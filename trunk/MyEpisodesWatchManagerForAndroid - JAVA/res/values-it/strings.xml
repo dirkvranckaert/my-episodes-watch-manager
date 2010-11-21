@@ -6,6 +6,8 @@
     <string name="no">No</string>
     <string name="close">Uscire</string>
     <string name="attention">Attenzione</string>
+    <string name="done">Fatto</string>
+    <string name="search">Ricerca</string>
 
     <!-- login form -->
     <string name="loginFormTitle">Fornire i vostri dati utente di MyEpisodes.com qui sotto.</string>
@@ -39,6 +41,34 @@
     <string name="watchListSubTitleAcquirePlural">%d episodi da acquistare</string>
     <string name="watchListSubTitleComingPlural">%d episodi a venire</string>
     <string name="watchListEmpty">Nessun episodio trovato.</string>
+    
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Stagione: </string>
+    <string name="episodeDetailsEpisodeLabel">Episodio: </string>
+    <string name="episodeDetailsAirDateLabel">Data di trasmissione: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">Data non riconosciuta!</string>
+    <string name="TweetTitle">Condividere</string>
+    <string name="Tweet">Ho guardato \'%s\' #MyEpisodesManager #Android</string>
+
+    <!-- Show management -->
+    <!-- Show Panel -->
+    <string name="addShow">Aggiunga Episodio</string>
+    <string name="favouriteShows">Episodi preferiti Shows</string>
+    <string name="ignoredShows">Episodi ignorati</string>
+    <!-- Show searching -->
+    <string name="showSearchHint">Introduca un nome di episodio...</string>
+    <string name="showSearchNoSearchResults">Nessun episodio trovato</string>
+    <string name="showSearchOneFound">Episodio trovato</string>
+    <string name="showSearchMoreFound">Episodi trovati</string>
+    <string name="showSearchAddShow">Siete sicuri che volete aggiungere questo episodio nella vostra lista?</string>    
+    <string name="showSearchFinished">Volete continuare ad aggiungere episodi?</string>
+    <!-- Favo and ingored shows -->
+    <string name="favoIgnoredDeleteShow">Cancella episodio</string>
+    <string name="favoIgnoredIgnoreShow">Ignorare episodio</string>
+    <string name="favoIgnoredUnignoreShow">Ripristina l\'ignoramento</string>
+    <string name="favoIgnoredConfirmationDeleteMessage">Siete sicuro che volete cancellare questo episodio?</string>
+    <string name="favoIgnoredConfirmationIgnoreMessage">Siete sicuro che volete ignorare questo episodio?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">Siete sicuro che volete ripristinare l\'ignoramento?</string>
 
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Caricamento...</string>
@@ -46,21 +76,33 @@
 
     <!-- aboutDialog -->
     <string name="aboutTitle">A proposito...</string>
-    <string name="aboutText">Sviluppato da: Dirk Vranckaert\n
-    Mantenuto da:\n
-    * Dirk Vranckaert\n
-    * Ivo Janssen\n
-    Tradotto da:\n
-    * Dirk Vranckaert (Inglese, Olandese)\n
-    * Fredrik Nohrborg (Svedese)\n
-    * Daniel De Luca (Francese, Italiano)\n
-    * Hyeon Tae Jeon (Coreano)\n
-    * Sergio Travieso (Spagnolo)\n
-    Licenza: GNU GPL V3 License\n
-    Sito Internet del progetto: http://code.google.com/p/my-episodes-watch-manager\n
-    Contatto del progetto: dirkvranckaert@gmail.com\n
-    \n
-    Gestite gli episodi che seguite usando MyEpisodes.com (dati utente richiesti) verificando direttamente sul vostro cellulare i prossimi episodi che dovete guardare.</string>
+    <string name="aboutVersion">Versione:</string>
+    <string name="aboutLicense">Licenza:</string>
+    <string name="aboutWebsite">Sito:</string>
+    <string name="aboutEmail">Email:</string>
+    <string name="aboutOriginalIdea">Idea originale:</string>
+    
+    <!-- whatsNewDialog -->
+    <string name="whatsNewTitle">Nuovità</string>
+    <string name="whatsNewVersion">Versione:</string>
+    <string name="whatsNewText">Che cosa è cambiato:</string>
+    <string-array name="whatsNewValues">
+        <item>Iscrizione per i nuovi utenti</item>
+        <item>Gestione degli episodi</item>
+        <item>Integrazione Twitter</item>
+        <item>Traduzione Tedesca</item>
+        <item>Traduzione Lettone</item>
+        <item>Traduzione Portoghese</item>
+        <item>Nuovo marchio</item>
+        <item>Schermo con colori scuri</item>
+        <item>Contrassegnare tutti gli episodi di una serie (gruppo) come Guardato o Acquistato </item>
+        <item>Selezionare l\'etichetta principale da aprire</item>
+        <item>Dialoghi di caricamento</item>
+        <item>Problemi di date risolti</item>
+        <item>Lingua Coreana non più supportata</item>
+        <item>Nuova finestra di dialogo: \'A proposito\'</item>
+        <item>Nuova finestra di dialogo: \'Che cosa è cambiato\'</item>
+    </string-array>
 
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Siete sicuro?</string>
@@ -69,15 +111,16 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Ripristina</string>
+    <string name="manageShows">Gestire Episodi</string>
     <string name="about">A proposito</string>
     <string name="logout">Uscire</string>
     <string name="changelog">Che cosa è cambiato</string>
-    <string name="preferences">Preferenze</string>
+    <string name="preferences">Impostazioni</string>
+    <!-- show specific menu -->
+    <string name="menuShowMarkAcquired">Contrassegnare tutti gli episodi come Acquistati</string>
+    <string name="menuShowMarkWatched">Contrassegnare tutti gli episodi come Guardati</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Particolari</string>
-    <string name="episodeDetailsSeasonLabel">Stagione: </string>
-    <string name="episodeDetailsEpisodeLabel">Episodio: </string>
-    <string name="episodeDetailsAirDateLabel">Data di trasmissione: </string>
     <string name="menuEpisodeMarkAcquired">Contrassegna acquisito</string>
     <string name="menuEpisodeMarkWatched">Contrassegna guardato</string>
 
@@ -97,20 +140,26 @@
         <item>Il più vecchio primo</item>
         <item>Il più recente primo</item>
     </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Selezionare l\'etichetta principale da aprire</string>
+    <string name="openDefaultPromptExtra">Selezionare l\'etichetta principale quando l\'applicazione si apre</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Guarda</item>
+            <item>Acquista</item>
+            <item>In arrivo</item>
+    </string-array>
+    <!-- Change Theme -->
+    <string name="ThemePrompt">Scelga uno Tema</string>
+    <string name="ThemePromptExtra">Scelga il suo tema</string>
+    <string-array name="ThemeOptions">
+            <item>Chiaro</item>
+            <item>Scuro</item>
+    </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Registrare la password</string>
 
     <!-- Change Language -->
     <string name="showLanguagePrompt">Cambiare di lingua</string>
-    <string-array name="showLanguageOptions">
-        <item>Inglese</item>
-        <item>Coreano</item>
-        <item>Spagnolo</item>
-        <item>Francese</item>
-        <item>Italiano</item>
-        <item>Hollandese</item>
-        <item>Svedese</item>
-    </string-array>
 
     <!-- Basic Dialog -->
     <string name="dialogOK">OK</string>
@@ -124,83 +173,5 @@
     <string name="networkIssues">Errore rete !\nVerificare la configurazione rete e ripristinare.</string>
     <string name="watchListUnableToReadFeed">Errore rete !\nRipristina.</string>
     <string name="watchListUnableToMarkWatched">Impossibile contrassegnare questo episodio!\nControllare il collegamento a Internet o ripristinare l\'elenco!</string>
-
-    <!-- Next string values do not need to be translated into other languages! -->
-
-    <!-- changelogDialog -->
-    <string name="changelogTitle">Che cosa è cambiato</string>
-    <string name="changelogText">Version 1.6.1\n
-    ***********\n
-    Nuovo logo applicativo\n
-    Cambiare la lingua di base nelle impostazioni\n
-    Sopporto impostazioni di myEpisodes.com riguardando le impostazioni delle date\n
-    Data di trasmissione nella disposizione della lingua\n
-    Ottimalizzazioni del codice\n
-    Nessuna ricarica di dati durante il cambiamento dell\'orientamento\n
-    Traduzione spagnola\n
-    \n
-    Version 1.6.0\n
-    ***********\n
-    Applicazione mobile MyEpisodes.com incluendo episodi da guardare, da acquistare, ed episodi a venire\n
-    Risoluzione problema : Episodi non riferiti nelle liste\n
-    Risoluzione problema : Problemi nelle liste degli episodi per le grandi collezioni\n
-    Risoluzione problema : Episodi con caratteri speciali\n
-    Version 1.5.1\n
-    Aggiornamento statistica Google Analytics\n
-    \n
-    Versione 1.5.0\n
-    Android 2.2 (Froyo) compatibilità\n
-    Schermo preferenze\n
-    Preferenza: Ricordi la password\n
-    Preferenza: Ordine delle serie\n
-    Preferenza: Ordine dei episodi\n
-    Miglioramento menu contestuale\n
-    Risoluzione problema : Titolo dell\'episodo nell\'elenco\n
-    Risoluzione problema : Login \n
-    Traduzione Francese di Daniel De Luca\n
-    Traduzione Italiana di Daniel De Luca\n
-    Traduzione Coreana di Hyeon Tae Jeon\n
-    \n
-    Versione 1.4.1\n
-    ***********\n
-    Traduzione Svedese di Fredrik Nohrborg\n
-    \n
-    Versione 1.4.0\n
-    ***********\n
-    Raggruppamento degli episodi\n
-    \n
-    Versione 1.3.5\n
-    ***********\n
-    Aggiornamento schermo e procedura di login\n
-    Modifiche messa in pagina (testata)\n
-    Risoluzione problema : Tema "bianco"\n
-    \n
-    Versione 1.3.4\n
-    ***********\n
-    Sviluppo tema "bianco" suggerito da Ivo Janssen\n
-    \n
-    Versione 1.3.3\n
-    ***********\n
-    Sviluppo del dialogo di conferma prima di chiudere la connessione a MyEpisodes.com\n
-    \n
-    Versione 1.3.2\n
-    ***********\n
-    Aggiunto : Google Analytics a scopo di statistica\n
-    Risoluzione problema : Lungo nome di episodio\n
-    \n
-    Versione 1.3.1\n
-    ***********\n
-    Aggiunto : Dialogo "A proposito"\n
-    Aggiunto : Dialogo "Che cosa è cambiato"\n
-    Verificato : Compatibilità Android 2.0\n
-    Internazionalizzazione (i18n: Inglese, Olandese)\n
-    \n
-    Versione 1.3.0\n
-    ***********\n
-    Risoluzione problemi \n
-    \n
-    Versione 1.2.0\n
-    ***********\n
-    Risoluzione problema : Connettività rete\n
-    Formato data nell dettaglio di un episodio</string>
+    <string name="searchShowUnabletoAdd">Impossible di aggiungere l\'episodio. Prova più tardi. Se questo errore si verifica nuovamente annoti prego un nuovo errore!</string>
 </resources>
