@@ -17,8 +17,9 @@ Content: Features, UI
   * Issue 86 (Layout the application)
 ====Version 1.7.2====
 Scheduled Release Date: December 12th 2010<br>
-Content: ???
-  * Issue XX (Refactoring)
+Content: Performance, Stability, Security
+  * Issue 99 (Code review)
+  * Issue 100 (Refactoring)
 ====Version 1.7.1====
 Scheduled Release Date: December 5th 2010<br>
 Content: Features, Bugfixes
