@@ -6,7 +6,9 @@
     <string name="no">Nē</string>
     <string name="close">Aizvērt</string>
     <string name="attention">Uzmanību</string>
-
+    <string name="done">Darīts</string>
+    <string name="search">Meklēt</string>
+    
     <!-- login form -->
     <string name="loginFormTitle">Sniedz savu MyEpisodes.com lietotāja iformāciju zemāk.</string>
     <string name="loginFormRegister">Neesi reģistrējies? Spied šeit!</string>
@@ -40,29 +42,66 @@
     <string name="watchListSubTitleComingPlural">%d drīzumā sērijas</string>
     <string name="watchListEmpty">Neviena sērija nav atrasta.</string>
 
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Sezona: </string>
+    <string name="episodeDetailsEpisodeLabel">Sērija: </string>
+    <string name="episodeDetailsAirDateLabel">Rādīšanas datums: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">Šāds datuma formāts netiek atbalstīts!</string>
+	<string name="TweetTitle">Padot ziņu</string>
+    <string name="Tweet">Es esmu apskatījis \'%s\' #MyEpisodesManager #Android</string>
+
+    <!-- Show management -->
+    <!-- Show Panel -->
+    <string name="addShow">Pievienot pārriadi</string>
+    <string name="favouriteShows">Iecienītākās pārraides</string>
+    <string name="ignoredShows">Ignorētās pārraides</string>
+    <!-- Show searching -->
+    <string name="showSearchHint">Ievadīt pārraides nosaukumu...</string>
+    <string name="showSearchNoSearchResults">Pārraide netika atrasta</string>
+    <string name="showSearchOneFound">Pārraide atrasta</string>
+    <string name="showSearchMoreFound">Vairākas pārraides ir atrastas</string>
+    <string name="showSearchAddShow">Vai esi pārliecināts, ka šo pāraidi vēlies pievienot pie sava saraksta?</string>    
+    <string name="showSearchFinished">Are you done adding shows or do you want to continue?</string>
+    <!-- Favo and ingored shows -->
+    <string name="favoIgnoredDeleteShow">Dzēst pārraidi</string>
+    <string name="favoIgnoredIgnoreShow">Ignorēt pārraidi</string>
+    <string name="favoIgnoredUnignoreShow">Atcelt pārraides ignorēšanu</string>
+    <string name="favoIgnoredConfirmationDeleteMessage">Vai esi pārliecināts, ka vēlies dzēst šo pārraidi?</string>
+    <string name="favoIgnoredConfirmationIgnoreMessage">Vai esi pārliecināts, ka vēlies ignorēt šo pārraidi?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">Vai esi pārliecināts, ka vēlies atcelt šīs pārraides ignorēšanu?</string>
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Ielāde...</string>
     <string name="progressLoadingBody">Dati tiek nosūtīti/saņemti</string>
 
     <!-- aboutDialog -->
     <string name="aboutTitle">Informācija par programmu...</string>
-    <string name="aboutText">Autors: Dirk Vranckaert\n
-    Uzturēšana:\n
-    * Dirk Vranckaert\n
-    * Ivo Janssen\n
-    Tulkojumi:\n
-    * Dirk Vranckaert (Angliski, Dāniski)\n
-    * Fredrik Nohrborg (Zviedriski)\n
-    * Daniel De Luca (Franciski, Itāliski)\n
-    * Hyeon Tae Jeon (Korejiešu)\n
-    * Sergio Travieso (Spāniski)\n
-    * Artūrs Vikmanis (Latviski)
-    Licence: GNU GPL V3 License\n
-    Projekta mājas lapa: http://code.google.com/p/my-episodes-watch-manager\n
-    Sazināties ar projekta kontaktpersonu: dirkvranckaert@gmail.com\n
-    \n
-    Seko līdzi saviem iecienītākajiem seriāliem ar MyEpisodes.com (nepieciešama reģistrācija) un uzzini pirmais no sava telefona, kura ir nākamā sērija, kura tev ir jāapskata nākamā.</string>
-
+    <string name="aboutVersion">Versija:</string>
+    <string name="aboutLicense">Licence:</string>
+    <string name="aboutWebsite">Mājas lapa:</string>
+    <string name="aboutEmail">E-pasta:</string>
+    <string name="aboutOriginalIdea">Idejas autors:</string>
+    <!-- whatsNewDialog -->
+    <string name="whatsNewTitle">Kas jauns</string>
+    <string name="whatsNewVersion">Versija:</string>
+    <string name="whatsNewText">Kas ir mainījies:</string>
+    <string-array name="whatsNewValues">
+        <item>Jaunu lietotāju reģistrācija</item>
+        <item>Pārraižu vadība</item>
+        <item>Twitter integrācija</item>
+        <item>Tulkojums vācu valodā</item>
+        <item>Tulkojums latviešu valodā</item>
+        <item>Tulkojums portugāļu valodā</item>
+        <item>Jauns logo</item>
+        <item>Tumšo toņu izkārtojums</item>
+        <item>Atzīmēt visas pārraides (grupu) kā skatītu vai iegūtu</item>
+        <item>Izvēlēties, kuru sadaļu jāatver pēc noklusējuma</item>
+        <item>Ielādes dialogi (vairs nekādu ANR)</item>
+        <item>Labotas kļūdas saistītas ar datumiem</item>
+        <item>Korejiešu valoda turpmāk netiks atbalstīta</item>
+        <item>Jauns izskats sadaļai \'Par mums\'</item>
+        <item>Jauns izskats sadaļai \'Kas jauns\'</item>
+    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Vai esi pārliecināts?</string>
     <string name="logoutDialogMessage">Tavi dati netiks saglabāti mobilās ierīces atmiņā.</string>
@@ -70,15 +109,16 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Atjaunināt</string>
+    <string name="manageShows">Pārraižu vadība</string>
     <string name="about">Par programmu</string>
     <string name="logout">Izeja</string>
-    <string name="changelog">Jaunās versijas izmaiņas</string>
+    <string name="whatsNew">Kas jauns</string>
     <string name="preferences">Papildiespējas</string>
+    <!-- show specific menu -->
+    <string name="menuShowMarkAcquired">Atzīmēt visas sērijas kā iegūtas</string>
+    <string name="menuShowMarkWatched">Atzīmēt visas sērijas kā apskatītas</string>
     <!-- episode specific menu -->
     <string name="menuEpisodeDetails">Sīkāk</string>
-    <string name="episodeDetailsSeasonLabel">Sezona: </string>
-    <string name="episodeDetailsEpisodeLabel">Sērija: </string>
-    <string name="episodeDetailsAirDateLabel">Ētera datums: </string>
     <string name="menuEpisodeMarkAcquired">Atzīmēt kā iegūtu</string>
     <string name="menuEpisodeMarkWatched">Atzīmēt kā apskatītu</string>
 
@@ -98,20 +138,25 @@
         <item>Sākt ar vecāko</item>
         <item>Sākt ar jaunāko</item>
     </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Sadaļa, kuru atvērt pēc noklusējuma</string>
+    <string name="openDefaultPromptExtra">Sadaļa, kuru izvēlēties pēc noklusējuma atverot aplikāciju</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Apskatīt</item>
+            <item>Iegūt</item>
+            <item>Drīzumā</item>
+    </string-array>
+    <!-- Change Theme -->
+    <string name="ThemePrompt">Izvēlēties izskatu</string>
+    <string name="ThemePromptExtra">Atzīmēt izvēlēto izskatu</string>
+    <string-array name="ThemeOptions">
+            <item>Gaiša</item>
+            <item>Tumša</item>
+    </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Saglabāt paroli</string>
     <!-- Change Language -->
     <string name="showLanguagePrompt">Nomainīt valodu</string>
-    <string-array name="showLanguageOptions">
-        <item>English</item>
-        <item>Español</item>
-        <item>French</item>
-        <item>Italian</item>
-        <item>Korean</item>
-        <item>Dutch</item>
-        <item>Swedish</item>
-        <item>Latviski</item>
-    </string-array>
 
     <!-- Basic Dialog -->
     <string name="dialogOK">Labi</string>
@@ -125,79 +170,5 @@
     <string name="networkIssues">Savienojuma kļūda!\nPārbaudi sava savienojuma iestatījumus un mēģini atjaunināt manuāli.</string>
     <string name="watchListUnableToReadFeed">Savienojuma kļūda!\nMēģini atjaunināt manuāli.</string>
     <string name="watchListUnableToMarkWatched">Šo sēriju atzīmēt kā apskatītu nav izdevies!\nPārbaudi interneta pieejamību un atjaunini sarakstu!</string>
-
-    <string name="changelogTitle">Kādas ir izmaiņas jaunajā versijā</string>
-    <string name="changelogText">Versija 1.6.1\n
-    ***********\n
-    Pilnā MyEpisodes.com mobilā programma ar iespēju atzīmēt apskatāmās, iegustamās un sērijas kuras iznāks drīzumā\n
-    Izlabota kļūda, kur dažas sērijas netika iekļautas sarakstā\n
-    Izlabota kļūda, kura saistīta ar lieliem sēriju sarakstiem\n
-    Izlabota kļūda, kurā nekorekti tika attēloti sēriju nosaukumi ar īpašiem simboliem\n
-    \n
-    Version 1.6.0\n
-    ***********\n
-    Pilna MyEpisodes.com mobilā aplikācija iekļaujot apskatāmās, iegūstamās un sērijas drīzumā\n
-    Izlabota kļūda, ka dažas sērijas netika iekļautas sarakstā\n
-    Izlabota kļūda ar lieliem sēriju sarakstiem\n
-    Izlabota kļūda ar īpašajiem simboliem sēriju nosaukumos\n
-    Version 1.5.1\n
-    ***********\n
-    Uzlabota Google Analytics statistika\n
-    \n
-    Versija 1.5.0\n
-    ***********\n
-    Android 2.2 aka Froyo savietojams\n
-    Papildiespēju izvēlne\n
-    Iespēja paroles saglabāšanai\n
-    Pārraišu šķirošanas iespēja\n
-    Sēriju šķirošanas iespēja\n
-    Ulzabota kontekstuālā izvēlne\n
-    Izlabota kļūda, kur nepareizi tika attēlots sērijas nosaukums sarakstā\n
-    Izlabota kļūda ar ieiešanu\n
-    Tulkojums Franču valodā sadarbībā ar Daniel De Luca\n
-    Tulkojums Itāļu valodā sadarbībā ar Daniel De Luca\n
-    Tulkojums Korejiešu valodā sadarbībā ar Hyeon Tae Jeon\n
-    \n
-    Versija 1.4.1\n
-    ***********\n
-    Tulkojums Zviedru valodā sadarbībā ar Fredrik Nohrborg\n
-    \n
-    Versija 1.4.0\n
-    ***********\n
-    Sēriju grupēšana\n
-    \n
-    Versija 1.3.5\n
-    ***********\n
-    Uzlabots ieiešanas interfeiss un procedūra\n
-    Izvietojuma modifikācija (galvgalis)\n
-    Izlabotas kļūdas baltajā tēmā\n
-    \n
-    Versija 1.3.4\n
-    ***********\n
-    Ieviesta baltā tēma pēc Ivo Janssen ieteikuma\n
-    \n
-    Versija 1.3.3\n
-    ***********\n
-    Ieviests iziešanas dialoga interfeiss\n
-    \n
-    Versija 1.3.2\n
-    ***********\n
-    Pievienots Google Analytics statistikas ievākšanai\n
-    Izlabota kļūda, kura saistīta ar garajiem sēriju nosaukumiem\n
-    \n
-    Versija 1.3.1\n
-    ***********\n
-    Pievienots informācijas par programmu logs\n
-    Pievienots programmas izmaiņu logs\n
-    Pārbaudīta savietojamība ar Android 2.0\n
-    Internacionalizācija (i18n: Angliski, Dāniski)\n
-    \n
-    Versija 1.3.0\n
-    ***********\n
-    Kļūdu labojumu izlaidums\n
-    \n
-    Versija 1.2.0\n
-    ***********\n
-    Tīkla savienojuma kļūdu labojums\n
-    Izmainīts veids kā attēlojās datumi sēriju papildinformācijā</string>
-</resources>
+    <string name="searchShowUnabletoAdd">Kļūda pievienojot jaunu pārraidi. Mēģini atkal vēlāk. Ja šī kļūda parādās atkal un atkal, dod lūdzu ziņu!</string>
+ </resources>
