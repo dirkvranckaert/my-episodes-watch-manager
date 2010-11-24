@@ -5,23 +5,27 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
-====Version 1.7.3====
-Scheduled Release Date: 31th January 2010<br>
-Content: Features, Bugfixes
+====Version 1.7.4====
+Scheduled Release Date: February 1st 2011<br>
+Content: Features
   * Issue 67 (Calender View)
   * Issue 90 (Keep collapsable lists opened)
-====Version 1.7.2====
-Scheduled Release Date: 30th December 2010<br>
-Content: Features, Bugfixes
+====Version 1.7.3====
+Scheduled Release Date: January 2nd 2011<br>
+Content: Features, UI
   * Issue 38 (Mark several episodes as "Watched" at once)
   * Issue 86 (Layout the application)
+====Version 1.7.2====
+Scheduled Release Date: December 12th 2010<br>
+Content: ???
+  * Issue XX (Refactoring)
 ====Version 1.7.1====
-Scheduled Release Date: 5th December 2010<br>
+Scheduled Release Date: December 5th 2010<br>
 Content: Features, Bugfixes
   * Issue 66 (Change request: For upcoming shows, show date and time)
   * Issue 98 (Error reporting)
 ====Version 1.7.0====
-Scheduled Release Date: 23th November 2010<br>
+Scheduled Release Date: November 26th 2010<br>
 Content: Features, Bugfixes
   * Issue 62 (Register new users)
   * Issue 63 (Add/Remove and Ignore/Unignore shows feature)
@@ -42,7 +46,7 @@ Content: Features, Bugfixes
 
 === Market Releases ===
 ====Version 1.6.1====
-Release Date: 14th September 2010<br>
+Release Date: September 14th 2010<br>
   * Issue 55 (Lines between tv show on WVGA800)
   * Issue 61 (Change language in settings)
   * Issue 65 (Date not correct)
@@ -54,14 +58,14 @@ Release Date: 14th September 2010<br>
   * Issue 75 (New application logo)
 
 ====Version 1.6.0====
-Release Date: 28th July 2010<br>
+Release Date: July 28th 2010<br>
   * Issue 52 (Tabs for episodes list)
   * Issue 58 (Missing episodes)
   * Issue 59 (Large collections of episodes)
   * Issue 60 (Problem with show Grey's Anatomy - From Market comments)
 
 ====Version 1.5.1====
-Release Date: 3th June 2010<br>
+Release Date: June 3th 2010<br>
   * Issue 51 (Improve Google Analytics reports)
   * Issue 56 (Everything translated, also the about dialog)
   * Issue 57 (Issue when pressing the back button)
