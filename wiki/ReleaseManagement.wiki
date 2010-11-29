@@ -25,9 +25,10 @@ Scheduled Release Date: December 5th 2010<br>
 Content: Features, Bugfixes
   * Issue 66 (Change request: For upcoming shows, show date and time)
   * Issue 98 (Error reporting)
+
+=== Market Releases ===
 ====Version 1.7.0====
-Scheduled Release Date: November 26th 2010<br>
-Content: Features, Bugfixes
+Scheduled Release Date: November 29th 2010<br>
   * Issue 62 (Register new users)
   * Issue 63 (Add/Remove and Ignore/Unignore shows feature)
   * Issue 74 (Aboutdialog and Changelog-dialog make-over)
@@ -45,7 +46,6 @@ Content: Features, Bugfixes
   * Issue 94 (New logo)
   * Issue 96 (Last Episode of first Bones Season won't show up correctly)
 
-=== Market Releases ===
 ====Version 1.6.1====
 Release Date: September 14th 2010<br>
   * Issue 55 (Lines between tv show on WVGA800)
