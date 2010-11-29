@@ -1,0 +1,4 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/markAsSeen" android:title="@string/menuEpisodeMarkWatched" android:enabled="true" android:visible="true" android:icon="@android:drawable/ic_menu_view"/>
+    <item android:id="@+id/markAsAquired" android:title="@string/menuEpisodeMarkAcquired" android:icon="@android:drawable/ic_menu_save" android:visible="true" android:enabled="true"/>
+</menu>

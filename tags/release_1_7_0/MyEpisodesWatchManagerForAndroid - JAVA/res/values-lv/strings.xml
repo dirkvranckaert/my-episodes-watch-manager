@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Revision #93 -->
+<resources>
+    <!-- default values -->
+    <string name="yes">Jā</string>
+    <string name="no">Nē</string>
+    <string name="close">Aizvērt</string>
+    <string name="attention">Uzmanību</string>
+    <string name="done">Darīts</string>
+    <string name="search">Meklēt</string>
+    
+    <!-- login form -->
+    <string name="loginFormTitle">Sniedz savu MyEpisodes.com lietotāja iformāciju zemāk.</string>
+    <string name="loginFormRegister">Neesi reģistrējies? Spied šeit!</string>
+    <string name="loginUsernameHint">Lietotājvārds</string>
+    <string name="loginPasswordHint">Parole</string>
+    <string name="loginLoginBtn">Ieiet</string>
+    <string name="loginStartLogin">Notiek autorizācija MyEpisodes.com</string>
+    <string name="loginSuccessfullLogin">Autorizācija notika veiksmīgi!</string>
+    <string name="loginLoginFailed">Lietotājvārds vai parole nav pareizi, mēģini vēlreiz!</string>
+    
+	<!-- register form -->
+    <string name="registerFormTitle">Reģistrējies šeit! Ievadi visus personas datus un piespied reģistrēties. </string>
+    <string name="registerUsernameHint">Lietotājvārds</string>
+    <string name="registerPasswordHint">Parole</string>
+    <string name="registerEmailHint">E-pasta adrese</string>
+    <string name="registerBtn">Reģistrēties</string>
+    <string name="registerStart">Tiek radīts tavs MyEpisodes.com lietotājs</string>
+    <string name="registerSuccessfull">Darbība veiksmīga, lietotājs radīts!</string>
+    <string name="registerFailed">Lietotājvārds jau eksistē, lūdzu izvēlies citu lietotājvārdu!</string>	
+	
+    <!-- watchlist -->
+    <string name="watch">Jāapskata</string>
+    <string name="acquire">Jāiegūst</string>
+    <string name="coming">Drīzumā</string>
+    <string name="watchListTitle">Pārraižu un sēriju saraksts</string>
+    <string name="watchListSubTitleWatch">%d apskatāmā sērija</string>
+    <string name="watchListSubTitleAcquire">%d iegūstamā sērija</string>
+    <string name="watchListSubTitleComing">%d drīzumā sērija</string>
+    <string name="watchListSubTitleWatchPlural">%d apskatāmās sērijas</string>
+    <string name="watchListSubTitleAcquirePlural">%d iegūstamās sērijas</string>
+    <string name="watchListSubTitleComingPlural">%d drīzumā sērijas</string>
+    <string name="watchListEmpty">Neviena sērija nav atrasta.</string>
+
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Sezona: </string>
+    <string name="episodeDetailsEpisodeLabel">Sērija: </string>
+    <string name="episodeDetailsAirDateLabel">Rādīšanas datums: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">Šāds datuma formāts netiek atbalstīts!</string>
+	<string name="TweetTitle">Padot ziņu</string>
+    <string name="Tweet">Es esmu apskatījis \'%s\' #MyEpisodesManager #Android</string>
+
+    <!-- Show management -->
+    <!-- Show Panel -->
+    <string name="addShow">Pievienot pārriadi</string>
+    <string name="favouriteShows">Iecienītākās pārraides</string>
+    <string name="ignoredShows">Ignorētās pārraides</string>
+    <!-- Show searching -->
+    <string name="showSearchHint">Ievadīt pārraides nosaukumu...</string>
+    <string name="showSearchNoSearchResults">Pārraide netika atrasta</string>
+    <string name="showSearchOneFound">Pārraide atrasta</string>
+    <string name="showSearchMoreFound">Vairākas pārraides ir atrastas</string>
+    <string name="showSearchAddShow">Vai esi pārliecināts, ka šo pāraidi vēlies pievienot pie sava saraksta?</string>    
+    <string name="showSearchFinished">Are you done adding shows or do you want to continue?</string>
+    <!-- Favo and ingored shows -->
+    <string name="favoIgnoredDeleteShow">Dzēst pārraidi</string>
+    <string name="favoIgnoredIgnoreShow">Ignorēt pārraidi</string>
+    <string name="favoIgnoredUnignoreShow">Atcelt pārraides ignorēšanu</string>
+    <string name="favoIgnoredConfirmationDeleteMessage">Vai esi pārliecināts, ka vēlies dzēst šo pārraidi?</string>
+    <string name="favoIgnoredConfirmationIgnoreMessage">Vai esi pārliecināts, ka vēlies ignorēt šo pārraidi?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">Vai esi pārliecināts, ka vēlies atcelt šīs pārraides ignorēšanu?</string>
+
+    <!-- progressDialog -->
+    <string name="progressLoadingTitle">Ielāde...</string>
+    <string name="progressLoadingBody">Dati tiek nosūtīti/saņemti</string>
+
+    <!-- aboutDialog -->
+    <string name="aboutTitle">Informācija par programmu...</string>
+    <string name="aboutVersion">Versija:</string>
+    <string name="aboutLicense">Licence:</string>
+    <string name="aboutWebsite">Mājas lapa:</string>
+    <string name="aboutEmail">E-pasta:</string>
+    <string name="aboutOriginalIdea">Idejas autors:</string>
+    <!-- whatsNewDialog -->
+    <string name="whatsNewTitle">Kas jauns</string>
+    <string name="whatsNewVersion">Versija:</string>
+    <string name="whatsNewText">Kas ir mainījies:</string>
+    <string-array name="whatsNewValues">
+        <item>Jaunu lietotāju reģistrācija</item>
+        <item>Pārraižu vadība</item>
+        <item>Twitter integrācija</item>
+        <item>Tulkojums vācu valodā</item>
+        <item>Tulkojums latviešu valodā</item>
+        <item>Tulkojums portugāļu valodā</item>
+        <item>Jauns logo</item>
+        <item>Tumšo toņu izkārtojums</item>
+        <item>Atzīmēt visas pārraides (grupu) kā skatītu vai iegūtu</item>
+        <item>Izvēlēties, kuru sadaļu jāatver pēc noklusējuma</item>
+        <item>Ielādes dialogi (vairs nekādu ANR)</item>
+        <item>Labotas kļūdas saistītas ar datumiem</item>
+        <item>Korejiešu valoda turpmāk netiks atbalstīta</item>
+        <item>Jauns izskats sadaļai \'Par mums\'</item>
+        <item>Jauns izskats sadaļai \'Kas jauns\'</item>
+    </string-array>
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Vai esi pārliecināts?</string>
+    <string name="logoutDialogMessage">Tavi dati netiks saglabāti mobilās ierīces atmiņā.</string>
+
+    <!-- menu's -->
+    <!-- main menu -->
+    <string name="refresh">Atjaunināt</string>
+    <string name="manageShows">Pārraižu vadība</string>
+    <string name="about">Par programmu</string>
+    <string name="logout">Izeja</string>
+    <string name="whatsNew">Kas jauns</string>
+    <string name="preferences">Papildiespējas</string>
+    <!-- show specific menu -->
+    <string name="menuShowMarkAcquired">Atzīmēt visas sērijas kā iegūtas</string>
+    <string name="menuShowMarkWatched">Atzīmēt visas sērijas kā apskatītas</string>
+    <!-- episode specific menu -->
+    <string name="menuEpisodeDetails">Sīkāk</string>
+    <string name="menuEpisodeMarkAcquired">Atzīmēt kā iegūtu</string>
+    <string name="menuEpisodeMarkWatched">Atzīmēt kā apskatītu</string>
+
+    <!-- preferences Dialog -->
+    <string name="applyPreferences">Ņemot vērā to, ka tika veiktas izmaiņas, sēriju saraksts tiks atjaunināts!</string>
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Raidījumu secība</string>
+    <string-array name="showOrderOptions">
+        <item>Sākotnējā</item>
+        <item>Augoša</item>
+        <item>Dilstoša</item>
+    </string-array>
+    <!-- Episode sorting -->
+    <string name="episodeOrderPrompt">Sēriju secība</string>
+    <string name="episodeOrderPromptExtra">Sākt ar jaunāko vai vecāko...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Sākt ar vecāko</item>
+        <item>Sākt ar jaunāko</item>
+    </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Sadaļa, kuru atvērt pēc noklusējuma</string>
+    <string name="openDefaultPromptExtra">Sadaļa, kuru izvēlēties pēc noklusējuma atverot aplikāciju</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Apskatīt</item>
+            <item>Iegūt</item>
+            <item>Drīzumā</item>
+    </string-array>
+    <!-- Change Theme -->
+    <string name="ThemePrompt">Izvēlēties izskatu</string>
+    <string name="ThemePromptExtra">Atzīmēt izvēlēto izskatu</string>
+    <string-array name="ThemeOptions">
+            <item>Gaiša</item>
+            <item>Tumša</item>
+    </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Saglabāt paroli</string>
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Nomainīt valodu</string>
+
+    <!-- Basic Dialog -->
+    <string name="dialogOK">Labi</string>
+
+    <!-- Exception handling for dialogs -->
+    <string name="fillInAllFields">Visiem laukiem ir jābūt aizpildītiem!</string>
+    <string name="exceptionDialogTitle">Vai vai vai...</string>
+    <string name="defaultExceptionMessage">Kaut kas nogāja greizi. Mēģini pārstartēt programmu un pārbaudi vai strādā internets. Ja atkārtoti redzi šo kļūdu, ziņo par to: http://code.google.com/p/my-episodes-watch-manager/.</string>
+    <string name="internetConnectionFailureTryAgain">Neveiksmīgs interneta savienojums. Mēģini vēlreiz!</string>
+    <string name="internetConnectionFailureReload">Neveiksmīgs interneta savienojums. Izmanto izvēlni, lai atjauninātu un mēģinātu vēlreiz.</string>
+    <string name="networkIssues">Savienojuma kļūda!\nPārbaudi sava savienojuma iestatījumus un mēģini atjaunināt manuāli.</string>
+    <string name="watchListUnableToReadFeed">Savienojuma kļūda!\nMēģini atjaunināt manuāli.</string>
+    <string name="watchListUnableToMarkWatched">Šo sēriju atzīmēt kā apskatītu nav izdevies!\nPārbaudi interneta pieejamību un atjaunini sarakstu!</string>
+    <string name="searchShowUnabletoAdd">Kļūda pievienojot jaunu pārraidi. Mēģini atkal vēlāk. Ja šī kļūda parādās atkal un atkal, dod lūdzu ziņu!</string>
+ </resources>
