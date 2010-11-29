@@ -13,6 +13,7 @@ import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import eu.vranckaert.episodeWatcher.domain.Show;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.enums.ShowAction;
@@ -48,9 +49,12 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
     private static final int CONTEXT_MENU_IGNORE = 2;
     private static final int CONFIRMATION_DIALOG = 3;
 
+    GoogleAnalyticsTracker tracker = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	init(savedInstanceState);
+        startAnalyticsTracking();
 
         reloadShows();
     }
@@ -77,6 +81,16 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
         initializeShowList();
 
         service = new ShowService();
+    }
+
+    private void startAnalyticsTracking() {
+        tracker = GoogleAnalyticsTracker.getInstance();
+        tracker.start("UA-3183255-2", 30, this);
+        if(showType.equals(ShowType.FAVOURITE_SHOWS)) {
+            tracker.trackPageView("/favouriteShowsActivity");
+        } else if(showType.equals(ShowType.IGNORED_SHOWS)) {
+            tracker.trackPageView("/ignoredShowsActivity");
+        }
     }
 
     @Override
@@ -285,6 +299,18 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
 
             @Override
             protected Object doInBackground(Object... objects) {
+                switch(action) {
+                    case IGNORE:
+                        tracker.trackEvent("IgnoreShow", "FavosAndIngoredShowManagementActivity", "", 0);
+                        break;
+                    case UNIGNORE:
+                        tracker.trackEvent("UnignoreShow", "FavosAndIngoredShowManagementActivity", "", 0);
+                        break;
+                    case DELETE:
+                        tracker.trackEvent("DeleteShow", "FavosAndIngoredShowManagementActivity", "", 0);
+                        break;
+                }
+
                 markShow(user, showType, action, show);
                 return 100L;
             }

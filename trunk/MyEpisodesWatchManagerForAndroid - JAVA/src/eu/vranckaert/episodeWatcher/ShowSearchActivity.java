@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import eu.vranckaert.episodeWatcher.domain.Show;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
@@ -53,9 +54,12 @@ public class ShowSearchActivity extends ListActivity {
 
     private boolean showsAdded = false;
 
+    GoogleAnalyticsTracker tracker = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         init(savedInstanceState);
+        startAnalyticsTracking();
 
         ImageButton searchButton = (ImageButton) findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +87,12 @@ public class ShowSearchActivity extends ListActivity {
         );
 
         initializeShowList();
+    }
+
+    private void startAnalyticsTracking() {
+        tracker = GoogleAnalyticsTracker.getInstance();
+        tracker.start("UA-3183255-2", 30, this);
+        tracker.trackPageView("/showSearchActivity");
     }
 
     private void initializeShowList() {
@@ -277,6 +287,7 @@ public class ShowSearchActivity extends ListActivity {
 
             @Override
             protected Object doInBackground(Object... objects) {
+                tracker.trackEvent("AddNewShow", "ContextMenu-ShowSearchActivity", "", 0);
                 Show show = shows.get(position);
                 addShow(show);
                 return 100L;
