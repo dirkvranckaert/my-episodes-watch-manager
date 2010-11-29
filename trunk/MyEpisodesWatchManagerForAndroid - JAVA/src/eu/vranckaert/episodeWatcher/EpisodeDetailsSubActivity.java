@@ -57,14 +57,17 @@ public class EpisodeDetailsSubActivity extends Activity {
         Button markAsSeenButton = (Button) findViewById(R.id.markAsSeenButton);
         ImageButton twitterButton = (ImageButton) findViewById(R.id.twitterButton);
         
-        
+        if (episodesType != 0)
+        {
+        	twitterButton.setVisibility(View.GONE);
+        }
         if (episodesType != 1)
         {
-        	markAsAcquiredButton.setVisibility(8);
+        	markAsAcquiredButton.setVisibility(View.GONE);
         }
         if (episodesType == 2)
         {
-        	markAsSeenButton.setVisibility(8);
+        	markAsSeenButton.setVisibility(View.GONE);
         }
         
         markAsAcquiredButton.setOnClickListener(new View.OnClickListener() {
