@@ -19,12 +19,13 @@ Content: Features, UI
 Scheduled Release Date: December 12th 2010<br>
 Content: Performance, Stability, Security
   * Issue 99 (Code review)
-  * Issue 100 (Refactoring)
+  * Issue 105 (Code Refactoring part 2)
 ====Version 1.7.1====
 Scheduled Release Date: December 5th 2010<br>
 Content: Features, Bugfixes
   * Issue 66 (Change request: For upcoming shows, show date and time)
   * Issue 98 (Error reporting)
+  * Issue 104 (Code Refactoring part 1)
 
 === Market Releases ===
 ====Version 1.7.0====
