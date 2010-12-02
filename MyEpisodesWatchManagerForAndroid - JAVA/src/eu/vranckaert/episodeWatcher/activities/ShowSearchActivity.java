@@ -340,4 +340,10 @@ public class ShowSearchActivity extends ListActivity {
         }
         super.finish();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        tracker.stop();
+    }
 }
