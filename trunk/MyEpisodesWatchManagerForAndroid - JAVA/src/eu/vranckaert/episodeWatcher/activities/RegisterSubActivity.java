@@ -32,7 +32,9 @@ public class RegisterSubActivity extends Activity {
     private static final int MY_EPISODES_REGISTER_DIALOG_LOADING = 0;
     private static final int MY_EPISODES_ERROR_DIALOG = 1;
     private static final int MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS = 2;
+
     private static final String LOG_TAG = "RegisterSubActivity";
+    GoogleAnalyticsTracker tracker;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class RegisterSubActivity extends Activity {
         init();
         
         if (!checkLoginCredentials()) {
-        	GoogleAnalyticsTracker tracker = GoogleAnalyticsTracker.getInstance();
+        	tracker = GoogleAnalyticsTracker.getInstance();
         	tracker.trackPageView("registerSubActivity");
         	
 	        setContentView(R.layout.register);
@@ -174,5 +176,11 @@ public class RegisterSubActivity extends Activity {
     
     private void init() {
     	this.service = new UserService();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        tracker.stop();
     }
 }

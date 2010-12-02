@@ -34,6 +34,7 @@ public class LoginSubActivity extends Activity {
     private static final int MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS = 2;
     
     private static final String LOG_TAG = "LoginSubActivity";
+    GoogleAnalyticsTracker tracker;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class LoginSubActivity extends Activity {
         init();
         
         if (!checkLoginCredentials()) {
-        	GoogleAnalyticsTracker tracker = GoogleAnalyticsTracker.getInstance();
+        	tracker = GoogleAnalyticsTracker.getInstance();
         	tracker.trackPageView("loginSubActivity");
 
 	        setContentView(R.layout.login);
@@ -196,4 +197,10 @@ public class LoginSubActivity extends Activity {
     	Intent registerActivity = new Intent(this.getApplicationContext(), RegisterSubActivity.class);
     	startActivity(registerActivity);
 	}
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        tracker.stop();
+    }
 }

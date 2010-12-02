@@ -347,4 +347,10 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
 			exceptionMessageResId = R.string.networkIssues;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        tracker.stop();
+    }
 }
