@@ -1,10 +1,11 @@
-package eu.vranckaert.episodeWatcher;
+package eu.vranckaert.episodeWatcher.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.enums.ShowType;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;

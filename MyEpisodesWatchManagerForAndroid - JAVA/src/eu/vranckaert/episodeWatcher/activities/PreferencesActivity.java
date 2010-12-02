@@ -1,4 +1,4 @@
-package eu.vranckaert.episodeWatcher;
+package eu.vranckaert.episodeWatcher.activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 

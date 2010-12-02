@@ -1,4 +1,4 @@
-package eu.vranckaert.episodeWatcher;
+package eu.vranckaert.episodeWatcher.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
@@ -27,8 +28,6 @@ public class LoginSubActivity extends Activity {
     private TextView register;
     private UserService service;
     private int exceptionMessageResId = -1;
-
-    private static final int WHATS_NEW_INTENT_REQUEST_CODE = 0;
 
     private static final int MY_EPISODES_LOGIN_DIALOG_LOADING = 0;
     private static final int MY_EPISODES_ERROR_DIALOG = 1;

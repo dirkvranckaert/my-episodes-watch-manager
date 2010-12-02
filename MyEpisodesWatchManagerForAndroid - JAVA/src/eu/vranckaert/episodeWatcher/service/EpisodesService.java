@@ -6,6 +6,7 @@ import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.domain.Feed;
 import eu.vranckaert.episodeWatcher.domain.FeedItem;
 import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.enums.EpisodeListingType;
 import eu.vranckaert.episodeWatcher.exception.*;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
 import org.apache.http.HttpResponse;
@@ -31,7 +32,7 @@ public class EpisodesService {
         userService = new UserService();
     }
 
-    public List<Episode> retrieveEpisodes(int episodesType,final User user) throws InternetConnectivityException, Exception {
+    public List<Episode> retrieveEpisodes(EpisodeListingType episodesType,final User user) throws InternetConnectivityException, Exception {
         String encryptedPassword = userService.encryptPassword(user.getPassword());
         URL feedUrl = buildEpisodesUrl(episodesType, user.getUsername(), encryptedPassword);
         
@@ -182,15 +183,15 @@ public class EpisodesService {
     	}
     }
     
-    private URL buildEpisodesUrl(int episodesType,final String username, final String encryptedPassword) throws FeedUrlBuildingFaildException {
+    private URL buildEpisodesUrl(EpisodeListingType episodesType,final String username, final String encryptedPassword) throws FeedUrlBuildingFaildException {
     	String urlRep = "";
     	switch(episodesType)
         {
-	        case 0: urlRep = MyEpisodeConstants.UNWATCHED_EPISODES_URL;
+	        case EPISODES_TO_WATCH: urlRep = MyEpisodeConstants.UNWATCHED_EPISODES_URL;
 	        break;
-	        case 1: urlRep = MyEpisodeConstants.UNAQUIRED_EPISODES_URL;
+	        case EPISODES_TO_ACQUIRE: urlRep = MyEpisodeConstants.UNAQUIRED_EPISODES_URL;
 	        break;  
-	        case 2: urlRep = MyEpisodeConstants.COMING_EPISODES_URL;
+	        case EPISODES_COMING: urlRep = MyEpisodeConstants.COMING_EPISODES_URL;
 	        break; 
         }
     	
