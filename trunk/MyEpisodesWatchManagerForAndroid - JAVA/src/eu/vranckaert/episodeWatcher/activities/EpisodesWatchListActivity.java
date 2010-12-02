@@ -1,4 +1,4 @@
-package eu.vranckaert.episodeWatcher;
+package eu.vranckaert.episodeWatcher.activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,7 +17,10 @@ import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
+import eu.vranckaert.episodeWatcher.Constants.ActivityConstants;
+import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.*;
+import eu.vranckaert.episodeWatcher.enums.EpisodeListingType;
 import eu.vranckaert.episodeWatcher.exception.*;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
@@ -42,7 +45,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     private TextView subTitle;
     private SimpleExpandableListAdapter episodeAdapter;
     private Integer exceptionMessageResId = null;
-    private int episodesType;
+    private EpisodeListingType episodesType;
 	private Resources res; // Resource object to get Drawables
 	private android.content.res.Configuration conf;
 
@@ -77,11 +80,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 					shows.get(groupid).getEpisodes().get(childid).getName());
 			MenuInflater inflater = getMenuInflater();
 			inflater.inflate(R.menu.episodemenu, menu);
-			if (episodesType != 1)
+			if (!episodesType.equals(EpisodeListingType.EPISODES_TO_ACQUIRE))
 			{
 				menu.removeItem(R.id.episodeMenuAcquired);
 			}
-			if (episodesType == 2)
+			if (episodesType.equals(EpisodeListingType.EPISODES_COMING))
 			{
 				menu.removeItem(R.id.episodeMenuWatched);
 			}
@@ -90,11 +93,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			menu.setHeaderTitle(shows.get(groupid).getShowName());
 			MenuInflater inflater = getMenuInflater();
 			inflater.inflate(R.menu.groupmenu, menu);
-			if (episodesType != 1)
+			if (!episodesType.equals(EpisodeListingType.EPISODES_TO_ACQUIRE))
 			{
 				menu.removeItem(R.id.showMenuAcquired);
 			}
-			if (episodesType == 2)
+			if (episodesType.equals(EpisodeListingType.EPISODES_COMING))
 			{
 				menu.removeItem(R.id.showMenuWatched);
 			}
@@ -163,7 +166,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
 		TabMain tabMain = (TabMain) getParent();
         Bundle data = this.getIntent().getExtras();
-        episodesType = (Integer) data.getSerializable("Type");
+        episodesType = (EpisodeListingType) data.getSerializable(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE);
 
         tabMain.clearRefreshTab(episodesType);
         init();
@@ -274,13 +277,13 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		{
 			switch(episodesType)
 			{
-			case 0:
+			case EPISODES_TO_WATCH:
 		        subTitle.setText(getString(R.string.watchListSubTitleWatch, countEpisodes));
 		        break;
-			case 1:
+			case EPISODES_TO_ACQUIRE:
 			    subTitle.setText(getString(R.string.watchListSubTitleAcquire, countEpisodes));
 			    break;
-			case 2:
+			case EPISODES_COMING:
 		        subTitle.setText(getString(R.string.watchListSubTitleComing, countEpisodes));
 		        break;
 			}
@@ -289,13 +292,13 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		{
 			switch(episodesType)
 			{
-			case 0:
+			case EPISODES_TO_WATCH:
 		        subTitle.setText(getString(R.string.watchListSubTitleWatchPlural, countEpisodes));
 		        break;
-			case 1:
+			case EPISODES_TO_ACQUIRE:
 			    subTitle.setText(getString(R.string.watchListSubTitleAcquirePlural, countEpisodes));
 			    break;
-			case 2:
+			case EPISODES_COMING:
 		        subTitle.setText(getString(R.string.watchListSubTitleComingPlural, countEpisodes));
 		        break;
 			}
@@ -347,10 +350,10 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         startActivity(manageShowsActivity);
     }
 
-	private void openEpisodeDetails(Episode episode, int episodesType2) {
+	private void openEpisodeDetails(Episode episode, EpisodeListingType episodeType) {
 		Intent episodeDetailsSubActivity = new Intent(this.getApplicationContext(), EpisodeDetailsSubActivity.class);
-		episodeDetailsSubActivity.putExtra("episode", episode);
-		episodeDetailsSubActivity.putExtra("episodesType", episodesType2);
+		episodeDetailsSubActivity.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode);
+		episodeDetailsSubActivity.putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodeType);
         startActivityForResult(episodeDetailsSubActivity, EPISODE_DETAILS_REQUEST_CODE);
 	}
 
@@ -369,14 +372,14 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			{
 	            tracker.trackPageView("/episodesWatchListActivity");
 	            Bundle intentData = data.getExtras();
-	            String markEpisode = intentData.getString("markEpisode");
-	            Episode episode = (Episode) intentData.getSerializable("episode");
+	            String markEpisode = intentData.getString(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE);
+	            Episode episode = (Episode) intentData.getSerializable(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE);
 
-	            if (markEpisode.equals("watch")) {
+	            if (markEpisode.equals(ActivityConstants.EXTRA_BUNDLE_VALUE_WATCH)) {
 	                tracker.trackEvent("MarkAsWatched", "MenuButton-DetailsSubActivity", "", 0);
 	                markEpisodes(0, episode);
 	            }
-	            else if (markEpisode.equals("acquire")) {
+	            else if (markEpisode.equals(ActivityConstants.EXTRA_BUNDLE_VALUE_AQUIRE)) {
 	                tracker.trackEvent("MarkAsAcquired", "MenuButton-DetailsSubActivity", "", 0);
 	            	markEpisodes(1, episode);
 	            }
