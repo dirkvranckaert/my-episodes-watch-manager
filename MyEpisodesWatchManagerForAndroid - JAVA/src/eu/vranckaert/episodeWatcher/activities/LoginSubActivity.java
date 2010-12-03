@@ -44,6 +44,7 @@ public class LoginSubActivity extends Activity {
         
         if (!checkLoginCredentials()) {
         	tracker = GoogleAnalyticsTracker.getInstance();
+            tracker.start("UA-3183255-2", 30, this);
         	tracker.trackPageView("loginSubActivity");
 
 	        setContentView(R.layout.login);
@@ -201,6 +202,8 @@ public class LoginSubActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        tracker.stop();
+        if(tracker != null) {
+            tracker.stop();
+        }
     }
 }
