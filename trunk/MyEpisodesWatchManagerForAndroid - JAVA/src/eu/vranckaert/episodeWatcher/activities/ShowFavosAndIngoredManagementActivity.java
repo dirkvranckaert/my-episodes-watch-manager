@@ -13,10 +13,10 @@ import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Show;
 import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.enums.CustomTracker;
 import eu.vranckaert.episodeWatcher.enums.ShowAction;
 import eu.vranckaert.episodeWatcher.enums.ShowType;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
@@ -25,6 +25,7 @@ import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingExcepti
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.ShowService;
+import eu.vranckaert.episodeWatcher.utils.CustomAnalyticsTracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
     private static final int CONTEXT_MENU_IGNORE = 2;
     private static final int CONFIRMATION_DIALOG = 3;
 
-    GoogleAnalyticsTracker tracker = null;
+    CustomAnalyticsTracker tracker = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,12 +86,11 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
     }
 
     private void startAnalyticsTracking() {
-        tracker = GoogleAnalyticsTracker.getInstance();
-        tracker.start("UA-3183255-2", 30, this);
+        tracker = CustomAnalyticsTracker.getInstance(this);
         if(showType.equals(ShowType.FAVOURITE_SHOWS)) {
-            tracker.trackPageView("/favouriteShowsActivity");
+            tracker.trackPageView(CustomTracker.PageView.SHOW_MANAGEMENT_FAVOS);
         } else if(showType.equals(ShowType.IGNORED_SHOWS)) {
-            tracker.trackPageView("/ignoredShowsActivity");
+            tracker.trackPageView(CustomTracker.PageView.SHOW_MANAGEMENT_IGNORED);
         }
     }
 
@@ -302,13 +302,13 @@ public class ShowFavosAndIngoredManagementActivity extends ListActivity {
             protected Object doInBackground(Object... objects) {
                 switch(action) {
                     case IGNORE:
-                        tracker.trackEvent("IgnoreShow", "FavosAndIngoredShowManagementActivity", "", 0);
+                        tracker.trackEvent(CustomTracker.Event.SHOW_INGORE);
                         break;
                     case UNIGNORE:
-                        tracker.trackEvent("UnignoreShow", "FavosAndIngoredShowManagementActivity", "", 0);
+                        tracker.trackEvent(CustomTracker.Event.SHOW_UNIGNORE);
                         break;
                     case DELETE:
-                        tracker.trackEvent("DeleteShow", "FavosAndIngoredShowManagementActivity", "", 0);
+                        tracker.trackEvent(CustomTracker.Event.SHOW_DELETE);
                         break;
                 }
 

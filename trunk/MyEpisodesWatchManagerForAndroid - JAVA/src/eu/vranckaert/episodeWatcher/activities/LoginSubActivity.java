@@ -14,14 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.enums.CustomTracker;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.UserService;
+import eu.vranckaert.episodeWatcher.utils.CustomAnalyticsTracker;
 
 public class LoginSubActivity extends Activity {
     private Button loginButton;
@@ -34,7 +35,7 @@ public class LoginSubActivity extends Activity {
     private static final int MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS = 2;
     
     private static final String LOG_TAG = "LoginSubActivity";
-    GoogleAnalyticsTracker tracker;
+    CustomAnalyticsTracker tracker;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,9 +44,8 @@ public class LoginSubActivity extends Activity {
         init();
         
         if (!checkLoginCredentials()) {
-        	tracker = GoogleAnalyticsTracker.getInstance();
-            tracker.start("UA-3183255-2", 30, this);
-        	tracker.trackPageView("loginSubActivity");
+        	tracker = CustomAnalyticsTracker.getInstance(this);
+        	tracker.trackPageView(CustomTracker.PageView.LOGIN);
 
 	        setContentView(R.layout.login);
 

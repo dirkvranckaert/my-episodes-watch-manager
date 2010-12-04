@@ -16,15 +16,16 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import eu.vranckaert.episodeWatcher.Constants.ActivityConstants;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.*;
+import eu.vranckaert.episodeWatcher.enums.CustomTracker;
 import eu.vranckaert.episodeWatcher.enums.EpisodeListingType;
 import eu.vranckaert.episodeWatcher.exception.*;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.EpisodesService;
+import eu.vranckaert.episodeWatcher.utils.CustomAnalyticsTracker;
 
 import java.util.*;
 
@@ -49,7 +50,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	private Resources res; // Resource object to get Drawables
 	private android.content.res.Configuration conf;
 
-    private GoogleAnalyticsTracker tracker;
+    private CustomAnalyticsTracker tracker;
 
 	public EpisodesWatchListActivity() {
 		super();
@@ -161,8 +162,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        tracker = GoogleAnalyticsTracker.getInstance();
-        tracker.start("UA-3183255-2", 30, this);
+        tracker = CustomAnalyticsTracker.getInstance(this);
 
 		TabMain tabMain = (TabMain) getParent();
         Bundle data = this.getIntent().getExtras();
@@ -209,15 +209,15 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		int childid = ExpandableListView.getPackedPositionChild(info.packedPosition);
 			switch(item.getItemId()) {
 			case R.id.episodeMenuWatched:
-				tracker.trackEvent("MarkAsWatched", "ContextMenu-EpisodesWatchListActivity", "", 0);
+                tracker.trackEvent(CustomTracker.Event.MARK_WATCHED);
 				markEpisodes(0, shows.get(groupid).getEpisodes().get(childid));
 				return true;
 			case R.id.episodeMenuAcquired:
-				tracker.trackEvent("MarkAsAcquire", "ContextMenu-EpisodesWatchListActivity", "", 0);
+				tracker.trackEvent(CustomTracker.Event.MARK_ACQUIRED);
 				markEpisodes(1, shows.get(groupid).getEpisodes().get(childid));
 				return true;
 			case R.id.episodeMenuDetails:
-				tracker.trackPageView("/episodeDetailsSubActivity");
+				tracker.trackPageView(CustomTracker.PageView.EPISODE_DETAILS);
 				openEpisodeDetails(shows.get(groupid).getEpisodes().get(childid), episodesType);
 				return true;
 			case R.id.showMenuWatched:
@@ -233,7 +233,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		tracker.trackPageView("/episodeDetailsSubActivity");
+		tracker.trackPageView(CustomTracker.PageView.EPISODE_DETAILS);
 		openEpisodeDetails(shows.get(groupPosition).getEpisodes().get(childPosition), episodesType);
 		return true;
 	}
@@ -339,13 +339,13 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	}
 
     private void openPreferencesActivity() {
-        tracker.trackPageView("/generalPreferences");
+        tracker.trackPageView(CustomTracker.PageView.PREFERENCES_GENERAL);
         Intent preferencesActivity = new Intent(this.getApplicationContext(), PreferencesActivity.class);
         startActivity(preferencesActivity);
     }
 
     private void openManageShowsActivity() {
-        tracker.trackPageView("/manageShows");
+        tracker.trackPageView(CustomTracker.PageView.SHOW_MANAGEMENT);
         Intent manageShowsActivity = new Intent(this.getApplicationContext(), ShowManagementActivity.class);
         startActivity(manageShowsActivity);
     }
@@ -360,7 +360,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == LOGIN_REQUEST_CODE && resultCode == RESULT_OK) {
-            tracker.trackPageView("/episodesWatchListActivity");
+            tracker.trackPageView(CustomTracker.PageView.EPISODE_LIST);
 	        user = new User(
         		Preferences.getPreference(this, User.USERNAME),
         		Preferences.getPreference(this, User.PASSWORD)
@@ -370,17 +370,17 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		} else if (requestCode == EPISODE_DETAILS_REQUEST_CODE) {
 			if (resultCode == RESULT_OK)
 			{
-	            tracker.trackPageView("/episodesWatchListActivity");
+	            tracker.trackPageView(CustomTracker.PageView.EPISODE_LIST);
 	            Bundle intentData = data.getExtras();
 	            String markEpisode = intentData.getString(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE);
 	            Episode episode = (Episode) intentData.getSerializable(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE);
 
 	            if (markEpisode.equals(ActivityConstants.EXTRA_BUNDLE_VALUE_WATCH)) {
-	                tracker.trackEvent("MarkAsWatched", "MenuButton-DetailsSubActivity", "", 0);
+	                tracker.trackEvent(CustomTracker.Event.MARK_WATCHED);
 	                markEpisodes(0, episode);
 	            }
 	            else if (markEpisode.equals(ActivityConstants.EXTRA_BUNDLE_VALUE_AQUIRE)) {
-	                tracker.trackEvent("MarkAsAcquired", "MenuButton-DetailsSubActivity", "", 0);
+	                tracker.trackEvent(CustomTracker.Event.MARK_ACQUIRED);
 	            	markEpisodes(1, episode);
 	            }
 			}
@@ -647,7 +647,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	}
 
 	private void logout() {
-		tracker.trackEvent("Logout", "MenuButton-EpisodesWatchListActivity", "", 0);
+		tracker.trackEvent(CustomTracker.Event.LOGOUT);
 		Preferences.removePreference(this, User.USERNAME);
 		Preferences.removePreference(this, User.PASSWORD);
 		TabMain tabMain = (TabMain) getParent();
