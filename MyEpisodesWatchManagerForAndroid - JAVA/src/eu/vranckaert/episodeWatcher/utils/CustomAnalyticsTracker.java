@@ -50,4 +50,8 @@ public class CustomAnalyticsTracker {
             tracker.trackPageView(pageView.getPageView());
         }
     }
+
+    public void stop() {
+        tracker.stop();
+    }
 }

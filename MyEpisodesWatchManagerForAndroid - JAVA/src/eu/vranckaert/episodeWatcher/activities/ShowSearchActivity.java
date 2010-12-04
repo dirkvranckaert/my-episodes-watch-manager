@@ -17,10 +17,10 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Show;
 import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.enums.CustomTracker;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.exception.ShowAddFailedException;
@@ -28,6 +28,7 @@ import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingExcepti
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.ShowService;
+import eu.vranckaert.episodeWatcher.utils.CustomAnalyticsTracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class ShowSearchActivity extends ListActivity {
 
     private boolean showsAdded = false;
 
-    GoogleAnalyticsTracker tracker = null;
+    CustomAnalyticsTracker tracker = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,9 +92,8 @@ public class ShowSearchActivity extends ListActivity {
     }
 
     private void startAnalyticsTracking() {
-        tracker = GoogleAnalyticsTracker.getInstance();
-        tracker.start("UA-3183255-2", 30, this);
-        tracker.trackPageView("/showSearchActivity");
+        tracker = CustomAnalyticsTracker.getInstance(this);
+        tracker.trackPageView(CustomTracker.PageView.SHOW_MANAGEMENT_SEARCH);
     }
 
     private void initializeShowList() {
@@ -288,7 +288,7 @@ public class ShowSearchActivity extends ListActivity {
 
             @Override
             protected Object doInBackground(Object... objects) {
-                tracker.trackEvent("AddNewShow", "ContextMenu-ShowSearchActivity", "", 0);
+                tracker.trackEvent(CustomTracker.Event.SHOW_ADD_NEW);
                 Show show = shows.get(position);
                 addShow(show);
                 return 100L;

@@ -7,7 +7,15 @@ package eu.vranckaert.episodeWatcher.enums;
  */
 public class CustomTracker {
     public enum PageView {
-        TEST("/episodeDetailsSubActivity");
+        EPISODE_DETAILS("/episodeDetailsSubActivity"),
+        EPISODE_LIST("/episodesWatchListActivity"),
+        PREFERENCES_GENERAL("/generalPreferences"),
+        SHOW_MANAGEMENT("/manageShows"),
+        LOGIN("loginSubActivity"),
+        REGISTER_USER("registerSubActivity"),
+        SHOW_MANAGEMENT_FAVOS("/favouriteShowsActivity"),
+        SHOW_MANAGEMENT_IGNORED("/ignoredShowsActivity"),
+        SHOW_MANAGEMENT_SEARCH("/showSearchActivity");
 
         PageView(String pageView) {
             this.pageView = pageView;
@@ -21,8 +29,13 @@ public class CustomTracker {
     }
 
     public enum Event {
-        TEST1("changeEpisodeStatus","markAquired"),
-        TEST2("changeEpisodeStatus","markWatched");
+        MARK_WATCHED("MarkAsWatched","ContextMenu-EpisodesWatchListActivity"),
+        MARK_ACQUIRED("MarkAsAcquire","ContextMenu-EpisodesWatchListActivity"),
+        LOGOUT("Logout", "MenuButton-EpisodesWatchListActivity"),
+        SHOW_INGORE("IgnoreShow", "FavosAndIngoredShowManagementActivity"),
+        SHOW_UNIGNORE("UnignoreShow", "FavosAndIngoredShowManagementActivity"),
+        SHOW_DELETE("DeleteShow", "FavosAndIngoredShowManagementActivity"),
+        SHOW_ADD_NEW("AddNewShow","ContextMenu-ShowSearchActivity");
 
         Event(String category, String action) {
             this.category = category;

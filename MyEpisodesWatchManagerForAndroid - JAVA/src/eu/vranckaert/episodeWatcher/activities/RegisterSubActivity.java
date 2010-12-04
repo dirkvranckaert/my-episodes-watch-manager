@@ -12,15 +12,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.User;
+import eu.vranckaert.episodeWatcher.enums.CustomTracker;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.UserService;
+import eu.vranckaert.episodeWatcher.utils.CustomAnalyticsTracker;
 
 public class RegisterSubActivity extends Activity {
     private Button registerButton;
@@ -34,7 +35,7 @@ public class RegisterSubActivity extends Activity {
     private static final int MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS = 2;
 
     private static final String LOG_TAG = "RegisterSubActivity";
-    GoogleAnalyticsTracker tracker;
+    CustomAnalyticsTracker tracker;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,8 @@ public class RegisterSubActivity extends Activity {
         init();
         
         if (!checkLoginCredentials()) {
-        	tracker = GoogleAnalyticsTracker.getInstance();
-        	tracker.trackPageView("registerSubActivity");
+        	tracker = CustomAnalyticsTracker.getInstance(this);
+        	tracker.trackPageView(CustomTracker.PageView.REGISTER_USER);
         	
 	        setContentView(R.layout.register);
 	        
