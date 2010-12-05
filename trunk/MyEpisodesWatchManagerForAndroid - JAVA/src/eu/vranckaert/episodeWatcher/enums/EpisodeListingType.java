@@ -1,5 +1,8 @@
 package eu.vranckaert.episodeWatcher.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * User: DIRK VRANCKAERT
  * Date: Dec 2, 2010
@@ -20,7 +23,20 @@ public enum EpisodeListingType {
         return episodeListingType;
     }
 
-    public void setEpisodeListingType(int episodeListingType) {
-        this.episodeListingType = episodeListingType;
+    public static List<Integer> getEpisodeListingTypeList() {
+        List<Integer> episodeTypes = new ArrayList<Integer>();
+        episodeTypes.add(EPISODES_TO_WATCH.getEpisodeListingType());
+        episodeTypes.add(EPISODES_TO_ACQUIRE.getEpisodeListingType());
+        episodeTypes.add(EPISODES_COMING.getEpisodeListingType());
+        return episodeTypes;
+    }
+
+    public static CharSequence[] getEpisodeListingTypeArray() {
+        CharSequence[] types = {
+                       String.valueOf(EPISODES_TO_WATCH.getEpisodeListingType()),
+                       String.valueOf(EPISODES_TO_ACQUIRE.getEpisodeListingType()),
+                       String.valueOf(EPISODES_COMING.getEpisodeListingType())
+                      };
+        return types;
     }
 }

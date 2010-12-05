@@ -194,11 +194,6 @@
         <item>oldest_on_top</item>
         <item>newest_on_top</item>
     </string-array>
-    <string-array name="openDefaultTabValues">
-            <item>0</item>
-            <item>1</item>
-            <item>2</item>
-    </string-array>
     <string-array name="ThemeValues">
             <item>0</item>
             <item>1</item>
