@@ -26,6 +26,7 @@ Content: Features, Bugfixes
   * Issue 66 (Change request: For upcoming shows, show date and time)
   * Issue 98 (Error reporting)
   * Issue 104 (Code Refactoring part 1)
+  * Issue 106 (Hungarian translations)
 
 === Market Releases ===
 ====Version 1.7.0====
