@@ -207,23 +207,25 @@
     <string-array name="showLanguageOptionsValues">
         <item>nl</item>
         <item>en</item>
-        <item>es</item>
         <item>fr</item>
         <item>de</item>
+        <item>hu</item>
         <item>it</item>
         <item>lv</item>
         <item>pt</item>
+        <item>es</item>
         <item>sv</item>
     </string-array>
     <string-array name="showLanguageOptions">
         <item>Dutch</item>
         <item>English</item>
-        <item>Spanish</item>
         <item>French</item>
         <item>German</item>
+        <item>Hungarian</item>
         <item>Italian</item>
         <item>Latvian</item>
         <item>Portuguese</item>
+        <item>Spanish</item>
         <item>Swedish</item>
     </string-array>
 </resources>
