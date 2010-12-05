@@ -52,6 +52,8 @@ public class CustomAnalyticsTracker {
     }
 
     public void stop() {
-        tracker.stop();
+        if(tracker != null) {
+            tracker.stop();
+        }
     }
 }

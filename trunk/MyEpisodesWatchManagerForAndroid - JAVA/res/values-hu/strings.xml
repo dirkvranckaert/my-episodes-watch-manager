@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- default values -->
+    <string name="yes">Igen</string>
+    <string name="no">Nem</string>
+    <string name="close">Bezárás</string>
+    <string name="attention">Figyelem</string>
+    <string name="done">Kész</string>
+    <string name="search">Keresés</string>
+
+    <!-- login form -->
+    <string name="loginFormTitle">Add meg a MyEpisodes.com fiókod adatait az alábbiakban!</string>
+    <string name="loginFormRegister">Új felhasználó?</string>
+    <string name="loginUsernameHint">Felhasználónév</string>
+    <string name="loginPasswordHint">Jelszó</string>
+    <string name="loginLoginBtn">Bejelentkezés</string>
+    <string name="loginStartLogin">Bejelentkezés a MyEpisodes.com-ra</string>
+    <string name="loginSuccessfullLogin">Sikeres bejelentkezés</string>
+    <string name="loginLoginFailed">A felhasználónév vagy a jelszó hibás, próbáld meg újra!</string>
+    
+	<!-- register form -->
+    <string name="registerFormTitle">Itt regisztrálhatsz, töltsd ki a felhasználói adatokat és kattints a \"Regisztrálok\" gombra.</string>
+    <string name="registerUsernameHint">Felhasználónév</string>
+    <string name="registerPasswordHint">Jelszó</string>
+    <string name="registerEmailHint">Email</string>
+    <string name="registerBtn">Regisztrálok</string>
+    <string name="registerStart">Felhasználói fiók készítése a MyEpisodes.com-on</string>
+    <string name="registerSuccessfull">Sikeresen elkészült a fiók!</string>
+    <string name="registerFailed">A felhasználónév már foglalt, kérlek válassz egy másikat!</string>	
+	
+    <!-- watchlist -->
+    <string name="watch">Megnézendő</string>
+    <string name="acquire">Beszerzendő</string>
+    <string name="coming">Várható</string>
+    <string name="watchListTitle">Műsorok/részek listája</string>
+    <string name="watchListSubTitleWatch">%d megnézendő rész</string>
+    <string name="watchListSubTitleAcquire">%d beszerzendő rész</string>
+    <string name="watchListSubTitleComing">%d jövőbeni rész</string>
+    <string name="watchListSubTitleWatchPlural">%d megnézendő rész</string>
+    <string name="watchListSubTitleAcquirePlural">%d beszerzendő rész</string>
+    <string name="watchListSubTitleComingPlural">%d jövőbeni rész</string>
+    <string name="watchListEmpty">Nincs egy rész se.</string>
+
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Évad: </string>
+    <string name="episodeDetailsEpisodeLabel">Rész: </string>
+    <string name="episodeDetailsAirDateLabel">Adás napja: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">Nem támogatott dátumformátum!</string>
+	<string name="TweetTitle">Megosztás</string>
+    <string name="Tweet">Megnéztem a(z) \'%s\' részét #MyEpisodesManager #Android #snezes</string>
+
+    <!-- Show management -->
+    <!-- Show Panel -->
+    <string name="addShow">Műsor hozzáadása</string>
+    <string name="favouriteShows">Kedvenc műsorok</string>
+    <string name="ignoredShows">Elrejtett műsorok</string>
+    <!-- Show searching -->
+    <string name="showSearchHint">Írd be a műsor nevét!</string>
+    <string name="showSearchNoSearchResults">Nincs találat</string>
+    <string name="showSearchOneFound">műsort találtam</string>
+    <string name="showSearchMoreFound">műsort találtam</string>
+    <string name="showSearchAddShow">Biztos a műsorlistádhoz szeretnéd adni ezt a műsort?</string>    
+    <string name="showSearchFinished">Végeztél a műsorok felvételével, vagy szeretnéd folytatni még?</string>
+    <!-- Favo and ingored shows -->
+    <string name="favoIgnoredDeleteShow">Műsor törlése</string>
+    <string name="favoIgnoredIgnoreShow">Műsor rejtése</string>
+    <string name="favoIgnoredUnignoreShow">Műsor mutatása</string>
+    <string name="favoIgnoredConfirmationDeleteMessage">Biztos törlöd ezt a műsort?</string>
+    <string name="favoIgnoredConfirmationIgnoreMessage">Biztos nem szeretnéd látni ezt a műsort a listákban mostantól?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">Biztos szeretnéd látni ezt a műsort a listákban mostantól?</string>
+
+    <!-- progressDialog -->
+    <string name="progressLoadingTitle">Betöltés...</string>
+    <string name="progressLoadingBody">Adatok küldése/fogadása</string>
+
+    <!-- aboutDialog -->
+    <string name="aboutTitle">Névjegy</string>
+    <string name="aboutVersion">Verzió:</string>
+    <string name="aboutLicense">Licensz:</string>
+    <string name="aboutWebsite">Honlap:</string>
+    <string name="aboutEmail">Email:</string>
+    <string name="aboutOriginalIdea">Ötletgazda:</string>
+    <!-- whatsNewDialog -->
+    <string name="whatsNewTitle">Újdonságok</string>
+    <string name="whatsNewVersion">Verzió:</string>
+    <string name="whatsNewText">Ami változott:</string>
+    <string-array name="whatsNewValues">
+        <!-- TODO update! -->
+        <item>Felhasználói fiók regisztráció</item>
+        <item>Műsor kezelése</item>
+        <item>Twitter integráció</item>
+        <item>Német nyelv</item>
+        <item>Litván nyelv</item>
+        <item>Portugál nyelv</item>
+        <item>Új logó</item>
+        <item>Sötét téma</item>
+        <item>Egy műsor(csoport) összes részének nézetté vagy beszerzetté nyilvánítása</item>
+        <item>Kezdőfül állításának lehetősége</item>
+        <item>Betöltés jelzése (Android nem válaszol üzenetek megszűntek)</item>
+        <item>Dátum problémák javítása</item>
+        <item>Kikerült a koreai nyelv támogatása</item>
+        <item>Új névjegy</item>
+        <item>Frissített \"Újdonságok\" lap</item>
+    </string-array>
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Biztos kilépsz?</string>
+    <string name="logoutDialogMessage">A bejelentkezési adataid törölve lettek a készülékről.</string>
+
+    <!-- menu's -->
+    <!-- main menu -->
+    <string name="refresh">Frissít</string>
+    <string name="manageShows">Műsorok kezelése</string>
+    <string name="about">Névjegy</string>
+    <string name="logout">Kilépés</string>
+    <string name="whatsNew">Újdonságok</string>
+    <string name="preferences">Beállítások</string>
+    <!-- show specific menu -->
+    <string name="menuShowMarkAcquired">Mindegyik részt beszereztem</string>
+    <string name="menuShowMarkWatched">Mindegyik részt megnéztem</string>
+    <!-- episode specific menu -->
+    <string name="menuEpisodeDetails">Részletek</string>
+    <string name="menuEpisodeMarkAcquired">Beszereztem</string>
+    <string name="menuEpisodeMarkWatched">Megnéztem</string>
+
+    <!-- preferences Dialog -->
+    <string name="applyPreferences">Mivel a beállítások megváltoztak, a részek listája most frissül!</string>
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Műsorok sorrendje</string>
+    <string-array name="showOrderOptions">
+        <item>Alapértelmezett</item>
+        <item>Növekvő</item>
+        <item>Csökkenő</item>
+    </string-array>
+    <!-- Episode sorting -->
+    <string name="episodeOrderPrompt">A részek sorrendje</string>
+    <string name="episodeOrderPromptExtra">Régiek vagy újak elől...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Régiek elől</item>
+        <item>Újak elől</item>
+    </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Kezdőfül beállítása</string>
+    <string name="openDefaultPromptExtra">Az alkalmazás indulásakor megnyíló fül</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Megnézendő</item>
+            <item>Beszerzendő</item>
+            <item>Várható</item>
+    </string-array>
+    <!-- Change Theme -->
+    <string name="ThemePrompt">Témaválasztás</string>
+    <string name="ThemePromptExtra">Válassz témát!</string>
+    <string-array name="ThemeOptions">
+            <item>Világos</item>
+            <item>Sötét</item>
+    </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Jelszó tárolása</string>
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Nyelvváltás</string>
+
+    <!-- Basic Dialog -->
+    <string name="dialogOK">OK</string>
+
+    <!-- Exception handling for dialogs -->
+    <string name="fillInAllFields">Minden mezőt ki kell tölteni!</string>
+    <string name="exceptionDialogTitle">Hoppá...</string>
+    <string name="defaultExceptionMessage">Valami bibi van. Próbáld újraindítani az alkalmazást és ellenőrizd az internet kapcsolatot! Ha a probléma továbbra is fennáll, kérlek jelentsd a http://code.google.com/p/my-episodes-watch-manager/ oldalon!</string>
+    <string name="internetConnectionFailureTryAgain">Nem sikerült kapcsolódni az internetre. Próbáld újra, kérlek!</string>
+    <string name="internetConnectionFailureReload">Nem sikerült kapcsolódni az internetre. Frissíts menüből és próbáld újra!</string>
+    <string name="networkIssues">Hálózati hiba!\nEllenőrizd a hálózati beállításokat és próbálj frissíteni!</string>
+    <string name="watchListUnableToReadFeed">Hálózati hiba!\nPróbálj frissíteni!</string>
+    <string name="watchListUnableToMarkWatched">Hiba a rész megnézetté állítása közben!\nEllenőrizd az internet kapcsolatot vagy frissítsd a listát!</string>
+    <string name="searchShowUnabletoAdd">Nem sikerült a műsor felvétele. Próbáld meg később! Ha ez a hiba akkor is fennáll, kérlek jelentsd be!</string>
+</resources>
