@@ -12,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import eu.vranckaert.episodeWatcher.R;
-import eu.vranckaert.episodeWatcher.enums.EpisodeListingType;
+import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 
@@ -104,7 +104,7 @@ public class PreferencesActivity extends PreferenceActivity {
         openDefaultTabPref.setTitle(R.string.openDefaultPrompt);
         openDefaultTabPref.setSummary(R.string.openDefaultPromptExtra);
         openDefaultTabPref.setEntries(R.array.openDefaultTabOptions);
-        openDefaultTabPref.setEntryValues(EpisodeListingType.getEpisodeListingTypeArray());
+        openDefaultTabPref.setEntryValues(EpisodeType.getEpisodeListingTypeArray());
         openDefaultTabPref.setDefaultValue("0");
         root.addPreference(openDefaultTabPref);
         

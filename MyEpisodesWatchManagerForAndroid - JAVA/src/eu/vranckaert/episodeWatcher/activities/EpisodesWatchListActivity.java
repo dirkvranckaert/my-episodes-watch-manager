@@ -20,12 +20,14 @@ import eu.vranckaert.episodeWatcher.Constants.ActivityConstants;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.*;
 import eu.vranckaert.episodeWatcher.enums.CustomTracker;
-import eu.vranckaert.episodeWatcher.enums.EpisodeListingType;
+import eu.vranckaert.episodeWatcher.enums.EpisodeType;
+import eu.vranckaert.episodeWatcher.enums.ListMode;
 import eu.vranckaert.episodeWatcher.exception.*;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.EpisodesService;
 import eu.vranckaert.episodeWatcher.utils.CustomAnalyticsTracker;
+import eu.vranckaert.episodeWatcher.utils.DateUtil;
 
 import java.util.*;
 
@@ -46,9 +48,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     private TextView subTitle;
     private SimpleExpandableListAdapter episodeAdapter;
     private Integer exceptionMessageResId = null;
-    private EpisodeListingType episodesType;
+    private EpisodeType episodesType;
+    private ListMode listMode;
 	private Resources res; // Resource object to get Drawables
 	private android.content.res.Configuration conf;
+    Map<Date, List<Episode>> listedAirDates = null;
 
     private CustomAnalyticsTracker tracker;
 
@@ -75,35 +79,56 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
 			int childid = ExpandableListView.getPackedPositionChild(info.packedPosition);
 
-			menu.setHeaderTitle(shows.get(groupid).getEpisodes().get(childid).getShowName() +
-					" S" + shows.get(groupid).getEpisodes().get(childid).getSeasonString() +
-					"E" + shows.get(groupid).getEpisodes().get(childid).getEpisodeString() + "\n" +
-					shows.get(groupid).getEpisodes().get(childid).getName());
+            Episode selectedEpisode = determineEpisode(groupid, childid);
+
+			menu.setHeaderTitle(selectedEpisode.getShowName() +
+					" S" + selectedEpisode.getSeasonString() +
+					"E" + selectedEpisode.getEpisodeString() + "\n" +
+					selectedEpisode.getName());
 			MenuInflater inflater = getMenuInflater();
 			inflater.inflate(R.menu.episodemenu, menu);
-			if (!episodesType.equals(EpisodeListingType.EPISODES_TO_ACQUIRE))
-			{
+			if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
 				menu.removeItem(R.id.episodeMenuAcquired);
 			}
-			if (episodesType.equals(EpisodeListingType.EPISODES_COMING))
-			{
+			if (episodesType.equals(EpisodeType.EPISODES_COMING)) {
 				menu.removeItem(R.id.episodeMenuWatched);
 			}
-		} else {
+		} else if (listMode.equals(ListMode.EPISODES_BY_SHOW)) {
 			int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
 			menu.setHeaderTitle(shows.get(groupid).getShowName());
 			MenuInflater inflater = getMenuInflater();
 			inflater.inflate(R.menu.groupmenu, menu);
-			if (!episodesType.equals(EpisodeListingType.EPISODES_TO_ACQUIRE))
-			{
+			if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
 				menu.removeItem(R.id.showMenuAcquired);
 			}
-			if (episodesType.equals(EpisodeListingType.EPISODES_COMING))
-			{
+			if (episodesType.equals(EpisodeType.EPISODES_COMING)) {
 				menu.removeItem(R.id.showMenuWatched);
 			}
 		}
 	}
+
+    private Episode determineEpisode(int listGroupId, int listChildId) {
+        Episode episode = null;
+        switch(listMode) {
+            case EPISODES_BY_SHOW:
+                episode = shows.get(listGroupId).getEpisodes().get(listChildId);
+                break;
+            case EPISODES_BY_DATE:
+                Iterator iter = listedAirDates.entrySet().iterator();
+                int i = 0;
+                while(iter.hasNext()) {
+                    Map.Entry entry = (Map.Entry) iter.next();
+                    if(i == listGroupId) {
+                        episode = listedAirDates.get(entry.getKey()).get(listChildId);
+                        break;
+                    } else {
+                        i++;
+                    }
+                }
+                break;
+        }
+        return episode;
+    }
 
 	@Override
 	protected Dialog onCreateDialog(int id) {
@@ -166,7 +191,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
 		TabMain tabMain = (TabMain) getParent();
         Bundle data = this.getIntent().getExtras();
-        episodesType = (EpisodeListingType) data.getSerializable(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE);
+        episodesType = (EpisodeType) data.getSerializable(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE);
+        listMode = (ListMode) data.getSerializable(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE);
 
         tabMain.clearRefreshTab(episodesType);
         init();
@@ -207,24 +233,29 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) item.getMenuInfo();
 		int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
 		int childid = ExpandableListView.getPackedPositionChild(info.packedPosition);
+        Episode selectedEpisode = determineEpisode(groupid, childid);
+        Show selectedShow = null;
+        if(!listMode.equals(ListMode.EPISODES_BY_DATE)) {
+            shows.get(groupid);
+        }
 			switch(item.getItemId()) {
 			case R.id.episodeMenuWatched:
                 tracker.trackEvent(CustomTracker.Event.MARK_WATCHED);
-				markEpisodes(0, shows.get(groupid).getEpisodes().get(childid));
+				markEpisodes(0, selectedEpisode);
 				return true;
 			case R.id.episodeMenuAcquired:
 				tracker.trackEvent(CustomTracker.Event.MARK_ACQUIRED);
-				markEpisodes(1, shows.get(groupid).getEpisodes().get(childid));
+				markEpisodes(1, selectedEpisode);
 				return true;
 			case R.id.episodeMenuDetails:
 				tracker.trackPageView(CustomTracker.PageView.EPISODE_DETAILS);
-				openEpisodeDetails(shows.get(groupid).getEpisodes().get(childid), episodesType);
+				openEpisodeDetails(selectedEpisode, episodesType);
 				return true;
 			case R.id.showMenuWatched:
-				markShowEpisodes(0, shows.get(groupid));
+				markShowEpisodes(0, selectedShow);
 				return true;
 			case R.id.showMenuAcquired:
-				markShowEpisodes(1, shows.get(groupid));
+				markShowEpisodes(1, selectedShow);
 				return true;
 			default:
 				return false;
@@ -234,7 +265,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		tracker.trackPageView(CustomTracker.PageView.EPISODE_DETAILS);
-		openEpisodeDetails(shows.get(groupPosition).getEpisodes().get(childPosition), episodesType);
+		openEpisodeDetails(determineEpisode(groupPosition, childPosition), episodesType);
 		return true;
 	}
 
@@ -306,31 +337,80 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	}
 
 	private List<? extends Map<String, ?>> createGroups() {
-		List output = new ArrayList();
+		List<Map<String, String>> headerList = new ArrayList<Map<String, String>>();
 
-		for(Show show : shows) {
-				HashMap map = new HashMap();
-				map.put("episodeRowTitle", show.getShowName() + " ( " + show.getNumberEpisodes() + " )");
-				output.add(map);
-			}
+        switch(listMode) {
+            case EPISODES_BY_DATE: {
+                listedAirDates = new HashMap<Date, List<Episode>>();
+                for (Show show : shows) {
+                    for(Episode episode : show.getEpisodes()) {
+                        Date airDate = episode.getAirDate();
+                        if(!listedAirDates.containsKey(airDate)) {
+                            Map<String, String> map = new HashMap<String, String>();
+                            map.put("episodeRowTitle", DateUtil.formatDateLong(airDate, getApplicationContext()));
+                            headerList.add(map);
+                            listedAirDates.put(airDate, null);
+                        }
+                    }
+                }
+                break;
+            }
+            case EPISODES_BY_SHOW: {
+                for(Show show : shows) {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("episodeRowTitle", show.getShowName() + " ( " + show.getNumberEpisodes() + " )");
+                    headerList.add(map);
+                }
+            }
+        }
 
-		return output;
+		return headerList;
 	}
 
 	private List<? extends List<? extends Map<String, ?>>> createChilds() {
-		List subList = new ArrayList();
-		for (Show show : shows) {
-			List subListSecondLvl = new ArrayList();
-			for (Episode episode : show.getEpisodes()) {
-					HashMap map = new HashMap();
-					map.put("episodeRowChildTitle", episode.getShowName());
-					map.put("episodeRowChildDetail", "S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName());
-					subListSecondLvl.add(map);
-			}
-			subList.add(subListSecondLvl);
-		}
+		List<List<Map<String,String>>> childList = new ArrayList<List<Map<String,String>>>();
 
-		return subList;
+        switch(episodesType) {
+            case EPISODES_COMING: {
+                for(Iterator iter = listedAirDates.entrySet().iterator(); iter.hasNext();) {
+                    Map.Entry entry = (Map.Entry) iter.next();
+                    Date listedAirDate = (Date) entry.getKey();
+
+                    List<Episode> episodeList = new ArrayList<Episode>();
+
+                    List<Map<String, String>> subListSecondLvl = new ArrayList<Map<String, String>>();
+                    for(Show show : shows) {
+                        for(Episode episode : show.getEpisodes()) {
+                            if(listedAirDate.equals(episode.getAirDate())) {
+                                HashMap<String, String> map = new HashMap<String, String>();
+                                map.put("episodeRowChildTitle", episode.getShowName());
+                                map.put("episodeRowChildDetail", "S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName());
+                                subListSecondLvl.add(map);
+                                episodeList.add(episode);
+                            }
+                        }
+                    }
+
+                    entry.setValue(episodeList);
+
+                    childList.add(subListSecondLvl);
+                }
+                break;
+            }
+            default:
+                for (Show show : shows) {
+                    List<Map<String, String>> subListSecondLvl = new ArrayList<Map<String, String>>();
+                    for (Episode episode : show.getEpisodes()) {
+                            HashMap<String, String> map = new HashMap<String, String>();
+                            map.put("episodeRowChildTitle", episode.getShowName());
+                            map.put("episodeRowChildDetail", "S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName());
+                            subListSecondLvl.add(map);
+                    }
+                    childList.add(subListSecondLvl);
+                }
+        }
+
+		return childList;
 	}
 
 	private void openLoginActivity() {
@@ -350,7 +430,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         startActivity(manageShowsActivity);
     }
 
-	private void openEpisodeDetails(Episode episode, EpisodeListingType episodeType) {
+	private void openEpisodeDetails(Episode episode, EpisodeType episodeType) {
 		Intent episodeDetailsSubActivity = new Intent(this.getApplicationContext(), EpisodeDetailsSubActivity.class);
 		episodeDetailsSubActivity.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode);
 		episodeDetailsSubActivity.putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodeType);
@@ -512,7 +592,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         }
     }
 
-    private void markEpisodes(final int EpisodeStatus, final Episode episode) {
+    private void markEpisodes(final int EpisodeStatus, final Episode episode) {   //TODO use enum
         AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
 
             @Override
