@@ -8,5 +8,5 @@ package eu.vranckaert.episodeWatcher.Constants;
 public class GoogleAnalyticsTrackerBasicConstants {
     public static final String WEB_PROPERTY_ID = "UA-3183255-2";
     public static final int DISPATCH_INTERVAL = 30;
-    public static final boolean DEBUG = false; //TODO change to true upon release
+    public static final boolean DEBUG = true; //TODO change to true upon release
 }
