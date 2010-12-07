@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import eu.vranckaert.episodeWatcher.Constants.ActivityConstants;
 import eu.vranckaert.episodeWatcher.R;
-import eu.vranckaert.episodeWatcher.enums.EpisodeListingType;
+import eu.vranckaert.episodeWatcher.enums.EpisodeType;
+import eu.vranckaert.episodeWatcher.enums.ListMode;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 
@@ -40,7 +41,8 @@ public class TabMain extends TabActivity {
         
         // Create an Intent to launch an Activity for the tab (to be reused)
         intentWatch = new Intent().setClass(this, EpisodesWatchListActivity.class)
-        					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeListingType.EPISODES_TO_WATCH)
+        					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_TO_WATCH)
+                             .putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW)
         					 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         // Initialize a TabSpec for each tab and add it to the TabHost
         TabHost.TabSpec watchSpec = tabHost.newTabSpec("" + R.string.watch)
@@ -48,14 +50,16 @@ public class TabMain extends TabActivity {
         			  .setContent(intentWatch);
 
         intentAcquire = new Intent().setClass(this, EpisodesWatchListActivity.class)
-        					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeListingType.EPISODES_TO_ACQUIRE)
+        					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_TO_ACQUIRE)
+                             .putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW)
         					 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         TabHost.TabSpec acquireSpec = tabHost.newTabSpec("" + R.string.acquire)
         			  .setIndicator(getString(R.string.acquire), res.getDrawable(R.drawable.tabacquired))
         			  .setContent(intentAcquire);
 
         intentComing = new Intent().setClass(this, EpisodesWatchListActivity.class)
-        					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeListingType.EPISODES_COMING)
+        					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_COMING)
+                             .putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE)
         					 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         TabHost.TabSpec comingSpec = tabHost.newTabSpec("" + R.string.coming)
         			  .setIndicator(getString(R.string.coming), res.getDrawable(R.drawable.tabcoming))
@@ -63,11 +67,11 @@ public class TabMain extends TabActivity {
 
         int preferedTab = Preferences.getPreferenceInt(this, PreferencesKeys.OPEN_DEFAULT_TAB_KEY);
 
-        if(preferedTab == EpisodeListingType.EPISODES_TO_ACQUIRE.getEpisodeListingType()) {
+        if(preferedTab == EpisodeType.EPISODES_TO_ACQUIRE.getEpisodeListingType()) {
             tabHost.addTab(acquireSpec);
             tabHost.addTab(watchSpec);
             tabHost.addTab(comingSpec);
-        } else if(preferedTab == EpisodeListingType.EPISODES_COMING.getEpisodeListingType()) {
+        } else if(preferedTab == EpisodeType.EPISODES_COMING.getEpisodeListingType()) {
             tabHost.addTab(comingSpec);
             tabHost.addTab(watchSpec);
             tabHost.addTab(acquireSpec);
@@ -77,36 +81,36 @@ public class TabMain extends TabActivity {
             tabHost.addTab(comingSpec);
         }
 
-        tabHost.setCurrentTab(EpisodeListingType.EPISODES_TO_WATCH.getEpisodeListingType());
+        tabHost.setCurrentTab(EpisodeType.EPISODES_TO_WATCH.getEpisodeListingType());
     }
     
-    public void clearRefreshTab(EpisodeListingType episodesType)
+    public void clearRefreshTab(EpisodeType episodesType)
     {
-    	if (episodesType.equals(EpisodeListingType.EPISODES_TO_WATCH))
+    	if (episodesType.equals(EpisodeType.EPISODES_TO_WATCH))
     	{
     		intentWatch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
     	}
-    	else if (episodesType.equals(EpisodeListingType.EPISODES_TO_ACQUIRE))
+    	else if (episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE))
     	{
     		intentAcquire.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
     	}
-    	else if (episodesType.equals(EpisodeListingType.EPISODES_COMING))
+    	else if (episodesType.equals(EpisodeType.EPISODES_COMING))
     	{
     		intentComing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
     	}
     }
     
-    public void refreshAllTabs(EpisodeListingType episodesType)
+    public void refreshAllTabs(EpisodeType episodesType)
     {
-    	if (!episodesType.equals(EpisodeListingType.EPISODES_TO_WATCH))
+    	if (!episodesType.equals(EpisodeType.EPISODES_TO_WATCH))
     	{
     		intentWatch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	}
-    	if (!episodesType.equals(EpisodeListingType.EPISODES_TO_ACQUIRE))
+    	if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE))
     	{
     		intentAcquire.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	}
-    	if (!episodesType.equals(EpisodeListingType.EPISODES_COMING))
+    	if (!episodesType.equals(EpisodeType.EPISODES_COMING))
     	{
     		intentComing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	}

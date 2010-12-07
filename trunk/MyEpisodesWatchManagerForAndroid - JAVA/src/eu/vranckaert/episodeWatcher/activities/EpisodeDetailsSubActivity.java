@@ -13,7 +13,7 @@ import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.Constants.ActivityConstants;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Episode;
-import eu.vranckaert.episodeWatcher.enums.EpisodeListingType;
+import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
@@ -22,7 +22,7 @@ import java.util.Date;
 
 public class EpisodeDetailsSubActivity extends Activity {
 	Episode episode = null;
-	EpisodeListingType episodesType;
+	EpisodeType episodesType;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class EpisodeDetailsSubActivity extends Activity {
         TextView airdateText = (TextView) findViewById(R.id.episodeDetAirdate);
         
         episode = (Episode) data.getSerializable(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE);
-        episodesType = (EpisodeListingType) data.getSerializable(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE);
+        episodesType = (EpisodeType) data.getSerializable(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE);
         
         showNameText.setText(episode.getShowName());
         episodeNameText.setText(episode.getName());
@@ -60,15 +60,15 @@ public class EpisodeDetailsSubActivity extends Activity {
         Button markAsSeenButton = (Button) findViewById(R.id.markAsSeenButton);
         ImageButton twitterButton = (ImageButton) findViewById(R.id.twitterButton);
         
-        if (!episodesType.equals(EpisodeListingType.EPISODES_TO_WATCH))
+        if (!episodesType.equals(EpisodeType.EPISODES_TO_WATCH))
         {
         	twitterButton.setVisibility(View.GONE);
         }
-        if (!episodesType.equals(EpisodeListingType.EPISODES_TO_ACQUIRE))
+        if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE))
         {
         	markAsAcquiredButton.setVisibility(View.GONE);
         }
-        if (episodesType.equals(EpisodeListingType.EPISODES_COMING))
+        if (episodesType.equals(EpisodeType.EPISODES_COMING))
         {
         	markAsSeenButton.setVisibility(View.GONE);
         }
@@ -99,11 +99,11 @@ public class EpisodeDetailsSubActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.episodedetailsmenu, menu);
-		if (!episodesType.equals(EpisodeListingType.EPISODES_TO_ACQUIRE))
+		if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE))
 		{
 			menu.removeItem(R.id.markAsAquired);
 		}
-		if (episodesType.equals(EpisodeListingType.EPISODES_COMING))
+		if (episodesType.equals(EpisodeType.EPISODES_COMING))
 		{
 			menu.removeItem(R.id.markAsSeen);
 		}

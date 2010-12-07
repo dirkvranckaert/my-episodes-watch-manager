@@ -8,12 +8,12 @@ import java.util.List;
  * Date: Dec 2, 2010
  * Time: 7:09:15 PM
  */
-public enum EpisodeListingType {
+public enum EpisodeType {
     EPISODES_TO_WATCH(0),
     EPISODES_TO_ACQUIRE(1),
     EPISODES_COMING(2);
 
-    EpisodeListingType(int type) {
+    EpisodeType(int type) {
         this.episodeListingType = type;
     }
 

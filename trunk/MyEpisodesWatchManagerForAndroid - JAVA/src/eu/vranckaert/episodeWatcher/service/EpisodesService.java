@@ -6,7 +6,7 @@ import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.domain.Feed;
 import eu.vranckaert.episodeWatcher.domain.FeedItem;
 import eu.vranckaert.episodeWatcher.domain.User;
-import eu.vranckaert.episodeWatcher.enums.EpisodeListingType;
+import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 import eu.vranckaert.episodeWatcher.exception.*;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
 import org.apache.http.HttpResponse;
@@ -32,7 +32,7 @@ public class EpisodesService {
         userService = new UserService();
     }
 
-    public List<Episode> retrieveEpisodes(EpisodeListingType episodesType,final User user) throws InternetConnectivityException, Exception {
+    public List<Episode> retrieveEpisodes(EpisodeType episodesType,final User user) throws InternetConnectivityException, Exception {
         String encryptedPassword = userService.encryptPassword(user.getPassword());
         URL feedUrl = buildEpisodesUrl(episodesType, user.getUsername(), encryptedPassword);
         
@@ -183,7 +183,7 @@ public class EpisodesService {
     	}
     }
     
-    private URL buildEpisodesUrl(EpisodeListingType episodesType,final String username, final String encryptedPassword) throws FeedUrlBuildingFaildException {
+    private URL buildEpisodesUrl(EpisodeType episodesType,final String username, final String encryptedPassword) throws FeedUrlBuildingFaildException {
     	String urlRep = "";
     	switch(episodesType)
         {
