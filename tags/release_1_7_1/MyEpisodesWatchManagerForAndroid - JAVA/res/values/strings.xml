@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Revision #93 -->
+<resources>
+    <!-- default values -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="close">Close</string>
+    <string name="attention">Attention</string>
+    <string name="done">Done</string>
+    <string name="search">Search</string>
+
+    <!-- login form -->
+    <string name="loginFormTitle">Provide your user details for the MyEpisodes.com website below.</string>
+    <string name="loginFormRegister">New user?</string>
+    <string name="loginUsernameHint">Username</string>
+    <string name="loginPasswordHint">Password</string>
+    <string name="loginLoginBtn">Login</string>
+    <string name="loginStartLogin">Logging in to MyEpisodes.com</string>
+    <string name="loginSuccessfullLogin">Successfull logged in</string>
+    <string name="loginLoginFailed">Username or password incorrect, please try again!</string>
+    
+	<!-- register form -->
+    <string name="registerFormTitle">Register here, fill in all your user details and click on register.</string>
+    <string name="registerUsernameHint">Username</string>
+    <string name="registerPasswordHint">Password</string>
+    <string name="registerEmailHint">Email</string>
+    <string name="registerBtn">Register</string>
+    <string name="registerStart">Creating user for MyEpisodes.com</string>
+    <string name="registerSuccessfull">Successfull created user!</string>
+    <string name="registerFailed">Username already exists, please choose another username.</string>	
+	
+    <!-- watchlist -->
+    <string name="watch">Watch</string>
+    <string name="acquire">Acquire</string>
+    <string name="coming">Coming</string>
+    <string name="watchListTitle">List of shows/episodes</string>
+    <string name="watchListSubTitleWatch">%d episode to watch</string>
+    <string name="watchListSubTitleAcquire">%d episode to acquire</string>
+    <string name="watchListSubTitleComing">%d future episode</string>
+    <string name="watchListSubTitleWatchPlural">%d episodes to watch</string>
+    <string name="watchListSubTitleAcquirePlural">%d episodes to acquire</string>
+    <string name="watchListSubTitleComingPlural">%d future episodes</string>
+    <string name="watchListEmpty">No episodes found.</string>
+
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Season: </string>
+    <string name="episodeDetailsEpisodeLabel">Episode: </string>
+    <string name="episodeDetailsAirDateLabel">Airdate: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">Unsupported date format!</string>
+	<string name="TweetTitle">Share</string>
+    <string name="Tweet">I have watched \'%s\' #MyEpisodesManager #Android</string>
+
+    <!-- Show management -->
+    <!-- Show Panel -->
+    <string name="addShow">Add Show</string>
+    <string name="favouriteShows">Favourite Shows</string>
+    <string name="ignoredShows">Ignored Shows</string>
+    <!-- Show searching -->
+    <string name="showSearchHint">Enter a show name...</string>
+    <string name="showSearchNoSearchResults">No shows found</string>
+    <string name="showSearchOneFound">show found</string>
+    <string name="showSearchMoreFound">shows found</string>
+    <string name="showSearchAddShow">Are you sure you want to add this show to your list of shows?</string>    
+    <string name="showSearchFinished">Are you done adding shows or do you want to continue?</string>
+    <!-- Favo and ingored shows -->
+    <string name="favoIgnoredDeleteShow">Delete show</string>
+    <string name="favoIgnoredIgnoreShow">Ignore show</string>
+    <string name="favoIgnoredUnignoreShow">Unignore show</string>
+    <string name="favoIgnoredConfirmationDeleteMessage">Are you sure you want to delete this show?</string>
+    <string name="favoIgnoredConfirmationIgnoreMessage">Are you sure you want to ingore this show?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">Are you sure you want to unignore this show?</string>
+
+    <!-- progressDialog -->
+    <string name="progressLoadingTitle">Loading...</string>
+    <string name="progressLoadingBody">Sending/Retreiving data</string>
+
+    <!-- aboutDialog -->
+    <string name="aboutTitle">About...</string>
+    <string name="aboutVersion">Version:</string>
+    <string name="aboutLicense">License:</string>
+    <string name="aboutWebsite">Website:</string>
+    <string name="aboutEmail">Email:</string>
+    <string name="aboutOriginalIdea">Original idea:</string>
+    <!-- whatsNewDialog -->
+    <string name="whatsNewTitle">What\'s new</string>
+    <string name="whatsNewVersion">Version:</string>
+    <string name="whatsNewText">What has changed:</string>
+    <string-array name="whatsNewValues">
+        <!-- TODO update! -->
+        <item>Registration for new users</item>
+        <item>Show Management</item>
+        <item>Twitter Integration</item>
+        <item>German translations</item>
+        <item>Latvian translations</item>
+        <item>Portuguese translations</item>
+        <item>New logo</item>
+        <item>Dark colored scheme</item>
+        <item>Mark all episodes of a show (group) watched or acquired</item>
+        <item>Select a tab to open by default</item>
+        <item>Loading dialogs (no ANR anymore)</item>
+        <item>Date issues solved</item>
+        <item>No more Korean language support</item>
+        <item>New about dialog</item>
+        <item>New \'What\'s new\' dialog</item>
+    </string-array>
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Are you sure?</string>
+    <string name="logoutDialogMessage">Your credentials will no longer be stored on the device.</string>
+
+    <!-- menu's -->
+    <!-- main menu -->
+    <string name="refresh">Refresh</string>
+    <string name="manageShows">Manage Shows</string>
+    <string name="about">About</string>
+    <string name="logout">Logout</string>
+    <string name="whatsNew">What\'s new</string>
+    <string name="preferences">Preferences</string>
+    <!-- show specific menu -->
+    <string name="menuShowMarkAcquired">Mark all episodes as Acquired</string>
+    <string name="menuShowMarkWatched">Mark all episodes as Watched</string>
+    <!-- episode specific menu -->
+    <string name="menuEpisodeDetails">Details</string>
+    <string name="menuEpisodeMarkAcquired">Mark Acquired</string>
+    <string name="menuEpisodeMarkWatched">Mark Watched</string>
+
+    <!-- preferences Dialog -->
+    <string name="applyPreferences">Because settings are changed, the episodes will be refreshed now!</string>
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Order of shows</string>
+    <string-array name="showOrderOptions">
+        <item>Default</item>
+        <item>Ascending</item>
+        <item>Descending</item>
+    </string-array>
+    <!-- Episode sorting -->
+    <string name="episodeOrderPrompt">Order of episodes</string>
+    <string name="episodeOrderPromptExtra">Oldest or newest first...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Oldest first</item>
+        <item>Newest first</item>
+    </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Default tab to open</string>
+    <string name="openDefaultPromptExtra">Default tab to select when opening the application</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Watch</item>
+            <item>Acquire</item>
+            <item>Coming</item>
+    </string-array>
+    <!-- Change Theme -->
+    <string name="ThemePrompt">Choose Theme</string>
+    <string name="ThemePromptExtra">Select your theme</string>
+    <string-array name="ThemeOptions">
+            <item>Light</item>
+            <item>Dark</item>
+    </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Store password</string>
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Change Language</string>
+
+    <!-- Basic Dialog -->
+    <string name="dialogOK">OK</string>
+
+    <!-- Exception handling for dialogs -->
+    <string name="fillInAllFields">All fields should be filled in!</string>
+    <string name="exceptionDialogTitle">Ooops...</string>
+    <string name="defaultExceptionMessage">Something went wrong. Try to restart the application and check your internet connection. If you keep having this issue report a bug at http://code.google.com/p/my-episodes-watch-manager/.</string>
+    <string name="internetConnectionFailureTryAgain">Could not establish internet connection. Please try again!</string>
+    <string name="internetConnectionFailureReload">Could not establish internet connection. Use the menu option to reload and try again.</string>
+    <string name="networkIssues">Network error!\nCheck you network settings and try refreshing manually.</string>
+    <string name="watchListUnableToReadFeed">Network error!\nTry to refresh manually.</string>
+    <string name="watchListUnableToMarkWatched">Failed to mark this episode watched!\nCheck internet connection or refresh the list!</string>
+    <string name="searchShowUnabletoAdd">Failed to add the show. Try again later. If this error keeps showing up please log an issue!</string>
+
+    <!-- The tags beneath may never be translated or will cause an application failure!!! -->
+    <!-- The tags shouldn't even be copied to the custom translation files. -->
+    <!-- Application Name -->
+    <string name="app_name">MyEpisodes Manager</string>
+    <!-- About Dialog -->
+    <string name="aboutLicenseValue">GNU GPL V3 License</string>
+    <string name="aboutOriginalIdeaValue">Dirk Vranckaert</string>
+    <string name="aboutWebsiteValue">http://code.google.com/p/my-episodes-watch-manager</string>
+    <string name="aboutEmailValue">android-dev@vranckaert.eu</string>
+    <!-- What's new Dialog -->
+    <string name="whatsNewListPrefix">-</string>
+    <!-- Preferences -->
+    <string-array name="showOrderOptionsValues">
+        <item>show_myepisodes_default_sort</item>
+        <item>show_ascending_sort</item>
+        <item>show_descending_sort</item>
+    </string-array>
+    <string-array name="episodeOrderOptionsValues">
+        <item>oldest_on_top</item>
+        <item>newest_on_top</item>
+    </string-array>
+    <string-array name="ThemeValues">
+            <item>0</item>
+            <item>1</item>
+    </string-array>
+    <!-- Next two arrays should be in the same order always!!! -->
+    <string-array name="showLanguageOptionsValues">
+        <item>nl</item>
+        <item>en</item>
+        <item>fr</item>
+        <item>de</item>
+        <item>hu</item>
+        <item>it</item>
+        <item>lv</item>
+        <item>pt</item>
+        <item>es</item>
+        <item>sv</item>
+    </string-array>
+    <string-array name="showLanguageOptions">
+        <item>Dutch</item>
+        <item>English</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Hungarian</item>
+        <item>Italian</item>
+        <item>Latvian</item>
+        <item>Portuguese</item>
+        <item>Spanish</item>
+        <item>Swedish</item>
+    </string-array>
+</resources>

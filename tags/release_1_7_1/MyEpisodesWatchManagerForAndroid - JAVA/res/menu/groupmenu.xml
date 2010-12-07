@@ -1,0 +1,4 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/showMenuAcquired" android:title="@string/menuShowMarkAcquired"/>
+    <item android:id="@+id/showMenuWatched" android:title="@string/menuShowMarkWatched" />
+</menu>

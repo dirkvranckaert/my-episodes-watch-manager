@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Revision #93 -->
+<resources>
+    <!-- default values -->
+    <string name="yes">Ja</string>
+    <string name="no">Nee</string>
+    <string name="close">Sluiten</string>
+    <string name="attention">Aandacht</string>
+    <string name="done">Gereed</string>
+    <string name="search">Zoeken</string>
+
+    <!-- login form -->
+    <string name="loginFormTitle">Vul uw logingegevens voor de MyEpisodes.com hieronder in.</string>
+    <string name="loginFormRegister">Nieuwe gebruiker?</string>
+    <string name="loginUsernameHint">Gebruikersnaam</string>
+    <string name="loginPasswordHint">Wachtwoord</string>
+    <string name="loginLoginBtn">Aanmelden</string>
+    <string name="loginStartLogin">Bezig met aanmelden bij MyEpisodes.com</string>
+    <string name="loginSuccessfullLogin">Aanmelden gelukt</string>
+    <string name="loginLoginFailed">Gebruikersnaam of wachtwoord zijn niet juist, probeer opnieuw!</string>
+
+	<!-- register form -->
+    <string name="registerFormTitle">Registreer u hier. Vul alle gebruikersgegevens in en klik op registreer.</string>
+    <string name="registerUsernameHint">Gebruikersnaam</string>
+    <string name="registerPasswordHint">Wachtwoord</string>
+    <string name="registerEmailHint">Email</string>
+    <string name="registerBtn">Registreer</string>
+    <string name="registerStart">Gebruiker voor MyEpisodes.com aan het aanmaken.</string>
+    <string name="registerSuccessfull">Gebruiker met success aangemaakt!</string>
+    <string name="registerFailed">Deze gebruikersnaam wordt reeds gebruikt, gelieve een andere te kiezen.</string>	
+
+    <!-- watchtlist -->
+    <string name="watch">Te Bekijken</string>
+    <string name="acquire">Te Verwerven</string>
+    <string name="coming">Binnenkort</string>
+    <string name="watchListTitle">Lijst series/afleveringen</string>
+    <string name="watchListSubTitleWatch">%d aflevering te bekijken</string>
+    <string name="watchListSubTitleAcquire">%d aflevering te verwerven</string>
+    <string name="watchListSubTitleComing">%d komende aflevering</string>
+    <string name="watchListSubTitleWatchPlural">%d afleveringen te bekijken</string>
+    <string name="watchListSubTitleAcquirePlural">%d afleveringen te verwerven</string>
+    <string name="watchListSubTitleComingPlural">%d komende afleveringen</string>
+    <string name="watchListEmpty">Geen afleveringen gevonden.</string>
+
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Seizoen: </string>
+    <string name="episodeDetailsEpisodeLabel">Aflevering: </string>
+    <string name="episodeDetailsAirDateLabel">Uitzend-datum: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">Niet ondersteund datum-formaat!</string>
+	<string name="TweetTitle">Delen</string>
+    <string name="Tweet">Ik heb zonet naar \'%s\' gekeken #MyEpisodesManager #Android</string>
+
+    <!-- Show management -->
+    <!-- Show Panel -->
+    <string name="addShow">Serie toevoegen</string>
+    <string name="favouriteShows">Favoriete Series</string>
+    <string name="ignoredShows">Geblokkeerde series</string>
+    <!-- Show searching -->
+    <string name="showSearchHint">Vul een naam van een serie in...</string>
+    <string name="showSearchNoSearchResults">Geen series gevonden</string>
+    <string name="showSearchOneFound">serie gevonden</string>
+    <string name="showSearchMoreFound">series gevonden</string>
+    <string name="showSearchAddShow">Weet u zeker dat u deze serie wilt toevoegen aan uw lijst van series?</string>
+    <string name="showSearchFinished">Bent u gereed met toevoegen of wilt u verder zoeken?</string>
+    <!-- Favo and ingored shows -->
+    <string name="favoIgnoredDeleteShow">Serie verwijderen</string>
+    <string name="favoIgnoredIgnoreShow">Serie blokkeren</string>
+    <string name="favoIgnoredUnignoreShow">Serie deblokkeren</string>
+    <string name="favoIgnoredConfirmationDeleteMessage">Weet u zeker dat u deze serie wilt verwijderen?</string>
+    <string name="favoIgnoredConfirmationIgnoreMessage">Weet u zeker dat u deze serie wilt blokkeren?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">Weet u zeker dat u deze serie wilt deblokkeren?</string>
+
+    <!-- progressDialog -->
+    <string name="progressLoadingTitle">Laden...</string>
+    <string name="progressLoadingBody">Verzenden/Ontvangen data</string>
+
+    <!-- aboutDialog -->
+    <string name="aboutTitle">Over...</string>
+    <string name="aboutVersion">Versie:</string>
+    <string name="aboutLicense">Licentie:</string>
+    <string name="aboutWebsite">Website:</string>
+    <string name="aboutEmail">Email:</string>
+    <string name="aboutOriginalIdea">Oorspronkelijk idee:</string>
+    <!-- whatsNewDialog -->
+    <string name="whatsNewTitle">Nieuwigheden...</string>
+    <string name="whatsNewVersion">Versie:</string>
+    <string name="whatsNewText">Wat is veranderd:</string>
+    <string-array name="whatsNewValues">
+        <item>Registratie voor nieuwe gebruikers</item>
+        <item>Beheer van series</item>
+        <item>Twitter integratie</item>
+        <item>Duitse veratlingen</item>
+        <item>Letse vertalingen</item>
+        <item>Portugese vertalingen</item>
+        <item>Nieuw logo</item>
+        <item>Donker kleuren schema</item>
+        <item>Alle afleveringen van een serie markeren als bekeken of verkregen</item>
+        <item>Selecteer een standaard tabblad om te openen</item>
+        <item>Dialoogvensters voor het laden van data</item>
+        <item>Datum probleem opgelost</item>
+        <item>Geen Koreaanse taalondersteuning meer</item>
+        <item>Nieuw \'over\' dialoogvenster</item>
+        <item>Nieuw \'Nieuwigheden\' dialoogvenster</item>
+    </string-array>
+
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Bent u zeker?</string>
+    <string name="logoutDialogMessage">Uw login-gegevens zullen niet langer op het toestel worden bewaardt.</string>
+
+    <!-- menu's -->
+    <!-- main menu -->
+    <string name="refresh">Vernieuwen</string>
+    <string name="manageShows">Beheer Series</string>    
+    <string name="about">Over</string>
+    <string name="logout">Afmelden</string>
+    <string name="whatsNew">Nieuwigheden</string>    
+    <string name="preferences">Voorkeuren</string>
+    <!-- show specific menu -->
+    <string name="menuShowMarkAcquired">Markeer alle afleveringen als verworven</string>
+    <string name="menuShowMarkWatched">Markeer alle afleveringen als bekeken</string>
+    <!-- episode specific menu -->
+    <string name="menuEpisodeDetails">Details</string>
+    <string name="menuEpisodeMarkAcquired">Markeer als verworven</string>
+    <string name="menuEpisodeMarkWatched">Markeer als bekeken</string>
+
+    <!-- preferences Dialog -->
+    <string name="applyPreferences">Door het aanpassen van de instellingen zullen de afleveringen nu herladen worden!</string>
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Sortering series</string>
+    <string-array name="showOrderOptions">
+        <item>Standaard</item>
+        <item>Aflopend</item>
+        <item>Oplopend</item>
+    </string-array>
+    <!-- Episode sorting -->
+    <string name="episodeOrderPrompt">Sortering afleveringen</string>
+    <string name="episodeOrderPromptExtra">Oudste of nieuwste eerst...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Oudste eerst</item>
+        <item>Nieuwste eerst</item>
+    </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Standaard tabblad</string>
+    <string name="openDefaultPromptExtra">Standaard tabblad bij het openen van de applicatie</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Te bekijken</item>
+            <item>Te verwerven</item>
+            <item>Binnenkort</item>
+    </string-array>
+    <!-- Change Theme -->
+    <string name="ThemePrompt">Kies een thema</string>
+    <string name="ThemePromptExtra">Selecteer uw thema</string>
+    <string-array name="ThemeOptions">
+            <item>Licht</item>
+            <item>Donker</item>
+    </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Automatisch aanmelden</string>
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Verander de taal</string>
+
+    <!-- Basic Dialog -->
+    <string name="dialogOK">OK</string>
+
+    <!-- Exception handling for dialogs -->
+    <string name="fillInAllFields">Alle velden moeten worden ingevuld!</string>
+    <string name="exceptionDialogTitle">Ooops...</string>
+    <string name="defaultExceptionMessage">Er is iets fout gegaan. Probeer de applicatie te herstarten en kijk uw internet verbinding na. Indien dit probleem blijft gelieve een bug te registreren op http://code.google.com/p/my-episodes-watch-manager/.</string>
+    <string name="internetConnectionFailureTryAgain">Kan geen internetverbinding maken. Gelieve opnieuw te proberen.</string>
+    <string name="internetConnectionFailureReload">Kan geen internetverbinding maken. Gebruik de menu-optie om the herladen en opnieuw te proberen.</string>
+    <string name="networkIssues">Netwerk probleem!\nControleer je netwerkinstellingen en probeer handmatig te vernieuwen.</string>
+    <string name="watchListUnableToReadFeed">Netwerk probleem!\nProbeer handmatig te vernieuwen.</string>
+    <string name="watchListUnableToMarkWatched">Kan deze episode niet markeren als gezien!\nKijk uw internetverbinding na of herlaad de lijst!</string>
+    <string name="searchShowUnabletoAdd">Kan deze serie niet toevoegen. Probeer het later eens opnieuw. Indien dit probleem zich blijft voordoen gelieve een bug te registreren!</string>
+</resources>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Revision #93 -->
+<resources>
+    <!-- default values -->
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="close">Schließen</string>
+    <string name="attention">Achtung</string>
+    <string name="done">Fertig</string>
+    <string name="search">Suche</string>
+
+    <!-- login form -->
+    <string name="loginFormTitle">Gib deine Benutzerdaten für die MyEpisodes.com Webseite an.</string>
+    <string name="loginFormRegister">Neuer Benutzer?</string>
+    <string name="loginUsernameHint">Benutzer</string>
+    <string name="loginPasswordHint">Passwort</string>
+    <string name="loginLoginBtn">Anmelden</string>
+    <string name="loginStartLogin">Anmeldung bei MyEpisodes.com</string>
+    <string name="loginSuccessfullLogin">Erfolgreich angemeldet</string>
+    <string name="loginLoginFailed">Benutzer oder Passwort falsch, bitte nochmal versuchen!</string>
+
+	<!-- register form -->
+    <string name="registerFormTitle">Registriere dich hier, trage alle notwendigen Daten ein und tippe auf Registrieren.</string>
+    <string name="registerUsernameHint">Benutzer</string>
+    <string name="registerPasswordHint">Passwort</string>
+    <string name="registerEmailHint">E-Mail</string>
+    <string name="registerBtn">Registrieren</string>
+    <string name="registerStart">Erstelle Benutzer für MyEpisodes.com</string>
+    <string name="registerSuccessfull">Benutzer erfolgreich erstellt!</string>
+    <string name="registerFailed">Benutzername schon vergeben, bitte wähle einen anderen Namen.</string>
+
+    <!-- watchlist -->
+    <string name="watch">Sehen</string>
+    <string name="acquire">Erwerben</string>
+    <string name="coming">Kommend</string>
+    <string name="watchListTitle">Liste der Serien/Folgen</string>
+    <string name="watchListSubTitleWatch">%d Folge zu sehen</string>
+    <string name="watchListSubTitleAcquire">%d Folge zu erwerben</string>
+    <string name="watchListSubTitleComing">%d zukünftige Folge</string>
+    <string name="watchListSubTitleWatchPlural">%d Folgen zu sehen</string>
+    <string name="watchListSubTitleAcquirePlural">%d Folgen zu erwerben</string>
+    <string name="watchListSubTitleComingPlural">%d zukünftige Folgen</string>
+    <string name="watchListEmpty">Keine Folgen gefunden.</string>
+
+    <!-- Episode details -->
+    <string name="episodeDetailsSeasonLabel">Staffel: </string>
+    <string name="episodeDetailsEpisodeLabel">Folge: </string>
+    <string name="episodeDetailsAirDateLabel">Airdate: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">Datum nicht erkannt!</string>
+    <string name="TweetTitle">Teilen</string>
+    <string name="Tweet">Ich habe \'%s\' geguckt #MyEpisodesManager #Android</string>
+
+    <!-- Show management -->
+    <!-- Show Panel -->
+    <string name="addShow">Serie hinzufügen</string>
+    <string name="favouriteShows">Favourisierte Serien</string>
+    <string name="ignoredShows">Ignorierte Serien</string>
+    <!-- Show searching -->
+    <string name="showSearchHint">Serienname eingeben...</string>
+    <string name="showSearchNoSearchResults">Keine Serien gefunden</string>
+    <string name="showSearchOneFound">Serie gefunden</string>
+    <string name="showSearchMoreFound">Serien gefunden</string>
+    <string name="showSearchAddShow">Bist du sicher, dass du diese Serie zu deiner Serienliste hinzufügen möchtest?</string>    
+    <string name="showSearchFinished">Bist du mit Hinzufügen von Serien fertig oder möchtest du weiter suchen?</string>
+    <!-- Favo and ingored shows -->
+    <string name="favoIgnoredDeleteShow">Serie entfernen</string>
+    <string name="favoIgnoredIgnoreShow">Serie ignorieren</string>
+    <string name="favoIgnoredUnignoreShow">Serie nicht mehr ignorieren</string>
+    <string name="favoIgnoredConfirmationDeleteMessage">Bist du sicher, dass du diese Serie löschen möchtest?</string>
+    <string name="favoIgnoredConfirmationIgnoreMessage">Bist du sicher, dass du diese Serie ignorieren möchtest?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">Bist du sicher, dass du diese Serie nicht mehr ignorieren möchtest?</string>
+
+    <!-- progressDialog -->
+    <string name="progressLoadingTitle">Lädt...</string>
+    <string name="progressLoadingBody">Sende/Empfange Daten</string>
+
+    <!-- aboutDialog -->
+    <string name="aboutTitle">Info...</string>
+    <string name="aboutVersion">Version:</string>
+    <string name="aboutLicense">Lizenz:</string>
+    <string name="aboutWebsite">Webseite:</string>
+    <string name="aboutEmail">E-Mail:</string>
+    <string name="aboutOriginalIdea">Ursprüngliche Idee:</string>
+    <!-- whatsNewDialog -->
+    <string name="whatsNewTitle">Was ist neu?</string>
+    <string name="whatsNewVersion">Version:</string>
+    <string name="whatsNewText">Was geändert wurde:</string>
+    <string-array name="whatsNewValues">
+        <item>Registrierung für neue Benutzer</item>
+        <item>Serienverwaltung</item>
+        <item>Twitter Integration</item>
+        <item>Deutsche Übersetzung</item>
+        <item>Lettische Übersetzung</item>
+        <item>Portugiesische Übersetzung</item>
+        <item>Neues Logo</item>
+        <item>Dunkel gefärbtes Thema</item>
+        <item>Markiere alle Folgen einer Serie als Erworben oder Gesehen</item>
+        <item>Selektierbarer Tab der beim Start geöffnet wird</item>
+        <item>Lade Dialoge</item>
+        <item>Datum Problem behoben</item>
+        <item>Keine Koreanische Übersetzung mehr</item>
+        <item>Neuer Info Dialog</item>
+        <item>Neuer \'Was ist neu?\' Dialog</item>
+    </string-array>
+    <!-- logoutDialog -->
+    <string name="logoutDialogTitle">Bist du dir sicher?</string>
+    <string name="logoutDialogMessage">Deine Anmeldeinformationen werden nicht mehr auf diesen Gerät gespeichert.</string>
+
+    <!-- menu's -->
+    <!-- main menu -->
+    <string name="refresh">Aktualisieren</string>
+    <string name="manageShows">Serien verwalten</string>
+    <string name="about">Info</string>
+    <string name="logout">Abmelden</string>
+    <string name="whatsNew">Was ist neu?</string>
+    <string name="preferences">Einstellungen</string>
+    <!-- show specific menu -->
+    <string name="menuShowMarkAcquired">Markiere alle Folgen als Erworben</string>
+    <string name="menuShowMarkWatched">Markiere alle Folgen als Gesehen</string>
+    <!-- episode specific menu -->
+    <string name="menuEpisodeDetails">Details</string>
+    <string name="menuEpisodeMarkAcquired">Erworben markieren</string>
+    <string name="menuEpisodeMarkWatched">Gesehen markieren</string>
+
+    <!-- preferences Dialog -->
+    <string name="applyPreferences">Da Einstellungen geändert wurden, werden die Folgen jetzt aktualisiert!</string>
+    <!-- Show sorting -->
+    <string name="showOrderPrompt">Anordnung der Serien</string>
+    <string-array name="showOrderOptions">
+        <item>Standard</item>
+        <item>Aufsteigend</item>
+        <item>Absteigend</item>
+    </string-array>
+    <!-- Episode sorting -->
+    <string name="episodeOrderPrompt">Anordnung der Folgen</string>
+    <string name="episodeOrderPromptExtra">Älteste oder neuste zuerst...</string>
+    <string-array name="episodeOrderOptions">
+        <item>Älteste zuerst</item>
+        <item>Neuste zuerst</item>
+    </string-array>
+    <!-- Default opening tab -->
+    <string name="openDefaultPrompt">Standard Tab</string>
+    <string name="openDefaultPromptExtra">Aktiver Tab nach Programmstart</string>
+    <string-array name="openDefaultTabOptions">
+            <item>Sehen</item>
+            <item>Erwerben</item>
+            <item>Kommend</item>
+    </string-array>
+    <!-- Change Theme -->
+    <string name="ThemePrompt">Wähle Thema</string>
+    <string name="ThemePromptExtra">Selektiere dein Thema</string>
+    <string-array name="ThemeOptions">
+            <item>Hell</item>
+            <item>Dunkel</item>
+    </string-array>
+    <!-- Store password -->
+    <string name="storePasswordPrompt">Passwort speichern</string>
+    <!-- Change Language -->
+    <string name="showLanguagePrompt">Sprache ändern</string>
+
+    <!-- Basic Dialog -->
+    <string name="dialogOK">OK</string>
+
+    <!-- Exception handling for dialogs -->
+    <string name="fillInAllFields">Alle Felder sollten ausgefüllt werden!</string>
+    <string name="exceptionDialogTitle">Nanu...</string>
+    <string name="defaultExceptionMessage">Ein Fehler ist aufgetreten. Starte das Programm erneut und prüfe deine Internet Verbindung. Wenn du diesen Fehler wiederholt bekommst, melde ihn auf http://code.google.com/p/my-episodes-watch-manager/.</string>
+    <string name="internetConnectionFailureTryAgain">Konnte keine Internet Verbindung aufbauen. Bitte nochmal versuchen!</string>
+    <string name="internetConnectionFailureReload">Konnte keine Internet Verbindung aufbauen. Benutze das Menü zum Aktualisieren und versuche es nochmal.</string>
+    <string name="networkIssues">Netzwerk Fehler!\nPrüfe deine Netzwerk Einstellungen und versuche manuell zu aktualisieren.</string>
+    <string name="watchListUnableToReadFeed">Netzwerk Fehler!\nVersuche manuell zu aktualisieren.</string>
+    <string name="watchListUnableToMarkWatched">Konnte diese Folge nicht als gesehen markieren!\nPrüfe die Internet Verbindung oder aktualisiere die Liste!</string>
+    <string name="searchShowUnabletoAdd">Konnte Serie nicht hinzufügen. Versuche es später nochmal. Wenn dieser Fehler dauerhaft erscheint, melde ihn bitte!</string>
+</resources>
