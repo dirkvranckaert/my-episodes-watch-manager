@@ -76,10 +76,6 @@ public final class DateUtil {
                 Log.d(LOG_TAG, "Dateformat " + dateFormat + " not valid for dateString " + dateString);
             }
         }
-
-        //TODO uncomment next lines when the error reporting util is working just fine!
-        //Log.e(LOG_TAG, "No dateformat found for " + dateString);
-        //ErrorReportUtil.reportUnsupportedDateformat(dateString, dateFormats);
         return null;
     }
 }
