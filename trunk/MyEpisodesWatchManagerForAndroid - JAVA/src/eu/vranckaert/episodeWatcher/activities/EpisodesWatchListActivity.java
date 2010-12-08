@@ -109,6 +109,11 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
     private Episode determineEpisode(int listGroupId, int listChildId) {
         Episode episode = null;
+
+        if(listGroupId < 0 || listChildId < 0) {
+            return null;
+        }
+        
         switch(listMode) {
             case EPISODES_BY_SHOW:
                 episode = shows.get(listGroupId).getEpisodes().get(listChildId);
@@ -236,7 +241,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         Episode selectedEpisode = determineEpisode(groupid, childid);
         Show selectedShow = null;
         if(!listMode.equals(ListMode.EPISODES_BY_DATE)) {
-            shows.get(groupid);
+            selectedShow = shows.get(groupid);
         }
 			switch(item.getItemId()) {
 			case R.id.episodeMenuWatched:
