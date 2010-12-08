@@ -52,7 +52,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
     private ListMode listMode;
 	private Resources res; // Resource object to get Drawables
 	private android.content.res.Configuration conf;
-    Map<Date, List<Episode>> listedAirDates = null;
+    private Map<Date, List<Episode>> listedAirDates = null;
 
     private CustomAnalyticsTracker tracker;
 
@@ -341,17 +341,24 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
         switch(listMode) {
             case EPISODES_BY_DATE: {
-                listedAirDates = new HashMap<Date, List<Episode>>();
+                listedAirDates = new LinkedHashMap<Date, List<Episode>>();
+                List<Date> workingList = new ArrayList<Date>();
                 for (Show show : shows) {
                     for(Episode episode : show.getEpisodes()) {
                         Date airDate = episode.getAirDate();
-                        if(!listedAirDates.containsKey(airDate)) {
-                            Map<String, String> map = new HashMap<String, String>();
-                            map.put("episodeRowTitle", DateUtil.formatDateLong(airDate, getApplicationContext()));
-                            headerList.add(map);
-                            listedAirDates.put(airDate, null);
+                        if(!workingList.contains(airDate)) {
+                            workingList.add(airDate);
                         }
                     }
+                }
+
+                Collections.sort(workingList);
+
+                for(Date date : workingList) {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("episodeRowTitle", DateUtil.formatDateLong(date, getApplicationContext()));
+                    headerList.add(map);
+                    listedAirDates.put(date, null);
                 }
                 break;
             }
