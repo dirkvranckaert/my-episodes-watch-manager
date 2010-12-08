@@ -81,7 +81,7 @@
     <string name="aboutEmail">Email:</string>
     <string name="aboutOriginalIdea">Ötletgazda:</string>
     <!-- whatsNewDialog -->
-    <string name="whatsNewTitle">Újdonságok</string>
+    <string name="whatsNewTitle">Változások</string>
     <string name="whatsNewVersion">Verzió:</string>
     <string name="whatsNewText">Ami változott:</string>
     <string-array name="whatsNewValues">
@@ -103,16 +103,16 @@
         <item>Frissített \"Újdonságok\" lap</item>
     </string-array>
     <!-- logoutDialog -->
-    <string name="logoutDialogTitle">Biztos kilépsz?</string>
-    <string name="logoutDialogMessage">A bejelentkezési adataid törölve lettek a készülékről.</string>
+    <string name="logoutDialogTitle">Biztos kijelentkezel?</string>
+    <string name="logoutDialogMessage">A bejelentkezési adataid törölve lesznek a készülékről.</string>
 
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Frissít</string>
-    <string name="manageShows">Műsorok kezelése</string>
+    <string name="manageShows">Műsorkezelés</string>
     <string name="about">Névjegy</string>
-    <string name="logout">Kilépés</string>
-    <string name="whatsNew">Újdonságok</string>
+    <string name="logout">Kijelentkezés</string>
+    <string name="whatsNew">Változások</string>
     <string name="preferences">Beállítások</string>
     <!-- show specific menu -->
     <string name="menuShowMarkAcquired">Mindegyik részt beszereztem</string>
