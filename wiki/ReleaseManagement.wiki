@@ -20,6 +20,7 @@ Scheduled Release Date: December 18th 2010<br>
 Content: Performance, Stability, Security
   * Issue 99 (Code review)
   * Issue 105 (Code Refactoring part 2)
+  * Issue 114 (Do not show upcoming episodes from the past)
 
 === Market Releases ===
 ====Version 1.7.1====
