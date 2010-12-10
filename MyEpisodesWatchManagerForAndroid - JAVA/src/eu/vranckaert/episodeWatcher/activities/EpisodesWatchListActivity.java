@@ -361,9 +361,13 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
                 for(Date date : workingList) {
                     Map<String, String> map = new HashMap<String, String>();
-                    map.put("episodeRowTitle", DateUtil.formatDateLong(date, getApplicationContext()));
-                    headerList.add(map);
-                    listedAirDates.put(date, null);
+                    Calendar rightNow = Calendar.getInstance();
+                    Date now = rightNow.getTime();
+                    if (date.after(now)){
+	                    map.put("episodeRowTitle", DateUtil.formatDateLong(date, getApplicationContext()));
+	                    headerList.add(map);
+	                    listedAirDates.put(date, null);
+                    }
                 }
                 break;
             }
@@ -387,7 +391,9 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
                 for(Iterator iter = listedAirDates.entrySet().iterator(); iter.hasNext();) {
                     Map.Entry entry = (Map.Entry) iter.next();
                     Date listedAirDate = (Date) entry.getKey();
-
+                    Calendar rightNow = Calendar.getInstance();
+                    Date now = rightNow.getTime();
+                    if (listedAirDate.after(now)){
                     List<Episode> episodeList = new ArrayList<Episode>();
 
                     List<Map<String, String>> subListSecondLvl = new ArrayList<Map<String, String>>();
@@ -406,6 +412,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
                     entry.setValue(episodeList);
 
                     childList.add(subListSecondLvl);
+                    }
                 }
                 break;
             }
