@@ -29,6 +29,28 @@ public final class DateUtil {
         Locale locale = getCurrentLocale(context);
         return formatDateLong(date, locale);
     }
+    
+    /**
+     * Formats a given date in the {@link java.text.DateFormat#FULL} format.
+     * @param date The date to format.
+     * @param context The context in which the user locale can be found!
+     * @return The date representation in a string.
+     */
+    public static final String formatDateFull(Date date, Context context) {
+        Locale locale = getCurrentLocale(context);
+        return formatDateFull(date, locale);
+    }
+    
+    /**
+     * Formats a given date in the {@link java.text.DateFormat#FULL} format.
+     * @param date The date to format.
+     * @param locale The locale to use to format the date.
+     * @return The date representation in a string.
+     */
+    public static final String formatDateFull(Date date, Locale locale) {
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL, locale);
+        return dateFormat.format(date);
+    }
 
     /**
      * Formats a given date in the {@link java.text.DateFormat#LONG} format.
@@ -37,7 +59,7 @@ public final class DateUtil {
      * @return The date representation in a string.
      */
     public static final String formatDateLong(Date date, Locale locale) {
-        DateFormat dateFormat = dateFormat = DateFormat.getDateInstance(DateFormat.LONG, locale);
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG, locale);
         return dateFormat.format(date);
     }
 
