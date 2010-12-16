@@ -20,6 +20,7 @@ Scheduled Release Date: December 18th 2010<br>
 Content: Performance, Stability, Security
   * Issue 99 (Code review)
   * Issue 105 (Code Refactoring part 2)
+  * Issue 108 (Weekday and number of episodes in coming tab date-grouping)
   * Issue 114 (Do not show upcoming episodes from the past)
 
 === Market Releases ===
