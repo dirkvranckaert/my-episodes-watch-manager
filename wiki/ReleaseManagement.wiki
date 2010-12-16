@@ -5,31 +5,6 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
-====Version 1.7.7====
-Scheduled Release Date: Not Yet Scheduled<br>
-Content: Usability, New Features, Feature Improvements
-  * Issue 103 (Today-Tomorrow-episode-list option)
-  * Issue 115 (Random Episode Picker)
-====Version 1.7.6====
-Scheduled Release Date: Not Yet Scheduled<br>
-Content: Usability, New Features
-  * Issue 109 (Offline Usage)
-====Version 1.7.5====
-Scheduled Release Date: Not Yet Scheduled<br>
-Content: Usability, Feature Improvements
-  * Issue 107 (Enable date-grouping through preferences)
-  * Issue 102 (Disable tabs through preferences)
-====Version 1.7.4====
-Scheduled Release Date: Not Yet Scheduled<br>
-Content: Usability, New Features, Feature Improvements
-  * Issue 67 (Calender View)
-  * Issue 90 (Keep collapsable lists opened)
-====Version 1.7.3====
-Scheduled Release Date: January 15th 2011<br>
-Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
-  * Issue 38 (Mark several episodes as "Watched" at once)
-  * Issue 86 (Layout the application)
-  * Issue 113 (Allow swiping between tabs)
 ====Version 1.7.2====
 Scheduled Release Date: December 24th 2010<br>
 Content: Performance, Stability, Security, Usability, Feature Improvements
@@ -37,6 +12,31 @@ Content: Performance, Stability, Security, Usability, Feature Improvements
   * Issue 105 (Code Refactoring part 2)
   * Issue 108 (Weekday and number of episodes in coming tab date-grouping)
   * Issue 114 (Do not show upcoming episodes from the past)
+====Version 1.7.3====
+Scheduled Release Date: January 15th 2011<br>
+Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
+  * Issue 38 (Mark several episodes as "Watched" at once)
+  * Issue 86 (Layout the application)
+  * Issue 113 (Allow swiping between tabs)
+====Version 1.7.4====
+Scheduled Release Date: Not Yet Scheduled<br>
+Content: Usability, New Features, Feature Improvements
+  * Issue 67 (Calender View)
+  * Issue 90 (Keep collapsable lists opened)
+====Version 1.7.5====
+Scheduled Release Date: Not Yet Scheduled<br>
+Content: Usability, Feature Improvements
+  * Issue 107 (Enable date-grouping through preferences)
+  * Issue 102 (Disable tabs through preferences)
+====Version 1.7.6====
+Scheduled Release Date: Not Yet Scheduled<br>
+Content: Usability, New Features
+  * Issue 109 (Offline Usage)
+====Version 1.7.7====
+Scheduled Release Date: Not Yet Scheduled<br>
+Content: Usability, New Features, Feature Improvements
+  * Issue 103 (Today-Tomorrow-episode-list option)
+  * Issue 115 (Random Episode Picker)
 
 === Market Releases ===
 ====Version 1.7.1====
