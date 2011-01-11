@@ -28,6 +28,7 @@ import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.EpisodesService;
 import eu.vranckaert.episodeWatcher.utils.CustomAnalyticsTracker;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
+
 import java.util.*;
 
 public class EpisodesWatchListActivity extends ExpandableListActivity {
@@ -199,9 +200,9 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         listMode = (ListMode) data.getSerializable(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE);
 
         tabMain.clearRefreshTab(episodesType);
+
         init();
         checkPreferences();
-
         openLoginActivity();
 	}
 
@@ -293,51 +294,51 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	private void initExendableList()
 	{
 		episodeAdapter = new SimpleExpandableListAdapter(
-                this,
-                createGroups(),
-                R.layout.episoderowgroup,
-                new String[] {"episodeRowTitle"},
-                new int[] { R.id.episodeRowTitle },
-                createChilds(),
-                R.layout.episoderowchild,
-                new String[] {"episodeRowChildTitle", "episodeRowChildDetail"},
-                new int[] { R.id.episodeRowChildTitle, R.id.episodeRowChildDetail }
+	                this,
+	                createGroups(),
+	                R.layout.episoderowgroup,
+	                new String[] {"episodeRowTitle"},
+	                new int[] { R.id.episodeRowTitle },
+	                createChilds(),
+	                R.layout.episoderowchild,
+	                new String[] {"episodeRowChildTitle", "episodeRowChildDetail"},
+	                new int[] { R.id.episodeRowChildTitle, R.id.episodeRowChildDetail }
 		);
-	setListAdapter(episodeAdapter);
-	episodeAdapter.notifyDataSetChanged();
-	registerForContextMenu(getExpandableListView());
+		setListAdapter(episodeAdapter);
+		episodeAdapter.notifyDataSetChanged();
+		registerForContextMenu(getExpandableListView());
 
-	int countEpisodes = 0;
-	for(Show show : shows) {
-		countEpisodes += show.getNumberEpisodes();
-	}
+        int countEpisodes = 0;
+        for(Show show : shows) {
+            countEpisodes += show.getNumberEpisodes();
+        }
 
-	if (countEpisodes == 1) {
-		switch(episodesType) {
-		case EPISODES_TO_WATCH:
-	        subTitle.setText(getString(R.string.watchListSubTitleWatch, countEpisodes));
-	        break;
-		case EPISODES_TO_ACQUIRE:
-		    subTitle.setText(getString(R.string.watchListSubTitleAcquire, countEpisodes));
-		    break;
-		case EPISODES_COMING:
-	        subTitle.setText(getString(R.string.watchListSubTitleComing, countEpisodes));
-	        break;
-		}
-	}
-	else {
-		switch(episodesType) {
-		case EPISODES_TO_WATCH:
-	        subTitle.setText(getString(R.string.watchListSubTitleWatchPlural, countEpisodes));
-	        break;
-		case EPISODES_TO_ACQUIRE:
-		    subTitle.setText(getString(R.string.watchListSubTitleAcquirePlural, countEpisodes));
-		    break;
-		case EPISODES_COMING:
-	        subTitle.setText(getString(R.string.watchListSubTitleComingPlural, countEpisodes));
-	        break;
-		}
-	}
+        if (countEpisodes == 1) {
+            switch(episodesType) {
+            case EPISODES_TO_WATCH:
+                subTitle.setText(getString(R.string.watchListSubTitleWatch, countEpisodes));
+                break;
+            case EPISODES_TO_ACQUIRE:
+                subTitle.setText(getString(R.string.watchListSubTitleAcquire, countEpisodes));
+                break;
+            case EPISODES_COMING:
+                subTitle.setText(getString(R.string.watchListSubTitleComing, countEpisodes));
+                break;
+            }
+        }
+        else {
+            switch(episodesType) {
+            case EPISODES_TO_WATCH:
+                subTitle.setText(getString(R.string.watchListSubTitleWatchPlural, countEpisodes));
+                break;
+            case EPISODES_TO_ACQUIRE:
+                subTitle.setText(getString(R.string.watchListSubTitleAcquirePlural, countEpisodes));
+                break;
+            case EPISODES_COMING:
+                subTitle.setText(getString(R.string.watchListSubTitleComingPlural, countEpisodes));
+                break;
+            }
+        }
 	}
 
 	private List<? extends Map<String, ?>> createGroups() {
@@ -346,31 +347,23 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
         switch(listMode) {
             case EPISODES_BY_DATE: {
                 listedAirDates = new LinkedHashMap<Date, List<Episode>>();
-                Map<Date, Integer> workingMap = new TreeMap<Date, Integer>();
+                List<Date> workingList = new ArrayList<Date>();
                 for (Show show : shows) {
-                	for(Episode episode : show.getEpisodes()) {
-                		Date airDate = episode.getAirDate();
-                		if(!workingMap.containsKey(airDate)) {
-                			workingMap.put(airDate, 1);
-                		} else {
-                			int count = workingMap.get(airDate);
-                			workingMap.put(airDate, ++count);
-                		}
-                	}
-                }
-                
-                for(Iterator iter = workingMap.entrySet().iterator(); iter.hasNext();) {
-                	Map<String, String> map = new HashMap<String, String>();
-                	Map.Entry entry = (Map.Entry) iter.next();
-                	Date date = (Date) entry.getKey();
-                	int countEp = (Integer) entry.getValue();
-                    Calendar rightNow = Calendar.getInstance();
-                    Date now = rightNow.getTime();
-                    if (date.after(now)){
-	                    map.put("episodeRowTitle", DateUtil.formatDateFull(date, getApplicationContext()) + " ( " + countEp + " )");
-	                    headerList.add(map);
-	                    listedAirDates.put(date, null);
+                    for(Episode episode : show.getEpisodes()) {
+                        Date airDate = episode.getAirDate();
+                        if(!workingList.contains(airDate)) {
+                            workingList.add(airDate);
+                        }
                     }
+                }
+
+                Collections.sort(workingList);
+
+                for(Date date : workingList) {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("episodeRowTitle", DateUtil.formatDateLong(date, getApplicationContext()));
+                    headerList.add(map);
+                    listedAirDates.put(date, null);
                 }
                 break;
             }
@@ -394,9 +387,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
                 for(Iterator iter = listedAirDates.entrySet().iterator(); iter.hasNext();) {
                     Map.Entry entry = (Map.Entry) iter.next();
                     Date listedAirDate = (Date) entry.getKey();
-                    Calendar rightNow = Calendar.getInstance();
-                    Date now = rightNow.getTime();
-                    if (listedAirDate.after(now)){
+
                     List<Episode> episodeList = new ArrayList<Episode>();
 
                     List<Map<String, String>> subListSecondLvl = new ArrayList<Map<String, String>>();
@@ -413,8 +404,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
                     }
 
                     entry.setValue(episodeList);
+
                     childList.add(subListSecondLvl);
-                    }
                 }
                 break;
             }

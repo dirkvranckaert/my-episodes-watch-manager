@@ -21,18 +21,40 @@ public class TabMain extends TabActivity {
 	private Intent intentComing;  // Reusable Intent for each tab
 	private Resources res; // Resource object to get Drawables
 	private android.content.res.Configuration conf;
-	
+
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.tabmain);
-        
-        tabHost = getTabHost();  // The activity TabHost        
+
+        init();
+        checkPreferences();
+        loadTabs();
+    }
+
+    private void init() {
         res = getResources();
         conf = res.getConfiguration();
-        
+    }
+
+    /**
+     * Check if all preferences exist upon loading the application.
+     */
+    private void checkPreferences() {
+        //Checks preference for show sorting and sets the default to ascending (A-Z)
+        String[] episodeOrderOptions = getResources().getStringArray(R.array.episodeOrderOptionsValues);
+        Preferences.checkDefaultPreference(this, PreferencesKeys.EPISODE_SORTING_KEY, episodeOrderOptions[0]);
+        //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
+        String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
+        Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[0]);
+        Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
+    }
+
+    private void loadTabs() {
+        tabHost = getTabHost();  // The activity TabHost
+
     	Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
         
         String languageCode = Preferences.getPreference(this, PreferencesKeys.LANGUAGE_KEY);
@@ -84,47 +106,29 @@ public class TabMain extends TabActivity {
         tabHost.setCurrentTab(EpisodeType.EPISODES_TO_WATCH.getEpisodeListingType());
     }
     
-    public void clearRefreshTab(EpisodeType episodesType)
-    {
-    	if (episodesType.equals(EpisodeType.EPISODES_TO_WATCH))
-    	{
+    public void clearRefreshTab(EpisodeType episodesType) {
+    	if (episodesType.equals(EpisodeType.EPISODES_TO_WATCH)) {
     		intentWatch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-    	}
-    	else if (episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE))
-    	{
+    	} else if (episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
     		intentAcquire.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-    	}
-    	else if (episodesType.equals(EpisodeType.EPISODES_COMING))
-    	{
+    	} else if (episodesType.equals(EpisodeType.EPISODES_COMING)) {
     		intentComing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
     	}
     }
     
-    public void refreshAllTabs(EpisodeType episodesType)
-    {
-    	if (!episodesType.equals(EpisodeType.EPISODES_TO_WATCH))
-    	{
+    public void refreshAllTabs(EpisodeType episodesType) {
+    	if (!episodesType.equals(EpisodeType.EPISODES_TO_WATCH)) {
     		intentWatch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	}
-    	if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE))
-    	{
+        if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
     		intentAcquire.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	}
-    	if (!episodesType.equals(EpisodeType.EPISODES_COMING))
-    	{
+        if (!episodesType.equals(EpisodeType.EPISODES_COMING)) {
     		intentComing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     	}
     }
-    
-    public void refreshAllTabs()
-    {
-		intentWatch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intentAcquire.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intentComing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    }
-    
-    public void refreshWatchTab()
-    {
+
+    public void refreshWatchTab() {
     	intentWatch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }
 }
