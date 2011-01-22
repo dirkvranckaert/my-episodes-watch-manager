@@ -98,7 +98,7 @@ public class EpisodeDetailsActivity extends Activity {
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.episodedetailsmenu, menu);
+		inflater.inflate(R.menu.episode_details_menu, menu);
 		if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE))
 		{
 			menu.removeItem(R.id.markAsAquired);
