@@ -28,7 +28,7 @@
     <string name="registerSuccessfull">Sikeresen elkészült a fiók!</string>
     <string name="registerFailed">A felhasználónév már foglalt, kérlek válassz egy másikat!</string>	
 	
-    <!-- watchlist -->
+    <!-- episode_listing_tab -->
     <string name="watch">Megnézendő</string>
     <string name="acquire">Beszerzendő</string>
     <string name="coming">Várható</string>

@@ -29,7 +29,7 @@
     <string name="registerSuccessfull">Användarnamn skapat!</string>
     <string name="registerFailed">Användarnamnet upptaget, vänligen välj ett annat.</string>	
 	
-    <!-- watchlist -->
+    <!-- episode_listing_tab -->
     <string name="watch">Se</string>
     <string name="acquire">Hämta</string>
     <string name="coming">Kommer</string>

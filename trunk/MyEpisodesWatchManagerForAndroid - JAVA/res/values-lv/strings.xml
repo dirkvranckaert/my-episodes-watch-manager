@@ -29,7 +29,7 @@
     <string name="registerSuccessfull">Darbība veiksmīga, lietotājs radīts!</string>
     <string name="registerFailed">Lietotājvārds jau eksistē, lūdzu izvēlies citu lietotājvārdu!</string>	
 	
-    <!-- watchlist -->
+    <!-- episode_listing_tab -->
     <string name="watch">Jāapskata</string>
     <string name="acquire">Jāiegūst</string>
     <string name="coming">Drīzumā</string>
