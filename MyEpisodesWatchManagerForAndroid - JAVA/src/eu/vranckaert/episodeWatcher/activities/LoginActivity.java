@@ -24,7 +24,7 @@ import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.UserService;
 import eu.vranckaert.episodeWatcher.utils.CustomAnalyticsTracker;
 
-public class LoginSubActivity extends Activity {
+public class LoginActivity extends Activity {
     private Button loginButton;
     private TextView register;
     private UserService service;
@@ -34,7 +34,7 @@ public class LoginSubActivity extends Activity {
     private static final int MY_EPISODES_ERROR_DIALOG = 1;
     private static final int MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS = 2;
     
-    private static final String LOG_TAG = "LoginSubActivity";
+    private static final String LOG_TAG = "LoginActivity";
     CustomAnalyticsTracker tracker;
 	
     @Override
@@ -90,7 +90,7 @@ public class LoginSubActivity extends Activity {
                             protected void onPostExecute(Object o) {
                                 removeDialog(MY_EPISODES_LOGIN_DIALOG_LOADING);
                                 if(loginStatus) {
-                                    Toast.makeText(LoginSubActivity.this, R.string.loginSuccessfullLogin, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, R.string.loginSuccessfullLogin, Toast.LENGTH_LONG).show();
                                     finalizeLogin();
                                 } else {
                                     ((EditText) findViewById(R.id.loginUsername)).setText("");
@@ -195,7 +195,7 @@ public class LoginSubActivity extends Activity {
     }
     
 	private void openRegisterScreen() {
-    	Intent registerActivity = new Intent(this.getApplicationContext(), RegisterSubActivity.class);
+    	Intent registerActivity = new Intent(this.getApplicationContext(), RegisterActivity.class);
     	startActivity(registerActivity);
 	}
 

@@ -5,7 +5,7 @@
       android:versionCode="22"
       android:versionName="1.7.2 - DEV">
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".activities.TabMain"
+        <activity android:name=".activities.EpisodeListingActivity"
                   android:label="@string/app_name"
                   android:configChanges="orientation|keyboardHidden">
             <intent-filter>
@@ -13,28 +13,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.EpisodesWatchListActivity"
+        <activity android:name=".activities.EpisodeListingTabActivity"
                   android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".activities.LoginSubActivity"
+        <activity android:name=".activities.LoginActivity"
                   android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".activities.RegisterSubActivity"
+        <activity android:name=".activities.RegisterActivity"
                   android:configChanges="orientation|keyboardHidden"/>
-        <activity android:name=".activities.EpisodeDetailsSubActivity"
+        <activity android:name=".activities.EpisodeDetailsActivity"
                   android:configChanges="orientation|keyboardHidden"/>
         <activity android:name=".activities.PreferencesActivity"
                   android:configChanges="orientation|keyboardHidden"
                   android:label="@string/preferences"/>
-        <activity android:name=".activities.ShowManagementActivity"
+        <activity android:name=".activities.ShowManagementPortalActivity"
                   android:label="@string/manageShows"/>
-        <activity android:name=".activities.ShowFavosAndIngoredManagementActivity"
+        <activity android:name=".activities.ShowManagementActivity"
                   android:configChanges="orientation|keyboardHidden"
                   android:label="@string/manageShows"/>
-        <activity android:name=".activities.ShowSearchActivity"
+        <activity android:name=".activities.ShowManagementAddActivity"
                   android:configChanges="orientation|keyboardHidden"
                   android:label="@string/manageShows"/>
         <activity android:name=".activities.AboutActivity"
                   android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".activities.WhatsNewActivity"
+        <activity android:name=".activities.ChangelogActivity"
                   android:theme="@android:style/Theme.NoTitleBar"/>
 
         <uses-library android:name="android.test.runner" />

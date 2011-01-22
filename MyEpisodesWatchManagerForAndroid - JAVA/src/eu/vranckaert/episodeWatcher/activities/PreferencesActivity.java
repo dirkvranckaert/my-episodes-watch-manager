@@ -181,7 +181,7 @@ public class PreferencesActivity extends PreferenceActivity {
     
     private void startTabMain() {
     	super.finish();
-    	Intent mainActivity = new Intent(this.getApplicationContext(), TabMain.class);
+    	Intent mainActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
     	mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
     	startActivity(mainActivity);
     }

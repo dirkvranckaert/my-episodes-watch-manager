@@ -14,7 +14,7 @@ import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 
 import java.util.Locale;
 
-public class TabMain extends TabActivity {
+public class EpisodeListingActivity extends TabActivity {
 	private TabHost tabHost;
 	private Intent intentWatch;  // Reusable Intent for each tab
 	private Intent intentAcquire;  // Reusable Intent for each tab
@@ -62,7 +62,7 @@ public class TabMain extends TabActivity {
         res.updateConfiguration(conf, null);
         
         // Create an Intent to launch an Activity for the tab (to be reused)
-        intentWatch = new Intent().setClass(this, EpisodesWatchListActivity.class)
+        intentWatch = new Intent().setClass(this, EpisodeListingTabActivity.class)
         					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_TO_WATCH)
                              .putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW)
         					 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
@@ -71,7 +71,7 @@ public class TabMain extends TabActivity {
         			  .setIndicator(getString(R.string.watch), res.getDrawable(R.drawable.tabwatched))
         			  .setContent(intentWatch);
 
-        intentAcquire = new Intent().setClass(this, EpisodesWatchListActivity.class)
+        intentAcquire = new Intent().setClass(this, EpisodeListingTabActivity.class)
         					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_TO_ACQUIRE)
                              .putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW)
         					 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
@@ -79,7 +79,7 @@ public class TabMain extends TabActivity {
         			  .setIndicator(getString(R.string.acquire), res.getDrawable(R.drawable.tabacquired))
         			  .setContent(intentAcquire);
 
-        intentComing = new Intent().setClass(this, EpisodesWatchListActivity.class)
+        intentComing = new Intent().setClass(this, EpisodeListingTabActivity.class)
         					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_COMING)
                              .putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE)
         					 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);

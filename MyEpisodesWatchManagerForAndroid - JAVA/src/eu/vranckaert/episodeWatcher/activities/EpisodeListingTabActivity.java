@@ -31,7 +31,7 @@ import eu.vranckaert.episodeWatcher.utils.DateUtil;
 
 import java.util.*;
 
-public class EpisodesWatchListActivity extends ExpandableListActivity {
+public class EpisodeListingTabActivity extends ExpandableListActivity {
 	private static final int LOGIN_REQUEST_CODE = 0;
 	private static final int EPISODE_DETAILS_REQUEST_CODE = 1;
 
@@ -56,7 +56,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
     private CustomAnalyticsTracker tracker;
 
-	public EpisodesWatchListActivity() {
+	public EpisodeListingTabActivity() {
 		super();
 		this.user = new User("myUsername", "myPassword");
 		this.service = new EpisodesService();
@@ -194,12 +194,12 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
         tracker = CustomAnalyticsTracker.getInstance(this);
 
-		TabMain tabMain = (TabMain) getParent();
+		EpisodeListingActivity episodeListingActivity = (EpisodeListingActivity) getParent();
         Bundle data = this.getIntent().getExtras();
         episodesType = (EpisodeType) data.getSerializable(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE);
         listMode = (ListMode) data.getSerializable(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE);
 
-        tabMain.clearRefreshTab(episodesType);
+        episodeListingActivity.clearRefreshTab(episodesType);
 
         init();
         checkPreferences();
@@ -226,7 +226,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
                 showDialog(LOGOUT_DIALOG);
                 return true;
             case R.id.whatsnew:
-                Intent whatsNewIntent = new Intent(this.getApplicationContext(), WhatsNewActivity.class);
+                Intent whatsNewIntent = new Intent(this.getApplicationContext(), ChangelogActivity.class);
                 startActivity(whatsNewIntent);
                 return true;
 		}
@@ -426,7 +426,7 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 	}
 
 	private void openLoginActivity() {
-		Intent loginSubActivity = new Intent(this.getApplicationContext(), LoginSubActivity.class);
+		Intent loginSubActivity = new Intent(this.getApplicationContext(), LoginActivity.class);
         startActivityForResult(loginSubActivity, LOGIN_REQUEST_CODE);
 	}
 
@@ -438,12 +438,12 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 
     private void openManageShowsActivity() {
         tracker.trackPageView(CustomTracker.PageView.SHOW_MANAGEMENT);
-        Intent manageShowsActivity = new Intent(this.getApplicationContext(), ShowManagementActivity.class);
+        Intent manageShowsActivity = new Intent(this.getApplicationContext(), ShowManagementPortalActivity.class);
         startActivity(manageShowsActivity);
     }
 
 	private void openEpisodeDetails(Episode episode, EpisodeType episodeType) {
-		Intent episodeDetailsSubActivity = new Intent(this.getApplicationContext(), EpisodeDetailsSubActivity.class);
+		Intent episodeDetailsSubActivity = new Intent(this.getApplicationContext(), EpisodeDetailsActivity.class);
 		episodeDetailsSubActivity.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode);
 		episodeDetailsSubActivity.putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodeType);
         startActivityForResult(episodeDetailsSubActivity, EPISODE_DETAILS_REQUEST_CODE);
@@ -676,8 +676,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			else if (EpisodeStatus == 1)
 			{
 				service.acquireEpisode(episode, user);
-				TabMain tabMain = (TabMain) getParent();
-				tabMain.refreshWatchTab();
+				EpisodeListingActivity episodeListingActivity = (EpisodeListingActivity) getParent();
+				episodeListingActivity.refreshWatchTab();
 			}
 		} catch (InternetConnectivityException e) {
 			String message = "Could not connect to host";
@@ -711,8 +711,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 			else if (EpisodeStatus == 1)
 			{
 				service.acquireEpisodes(episodes, user);
-				TabMain tabMain = (TabMain) getParent();
-				tabMain.refreshWatchTab();
+				EpisodeListingActivity episodeListingActivity = (EpisodeListingActivity) getParent();
+				episodeListingActivity.refreshWatchTab();
 			}
 		} catch (InternetConnectivityException e) {
 			String message = "Could not connect to host";
@@ -741,8 +741,8 @@ public class EpisodesWatchListActivity extends ExpandableListActivity {
 		tracker.trackEvent(CustomTracker.Event.LOGOUT);
 		Preferences.removePreference(this, User.USERNAME);
 		Preferences.removePreference(this, User.PASSWORD);
-		TabMain tabMain = (TabMain) getParent();
-		tabMain.refreshAllTabs(episodesType);
+		EpisodeListingActivity episodeListingActivity = (EpisodeListingActivity) getParent();
+		episodeListingActivity.refreshAllTabs(episodesType);
 		openLoginActivity();
 	}
 

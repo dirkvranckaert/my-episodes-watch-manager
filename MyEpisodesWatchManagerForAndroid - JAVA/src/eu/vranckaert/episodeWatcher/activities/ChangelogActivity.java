@@ -10,7 +10,7 @@ import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.utils.ApplicationUtil;
 
-public class WhatsNewActivity extends Activity {
+public class ChangelogActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         init(savedInstanceState);
