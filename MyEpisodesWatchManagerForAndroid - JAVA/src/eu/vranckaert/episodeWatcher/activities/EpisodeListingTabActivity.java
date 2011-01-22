@@ -275,7 +275,7 @@ public class EpisodeListingTabActivity extends ExpandableListActivity {
 	}
 
 	private void init() {
-		setContentView(R.layout.watchlist);
+		setContentView(R.layout.episode_listing_tab);
         episodes = new ArrayList<Episode>();
 
         res = getResources();
@@ -296,11 +296,11 @@ public class EpisodeListingTabActivity extends ExpandableListActivity {
 		episodeAdapter = new SimpleExpandableListAdapter(
 	                this,
 	                createGroups(),
-	                R.layout.episoderowgroup,
+	                R.layout.episode_listing_tab_row_group,
 	                new String[] {"episodeRowTitle"},
 	                new int[] { R.id.episodeRowTitle },
 	                createChilds(),
-	                R.layout.episoderowchild,
+	                R.layout.episode_listing_tab_row_child,
 	                new String[] {"episodeRowChildTitle", "episodeRowChildDetail"},
 	                new int[] { R.id.episodeRowChildTitle, R.id.episodeRowChildDetail }
 		);

@@ -34,6 +34,6 @@ public class ChangelogActivity extends Activity {
     private void init(Bundle savedInstanceState) {
         setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.whatnewdialog);
+        setContentView(R.layout.changelog);
     }
 }

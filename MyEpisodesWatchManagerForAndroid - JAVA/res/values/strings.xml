@@ -29,7 +29,7 @@
     <string name="registerSuccessfull">Successfull created user!</string>
     <string name="registerFailed">Username already exists, please choose another username.</string>	
 	
-    <!-- watchlist -->
+    <!-- episode_listing_tab -->
     <string name="watch">Watch</string>
     <string name="acquire">Acquire</string>
     <string name="coming">Coming</string>

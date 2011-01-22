@@ -80,7 +80,7 @@ public class ShowManagementAddActivity extends ListActivity {
     private void init(Bundle savedInstanceState) {
     	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
     	super.onCreate(savedInstanceState);
-        setContentView(R.layout.showsearch);
+        setContentView(R.layout.show_management_add);
 
         service = new ShowService();
         user = new User(
@@ -97,7 +97,7 @@ public class ShowManagementAddActivity extends ListActivity {
     }
 
     private void initializeShowList() {
-        showAdapter = new ShowAdapter(this, R.layout.searchresultsshowsrow, shows);
+        showAdapter = new ShowAdapter(this, R.layout.show_management_add_row, shows);
         setListAdapter(showAdapter);
     }
 
@@ -260,7 +260,7 @@ public class ShowManagementAddActivity extends ListActivity {
             View row = convertView;
             if (row==null) {
                 LayoutInflater inflater = getLayoutInflater();
-                row = inflater.inflate(R.layout.searchresultsshowsrow, parent, false);
+                row = inflater.inflate(R.layout.show_management_add_row, parent, false);
             }
 
             TextView topText = (TextView) row.findViewById(R.id.showNameSearchResult);

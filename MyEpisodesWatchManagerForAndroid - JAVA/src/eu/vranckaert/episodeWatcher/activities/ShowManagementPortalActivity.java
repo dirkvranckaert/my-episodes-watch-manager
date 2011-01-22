@@ -27,7 +27,7 @@ public class ShowManagementPortalActivity extends Activity {
     private void init(Bundle savedInstanceState) {
     	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
     	super.onCreate(savedInstanceState);
-        setContentView(R.layout.showmanagement);
+        setContentView(R.layout.show_management_portal);
     }
 
     private void loadButtons() {
