@@ -65,7 +65,7 @@ public class EpisodeListingTabActivity extends ExpandableListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.watchlistmenu, menu);
+		inflater.inflate(R.menu.episode_listing_tab_menu, menu);
 		return true;
 	}
 
@@ -86,7 +86,7 @@ public class EpisodeListingTabActivity extends ExpandableListActivity {
 					"E" + selectedEpisode.getEpisodeString() + "\n" +
 					selectedEpisode.getName());
 			MenuInflater inflater = getMenuInflater();
-			inflater.inflate(R.menu.episodemenu, menu);
+			inflater.inflate(R.menu.episode_listing_tab_child_list_menu, menu);
 			if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
 				menu.removeItem(R.id.episodeMenuAcquired);
 			}
@@ -97,7 +97,7 @@ public class EpisodeListingTabActivity extends ExpandableListActivity {
 			int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
 			menu.setHeaderTitle(shows.get(groupid).getShowName());
 			MenuInflater inflater = getMenuInflater();
-			inflater.inflate(R.menu.groupmenu, menu);
+			inflater.inflate(R.menu.episode_listing_tab_group_list_menu, menu);
 			if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
 				menu.removeItem(R.id.showMenuAcquired);
 			}
