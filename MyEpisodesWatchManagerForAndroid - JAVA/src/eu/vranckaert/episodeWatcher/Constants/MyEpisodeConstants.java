@@ -1,4 +1,4 @@
-package eu.vranckaert.episodeWatcher.Constants;
+package eu.vranckaert.episodeWatcher.constants;
 
 public class MyEpisodeConstants {
     public static final String UID_REPLACEMENT_STRING = "[UID]";

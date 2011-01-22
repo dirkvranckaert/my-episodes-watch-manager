@@ -1,4 +1,4 @@
-package eu.vranckaert.episodeWatcher.Constants;
+package eu.vranckaert.episodeWatcher.constants;
 
 /**
  * User: DIRK VRANCKAERT

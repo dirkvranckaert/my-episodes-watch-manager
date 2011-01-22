@@ -1,7 +1,7 @@
 package eu.vranckaert.episodeWatcher.service;
 
 import android.util.Log;
-import eu.vranckaert.episodeWatcher.Constants.MyEpisodeConstants;
+import eu.vranckaert.episodeWatcher.constants.MyEpisodeConstants;
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.domain.Feed;
 import eu.vranckaert.episodeWatcher.domain.FeedItem;
