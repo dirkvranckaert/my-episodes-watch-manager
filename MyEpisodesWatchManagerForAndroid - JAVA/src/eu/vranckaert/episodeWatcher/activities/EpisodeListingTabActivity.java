@@ -347,23 +347,31 @@ public class EpisodeListingTabActivity extends ExpandableListActivity {
         switch(listMode) {
             case EPISODES_BY_DATE: {
                 listedAirDates = new LinkedHashMap<Date, List<Episode>>();
-                List<Date> workingList = new ArrayList<Date>();
+                Map<Date, Integer> workingMap = new TreeMap<Date, Integer>();
                 for (Show show : shows) {
-                    for(Episode episode : show.getEpisodes()) {
-                        Date airDate = episode.getAirDate();
-                        if(!workingList.contains(airDate)) {
-                            workingList.add(airDate);
+                        for(Episode episode : show.getEpisodes()) {
+                                Date airDate = episode.getAirDate();
+                                if(!workingMap.containsKey(airDate)) {
+                                        workingMap.put(airDate, 1);
+                                } else {
+                                        int count = workingMap.get(airDate);
+                                        workingMap.put(airDate, ++count);
+                                }
                         }
-                    }
                 }
-
-                Collections.sort(workingList);
-
-                for(Date date : workingList) {
-                    Map<String, String> map = new HashMap<String, String>();
-                    map.put("episodeRowTitle", DateUtil.formatDateLong(date, getApplicationContext()));
-                    headerList.add(map);
-                    listedAirDates.put(date, null);
+                
+                for(Iterator iter = workingMap.entrySet().iterator(); iter.hasNext();) {
+                        Map<String, String> map = new HashMap<String, String>();
+                        Map.Entry entry = (Map.Entry) iter.next();
+                        Date date = (Date) entry.getKey();
+                        int countEp = (Integer) entry.getValue();
+                    Calendar rightNow = Calendar.getInstance();
+                    Date now = rightNow.getTime();
+                    if (date.after(now)){
+                            map.put("episodeRowTitle", DateUtil.formatDateFull(date, getApplicationContext()) + " ( " + countEp + " )");
+                            headerList.add(map);
+                            listedAirDates.put(date, null);
+                    }
                 }
                 break;
             }
@@ -387,25 +395,27 @@ public class EpisodeListingTabActivity extends ExpandableListActivity {
                 for(Iterator iter = listedAirDates.entrySet().iterator(); iter.hasNext();) {
                     Map.Entry entry = (Map.Entry) iter.next();
                     Date listedAirDate = (Date) entry.getKey();
-
-                    List<Episode> episodeList = new ArrayList<Episode>();
-
-                    List<Map<String, String>> subListSecondLvl = new ArrayList<Map<String, String>>();
-                    for(Show show : shows) {
-                        for(Episode episode : show.getEpisodes()) {
-                            if(listedAirDate.equals(episode.getAirDate())) {
-                                HashMap<String, String> map = new HashMap<String, String>();
-                                map.put("episodeRowChildTitle", episode.getShowName());
-                                map.put("episodeRowChildDetail", "S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName());
-                                subListSecondLvl.add(map);
-                                episodeList.add(episode);
-                            }
-                        }
-                    }
+                    Calendar rightNow = Calendar.getInstance();
+                    Date now = rightNow.getTime();
+                    if (listedAirDate.after(now)){
+	                    List<Episode> episodeList = new ArrayList<Episode>();
+	
+	                    List<Map<String, String>> subListSecondLvl = new ArrayList<Map<String, String>>();
+	                    for(Show show : shows) {
+	                        for(Episode episode : show.getEpisodes()) {
+	                            if(listedAirDate.equals(episode.getAirDate())) {
+	                                HashMap<String, String> map = new HashMap<String, String>();
+	                                map.put("episodeRowChildTitle", episode.getShowName());
+	                                map.put("episodeRowChildDetail", "S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName());
+	                                subListSecondLvl.add(map);
+	                                episodeList.add(episode);
+	                            }
+	                         }
+	                     }
 
                     entry.setValue(episodeList);
-
                     childList.add(subListSecondLvl);
+                    }	
                 }
                 break;
             }
