@@ -38,7 +38,7 @@ import java.util.List;
  *         Date: 18-sep-2010
  *         Time: 17:20:41
  */
-public class ShowSearchActivity extends ListActivity {
+public class ShowManagementAddActivity extends ListActivity {
     private static final String LOG_TAG = "SHOW_SEARCH_AVTIVITY";
 
     private static final int DIALOG_LOADING = 0;
@@ -71,7 +71,7 @@ public class ShowSearchActivity extends ListActivity {
                 if(query.length() > 0) {
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    ShowSearchActivity.this.searchShows(query.toString());
+                    ShowManagementAddActivity.this.searchShows(query.toString());
                 }
             }
         });

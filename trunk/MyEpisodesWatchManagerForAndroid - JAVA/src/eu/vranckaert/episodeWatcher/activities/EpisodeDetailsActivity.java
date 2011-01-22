@@ -20,7 +20,7 @@ import eu.vranckaert.episodeWatcher.utils.DateUtil;
 
 import java.util.Date;
 
-public class EpisodeDetailsSubActivity extends Activity {
+public class EpisodeDetailsActivity extends Activity {
 	Episode episode = null;
 	EpisodeType episodesType;
 	

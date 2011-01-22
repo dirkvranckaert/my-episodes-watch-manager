@@ -23,7 +23,7 @@ import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.UserService;
 import eu.vranckaert.episodeWatcher.utils.CustomAnalyticsTracker;
 
-public class RegisterSubActivity extends Activity {
+public class RegisterActivity extends Activity {
     private Button registerButton;
     private UserService service;
     private User user;
@@ -34,7 +34,7 @@ public class RegisterSubActivity extends Activity {
     private static final int MY_EPISODES_ERROR_DIALOG = 1;
     private static final int MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS = 2;
 
-    private static final String LOG_TAG = "RegisterSubActivity";
+    private static final String LOG_TAG = "RegisterActivity";
     CustomAnalyticsTracker tracker;
 	
     @Override
@@ -93,7 +93,7 @@ public class RegisterSubActivity extends Activity {
                             protected void onPostExecute(Object o) {
                                 removeDialog(MY_EPISODES_REGISTER_DIALOG_LOADING);
                                 if(registerStatus) {
-                                    Toast.makeText(RegisterSubActivity.this, R.string.registerSuccessfull, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(RegisterActivity.this, R.string.registerSuccessfull, Toast.LENGTH_LONG).show();
                                     finalizeLogin();
                                 } else {
                                     ((EditText) findViewById(R.id.registerUsername)).setText("");
