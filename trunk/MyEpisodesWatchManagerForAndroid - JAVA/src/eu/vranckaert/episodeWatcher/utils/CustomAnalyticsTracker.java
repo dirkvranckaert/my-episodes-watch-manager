@@ -2,7 +2,7 @@ package eu.vranckaert.episodeWatcher.utils;
 
 import android.content.Context;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import eu.vranckaert.episodeWatcher.Constants.GoogleAnalyticsTrackerBasicConstants;
+import eu.vranckaert.episodeWatcher.constants.GoogleAnalyticsTrackerBasicConstants;
 import eu.vranckaert.episodeWatcher.enums.CustomTracker;
 import eu.vranckaert.episodeWatcher.exception.TrackerNotInitializedException;
 
