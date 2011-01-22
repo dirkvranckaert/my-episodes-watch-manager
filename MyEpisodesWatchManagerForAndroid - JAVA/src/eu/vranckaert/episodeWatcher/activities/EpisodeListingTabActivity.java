@@ -38,7 +38,7 @@ public class EpisodeListingTabActivity extends ExpandableListActivity {
 	private static final int EPISODE_LOADING_DIALOG = 0;
 	private static final int EXCEPTION_DIALOG = 1;
 	private static final int LOGOUT_DIALOG = 4;
-	private static final String LOG_TAG = "EpisodeWatchListActivity";
+	private static final String LOG_TAG = EpisodeListingTabActivity.class.getSimpleName();
 
 	private User user;
     private EpisodesService service;

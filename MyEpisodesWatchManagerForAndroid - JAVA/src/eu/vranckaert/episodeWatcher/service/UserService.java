@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
-    private static final String LOG_TAG = UserService.class.getName();
+    private static final String LOG_TAG = UserService.class.getSimpleName();
 
     public boolean login(User user) throws LoginFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
         HttpClient httpClient = new DefaultHttpClient();

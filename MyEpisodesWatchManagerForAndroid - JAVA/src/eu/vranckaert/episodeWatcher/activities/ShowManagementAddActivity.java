@@ -39,7 +39,7 @@ import java.util.List;
  *         Time: 17:20:41
  */
 public class ShowManagementAddActivity extends ListActivity {
-    private static final String LOG_TAG = "SHOW_SEARCH_AVTIVITY";
+    private static final String LOG_TAG = ShowManagementAddActivity.class.getSimpleName();
 
     private static final int DIALOG_LOADING = 0;
     private static final int DIALOG_EXCEPTION = 1;

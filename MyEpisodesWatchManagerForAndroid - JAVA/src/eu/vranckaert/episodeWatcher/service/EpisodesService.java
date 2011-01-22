@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 public class EpisodesService {
-	private static final String LOG_TAG = EpisodesService.class.getName();
+	private static final String LOG_TAG = EpisodesService.class.getSimpleName();
 
     private UserService userService;
 

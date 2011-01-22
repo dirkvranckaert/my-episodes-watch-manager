@@ -15,7 +15,7 @@ import java.util.Locale;
  * Time: 0:41:33
  */
 public final class DateUtil {
-    private static final String LOG_TAG = DateUtil.class.getName();
+    private static final String LOG_TAG = DateUtil.class.getSimpleName();
     //http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html#rfc822timezone
     private static final String[] dateFormats = {"dd-MM-yyyy"};
 
