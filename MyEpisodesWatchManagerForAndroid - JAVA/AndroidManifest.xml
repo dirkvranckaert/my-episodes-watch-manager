@@ -4,7 +4,7 @@
       android:installLocation="auto"
       android:versionCode="22"
       android:versionName="1.7.2 - DEV">
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:icon="@drawable/icon" android:label="@string/app_name" android:name="eu.vranckaert.episodeWatcher.guice.Application">
         <activity android:name=".activities.EpisodeListingActivity"
                   android:label="@string/app_name"
                   android:configChanges="orientation|keyboardHidden">

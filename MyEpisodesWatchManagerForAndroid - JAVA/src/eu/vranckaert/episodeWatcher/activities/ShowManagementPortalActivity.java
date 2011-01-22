@@ -1,6 +1,5 @@
 package eu.vranckaert.episodeWatcher.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +8,14 @@ import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.enums.ShowType;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
+import roboguice.activity.GuiceActivity;
 
 /**
  * @author Dirk Vranckaert
  *         Date: 18-sep-2010
  *         Time: 13:09:05
  */
-public class ShowManagementPortalActivity extends Activity {
+public class ShowManagementPortalActivity extends GuiceActivity {
     private static final String LOG_TAG = ShowManagementPortalActivity.class.getSimpleName();
 
     @Override

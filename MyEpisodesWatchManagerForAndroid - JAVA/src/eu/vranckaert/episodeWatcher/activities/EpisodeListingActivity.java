@@ -1,6 +1,5 @@
 package eu.vranckaert.episodeWatcher.activities;
 
-import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -11,10 +10,11 @@ import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 import eu.vranckaert.episodeWatcher.enums.ListMode;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
+import roboguice.activity.GuiceTabActivity;
 
 import java.util.Locale;
 
-public class EpisodeListingActivity extends TabActivity {
+public class EpisodeListingActivity extends GuiceTabActivity {
 	private TabHost tabHost;
 	private Intent intentWatch;  // Reusable Intent for each tab
 	private Intent intentAcquire;  // Reusable Intent for each tab
