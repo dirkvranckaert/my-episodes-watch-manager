@@ -1,16 +1,14 @@
 package eu.vranckaert.episodeWatcher.service;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
+import android.util.Log;
 import eu.vranckaert.episodeWatcher.domain.Feed;
 import eu.vranckaert.episodeWatcher.domain.FeedItem;
 import eu.vranckaert.episodeWatcher.exception.FeedUrlParsingException;
 import eu.vranckaert.episodeWatcher.exception.RssFeedParserException;
-
-import android.util.Log;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class DomRssFeedParser implements RssFeedParser {
-	private static final String LOG_TAG = "DomRssFeedParser";
+	private static final String LOG_TAG = DomRssFeedParser.class.getSimpleName();
 	
     public Feed parseFeed(final URL url) throws RssFeedParserException, FeedUrlParsingException {
         Feed rssFeed = new Feed();

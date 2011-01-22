@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowService {
-    private static final String LOG_TAG = ShowService.class.getName();
+    private static final String LOG_TAG = ShowService.class.getSimpleName();
 
     private UserService userService;
 

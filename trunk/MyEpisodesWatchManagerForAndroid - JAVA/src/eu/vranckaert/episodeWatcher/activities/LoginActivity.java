@@ -34,7 +34,7 @@ public class LoginActivity extends Activity {
     private static final int MY_EPISODES_ERROR_DIALOG = 1;
     private static final int MY_EPISODES_VALIDATION_REQUIRED_ALL_FIELDS = 2;
     
-    private static final String LOG_TAG = "LoginActivity";
+    private static final String LOG_TAG = LoginActivity.class.getSimpleName();
     CustomAnalyticsTracker tracker;
 	
     @Override

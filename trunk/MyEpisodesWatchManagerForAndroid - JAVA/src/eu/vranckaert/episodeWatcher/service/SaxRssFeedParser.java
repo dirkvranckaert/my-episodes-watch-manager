@@ -19,7 +19,7 @@ import java.net.URL;
 import java.net.UnknownHostException;
 
 public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
-	private static final String LOG_TAG = "SaxRssFeedParser";
+	private static final String LOG_TAG = SaxRssFeedParser.class.getSimpleName();
 	
     boolean inItem = false;
     boolean inDescription = true;
