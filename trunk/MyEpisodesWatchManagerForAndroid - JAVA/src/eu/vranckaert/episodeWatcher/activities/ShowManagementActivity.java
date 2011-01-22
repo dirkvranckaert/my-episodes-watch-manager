@@ -2,7 +2,6 @@ package eu.vranckaert.episodeWatcher.activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,11 +25,12 @@ import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.ShowService;
 import eu.vranckaert.episodeWatcher.utils.CustomAnalyticsTracker;
+import roboguice.activity.GuiceListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowManagementActivity extends ListActivity {
+public class ShowManagementActivity extends GuiceListActivity {
     private static final String LOG_TAG = ShowManagementActivity.class.getSimpleName();
     private ShowType showType;
     private User user;

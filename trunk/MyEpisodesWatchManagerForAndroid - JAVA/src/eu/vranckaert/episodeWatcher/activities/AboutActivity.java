@@ -1,6 +1,5 @@
 package eu.vranckaert.episodeWatcher.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
@@ -9,8 +8,9 @@ import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.utils.ApplicationUtil;
+import roboguice.activity.GuiceActivity;
 
-public class AboutActivity extends Activity {
+public class AboutActivity extends GuiceActivity {
     private static final String LOG_TAG = AboutActivity.class.getSimpleName();
 
     @Override

@@ -5,8 +5,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.*;
+import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,13 +18,14 @@ import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
+import roboguice.activity.GuicePreferenceActivity;
 
 /**
  * @author Dirk Vranckaert
  *         Date: 13-mei-2010
  *         Time: 19:34:14
  */
-public class PreferencesActivity extends PreferenceActivity {
+public class PreferencesActivity extends GuicePreferenceActivity {
     private static final int RELAOD_DIALOG = 0;
     private boolean refreshDialog;
 

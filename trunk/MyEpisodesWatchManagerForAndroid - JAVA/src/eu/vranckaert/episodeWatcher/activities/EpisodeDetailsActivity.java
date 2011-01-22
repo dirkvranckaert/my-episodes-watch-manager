@@ -1,6 +1,5 @@
 package eu.vranckaert.episodeWatcher.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,10 +16,11 @@ import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
+import roboguice.activity.GuiceActivity;
 
 import java.util.Date;
 
-public class EpisodeDetailsActivity extends Activity {
+public class EpisodeDetailsActivity extends GuiceActivity {
 	Episode episode = null;
 	EpisodeType episodesType;
 	

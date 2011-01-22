@@ -2,7 +2,6 @@ package eu.vranckaert.episodeWatcher.activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ExpandableListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,10 +27,11 @@ import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.EpisodesService;
 import eu.vranckaert.episodeWatcher.utils.CustomAnalyticsTracker;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
+import roboguice.activity.GuiceExpandableListActivity;
 
 import java.util.*;
 
-public class EpisodeListingTabActivity extends ExpandableListActivity {
+public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
 	private static final int LOGIN_REQUEST_CODE = 0;
 	private static final int EPISODE_DETAILS_REQUEST_CODE = 1;
 
