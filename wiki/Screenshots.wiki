@@ -1,7 +1,7 @@
 #summary Screenshots
 
 == Screenshots september 13th @ 11:00 PM ==
-http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/
+http://my-episodes-watch-manager.googlecode.com/svn/wiki/images/app-20100913-2245.png
 
 == Screenshots august 17th @ 09:00 AM ==
 http://img836.imageshack.us/img836/4104/device1c.png
