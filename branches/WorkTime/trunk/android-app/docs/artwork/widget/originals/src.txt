@@ -1,0 +1,1 @@
+https://android.git.kernel.org/?p=platform/packages/providers/CalendarProvider.git;a=tree;f=res/drawable-mdpi;hb=HEAD

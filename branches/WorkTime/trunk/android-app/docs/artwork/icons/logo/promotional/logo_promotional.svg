@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128"
+   height="128"
+   id="svg3992"
+   version="1.1"
+   inkscape:version="0.48.1 "
+   sodipodi:docname="New document 6">
+  <defs
+     id="defs3994" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="0.65540588"
+     inkscape:cy="122.84993"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="952"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3997">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-924.36218)">
+    <g
+       id="g3186"
+       style="fill:#f00000;fill-opacity:1"
+       inkscape:export-xdpi="180"
+       inkscape:export-ydpi="180"
+       inkscape:export-filename="E:\artwork\icons\logo\icon_48x48.png"
+       transform="matrix(3.1205357,0,0,3.1205357,12.571428,927.07646)">
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:#f00000;fill-opacity:1"
+         d="M 16,4 C 22.617,4 28,9.383 28,16 28,22.617 22.617,28 16,28 9.383,28 4,22.617 4,16 4,9.383 9.383,4 16,4 M 16,0 C 7.164,0 0,7.164 0,16 0,24.836 7.164,32 16,32 24.836,32 32,24.836 32,16 32,7.164 24.836,0 16,0 l 0,0 z"
+         id="path3188" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:#f00000;fill-opacity:1"
+         d="M 21.422,18.578 18,15.152 V 8 h -4.023 v 7.992 c 0,0.602 0.277,1.122 0.695,1.493 l 3.922,3.922 2.828,-2.829 z"
+         id="path3190" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="12.142857"
+       y="105.14286"
+       id="text4035"
+       sodipodi:linespacing="125%"
+       transform="translate(0,924.36218)"><tspan
+         sodipodi:role="line"
+         id="tspan4037"
+         x="12.142857"
+         y="105.14286" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#666666;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="12.57143"
+       y="1045.2192"
+       id="text4039"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4041"
+         x="12.57143"
+         y="1045.2192"
+         style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr;text-anchor:start;fill:#666666;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans">WorkTime</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="eu.vranckaert.worktime"
+      android:versionCode="8"
+      android:versionName="1.0.0 - Beta 1">
+    <application android:label="WorkTime" android:icon="@drawable/logo" android:name=".guice.Application">
+        <!-- Widget configuration -->
+        <receiver android:name=".providers.WorkTimeWidgetProvider" android:process=":otherPrivateProcess">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+			</intent-filter>
+			<meta-data android:name="android.appwidget.provider"
+					   android:resource="@xml/appwidget_info"/>
+		</receiver>
+
+        <activity android:name=".activities.HomeActivity"
+                  android:label="@string/app_name"
+                  android:theme="@android:style/Theme.Light.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.ManageProjectsActivity"
+                  android:theme="@android:style/Theme.Light.NoTitleBar"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".activities.TimeRegistrationsActivity"
+                  android:theme="@android:style/Theme.Light.NoTitleBar"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".activities.AboutActivity"
+                  android:theme="@android:style/Theme.Light.NoTitleBar"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <activity android:name=".activities.PreferencesActivity"
+                  android:theme="@android:style/Theme.Light.NoTitleBar"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <!-- Project specific activities -->
+        <activity android:name=".activities.projects.AddProjectActivity"
+                  android:theme="@android:style/Theme.Light.NoTitleBar"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <!-- TimeRegistration specific activities -->
+        <activity android:name=".activities.timeregistrations.ExportTimeRegistrationsActivity"
+                  android:theme="@android:style/Theme.Light.NoTitleBar"
+                  android:configChanges="orientation|keyboardHidden"/>
+
+        <!-- Widget activities -->
+        <!-- Start -->
+        <activity android:name=".activities.widget.StartTimeRegistrationActivity"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <!-- Stop -->
+        <activity android:name=".activities.widget.StopTimeRegistrationActivity"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                  android:configChanges="orientation|keyboardHidden"/>
+        <!-- Select project -->
+        <activity android:name=".activities.widget.SelectProjectActivity"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                  android:configChanges="orientation|keyboardHidden"/>
+    </application>
+
+    <uses-sdk android:minSdkVersion="7" />
+</manifest> 

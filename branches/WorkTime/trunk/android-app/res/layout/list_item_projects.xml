@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="12dp">
+    <ImageView android:id="@id/btn_delete"
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:src="@drawable/ic_delete"
+               android:layout_alignParentRight="true"/>
+    <RelativeLayout android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/btn_delete">
+        <TextView android:id="@+id/project_default"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/text_size_small"
+                  android:visibility="invisible"
+                  android:text="@string/lbl_project_default"
+                  android:layout_alignParentRight="true"/>
+        <TextView android:id="@+id/projectname_listitem"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/text_size_large_list"
+                  android:singleLine="true"
+                  android:ellipsize="end"
+                  android:layout_toLeftOf="@id/project_default"/>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2010 Google Inc.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout style="@style/TitleBar">
+        <ImageButton style="@style/TitleBarAction"
+            android:src="@drawable/ic_title_home"
+            android:onClick="onHomeClick"/>
+
+        <ImageView style="@style/TitleBarSeparator" />
+        <TextView style="@style/TitleBarText" android:text="@string/lbl_add_project_title"/>
+
+        <ImageView style="@style/TitleBarSeparator" />
+        <ImageButton android:id="@id/btn_save"
+            style="@style/TitleBarAction"
+            android:src="@drawable/ic_title_save"
+            android:onClick="onSaveClick" />
+        <!-- TODO save fix icon, create a custom one -->
+        <ProgressBar style="@style/TitleBarProgressIndicator"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:orientation="vertical">
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:text="@string/lbl_add_project_name"/>
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/projectname_required"
+                  style="@style/WorkTimeValidationError"
+                  android:text="@string/lbl_project_name_required"/>
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/projectname_unique"
+                  style="@style/WorkTimeValidationError"
+                  android:text="@string/lbl_project_name_not_unique"/>
+        <EditText android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/projectname"/>
+
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:text="@string/lbl_add_project_comment"/>
+        <EditText android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/projectcomment"/>
+        <CheckBox android:id="@+id/makeDefaultProject"
+                  android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:ellipsize="end"
+                  android:checked="false"
+                  android:text="@string/lbl_add_project_make_default_project"/>
+    </LinearLayout>
+
+</LinearLayout>
