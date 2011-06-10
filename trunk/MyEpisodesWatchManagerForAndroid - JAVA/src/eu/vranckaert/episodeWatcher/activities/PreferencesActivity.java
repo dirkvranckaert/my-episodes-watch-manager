@@ -96,6 +96,21 @@ public class PreferencesActivity extends GuicePreferenceActivity {
         episodeOrderingPref.setEntryValues(R.array.episodeOrderOptionsValues);
         root.addPreference(episodeOrderingPref);
 
+        ListPreference openAcquirePref = new ListPreference(this);
+        openAcquirePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				refreshDialog = true;
+				return true;
+			}
+        });
+        openAcquirePref.setKey(PreferencesKeys.ACQUIRE_KEY);
+        openAcquirePref.setTitle(R.string.openAcquirePrompt);
+        openAcquirePref.setSummary(R.string.openAcquirePromptExtra);
+        openAcquirePref.setEntries(R.array.openAcquireOptions);
+        openAcquirePref.setEntryValues(R.array.AcquireValues);
+        root.addPreference(openAcquirePref);
+        
         ListPreference openDefaultTabPref = new ListPreference(this);
         openDefaultTabPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
@@ -109,7 +124,6 @@ public class PreferencesActivity extends GuicePreferenceActivity {
         openDefaultTabPref.setSummary(R.string.openDefaultPromptExtra);
         openDefaultTabPref.setEntries(R.array.openDefaultTabOptions);
         openDefaultTabPref.setEntryValues(EpisodeType.getEpisodeListingTypeArray());
-        openDefaultTabPref.setDefaultValue("0");
         root.addPreference(openDefaultTabPref);
         
         ListPreference openThemePref = new ListPreference(this);
@@ -125,7 +139,6 @@ public class PreferencesActivity extends GuicePreferenceActivity {
         openThemePref.setSummary(R.string.ThemePromptExtra);
         openThemePref.setEntries(R.array.ThemeOptions);
         openThemePref.setEntryValues(R.array.ThemeValues);
-        openThemePref.setDefaultValue("0");
         root.addPreference(openThemePref);
         
         ListPreference showLanguagePref = new ListPreference(this);

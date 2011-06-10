@@ -199,7 +199,7 @@ public class ShowManagementAddActivity extends GuiceListActivity {
     }
 
     private void searchShows(final String query) {
-        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+    	AsyncTask<Object, Object, Object> asyncTask = new AsyncTask<Object, Object, Object>() {
             @Override
             protected void onPreExecute() {
                 showDialog(DIALOG_LOADING);
@@ -280,7 +280,7 @@ public class ShowManagementAddActivity extends GuiceListActivity {
     }
 
     private void addShowByListPosition(final int position) {
-        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+    	AsyncTask<Object, Object, Object> asyncTask = new AsyncTask<Object, Object, Object>() {
             @Override
             protected void onPreExecute() {
                 showDialog(DIALOG_LOADING);

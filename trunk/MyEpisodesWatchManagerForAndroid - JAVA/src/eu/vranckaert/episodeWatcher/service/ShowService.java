@@ -257,15 +257,10 @@ public class ShowService {
                 break;
         }
 
-
         HttpGet get = new HttpGet(url + show.getMyEpisodeID());
 
-        String responsePage = "";
-        HttpResponse response;
-
         try {
-            response = httpClient.execute(get);
-            responsePage = EntityUtils.toString(response.getEntity());
+            httpClient.execute(get);
         } catch (ClientProtocolException e) {
             String message = "Could not connect to host.";
             Log.e(LOG_TAG, message, e);
@@ -281,7 +276,7 @@ public class ShowService {
         } finally {
             httpClient.getConnectionManager().shutdown();
         }
-
+        
         List<Show> shows = getFavoriteOrIgnoredShows(user, showType);
 
         return shows;

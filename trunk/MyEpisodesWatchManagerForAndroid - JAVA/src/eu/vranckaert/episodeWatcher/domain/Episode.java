@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Episode implements Serializable {
-    private int id;
+	private static final long serialVersionUID = -8433440792935384437L;
+	private int id;
 	private String showName;
     private String name;
     private int season;

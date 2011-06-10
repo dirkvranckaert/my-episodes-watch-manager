@@ -156,7 +156,7 @@ public class ShowManagementActivity extends GuiceListActivity {
     }
 
     private void reloadShows() {
-        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+    	AsyncTask<Object, Object, Object> asyncTask = new AsyncTask<Object, Object, Object>()  {
             @Override
             protected void onPreExecute() {
                 showDialog(DIALOG_LOADING);
@@ -224,7 +224,6 @@ public class ShowManagementActivity extends GuiceListActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            final int i = position;
             View row = convertView;
             if (row==null) {
                 LayoutInflater inflater = getLayoutInflater();
@@ -292,7 +291,7 @@ public class ShowManagementActivity extends GuiceListActivity {
     }
 
     private void markShow(final Show show, final ShowAction action) {
-        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+    	AsyncTask<Object, Object, Object> asyncTask = new AsyncTask<Object, Object, Object>() {
             @Override
             protected void onPreExecute() {
                 showDialog(DIALOG_LOADING);

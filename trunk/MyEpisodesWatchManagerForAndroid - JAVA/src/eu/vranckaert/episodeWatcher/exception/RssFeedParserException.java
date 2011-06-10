@@ -1,7 +1,9 @@
 package eu.vranckaert.episodeWatcher.exception;
 
 public class RssFeedParserException extends Exception {
-    public RssFeedParserException(String message, Throwable e) {
+	private static final long serialVersionUID = -2533967871783141537L;
+
+	public RssFeedParserException(String message, Throwable e) {
         super(message, e);
     }
 

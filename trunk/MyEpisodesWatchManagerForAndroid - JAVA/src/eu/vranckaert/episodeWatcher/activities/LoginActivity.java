@@ -69,7 +69,7 @@ public class LoginActivity extends GuiceActivity {
                                 username, password
                         );
 
-                        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+                        AsyncTask<Object, Object, Object> asyncTask = new AsyncTask<Object, Object, Object>()  {
                             boolean loginStatus = false;
 
                             @Override

@@ -14,6 +14,11 @@ public class MyEpisodeConstants {
     														"&showignored=" + SHOW_IGNORED +
 															"&uid=" + UID_REPLACEMENT_STRING +
 															"&pwdmd5=" + PWD_REPLACEMENT_STRING;
+    public static final String YESTERDAY_EPISODES_URL = "http://www.myepisodes.com/rss.php?feed=yesterday" +
+															"&showignored=" + SHOW_IGNORED + 
+															"&onlyunacquired=1" +
+															"&uid=" + UID_REPLACEMENT_STRING +
+															"&pwdmd5=" + PWD_REPLACEMENT_STRING;
     public static final String COMING_EPISODES_URL = "http://www.myepisodes.com/rss.php?feed=mylist" +
     														"&showignored=" + SHOW_IGNORED +
     														"&onlyunacquired=1" +

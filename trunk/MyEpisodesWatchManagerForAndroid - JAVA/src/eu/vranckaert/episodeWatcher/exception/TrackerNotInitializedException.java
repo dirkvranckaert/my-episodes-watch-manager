@@ -8,7 +8,9 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
  * Time: 1:22:29 AM
  */
 public class TrackerNotInitializedException extends RuntimeException {
-    public TrackerNotInitializedException() {
+	private static final long serialVersionUID = 3955221711239179599L;
+
+	public TrackerNotInitializedException() {
         super("The " + GoogleAnalyticsTracker.class.getSimpleName() + " instance is not initialized!");
     }
 }
