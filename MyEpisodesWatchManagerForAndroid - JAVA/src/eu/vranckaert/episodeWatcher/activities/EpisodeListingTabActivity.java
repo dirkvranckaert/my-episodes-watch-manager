@@ -87,23 +87,18 @@ public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
 					selectedEpisode.getName());
 			MenuInflater inflater = getMenuInflater();
 			inflater.inflate(R.menu.episode_listing_tab_child_list_menu, menu);
-			if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
-				menu.removeItem(R.id.episodeMenuAcquired);
-			}
-			if (episodesType.equals(EpisodeType.EPISODES_COMING)) {
-				menu.removeItem(R.id.episodeMenuWatched);
-			}
 		} else if (listMode.equals(ListMode.EPISODES_BY_SHOW)) {
 			int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
 			menu.setHeaderTitle(shows.get(groupid).getShowName());
 			MenuInflater inflater = getMenuInflater();
 			inflater.inflate(R.menu.episode_listing_tab_group_list_menu, menu);
-			if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
-				menu.removeItem(R.id.showMenuAcquired);
-			}
-			if (episodesType.equals(EpisodeType.EPISODES_COMING)) {
-				menu.removeItem(R.id.showMenuWatched);
-			}
+		}
+		
+		if (episodesType.equals(EpisodeType.EPISODES_COMING)) {
+			menu.removeItem(R.id.episodeMenuAcquired);
+			menu.removeItem(R.id.episodeMenuWatched);
+		} else if  (episodesType.equals(EpisodeType.EPISODES_TO_WATCH)) {
+			menu.removeItem(R.id.episodeMenuAcquired);
 		}
 	}
 
@@ -318,6 +313,7 @@ public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
             case EPISODES_TO_WATCH:
                 subTitle.setText(getString(R.string.watchListSubTitleWatch, countEpisodes));
                 break;
+            case EPISODES_TO_YESTERDAY:
             case EPISODES_TO_ACQUIRE:
                 subTitle.setText(getString(R.string.watchListSubTitleAcquire, countEpisodes));
                 break;
@@ -331,6 +327,7 @@ public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
             case EPISODES_TO_WATCH:
                 subTitle.setText(getString(R.string.watchListSubTitleWatchPlural, countEpisodes));
                 break;
+            case EPISODES_TO_YESTERDAY:
             case EPISODES_TO_ACQUIRE:
                 subTitle.setText(getString(R.string.watchListSubTitleAcquirePlural, countEpisodes));
                 break;
@@ -498,11 +495,13 @@ public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
         //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
         String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
         Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[0]);
+        String[] acquireOptions = getResources().getStringArray(R.array.AcquireValues);
+        Preferences.checkDefaultPreference(this, PreferencesKeys.ACQUIRE_KEY, acquireOptions[0]);
         Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
     }
 
     private void reloadEpisodes() {
-        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+    	AsyncTask<Object, Object, Object> asyncTask = new AsyncTask<Object, Object, Object>()  {
             @Override
             protected void onPreExecute() {
                 showDialog(EPISODE_LOADING_DIALOG);
@@ -614,7 +613,7 @@ public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
     }
 
     private void markEpisodes(final int EpisodeStatus, final Episode episode) {   //TODO use enum
-        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+    	AsyncTask<Object, Object, Object> asyncTask = new AsyncTask<Object, Object, Object>() {
 
             @Override
             protected void onPreExecute() {
@@ -646,7 +645,7 @@ public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
 	}
     
     private void markShowEpisodes(final int episodeStatus, final Show show) {
-        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+    	AsyncTask<Object, Object, Object> asyncTask = new AsyncTask<Object, Object, Object>() {
 
             @Override
             protected void onPreExecute() {

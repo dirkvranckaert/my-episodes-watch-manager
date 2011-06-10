@@ -1,7 +1,9 @@
 package eu.vranckaert.episodeWatcher.exception;
 
 public class FeedUrlParsingException extends Exception {
-    public FeedUrlParsingException(String message, Throwable e) {
+	private static final long serialVersionUID = -1685121429609745741L;
+
+	public FeedUrlParsingException(String message, Throwable e) {
         super(message, e);
     }
 

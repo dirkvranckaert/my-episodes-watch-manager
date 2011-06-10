@@ -190,7 +190,9 @@ public class EpisodesService {
 	        case EPISODES_TO_WATCH: urlRep = MyEpisodeConstants.UNWATCHED_EPISODES_URL;
 	        break;
 	        case EPISODES_TO_ACQUIRE: urlRep = MyEpisodeConstants.UNAQUIRED_EPISODES_URL;
-	        break;  
+	        break;
+	        case EPISODES_TO_YESTERDAY: urlRep = MyEpisodeConstants.YESTERDAY_EPISODES_URL;
+	        break;
 	        case EPISODES_COMING: urlRep = MyEpisodeConstants.COMING_EPISODES_URL;
 	        break; 
         }

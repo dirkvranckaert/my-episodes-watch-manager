@@ -139,6 +139,13 @@
         <item>Oldest first</item>
         <item>Newest first</item>
     </string-array>
+    <!-- Acquire Settings -->
+    <string name="openAcquirePrompt">Acquire Settings</string>
+    <string name="openAcquirePromptExtra">All shows or only shows of yesterday</string>
+    <string-array name="openAcquireOptions">
+            <item>All</item>
+            <item>Only yesterday</item>
+    </string-array>
     <!-- Default opening tab -->
     <string name="openDefaultPrompt">Default tab to open</string>
     <string name="openDefaultPromptExtra">Default tab to select when opening the application</string>
@@ -195,6 +202,10 @@
         <item>newest_on_top</item>
     </string-array>
     <string-array name="ThemeValues">
+            <item>0</item>
+            <item>1</item>
+    </string-array>
+    <string-array name="AcquireValues">
             <item>0</item>
             <item>1</item>
     </string-array>

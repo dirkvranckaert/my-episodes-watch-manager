@@ -63,7 +63,7 @@ public class RegisterActivity extends GuiceActivity {
                         );
                         registerStatus = false;
 
-                        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask() {
+                        AsyncTask<Object, Object, Object> asyncTask = new AsyncTask<Object, Object, Object>()  {
                             @Override
                             protected void onPreExecute() {
                                 showDialog(MY_EPISODES_REGISTER_DIALOG_LOADING);

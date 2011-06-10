@@ -50,16 +50,17 @@ public class EpisodeListingActivity extends GuiceTabActivity {
         String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
         Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[0]);
         Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
+        Preferences.checkDefaultPreference(this, PreferencesKeys.ACQUIRE_KEY, "0");
     }
 
     private void loadTabs() {
         tabHost = getTabHost();  // The activity TabHost
-
-    	Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
         
         String languageCode = Preferences.getPreference(this, PreferencesKeys.LANGUAGE_KEY);
         conf.locale = new Locale(languageCode);
         res.updateConfiguration(conf, null);
+        
+        String acquire = Preferences.getPreference(this, PreferencesKeys.ACQUIRE_KEY);
         
         // Create an Intent to launch an Activity for the tab (to be reused)
         intentWatch = new Intent().setClass(this, EpisodeListingTabActivity.class)
@@ -71,10 +72,17 @@ public class EpisodeListingActivity extends GuiceTabActivity {
         			  .setIndicator(getString(R.string.watch), res.getDrawable(R.drawable.tabwatched))
         			  .setContent(intentWatch);
 
-        intentAcquire = new Intent().setClass(this, EpisodeListingTabActivity.class)
+        if (acquire.equals("0")) {
+        	intentAcquire = new Intent().setClass(this, EpisodeListingTabActivity.class)
         					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_TO_ACQUIRE)
                              .putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW)
         					 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        } else {
+        	intentAcquire = new Intent().setClass(this, EpisodeListingTabActivity.class)
+			 				.putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_TO_YESTERDAY)
+			 				.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW)
+			 				.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        }
         TabHost.TabSpec acquireSpec = tabHost.newTabSpec("" + R.string.acquire)
         			  .setIndicator(getString(R.string.acquire), res.getDrawable(R.drawable.tabacquired))
         			  .setContent(intentAcquire);

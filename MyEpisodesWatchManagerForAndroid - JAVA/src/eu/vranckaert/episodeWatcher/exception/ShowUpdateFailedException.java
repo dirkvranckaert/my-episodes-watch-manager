@@ -1,9 +1,9 @@
 package eu.vranckaert.episodeWatcher.exception;
 
-import java.io.IOException;
-
 public class ShowUpdateFailedException extends Exception {
-    public ShowUpdateFailedException(String message, Throwable e) {
+	private static final long serialVersionUID = 8862434939814849694L;
+
+	public ShowUpdateFailedException(String message, Throwable e) {
         super (message, e);
     }
 

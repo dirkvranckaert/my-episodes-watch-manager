@@ -1,9 +1,9 @@
 package eu.vranckaert.episodeWatcher.exception;
 
-import java.io.IOException;
-
 public class UnableToReadFeed extends Exception {
-    public UnableToReadFeed(String message, Throwable e) {
+	private static final long serialVersionUID = -7074275760455631763L;
+
+	public UnableToReadFeed(String message, Throwable e) {
         super(message, e);
     }
 }

@@ -16,8 +16,6 @@ import roboguice.activity.GuiceActivity;
  *         Time: 13:09:05
  */
 public class ShowManagementPortalActivity extends GuiceActivity {
-    private static final String LOG_TAG = ShowManagementPortalActivity.class.getSimpleName();
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	init(savedInstanceState);

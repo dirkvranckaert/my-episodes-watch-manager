@@ -6,7 +6,9 @@ package eu.vranckaert.episodeWatcher.exception;
  *         Time: 18:44:45
  */
 public class ShowAddFailedException extends Exception {
-    public ShowAddFailedException(String message, Throwable e) {
+	private static final long serialVersionUID = 3656857588312135601L;
+
+	public ShowAddFailedException(String message, Throwable e) {
         super (message, e);
     }
 
