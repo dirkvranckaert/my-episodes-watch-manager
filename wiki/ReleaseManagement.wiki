@@ -6,9 +6,10 @@
 == Release management ==
 === Scheduled releases ===
 ====Version 1.7.2====
-Scheduled Release Date: January 20th 2011<br>
+Scheduled Release Date: June 20th 2011<br>
 Content: Performance, Stability, Security, Usability, Feature Improvements
   * Issue 99 (Code review)
+  * Issue 103 (Today-Tomorrow-episode-list option)
   * Issue 105 (Code Refactoring part 2)
   * Issue 108 (Weekday and number of episodes in coming tab date-grouping)
   * Issue 114 (Do not show upcoming episodes from the past)
@@ -35,7 +36,6 @@ Content: Usability, New Features
 ====Version 1.7.7====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Usability, New Features, Feature Improvements
-  * Issue 103 (Today-Tomorrow-episode-list option)
   * Issue 115 (Random Episode Picker)
 
 === Market Releases ===
