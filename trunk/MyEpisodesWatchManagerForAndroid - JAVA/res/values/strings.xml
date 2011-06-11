@@ -41,6 +41,7 @@
     <string name="watchListSubTitleAcquirePlural">%d episodes to acquire</string>
     <string name="watchListSubTitleComingPlural">%d future episodes</string>
     <string name="watchListEmpty">No episodes found.</string>
+    <string name="watchListFull">Reached the limit of 200 episodes.</string>
 
     <!-- Episode details -->
     <string name="episodeDetailsSeasonLabel">Season: </string>
@@ -122,6 +123,7 @@
     <string name="menuEpisodeDetails">Details</string>
     <string name="menuEpisodeMarkAcquired">Mark Acquired</string>
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
+    <string name="menuTweet">Tweet this!</string>
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">Because settings are changed, the episodes will be refreshed now!</string>

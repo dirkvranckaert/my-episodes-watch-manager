@@ -115,25 +115,15 @@ public class EpisodeListingActivity extends GuiceTabActivity {
     }
     
     public void clearRefreshTab(EpisodeType episodesType) {
-    	if (episodesType.equals(EpisodeType.EPISODES_TO_WATCH)) {
-    		intentWatch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-    	} else if (episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
-    		intentAcquire.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-    	} else if (episodesType.equals(EpisodeType.EPISODES_COMING)) {
-    		intentComing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-    	}
+        switch(episodesType) {
+	        case EPISODES_TO_WATCH: intentWatch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET); break;
+	        case EPISODES_TO_ACQUIRE: intentAcquire.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET); break;
+	        case EPISODES_COMING: intentComing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET); break;
+        }
     }
     
     public void refreshAllTabs(EpisodeType episodesType) {
-    	if (!episodesType.equals(EpisodeType.EPISODES_TO_WATCH)) {
-    		intentWatch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    	}
-        if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
-    		intentAcquire.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    	}
-        if (!episodesType.equals(EpisodeType.EPISODES_COMING)) {
-    		intentComing.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    	}
+		intentWatch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }
 
     public void refreshWatchTab() {
