@@ -3,6 +3,13 @@
 = Internationalization Changes =
 Beneath is a list of all version and the items in the internationalization files that have changed for each version. This is used to keep track of all items (keys in the XML file) which should be translated (again) and will make it much more easier to manage the internationalization process.
 
+Version 1.7.2:
+  * openAcquirePrompt
+  * openAcquirePromptExtra
+  * openAcquireOptions
+  * watchListFull
+  * menuTweet
+
 Version 1.7.0:
 - Deleted tags:
   * showLanguageOptions
