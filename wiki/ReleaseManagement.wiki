@@ -13,6 +13,7 @@ Content: Performance, Stability, Security, Usability, Feature Improvements
   * Issue 105 (Code Refactoring part 2)
   * Issue 108 (Weekday and number of episodes in coming tab date-grouping)
   * Issue 114 (Do not show upcoming episodes from the past)
+  * Issue 119 (Russian translation)
 ====Version 1.7.3====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
