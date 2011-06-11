@@ -15,6 +15,7 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.constants.ActivityConstants;
 import eu.vranckaert.episodeWatcher.domain.*;
@@ -97,6 +98,7 @@ public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
 		if (episodesType.equals(EpisodeType.EPISODES_COMING)) {
 			menu.removeItem(R.id.episodeMenuAcquired);
 			menu.removeItem(R.id.episodeMenuWatched);
+			menu.removeItem(R.id.episodeTweet);
 		} else if  (episodesType.equals(EpisodeType.EPISODES_TO_WATCH)) {
 			menu.removeItem(R.id.episodeMenuAcquired);
 		}
@@ -247,6 +249,13 @@ public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
 				tracker.trackEvent(CustomTracker.Event.MARK_ACQUIRED);
 				markEpisodes(1, selectedEpisode);
 				return true;
+			case R.id.episodeTweet:
+		    	String tweet = selectedEpisode.getShowName() + " S" + selectedEpisode.getSeasonString() + "E" + selectedEpisode.getEpisodeString();
+		    	Intent i = new Intent(android.content.Intent.ACTION_SEND);
+		    	i.setType("text/plain");
+		    	i.putExtra(Intent.EXTRA_TEXT, getString(R.string.Tweet, tweet));
+		    	startActivity(Intent.createChooser(i, getString(R.string.TweetTitle)));
+				return true;
 			case R.id.episodeMenuDetails:
 				tracker.trackPageView(CustomTracker.PageView.EPISODE_DETAILS);
 				openEpisodeDetails(selectedEpisode, episodesType);
@@ -307,6 +316,9 @@ public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
         for(Show show : shows) {
             countEpisodes += show.getNumberEpisodes();
         }
+        
+        if (countEpisodes == 200)
+        	Toast.makeText(EpisodeListingTabActivity.this, R.string.watchListFull, Toast.LENGTH_LONG).show();
 
         if (countEpisodes == 1) {
             switch(episodesType) {
@@ -678,15 +690,13 @@ public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
 
 	private void markEpisode(int EpisodeStatus, Episode episode) {
 		try {
-			if (EpisodeStatus == 0)
-			{
-				service.watchedEpisode(episode, user);
-			}
-			else if (EpisodeStatus == 1)
-			{
-				service.acquireEpisode(episode, user);
-				EpisodeListingActivity episodeListingActivity = (EpisodeListingActivity) getParent();
-				episodeListingActivity.refreshWatchTab();
+			switch(EpisodeStatus) {
+				case 0: service.watchedEpisode(episode, user); break;
+				case 1:
+					service.acquireEpisode(episode, user);
+					EpisodeListingActivity episodeListingActivity = (EpisodeListingActivity) getParent();
+					episodeListingActivity.refreshWatchTab();
+					break;
 			}
 		} catch (InternetConnectivityException e) {
 			String message = "Could not connect to host";
@@ -713,15 +723,13 @@ public class EpisodeListingTabActivity extends GuiceExpandableListActivity {
 
     private void markAllEpisodes(int EpisodeStatus, List<Episode> episodes) {
 		try {
-			if (EpisodeStatus == 0)
-			{
-				service.watchedEpisodes(episodes, user);
-			}
-			else if (EpisodeStatus == 1)
-			{
-				service.acquireEpisodes(episodes, user);
-				EpisodeListingActivity episodeListingActivity = (EpisodeListingActivity) getParent();
-				episodeListingActivity.refreshWatchTab();
+			switch(EpisodeStatus) {
+				case 0: service.watchedEpisodes(episodes, user); break;
+				case 1:
+					service.acquireEpisodes(episodes, user);
+					EpisodeListingActivity episodeListingActivity = (EpisodeListingActivity) getParent();
+					episodeListingActivity.refreshWatchTab();
+					break;
 			}
 		} catch (InternetConnectivityException e) {
 			String message = "Could not connect to host";

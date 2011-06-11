@@ -60,17 +60,19 @@ public class EpisodeDetailsActivity extends GuiceActivity {
         Button markAsSeenButton = (Button) findViewById(R.id.markAsSeenButton);
         ImageButton twitterButton = (ImageButton) findViewById(R.id.twitterButton);
         
-        if (!episodesType.equals(EpisodeType.EPISODES_TO_WATCH))
-        {
-        	twitterButton.setVisibility(View.GONE);
-        }
-        if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE))
-        {
-        	markAsAcquiredButton.setVisibility(View.GONE);
-        }
-        if (episodesType.equals(EpisodeType.EPISODES_COMING))
-        {
-        	markAsSeenButton.setVisibility(View.GONE);
+        switch(episodesType) {
+	        case EPISODES_TO_WATCH:
+	        	markAsAcquiredButton.setVisibility(View.GONE);
+	        	break;
+	        case EPISODES_TO_YESTERDAY:	
+	        case EPISODES_TO_ACQUIRE:
+	        	twitterButton.setVisibility(View.GONE);
+	        	break;
+	        case EPISODES_COMING:
+	        	markAsAcquiredButton.setVisibility(View.GONE);
+	        	markAsSeenButton.setVisibility(View.GONE);
+	        	twitterButton.setVisibility(View.GONE);
+	        	break;
         }
         
         markAsAcquiredButton.setOnClickListener(new View.OnClickListener() {

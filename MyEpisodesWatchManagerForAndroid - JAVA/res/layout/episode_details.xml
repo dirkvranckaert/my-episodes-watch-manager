@@ -102,12 +102,13 @@
 
 	<LinearLayout android:id="@+id/LinearLayout02" 
 			  android:layout_width="fill_parent"
+			  android:gravity="center"
 			  android:layout_height="wrap_content">
     <ImageButton android:id="@+id/twitterButton"
 	      android:src="@drawable/twitterlogo"
-	      android:layout_width="wrap_content"
+	      android:layout_width="100sp"
 	      android:layout_height="wrap_content"
-    />	  
+    />
 	</LinearLayout>
 </LinearLayout>
 </ScrollView>
