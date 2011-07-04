@@ -6,7 +6,7 @@
 == Release management ==
 === Scheduled releases ===
 ====Version 1.7.2====
-Scheduled Release Date: June 20th 2011<br>
+Scheduled Release Date: July 14th 2011<br>
 Content: Performance, Stability, Security, Usability, Feature Improvements
   * Issue 99 (Code review)
   * Issue 103 (Today-Tomorrow-episode-list option)
@@ -14,30 +14,21 @@ Content: Performance, Stability, Security, Usability, Feature Improvements
   * Issue 108 (Weekday and number of episodes in coming tab date-grouping)
   * Issue 114 (Do not show upcoming episodes from the past)
   * Issue 119 (Russian translation)
-====Version 1.7.3====
+====Version 1.8.0====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
   * Issue 38 (Mark several episodes as "Watched" at once)
   * Issue 86 (Layout the application)
-  * Issue 113 (Allow swiping between tabs)
-====Version 1.7.4====
+  * Issue 90 (Keep collapsable lists opened)
+  * Issue 113 (Allow swiping between watched/acquired/coming)
+  * Issue 115 (Random Episode Picker)
+====Version 1.8.5====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Usability, New Features, Feature Improvements
   * Issue 67 (Calender View)
-  * Issue 90 (Keep collapsable lists opened)
-====Version 1.7.5====
-Scheduled Release Date: Not Yet Scheduled<br>
-Content: Usability, Feature Improvements
-  * Issue 107 (Enable date-grouping through preferences)
   * Issue 102 (Disable tabs through preferences)
-====Version 1.7.6====
-Scheduled Release Date: Not Yet Scheduled<br>
-Content: Usability, New Features
+  * Issue 107 (Enable date-grouping through preferences)
   * Issue 109 (Offline Usage)
-====Version 1.7.7====
-Scheduled Release Date: Not Yet Scheduled<br>
-Content: Usability, New Features, Feature Improvements
-  * Issue 115 (Random Episode Picker)
 
 === Market Releases ===
 ====Version 1.7.1====
