@@ -180,7 +180,7 @@
     <string name="aboutLicenseValue">GNU GPL V3 License</string>
     <string name="aboutOriginalIdeaValue">Dirk Vranckaert</string>
     <string name="aboutWebsiteValue">http://code.google.com/p/my-episodes-watch-manager</string>
-    <string name="aboutEmailValue">android-dev@vranckaert.eu</string>
+    <string name="aboutEmailValue">dirkvranckaert@gmail.com</string>
     <!-- What's new Dialog -->
     <string name="whatsNewListPrefix">-</string>
     <!-- Preferences -->
