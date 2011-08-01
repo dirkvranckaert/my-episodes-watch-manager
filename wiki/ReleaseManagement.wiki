@@ -5,15 +5,6 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
-====Version 1.7.2====
-Scheduled Release Date: July 14th 2011<br>
-Content: Performance, Stability, Security, Usability, Feature Improvements
-  * Issue 99 (Code review)
-  * Issue 103 (Today-Tomorrow-episode-list option)
-  * Issue 105 (Code Refactoring part 2)
-  * Issue 108 (Weekday and number of episodes in coming tab date-grouping)
-  * Issue 114 (Do not show upcoming episodes from the past)
-  * Issue 119 (Russian translation)
 ====Version 1.8.0====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
@@ -31,6 +22,15 @@ Content: Usability, New Features, Feature Improvements
   * Issue 109 (Offline Usage)
 
 === Market Releases ===
+====Version 1.7.2====
+Release Date: August 1st 2011<br>
+Content: Performance, Stability, Security, Usability, Feature Improvements
+  * Issue 99 (Code review)
+  * Issue 103 (Today-Tomorrow-episode-list option)
+  * Issue 105 (Code Refactoring part 2)
+  * Issue 108 (Weekday and number of episodes in coming tab date-grouping)
+  * Issue 114 (Do not show upcoming episodes from the past)
+  * Issue 119 (Russian translation)
 ====Version 1.7.1====
 Release Date: December 7th 2010<br>
   * Issue 66 (Change request: For upcoming shows, show date and time)
