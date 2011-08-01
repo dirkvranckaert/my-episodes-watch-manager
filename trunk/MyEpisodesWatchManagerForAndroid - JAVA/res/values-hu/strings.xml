@@ -40,6 +40,7 @@
     <string name="watchListSubTitleAcquirePlural">%d beszerzendő rész</string>
     <string name="watchListSubTitleComingPlural">%d jövőbeni rész</string>
     <string name="watchListEmpty">Nincs egy rész se.</string>
+	<string name="watchListFull">200 rész megjelenítve. (Ez a maximum.)</string>
 
     <!-- Episode details -->
     <string name="episodeDetailsSeasonLabel">Évad: </string>
@@ -84,24 +85,6 @@
     <string name="whatsNewTitle">Változások</string>
     <string name="whatsNewVersion">Verzió:</string>
     <string name="whatsNewText">Ami változott:</string>
-    <string-array name="whatsNewValues">
-        <!-- TODO update! -->
-        <item>Felhasználói fiók regisztráció</item>
-        <item>Műsor kezelése</item>
-        <item>Twitter integráció</item>
-        <item>Német nyelv</item>
-        <item>Litván nyelv</item>
-        <item>Portugál nyelv</item>
-        <item>Új logó</item>
-        <item>Sötét téma</item>
-        <item>Egy műsor(csoport) összes részének nézetté vagy beszerzetté nyilvánítása</item>
-        <item>Kezdőfül állításának lehetősége</item>
-        <item>Betöltés jelzése (Android nem válaszol üzenetek megszűntek)</item>
-        <item>Dátum problémák javítása</item>
-        <item>Kikerült a koreai nyelv támogatása</item>
-        <item>Új névjegy</item>
-        <item>Frissített \"Újdonságok\" lap</item>
-    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Biztos kijelentkezel?</string>
     <string name="logoutDialogMessage">A bejelentkezési adataid törölve lesznek a készülékről.</string>
@@ -121,6 +104,7 @@
     <string name="menuEpisodeDetails">Részletek</string>
     <string name="menuEpisodeMarkAcquired">Beszereztem</string>
     <string name="menuEpisodeMarkWatched">Megnéztem</string>
+	<string name="menuTweet">Tweet erről!</string>
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">Mivel a beállítások megváltoztak, a részek listája most frissül!</string>
@@ -137,6 +121,13 @@
     <string-array name="episodeOrderOptions">
         <item>Régiek elől</item>
         <item>Újak elől</item>
+    </string-array>
+	<!-- Acquire Settings -->
+    <string name="openAcquirePrompt">Beszerzendő lista opciói</string>
+    <string name="openAcquirePromptExtra">Mindegyik műsör megjelenítése, vagy csak a tegnapiaké.</string>
+    <string-array name="openAcquireOptions">
+            <item>Mindegyik</item>
+            <item>Csak a tegnapiak</item>
     </string-array>
     <!-- Default opening tab -->
     <string name="openDefaultPrompt">Kezdőfül beállítása</string>

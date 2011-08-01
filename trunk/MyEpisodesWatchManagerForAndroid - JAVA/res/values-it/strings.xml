@@ -41,6 +41,7 @@
     <string name="watchListSubTitleAcquirePlural">%d episodi da acquistare</string>
     <string name="watchListSubTitleComingPlural">%d episodi a venire</string>
     <string name="watchListEmpty">Nessun episodio trovato.</string>
+    <string name="watchListFull">Limite di 200 episodi raggiunto.</string>
     
     <!-- Episode details -->
     <string name="episodeDetailsSeasonLabel">Stagione: </string>
@@ -86,23 +87,6 @@
     <string name="whatsNewTitle">Nuovità</string>
     <string name="whatsNewVersion">Versione:</string>
     <string name="whatsNewText">Che cosa è cambiato:</string>
-    <string-array name="whatsNewValues">
-        <item>Iscrizione per i nuovi utenti</item>
-        <item>Gestione degli episodi</item>
-        <item>Integrazione Twitter</item>
-        <item>Traduzione Tedesca</item>
-        <item>Traduzione Lettone</item>
-        <item>Traduzione Portoghese</item>
-        <item>Nuovo marchio</item>
-        <item>Schermo con colori scuri</item>
-        <item>Contrassegnare tutti gli episodi di una serie (gruppo) come Guardato o Acquistato </item>
-        <item>Selezionare l\'etichetta principale da aprire</item>
-        <item>Dialoghi di caricamento</item>
-        <item>Problemi di date risolti</item>
-        <item>Lingua Coreana non più supportata</item>
-        <item>Nuova finestra di dialogo: \'A proposito\'</item>
-        <item>Nuova finestra di dialogo: \'Che cosa è cambiato\'</item>
-    </string-array>
 
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Siete sicuro?</string>
@@ -123,6 +107,7 @@
     <string name="menuEpisodeDetails">Particolari</string>
     <string name="menuEpisodeMarkAcquired">Contrassegna acquisito</string>
     <string name="menuEpisodeMarkWatched">Contrassegna guardato</string>
+    <string name="menuTweet">Condividere questo!</string>
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">Impostazioni cambiate, episodi verrano ripristinati</string>
@@ -139,6 +124,13 @@
     <string-array name="episodeOrderOptions">
         <item>Il più vecchio primo</item>
         <item>Il più recente primo</item>
+    </string-array>
+    <!-- Acquire Settings -->
+    <string name="openAcquirePrompt">Impostazioni Acquisti</string>
+    <string name="openAcquirePromptExtra">Tutti gli episodi o soltanto quelli di ieri</string>
+    <string-array name="openAcquireOptions">
+            <item>Tutti</item>
+            <item>Soltanto ieri</item>
     </string-array>
     <!-- Default opening tab -->
     <string name="openDefaultPrompt">Selezionare l\'etichetta principale da aprire</string>

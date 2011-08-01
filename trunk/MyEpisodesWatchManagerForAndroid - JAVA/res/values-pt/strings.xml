@@ -85,23 +85,6 @@
     <string name="whatsNewTitle">O que há de novo</string>
     <string name="whatsNewVersion">Versão:</string>
     <string name="whatsNewText">O que foi alterado:</string>
-    <string-array name="whatsNewValues">
-        <item>Registro de novos usuários</item>
-        <item>Administração de seriados</item>
-        <item>Integraçã com o Twitter</item>
-        <item>Tradução para o Alemão</item>
-        <item>Tradução para Latvian</item>
-        <item>Tradução para o Portugues</item>
-        <item>Novo logo</item>
-        <item>Padrao de cores escuras</item>
-        <item>Marcar todos os episodios de um seriado como assistidos ou adquiridos</item>
-        <item>Selecionar um painel para abrir por padrão</item>
-        <item>Carregamento de dialogos (sem ANR)</item>
-        <item>Problemas com datas resolvido</item>
-        <item>Idioma Koreano não é mais suportado</item>
-        <item>Nova caixa de \'Sobre\'</item>
-        <item>Novo caixa de \'O que há de novo\'</item>
-    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Você tem certeza?</string>
     <string name="logoutDialogMessage">Seus dados cadastrais não serão mais armazenados no seu dispositivo.</string>

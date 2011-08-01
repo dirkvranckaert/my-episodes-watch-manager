@@ -41,6 +41,7 @@
     <string name="watchListSubTitleAcquirePlural">%d Folgen zu erwerben</string>
     <string name="watchListSubTitleComingPlural">%d zukünftige Folgen</string>
     <string name="watchListEmpty">Keine Folgen gefunden.</string>
+	<string name="watchListFull">Limit von 200 Folgen wurde erreicht.</string>
 
     <!-- Episode details -->
     <string name="episodeDetailsSeasonLabel">Staffel: </string>
@@ -85,23 +86,6 @@
     <string name="whatsNewTitle">Was ist neu?</string>
     <string name="whatsNewVersion">Version:</string>
     <string name="whatsNewText">Was geändert wurde:</string>
-    <string-array name="whatsNewValues">
-        <item>Registrierung für neue Benutzer</item>
-        <item>Serienverwaltung</item>
-        <item>Twitter Integration</item>
-        <item>Deutsche Übersetzung</item>
-        <item>Lettische Übersetzung</item>
-        <item>Portugiesische Übersetzung</item>
-        <item>Neues Logo</item>
-        <item>Dunkel gefärbtes Thema</item>
-        <item>Markiere alle Folgen einer Serie als Erworben oder Gesehen</item>
-        <item>Selektierbarer Tab der beim Start geöffnet wird</item>
-        <item>Lade Dialoge</item>
-        <item>Datum Problem behoben</item>
-        <item>Keine Koreanische Übersetzung mehr</item>
-        <item>Neuer Info Dialog</item>
-        <item>Neuer \'Was ist neu?\' Dialog</item>
-    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Bist du dir sicher?</string>
     <string name="logoutDialogMessage">Deine Anmeldeinformationen werden nicht mehr auf diesen Gerät gespeichert.</string>
@@ -121,6 +105,7 @@
     <string name="menuEpisodeDetails">Details</string>
     <string name="menuEpisodeMarkAcquired">Erworben markieren</string>
     <string name="menuEpisodeMarkWatched">Gesehen markieren</string>
+    <string name="menuTweet">Tweeten!</string>
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">Da Einstellungen geändert wurden, werden die Folgen jetzt aktualisiert!</string>
@@ -137,6 +122,13 @@
     <string-array name="episodeOrderOptions">
         <item>Älteste zuerst</item>
         <item>Neuste zuerst</item>
+    </string-array>
+    <!-- Acquire Settings -->
+    <string name="openAcquirePrompt">Erwerben Einstellungen</string>
+    <string name="openAcquirePromptExtra">Alle Serien oder nur Serien von gestern</string>
+    <string-array name="openAcquireOptions">
+            <item>Alle</item>
+            <item>Nur von gestern</item>
     </string-array>
     <!-- Default opening tab -->
     <string name="openDefaultPrompt">Standard Tab</string>
