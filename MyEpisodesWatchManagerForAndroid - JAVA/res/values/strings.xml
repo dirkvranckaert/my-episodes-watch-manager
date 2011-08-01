@@ -88,21 +88,11 @@
     <string name="whatsNewText">What has changed:</string>
     <string-array name="whatsNewValues">
         <!-- TODO update! -->
-        <item>Registration for new users</item>
-        <item>Show Management</item>
-        <item>Twitter Integration</item>
-        <item>German translations</item>
-        <item>Latvian translations</item>
-        <item>Portuguese translations</item>
-        <item>New logo</item>
-        <item>Dark colored scheme</item>
-        <item>Mark all episodes of a show (group) watched or acquired</item>
-        <item>Select a tab to open by default</item>
-        <item>Loading dialogs (no ANR anymore)</item>
-        <item>Date issues solved</item>
-        <item>No more Korean language support</item>
-        <item>New about dialog</item>
-        <item>New \'What\'s new\' dialog</item>
+        <item>Code review</item>
+        <item>Today-tomorrow episode list option</item>
+        <item>Code refactoring</item>
+        <item>Weekday and number of episodes in coming tab date-grouping</item>
+        <item>Do not show upcoming episodes from the past</item>
     </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Are you sure?</string>

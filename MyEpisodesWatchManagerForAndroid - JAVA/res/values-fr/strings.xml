@@ -41,14 +41,15 @@
     <string name="watchListSubTitleAcquirePlural">%d épisodes a acquérir</string>
     <string name="watchListSubTitleComingPlural">%d futurs épisodes</string>
     <string name="watchListEmpty">Aucun épisode trouvé.</string>
-    <string name="episodeDetailsAirDateLabelDateNotFound">Format de date incorrect!</string>
-    <string name="TweetTitle">Partager</string>
-    <string name="Tweet">J\'ai regardé \'%s\' #MyEpisodesManager #Android</string>
+    <string name="watchListFull">Limite de 200 épisodes atteinte.</string>
 
     <!-- Episode details -->
     <string name="episodeDetailsSeasonLabel">Saison: </string>
     <string name="episodeDetailsEpisodeLabel">Episode: </string>
     <string name="episodeDetailsAirDateLabel">Date de diffusion: </string>
+    <string name="episodeDetailsAirDateLabelDateNotFound">Format de date incorrect!</string>
+    <string name="TweetTitle">Partager</string>
+    <string name="Tweet">J\'ai regardé \'%s\' #MyEpisodesManager #Android</string>
 
     <!-- Show management -->
     <!-- Show Panel -->
@@ -86,23 +87,6 @@
     <string name="whatsNewTitle">Nouveautés</string>
     <string name="whatsNewVersion">Version:</string>
     <string name="whatsNewText">Ce qui a changé:</string>
-    <string-array name="whatsNewValues">
-        <item>Enregistrement pour les nouveaux utilisateurs</item>
-        <item>Gestion des épisodes</item>
-        <item>Intégration Twitter</item>
-        <item>Traduction Allemande</item>
-        <item>Traduction Lettone</item>
-        <item>Traduction Portugaise</item>
-        <item>Nouveau logo</item>
-        <item>Schéma de couleurs foncées</item>
-        <item>Marquer tous les épisodes d\'une série (groupe) comme étant vu ou acquis</item>
-        <item>Sélectionner une tabulation à ouvrir par défaut</item>
-        <item>Chargement des dialogues</item>
-        <item>Problèmes de dates résolus</item>
-        <item>Traduction Coréenne enlevée</item>
-        <item>Nouveau dialogue: \'A propos\'</item>
-        <item>Nouveau dialogue: \'Ce qui a changé\'</item>
-    </string-array>
 
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Etes vous sûr ?</string>
@@ -123,6 +107,7 @@
     <string name="menuEpisodeDetails">Détails</string>
     <string name="menuEpisodeMarkAcquired">Marquer comme acquis</string>
     <string name="menuEpisodeMarkWatched">Marquer comme vu</string>
+    <string name="menuTweet">Partager ceci!</string>
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">Les préférences ont été changées, la liste des épisodes sera rafraîchie</string>
@@ -139,6 +124,13 @@
     <string-array name="episodeOrderOptions">
         <item>Du plus ancien au plus récent</item>
         <item>Du plus récent au plus ancien</item>
+    </string-array>
+    <!-- Acquire Settings -->
+    <string name="openAcquirePrompt">Paramètres d\'Acquisition</string>
+    <string name="openAcquirePromptExtra">Tous les épisodes ou uniquement ceux de hier</string>
+    <string-array name="openAcquireOptions">
+            <item>Tous</item>
+            <item>Uniquement hier</item>
     </string-array>
     <!-- Default opening tab -->
     <string name="openDefaultPrompt">Tabulation à ouvrir par défaut</string>

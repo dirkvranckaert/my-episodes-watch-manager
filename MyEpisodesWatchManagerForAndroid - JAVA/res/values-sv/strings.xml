@@ -10,7 +10,7 @@
     <string name="search">Sök</string>
 
     <!-- login form -->
-    <string name="loginFormTitle">Ange inloggningsuppgifter för MyEpisodes.com.</string>
+    <string name="loginFormTitle">Ange inloggningsuppgifter för MyEpisodes.com</string>
     <string name="loginFormRegister">Ny användare?</string>
     <string name="loginUsernameHint">Användarnamn</string>
     <string name="loginPasswordHint">Lösenord</string>
@@ -32,15 +32,16 @@
     <!-- episode_listing_tab -->
     <string name="watch">Se</string>
     <string name="acquire">Hämta</string>
-    <string name="coming">Kommer</string>
+    <string name="coming">Kommande</string>
     <string name="watchListTitle">TV-Serier/Avsnitt</string>
     <string name="watchListSubTitleWatch">%d avsnitt att se</string>
     <string name="watchListSubTitleAcquire">%d avsnitt att hämta</string>
-    <string name="watchListSubTitleComing">%d framtida avsnitt</string>
+    <string name="watchListSubTitleComing">%d kommande avsnitt</string>
     <string name="watchListSubTitleWatchPlural">%d avsnitt att se</string>
     <string name="watchListSubTitleAcquirePlural">%d avsnitt att hämta</string>
     <string name="watchListSubTitleComingPlural">%d framtida avsnitt</string>
     <string name="watchListEmpty">Inga avsnitt hittade.</string>
+    <string name="watchListFull">Tak på max 200 avsnitt nått.</string>
 
     <!-- Episode details -->
     <string name="episodeDetailsSeasonLabel">Säsong: </string>
@@ -60,7 +61,7 @@
     <string name="showSearchNoSearchResults">Ingen TV-serie hittades</string>
     <string name="showSearchOneFound">TV-serie hittades</string>
     <string name="showSearchMoreFound">TV-serier hittades</string>
-    <string name="showSearchAddShow">Är du säker på att du vill lägga till TV-serien till din lista?</string>    
+    <string name="showSearchAddShow">Är du säker på att du vill lägga till TV-serien i din lista?</string>    
     <string name="showSearchFinished">Är du färdig, eller vill du lägga till flera?</string>
     <!-- Favo and ingored shows -->
     <string name="favoIgnoredDeleteShow">Ta bort TV-serie</string>
@@ -85,23 +86,6 @@
     <string name="whatsNewTitle">Nyheter</string>
     <string name="whatsNewVersion">Version:</string>
     <string name="whatsNewText">Förändringar:</string>
-    <string-array name="whatsNewValues">
-        <item>Registrering av ny användare</item>
-        <item>Hantering av TV-serier</item>
-        <item>Twitterintegrering</item>
-        <item>Tysk översättning</item>
-        <item>Lettisk översättning</item>
-        <item>Portugisisk översättning</item>
-        <item>Ny logo</item>
-        <item>Mörkt tema</item>
-        <item>Markera alla avsnitt (grupp) som sedda eller hämtade</item>
-        <item>Välja default tab vid start</item>
-        <item>Laddning av dialoger (ingen mer ANR)</item>
-        <item>Fix av datumbug</item>
-        <item>Koreanska överättningen stöds inte längre</item>
-        <item>Ny \"Om\"-dialog</item>
-        <item>Ny \"Nyheter\"-dialog</item>
-    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Är du säker?</string>
     <string name="logoutDialogMessage">Dina uppgifter kommer inte längre lagras i mobilen.</string>
@@ -121,11 +105,12 @@
     <string name="menuEpisodeDetails">Detaljer</string>
     <string name="menuEpisodeMarkAcquired">Markera som \"Hämtat\"</string>
     <string name="menuEpisodeMarkWatched">Markera som \"Sett\"</string>
+    <string name="menuTweet">Posta till Twitter!</string>
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">För att spara inställningarna, starta om programmet, eller ladda om listan med avsnitt.</string>
     <!-- Show sorting -->
-    <string name="showOrderPrompt">Sortering serier</string>
+    <string name="showOrderPrompt">Sortering av serier</string>
     <string-array name="showOrderOptions">
         <item>Default</item>
         <item>Stigande</item>
@@ -135,23 +120,30 @@
     <string name="episodeOrderPrompt">Sortering av avsnitt</string>
     <string name="episodeOrderPromptExtra">Äldsta eller nyaste först...</string>
     <string-array name="episodeOrderOptions">
-        <item>Äldst först</item>
+        <item>Äldsta först</item>
         <item>Nyaste först</item>
     </string-array>
+    <!-- Acquire Settings -->
+    <string name="openAcquirePrompt">Hämtningsinställnig</string>
+    <string name="openAcquirePromptExtra">Visa alla avsnitt eller bara gårdagens</string>
+    <string-array name="openAcquireOptions">
+            <item>Alla</item>
+            <item>Bara gårdagens</item>
+    </string-array>
     <!-- Default opening tab -->
-    <string name="openDefaultPrompt">Default flik att öppna</string>
-    <string name="openDefaultPromptExtra">Default flik vid start av app</string>
+    <string name="openDefaultPrompt">Startflik</string>
+    <string name="openDefaultPromptExtra">Flik att öppna vid start av app</string>
     <string-array name="openDefaultTabOptions">
             <item>Se</item>
             <item>Hämta</item>
-            <item>Kommer</item>
+            <item>Kommande</item>
     </string-array>
     <!-- Change Theme -->
     <string name="ThemePrompt">Välj tema</string>
     <string name="ThemePromptExtra">Välj ditt tema</string>
     <string-array name="ThemeOptions">
-            <item>Ljus</item>
-            <item>Mörk</item>
+            <item>Ljust</item>
+            <item>Mörkt</item>
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Lagra lösenord</string>

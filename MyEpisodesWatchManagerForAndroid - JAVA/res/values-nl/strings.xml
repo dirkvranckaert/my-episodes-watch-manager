@@ -41,6 +41,7 @@
     <string name="watchListSubTitleAcquirePlural">%d afleveringen te verwerven</string>
     <string name="watchListSubTitleComingPlural">%d komende afleveringen</string>
     <string name="watchListEmpty">Geen afleveringen gevonden.</string>
+    <string name="watchListFull">De limiet van 200 afleveringen is bereikt.</string>
 
     <!-- Episode details -->
     <string name="episodeDetailsSeasonLabel">Seizoen: </string>
@@ -85,23 +86,6 @@
     <string name="whatsNewTitle">Nieuwigheden...</string>
     <string name="whatsNewVersion">Versie:</string>
     <string name="whatsNewText">Wat is veranderd:</string>
-    <string-array name="whatsNewValues">
-        <item>Registratie voor nieuwe gebruikers</item>
-        <item>Beheer van series</item>
-        <item>Twitter integratie</item>
-        <item>Duitse veratlingen</item>
-        <item>Letse vertalingen</item>
-        <item>Portugese vertalingen</item>
-        <item>Nieuw logo</item>
-        <item>Donker kleuren schema</item>
-        <item>Alle afleveringen van een serie markeren als bekeken of verkregen</item>
-        <item>Selecteer een standaard tabblad om te openen</item>
-        <item>Dialoogvensters voor het laden van data</item>
-        <item>Datum probleem opgelost</item>
-        <item>Geen Koreaanse taalondersteuning meer</item>
-        <item>Nieuw \'over\' dialoogvenster</item>
-        <item>Nieuw \'Nieuwigheden\' dialoogvenster</item>
-    </string-array>
 
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Bent u zeker?</string>
@@ -122,6 +106,7 @@
     <string name="menuEpisodeDetails">Details</string>
     <string name="menuEpisodeMarkAcquired">Markeer als verworven</string>
     <string name="menuEpisodeMarkWatched">Markeer als bekeken</string>
+    <string name="menuTweet">Tweet dit!</string>
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">Door het aanpassen van de instellingen zullen de afleveringen nu herladen worden!</string>
@@ -138,6 +123,13 @@
     <string-array name="episodeOrderOptions">
         <item>Oudste eerst</item>
         <item>Nieuwste eerst</item>
+    </string-array>
+    <!-- Acquire Settings -->
+    <string name="openAcquirePrompt">Te verwerven instellingen</string>
+    <string name="openAcquirePromptExtra">Alle afleveringen of enkel deze van gisteren</string>
+    <string-array name="openAcquireOptions">
+            <item>Allemaal</item>
+            <item>Enkel gisteren</item>
     </string-array>
     <!-- Default opening tab -->
     <string name="openDefaultPrompt">Standaard tabblad</string>

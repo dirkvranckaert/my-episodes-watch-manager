@@ -85,23 +85,6 @@
     <string name="whatsNewTitle">Kas jauns</string>
     <string name="whatsNewVersion">Versija:</string>
     <string name="whatsNewText">Kas ir mainījies:</string>
-    <string-array name="whatsNewValues">
-        <item>Jaunu lietotāju reģistrācija</item>
-        <item>Pārraižu vadība</item>
-        <item>Twitter integrācija</item>
-        <item>Tulkojums vācu valodā</item>
-        <item>Tulkojums latviešu valodā</item>
-        <item>Tulkojums portugāļu valodā</item>
-        <item>Jauns logo</item>
-        <item>Tumšo toņu izkārtojums</item>
-        <item>Atzīmēt visas pārraides (grupu) kā skatītu vai iegūtu</item>
-        <item>Izvēlēties, kuru sadaļu jāatver pēc noklusējuma</item>
-        <item>Ielādes dialogi (vairs nekādu ANR)</item>
-        <item>Labotas kļūdas saistītas ar datumiem</item>
-        <item>Korejiešu valoda turpmāk netiks atbalstīta</item>
-        <item>Jauns izskats sadaļai \'Par mums\'</item>
-        <item>Jauns izskats sadaļai \'Kas jauns\'</item>
-    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Vai esi pārliecināts?</string>
     <string name="logoutDialogMessage">Tavi dati netiks saglabāti mobilās ierīces atmiņā.</string>
