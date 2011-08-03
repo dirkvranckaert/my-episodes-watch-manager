@@ -34,7 +34,7 @@ public class EpisodesService {
 
     public List<Episode> retrieveEpisodes(EpisodeType episodesType,final User user) throws InternetConnectivityException, Exception {
         String encryptedPassword = userService.encryptPassword(user.getPassword());
-        URL feedUrl = buildEpisodesUrl(episodesType, user.getUsername(), encryptedPassword);
+        URL feedUrl = buildEpisodesUrl(episodesType, user.getUsername().replace(" ", "%20"), encryptedPassword);
         
         RssFeedParser rssFeedParser = new SaxRssFeedParser();
         Feed rssFeed;
