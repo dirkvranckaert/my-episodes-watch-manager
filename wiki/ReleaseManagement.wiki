@@ -5,6 +5,10 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
+====Version 1.7.3====
+Scheduled Release Date: August 4th, 2011<br>
+Content: Bugfix
+  * Issue 122 (Login failure due to spaces in login name)
 ====Version 1.8.0====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
