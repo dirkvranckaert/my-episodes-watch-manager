@@ -61,8 +61,8 @@ public class LoginActivity extends GuiceActivity {
 	        loginButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-                    String username = ((EditText) findViewById(R.id.loginUsername)).getText().toString();
-				    String password = ((EditText) findViewById(R.id.loginPassword)).getText().toString();
+                    String username = ((EditText) findViewById(R.id.loginUsername)).getText().toString().trim();
+				    String password = ((EditText) findViewById(R.id.loginPassword)).getText().toString().trim();
 
                     if( (username != null && username.length()>0) && (password != null && password.length()>0) ) {
                         final User user = new User(
