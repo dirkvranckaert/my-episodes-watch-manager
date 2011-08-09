@@ -8,14 +8,18 @@
 ====Version 1.8.0====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
-  * Issue 38 (Mark several episodes as "Watched" at once)
   * Issue 86 (Layout the application)
   * Issue 90 (Keep collapsable lists opened)
   * Issue 113 (Allow swiping between watched/acquired/coming)
   * Issue 115 (Random Episode Picker)
+  * Issue 119 (Russian translation)
+  * Issue 123 (Crash on Coming)
+  * Issue 124 (Mark Upcoming episodes)
+  * Issue 125 (Yesterday only not correct)
 ====Version 1.8.5====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Usability, New Features, Feature Improvements
+  * Issue 38 (Mark several episodes as "Watched" at once)
   * Issue 67 (Calender View)
   * Issue 102 (Disable tabs through preferences)
   * Issue 107 (Enable date-grouping through preferences)
@@ -34,7 +38,6 @@ Content: Performance, Stability, Security, Usability, Feature Improvements
   * Issue 105 (Code Refactoring part 2)
   * Issue 108 (Weekday and number of episodes in coming tab date-grouping)
   * Issue 114 (Do not show upcoming episodes from the past)
-  * Issue 119 (Russian translation)
 ====Version 1.7.1====
 Release Date: December 7th 2010<br>
   * Issue 66 (Change request: For upcoming shows, show date and time)
