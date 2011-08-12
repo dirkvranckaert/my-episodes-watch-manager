@@ -16,6 +16,9 @@ Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
   * Issue 123 (Crash on Coming)
   * Issue 124 (Mark Upcoming episodes)
   * Issue 125 (Yesterday only not correct)
+  * Issue 126 (Back button in details)
+  * Issue 127 (Settings in menu)
+  * Issue 128 (Same episodes in coming)
 ====Version 1.8.5====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Usability, New Features, Feature Improvements
