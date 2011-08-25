@@ -3,7 +3,6 @@ package eu.vranckaert.episodeWatcher.activities;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -15,15 +14,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import eu.vranckaert.episodeWatcher.R;
-import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import roboguice.activity.GuicePreferenceActivity;
 
 /**
- * @author Dirk Vranckaert
- *         Date: 13-mei-2010
- *         Time: 19:34:14
+ * @author Ivo Janssen
  */
 public class PreferencesActivity extends GuicePreferenceActivity {
     private static final int RELAOD_DIALOG = 0;
@@ -48,7 +44,7 @@ public class PreferencesActivity extends GuicePreferenceActivity {
 
     @Override
     public void onCreate(Bundle savedInstance) {
-    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
+    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);
     	super.onCreate(savedInstance);
         
         refreshDialog = false;
@@ -110,21 +106,6 @@ public class PreferencesActivity extends GuicePreferenceActivity {
         openAcquirePref.setEntries(R.array.openAcquireOptions);
         openAcquirePref.setEntryValues(R.array.AcquireValues);
         root.addPreference(openAcquirePref);
-        
-        ListPreference openDefaultTabPref = new ListPreference(this);
-        openDefaultTabPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				refreshDialog = true;
-				return true;
-			}
-        });
-        openDefaultTabPref.setKey(PreferencesKeys.OPEN_DEFAULT_TAB_KEY);
-        openDefaultTabPref.setTitle(R.string.openDefaultPrompt);
-        openDefaultTabPref.setSummary(R.string.openDefaultPromptExtra);
-        openDefaultTabPref.setEntries(R.array.openDefaultTabOptions);
-        openDefaultTabPref.setEntryValues(EpisodeType.getEpisodeListingTypeArray());
-        root.addPreference(openDefaultTabPref);
         
         ListPreference openThemePref = new ListPreference(this);
         openThemePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -197,9 +178,7 @@ public class PreferencesActivity extends GuicePreferenceActivity {
     }
     
     private void startTabMain() {
+    	setResult(RESULT_OK);
     	super.finish();
-    	Intent mainActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
-    	mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-    	startActivity(mainActivity);
     }
 }

@@ -1,0 +1,119 @@
+<LinearLayout android:layout_width="fill_parent"
+	  	android:layout_height="fill_parent"
+	 	android:orientation="vertical"
+	  	xmlns:android="http://schemas.android.com/apk/res/android"
+	 >
+	 
+    <LinearLayout style="@style/TitleBar">
+        <ImageButton style="@style/TitleBarAction"
+            android:contentDescription="@string/home"
+            android:src="@drawable/ic_title_home"
+            android:onClick="onHomeClick" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+        <TextView style="@style/TitleBarText" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+        <ImageButton style="@style/TitleBarAction"
+            android:id="@+id/btn_title_refresh"
+            android:contentDescription="@string/TweetTitle"
+            android:src="@drawable/ic_title_share"
+            android:onClick="onTweetClick" />
+    </LinearLayout>
+	 
+	<ScrollView android:id="@+id/ScrollView01" 
+				android:layout_width="fill_parent" 
+				android:layout_height="fill_parent">
+	<LinearLayout android:id="@+id/LinearLayout03" 
+				  android:orientation="vertical"
+				  android:layout_width="fill_parent" 
+				  android:layout_height="fill_parent">
+		
+	<TextView android:text="@string/randompickertext" android:layout_margin="10sp" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+
+	<TextView android:textSize="23px"
+	  	android:id="@+id/episodeDetShowName"
+		android:layout_width="fill_parent"
+		android:paddingTop="10px"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+	/>
+	
+	<TextView android:textSize="17px"
+		android:id="@+id/episodeDetName"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+	/>
+
+	<LinearLayout android:layout_width="fill_parent" 
+		android:paddingTop="25px" 
+		android:layout_height="wrap_content" 
+		android:orientation="horizontal"
+	>
+	<TextView android:text="@string/episodeDetailsSeasonLabel" 
+		android:paddingLeft="10px" 
+		android:id="@+id/episodeDetSeasonLabel" 
+		android:layout_width="120px"
+		android:layout_height="wrap_content"
+	/>
+	
+	<TextView android:id="@+id/episodeDetSeason" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+	/>
+	</LinearLayout>
+
+	<LinearLayout android:layout_width="fill_parent" 
+		android:layout_height="wrap_content" 
+		android:orientation="horizontal"
+	>
+	<TextView android:text="@string/episodeDetailsEpisodeLabel" 
+		android:paddingLeft="10px" 
+		android:id="@+id/episodeDetEpisodeLabel" 
+		android:layout_width="120px" 
+		android:layout_height="wrap_content"
+	/>
+	
+	<TextView android:id="@+id/episodeDetEpisode" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+	/>
+	</LinearLayout>
+
+	<LinearLayout android:layout_width="fill_parent" 
+		android:layout_height="wrap_content" 
+		android:orientation="horizontal"
+	>
+	<TextView android:text="@string/episodeDetailsAirDateLabel" 
+		android:paddingLeft="10px" 
+		android:id="@+id/episodeDetAirdateLabel" 
+		android:layout_width="120px" 
+		android:layout_height="wrap_content"
+	/>
+	
+	<TextView android:id="@+id/episodeDetAirdate" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+	/>
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/LinearLayout01" 
+		android:layout_width="wrap_content" 
+		android:layout_height="30px"
+	/>
+	
+	<Button android:id="@+id/markAsSeenButton" 
+		android:text="@string/menuEpisodeMarkWatched" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+	/>
+
+	<LinearLayout android:id="@+id/LinearLayout02" 
+			  android:layout_width="fill_parent"
+			  android:gravity="center"
+			  android:layout_height="wrap_content">
+	</LinearLayout>
+</LinearLayout>
+</ScrollView>
+</LinearLayout>

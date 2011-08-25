@@ -62,7 +62,7 @@ public class ShowManagementActivity extends GuiceListActivity {
     }
 
     private void init(Bundle savedInstanceState) {
-        setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
+        setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.show_management);
 
@@ -71,8 +71,10 @@ public class ShowManagementActivity extends GuiceListActivity {
 
         if(showType.equals(ShowType.FAVOURITE_SHOWS)) {
             Log.d(LOG_TAG, "Opening the favourite shows");
+            ((TextView) findViewById(R.id.title_text)).setText(R.string.favouriteShows);
         } else if(showType.equals(ShowType.IGNORED_SHOWS)) {
             Log.d(LOG_TAG, "Opening the ignored shows");
+            ((TextView) findViewById(R.id.title_text)).setText(R.string.ignoredShows);
         }
 
         user = new User(
@@ -351,5 +353,9 @@ public class ShowManagementActivity extends GuiceListActivity {
     protected void onDestroy() {
         super.onDestroy();
         tracker.stop();
+    }
+    
+    public void onHomeClick(View v) {
+    	finish();
     }
 }

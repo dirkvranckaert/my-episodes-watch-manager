@@ -3,31 +3,17 @@ package eu.vranckaert.episodeWatcher.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import eu.vranckaert.episodeWatcher.enums.EpisodeType;
+
 public class Episode implements Serializable {
 	private static final long serialVersionUID = -8433440792935384437L;
-	private int id;
 	private String showName;
     private String name;
     private int season;
     private int episode;
     private Date airDate;
     private String myEpisodeID;
-
-    /**
-     * Gets the ID.
-     *
-     * @return Gets the ID.
-     */
-    public int getId() {
-		return id;
-	}
-
-    /**
-     * Sets the ID.
-     */
-	public void setId() {
-		id++;
-	}
+    private EpisodeType type;
 
     /**
      * Gets the show name.
@@ -168,6 +154,15 @@ public class Episode implements Serializable {
     public void setMyEpisodeID(String myEpisodeID) {
         this.myEpisodeID = myEpisodeID;
     }
+    
+    public EpisodeType getType() {
+		return type;
+	}
+
+	public void setType(EpisodeType type) {
+		this.type = type;
+	}
+
 
     @Override
     public String toString() {

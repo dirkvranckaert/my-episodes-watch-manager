@@ -39,7 +39,7 @@ public class LoginActivity extends GuiceActivity {
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
-    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);        
+    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);        
     	super.onCreate(savedInstanceState);
         init();
         

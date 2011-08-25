@@ -7,12 +7,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.constants.ActivityConstants;
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.enums.EpisodeType;
+import eu.vranckaert.episodeWatcher.enums.ListMode;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
@@ -20,15 +20,19 @@ import roboguice.activity.GuiceActivity;
 
 import java.util.Date;
 
+/**
+ * @author Ivo Janssen
+ */
 public class EpisodeDetailsActivity extends GuiceActivity {
-	Episode episode = null;
-	EpisodeType episodesType;
+	private Episode episode = null;
+	private EpisodeType episodesType;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
-    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
+    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.episode_details);
+        
         Bundle data = this.getIntent().getExtras();
         
         TextView showNameText = (TextView) findViewById(R.id.episodeDetShowName);
@@ -36,6 +40,8 @@ public class EpisodeDetailsActivity extends GuiceActivity {
         TextView seasonText = (TextView) findViewById(R.id.episodeDetSeason);
         TextView episodeText = (TextView) findViewById(R.id.episodeDetEpisode);
         TextView airdateText = (TextView) findViewById(R.id.episodeDetAirdate);
+        
+        ((TextView) findViewById(R.id.title_text)).setText(R.string.details);
         
         episode = (Episode) data.getSerializable(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE);
         episodesType = (EpisodeType) data.getSerializable(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE);
@@ -58,20 +64,17 @@ public class EpisodeDetailsActivity extends GuiceActivity {
         
         Button markAsAcquiredButton = (Button) findViewById(R.id.markAsAcquiredButton);
         Button markAsSeenButton = (Button) findViewById(R.id.markAsSeenButton);
-        ImageButton twitterButton = (ImageButton) findViewById(R.id.twitterButton);
         
         switch(episodesType) {
 	        case EPISODES_TO_WATCH:
 	        	markAsAcquiredButton.setVisibility(View.GONE);
 	        	break;
-	        case EPISODES_TO_YESTERDAY:	
+			case EPISODES_TO_YESTERDAY1:
+			case EPISODES_TO_YESTERDAY2:
 	        case EPISODES_TO_ACQUIRE:
-	        	twitterButton.setVisibility(View.GONE);
 	        	break;
 	        case EPISODES_COMING:
 	        	markAsAcquiredButton.setVisibility(View.GONE);
-	        	markAsSeenButton.setVisibility(View.GONE);
-	        	twitterButton.setVisibility(View.GONE);
 	        	break;
         }
         
@@ -88,26 +91,16 @@ public class EpisodeDetailsActivity extends GuiceActivity {
 				closeAndMarkWatched(episode);
 			}
 		});
-        
-        twitterButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				tweetThis();
-			}
-		});
     }
     
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.episode_details_menu, menu);
-		if (!episodesType.equals(EpisodeType.EPISODES_TO_ACQUIRE))
-		{
+		if (episodesType.equals(EpisodeType.EPISODES_TO_WATCH)) {
 			menu.removeItem(R.id.markAsAquired);
-		}
-		if (episodesType.equals(EpisodeType.EPISODES_COMING))
-		{
-			menu.removeItem(R.id.markAsSeen);
+		} else if (episodesType.equals(EpisodeType.EPISODES_COMING)) {
+			menu.removeItem(R.id.markAsAquired);
 		}
 		return true;
 	}
@@ -126,16 +119,22 @@ public class EpisodeDetailsActivity extends GuiceActivity {
 	}
     
     private void closeAndAcquireEpisode(Episode episode) {
-    	Intent intent = new Intent();
-    	intent.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE, ActivityConstants.EXTRA_BUNDLE_VALUE_AQUIRE);
-    	intent.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode);
+    	finish();
     	
-    	setResult(RESULT_OK, intent);
-		finish();
+		Intent episodeListingActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
+		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode)
+							  .putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE, ActivityConstants.EXTRA_BUNDLE_VALUE_AQUIRE)
+						      .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episode.getType());
+		if (episode.getType() == EpisodeType.EPISODES_COMING)
+			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
+		else
+			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+		
+        startActivity(episodeListingActivity);
 	}
     
     private void tweetThis() {
-    	String tweet = episode.getShowName() + " S" + episode.getSeasonString() + "E" + episode.getEpisodeString();
+    	String tweet = episode.getShowName() + " S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName();
     	Intent i = new Intent(android.content.Intent.ACTION_SEND);
     	i.setType("text/plain");
     	i.putExtra(Intent.EXTRA_TEXT, getString(R.string.Tweet, tweet));
@@ -143,11 +142,41 @@ public class EpisodeDetailsActivity extends GuiceActivity {
     }
     
     private void closeAndMarkWatched(Episode episode) {
-    	Intent intent = new Intent();
-    	intent.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE, ActivityConstants.EXTRA_BUNDLE_VALUE_WATCH);
-    	intent.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode);
+    	finish();
     	
-    	setResult(RESULT_OK, intent);
-		finish();
+		Intent episodeListingActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
+		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode)
+							  .putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE, ActivityConstants.EXTRA_BUNDLE_VALUE_WATCH)
+						      .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episode.getType());
+		if (episode.getType() == EpisodeType.EPISODES_COMING)
+			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
+		else
+			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+		
+        startActivity(episodeListingActivity);
 	}
+    
+	@Override
+	public final void onBackPressed() { exit(); }
+    
+    public void onHomeClick(View v) {
+    	exit();
+    }
+    
+    private void exit() {
+    	finish();
+    	
+    	Intent episodeListingActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
+		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodesType);
+		if (episodesType == EpisodeType.EPISODES_COMING)
+			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
+		else
+			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+		
+        startActivity(episodeListingActivity);
+	}
+
+	public void onTweetClick(View v) {
+    	tweetThis();
+    }
 }

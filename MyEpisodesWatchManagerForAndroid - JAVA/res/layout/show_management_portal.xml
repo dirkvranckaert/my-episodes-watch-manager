@@ -1,56 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                 android:layout_width="fill_parent"
-                 android:layout_height="fill_parent">
-    <TableLayout android:layout_width="wrap_content"
-                 android:layout_height="wrap_content">
-        <TableRow>
-            <LinearLayout android:orientation="vertical"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:padding="10dp"
-                          android:id="@+id/selectionPanelFavoShows">
-                <ImageView android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:src="@drawable/ic_menu_favorite"
-                             android:layout_gravity="center_horizontal"/>
-                <TextView android:layout_height="wrap_content"
-                          android:layout_width="wrap_content"
-                          android:text="@string/favouriteShows"
-                          android:layout_gravity="center_horizontal"/>
-            </LinearLayout>
+    android:id="@+id/home_root"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-            <LinearLayout android:orientation="vertical"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:padding="10dp"
-                          android:id="@+id/selectionPanelIgnoredShows">
-                <ImageView android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:src="@drawable/ic_menu_stop"
-                             android:layout_gravity="center_horizontal"/>
-                <TextView android:layout_height="wrap_content"
-                          android:layout_width="wrap_content"
-                          android:text="@string/ignoredShows"
-                          android:layout_gravity="center_horizontal"/>
-            </LinearLayout>
-        </TableRow>
-        <TableRow>
-            <LinearLayout android:orientation="vertical"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:padding="10dp"
-                          android:id="@+id/selectionPanelAddShows">
-                <ImageView android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:src="@android:drawable/ic_menu_add"
-                             android:layout_gravity="center_horizontal"/>
-                <TextView android:layout_height="wrap_content"
-                          android:layout_width="wrap_content"
-                          android:text="@string/addShow"
-                          android:layout_gravity="center_horizontal"/>
-            </LinearLayout>
-        </TableRow>
-    </TableLayout>
+    <LinearLayout style="@style/TitleBar">
+        <ImageButton style="@style/TitleBarAction"
+            android:contentDescription="@string/home"
+            android:src="@drawable/ic_title_home"
+            android:onClick="onHomeClick" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+        <TextView style="@style/TitleBarText" />
+    </LinearLayout>
+
+     <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="6dip">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <Button android:id="@+id/selectionPanelFavoShows"
+                style="@style/HomeButton"
+                android:text="@string/favouriteShows"
+                android:drawableTop="@drawable/ic_menu_favorite"/>
+            <Button android:id="@+id/selectionPanelIgnoredShows"
+                style="@style/HomeButton"
+                android:text="@string/ignoredShows"
+                android:drawableTop="@drawable/ic_menu_stop"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <Button android:id="@+id/selectionPanelAddShows"
+                style="@style/HomeButton"
+                android:text="@string/addShow"
+                android:drawableTop="@android:drawable/ic_menu_add"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

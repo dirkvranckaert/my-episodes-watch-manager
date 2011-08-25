@@ -3,7 +3,8 @@ package eu.vranckaert.episodeWatcher.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.enums.ShowType;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
@@ -11,9 +12,7 @@ import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import roboguice.activity.GuiceActivity;
 
 /**
- * @author Dirk Vranckaert
- *         Date: 18-sep-2010
- *         Time: 13:09:05
+ * @author Ivo Janssen
  */
 public class ShowManagementPortalActivity extends GuiceActivity {
     @Override
@@ -23,15 +22,16 @@ public class ShowManagementPortalActivity extends GuiceActivity {
     }
 
     private void init(Bundle savedInstanceState) {
-    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
+    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.show_management_portal);
+        ((TextView) findViewById(R.id.title_text)).setText(R.string.manageShows);
     }
 
     private void loadButtons() {
-        LinearLayout favoShowsButton = (LinearLayout) findViewById(R.id.selectionPanelFavoShows);
-        LinearLayout ignoredShowsButton = (LinearLayout) findViewById(R.id.selectionPanelIgnoredShows);
-        LinearLayout addShowsButton = (LinearLayout) findViewById(R.id.selectionPanelAddShows);
+        Button favoShowsButton = (Button) findViewById(R.id.selectionPanelFavoShows);
+        Button ignoredShowsButton = (Button) findViewById(R.id.selectionPanelIgnoredShows);
+        Button addShowsButton = (Button) findViewById(R.id.selectionPanelAddShows);
         favoShowsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,5 +61,9 @@ public class ShowManagementPortalActivity extends GuiceActivity {
         Intent intent = new Intent(this.getApplicationContext(), ShowManagementActivity.class);
         intent.putExtra(ShowType.class.getSimpleName(), showType);
         startActivity(intent);
+    }
+    
+    public void onHomeClick(View v) {
+    	finish();
     }
 }

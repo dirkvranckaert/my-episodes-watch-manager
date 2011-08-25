@@ -78,9 +78,11 @@ public class ShowManagementAddActivity extends GuiceListActivity {
     }
 
     private void init(Bundle savedInstanceState) {
-    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
+    	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.show_management_add);
+        
+        ((TextView) findViewById(R.id.title_text)).setText(R.string.addShow);
 
         service = new ShowService();
         user = new User(
@@ -339,6 +341,10 @@ public class ShowManagementAddActivity extends GuiceListActivity {
             setResult(RESULT_CANCELED);
         }
         super.finish();
+    }
+    
+    public void onHomeClick(View v) {
+    	finish();
     }
 
     @Override

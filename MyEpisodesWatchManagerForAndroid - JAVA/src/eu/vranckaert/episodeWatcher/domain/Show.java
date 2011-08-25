@@ -43,6 +43,10 @@ public class Show {
 		return episodes;
 	}
 	
+	public Episode getFirstEpisode() {
+		return episodes.get(0);
+	}
+	
 	public int getNumberEpisodes() {
 		return episodes.size();
 	}
