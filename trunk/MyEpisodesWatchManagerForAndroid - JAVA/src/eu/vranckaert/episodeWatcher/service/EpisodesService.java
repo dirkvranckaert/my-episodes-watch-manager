@@ -2,6 +2,7 @@ package eu.vranckaert.episodeWatcher.service;
 
 import android.util.Log;
 import eu.vranckaert.episodeWatcher.constants.MyEpisodeConstants;
+import eu.vranckaert.episodeWatcher.controllers.EpisodesController;
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.domain.Feed;
 import eu.vranckaert.episodeWatcher.domain.FeedItem;
@@ -52,11 +53,13 @@ public class EpisodesService {
 	            title = title.replace(0, 2, ""); //Strip off first bracket [
 	            title = title.replace(title.length()-2, title.length(), ""); //Strip off last bracket ]
 	            String[] episodeInfo = title.toString().split(MyEpisodeConstants.FEED_TITLE_SEPERATOR);
+            	episode.setShowName(episodeInfo[0].trim());
+                getSeasonAndEpisodeNumber(episodeInfo[1], episode);
+	            
 	            if (episodeInfo.length == MyEpisodeConstants.FEED_TITLE_EPISODE_FIELDS) {
-	                episode.setShowName(episodeInfo[0].trim());
-	                getSeasonAndEpisodeNumber(episodeInfo[1], episode);
 	                episode.setName(episodeInfo[2].trim());
                     String airDateString = episodeInfo[3].trim();
+                    episode.setType(episodesType);
                     Date airDate = null;
                     try {
                         airDate = parseDate(airDateString);
@@ -65,18 +68,14 @@ public class EpisodesService {
                     }
 	                episode.setAirDate(airDate);
 	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
-	                episode.setId();
 	                
 	                Log.d(LOG_TAG, "Episode from feed: " + episode.getShowName() + " - S" + episode.getSeasonString() + "E" + episode.getEpisodeString());
 	                
 	                episodes.add(episode);
 	            } else if (episodeInfo.length == MyEpisodeConstants.FEED_TITLE_EPISODE_FIELDS - 1) {
 	            	//Solves problem mentioned in Issue 20
-	            	episode.setShowName(episodeInfo[0].trim());
-	                getSeasonAndEpisodeNumber(episodeInfo[1], episode);
 	                episode.setName(episodeInfo[2].trim() + "...");
 	                episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
-	                episode.setId();
 	                
 	                episodes.add(episode);
 	            } else {
@@ -87,6 +86,27 @@ public class EpisodesService {
         }
 
         return episodes;
+    }
+    
+    public int countEpisodes(EpisodeType episodesType,final User user) throws InternetConnectivityException, Exception {
+        String encryptedPassword = userService.encryptPassword(user.getPassword());
+        URL feedUrl = buildEpisodesUrl(episodesType, user.getUsername().replace(" ", "%20"), encryptedPassword);
+        
+        RssFeedParser rssFeedParser = new SaxRssFeedParser();
+        Feed rssFeed;
+		rssFeed = rssFeedParser.parseFeed(feedUrl);
+
+        int teller = 0;
+        
+        for (FeedItem item : rssFeed.getItems()) {
+            StringBuilder title = new StringBuilder(item.getTitle());
+            
+            if (title.length() > 0) {
+            	teller++;
+            }
+        }
+
+        return teller;
     }
 
     public void watchedEpisode(Episode episode, User user) throws LoginFailedException
@@ -104,6 +124,7 @@ public class EpisodesService {
 
         for(Episode episode : episodes) {
             markAnEpisode(0, httpClient, episode);
+            EpisodesController.getInstance().deleteEpisode(episode.getType(), episode);
         }
 
         httpClient.getConnectionManager().shutdown();
@@ -123,6 +144,8 @@ public class EpisodesService {
 		userService.login(httpClient, user.getUsername(), user.getPassword());
         for(Episode episode : episodes) {
 		    markAnEpisode(1, httpClient, episode);
+		    EpisodesController.getInstance().deleteEpisode(EpisodeType.EPISODES_TO_ACQUIRE, episode);
+		    EpisodesController.getInstance().addEpisode(EpisodeType.EPISODES_TO_WATCH, episode);
         }
 
 		httpClient.getConnectionManager().shutdown();
@@ -191,7 +214,9 @@ public class EpisodesService {
 	        break;
 	        case EPISODES_TO_ACQUIRE: urlRep = MyEpisodeConstants.UNAQUIRED_EPISODES_URL;
 	        break;
-	        case EPISODES_TO_YESTERDAY: urlRep = MyEpisodeConstants.YESTERDAY_EPISODES_URL;
+	        case EPISODES_TO_YESTERDAY1: urlRep = MyEpisodeConstants.YESTERDAY_EPISODES_URL;
+	        break;
+	        case EPISODES_TO_YESTERDAY2: urlRep = MyEpisodeConstants.YESTERDAY2_EPISODES_URL;
 	        break;
 	        case EPISODES_COMING: urlRep = MyEpisodeConstants.COMING_EPISODES_URL;
 	        break; 

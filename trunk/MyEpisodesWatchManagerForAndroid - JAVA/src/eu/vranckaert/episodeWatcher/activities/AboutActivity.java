@@ -3,6 +3,7 @@ package eu.vranckaert.episodeWatcher.activities;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
@@ -33,8 +34,14 @@ public class AboutActivity extends GuiceActivity {
     }
 
     private void init(Bundle savedInstanceState) {
-        setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
+        setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
+        
+        ((TextView) findViewById(R.id.title_text)).setText(R.string.about);
+    }
+    
+    public void onHomeClick(View v) {
+    	finish();
     }
 }

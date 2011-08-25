@@ -12,7 +12,8 @@ public enum EpisodeType {
     EPISODES_TO_WATCH(0),
     EPISODES_TO_ACQUIRE(1),
     EPISODES_COMING(2),
-    EPISODES_TO_YESTERDAY(3);
+    EPISODES_TO_YESTERDAY1(3),
+    EPISODES_TO_YESTERDAY2(4);
 
     EpisodeType(int type) {
         this.episodeListingType = type;

@@ -2,6 +2,7 @@ package eu.vranckaert.episodeWatcher.activities;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.R;
@@ -32,8 +33,14 @@ public class ChangelogActivity extends GuiceActivity {
     }
 
     private void init(Bundle savedInstanceState) {
-        setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light : android.R.style.Theme);
+        setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.changelog);
+        
+        ((TextView) findViewById(R.id.title_text)).setText(R.string.whatsNew);
+    }
+    
+    public void onHomeClick(View v) {
+    	finish();
     }
 }

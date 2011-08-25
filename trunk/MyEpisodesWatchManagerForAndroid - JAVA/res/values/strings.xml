@@ -31,8 +31,11 @@
 	
     <!-- episode_listing_tab -->
     <string name="watch">Watch</string>
+    <string name="watchhome">Watch (%d)</string>
     <string name="acquire">Acquire</string>
+    <string name="acquirehome">Acquire (%d)</string>
     <string name="coming">Coming</string>
+    <string name="more">More</string>
     <string name="watchListTitle">List of shows/episodes</string>
     <string name="watchListSubTitleWatch">%d episode to watch</string>
     <string name="watchListSubTitleAcquire">%d episode to acquire</string>
@@ -44,12 +47,15 @@
     <string name="watchListFull">Reached the limit of 200 episodes.</string>
 
     <!-- Episode details -->
+    <string name="details">Details</string>
     <string name="episodeDetailsSeasonLabel">Season: </string>
     <string name="episodeDetailsEpisodeLabel">Episode: </string>
     <string name="episodeDetailsAirDateLabel">Airdate: </string>
     <string name="episodeDetailsAirDateLabelDateNotFound">Unsupported date format!</string>
 	<string name="TweetTitle">Share</string>
     <string name="Tweet">I have watched \'%s\' #MyEpisodesManager #Android</string>
+    
+    <string name="randompickertext">The ramdom episode picker demands you to watch: </string>
 
     <!-- Show management -->
     <!-- Show Panel -->
@@ -71,6 +77,10 @@
     <string name="favoIgnoredConfirmationIgnoreMessage">Are you sure you want to ingore this show?</string>
     <string name="favoIgnoredConfirmationUnignoreMessage">Are you sure you want to unignore this show?</string>
 
+	<!-- random episode picker -->
+	<string name="randompicker">Random Episode Picker</string>
+	<string name="randompickershort">Random Picker</string>
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Loading...</string>
     <string name="progressLoadingBody">Sending/Retreiving data</string>
@@ -82,6 +92,7 @@
     <string name="aboutWebsite">Website:</string>
     <string name="aboutEmail">Email:</string>
     <string name="aboutOriginalIdea">Original idea:</string>
+    <string name="aboutProgrammer">Programmed by:</string>
     <!-- whatsNewDialog -->
     <string name="whatsNewTitle">What\'s new</string>
     <string name="whatsNewVersion">Version:</string>
@@ -101,6 +112,8 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Refresh</string>
+    <string name="collapse">Collapse</string>
+    <string name="home">Home</string>
     <string name="manageShows">Manage Shows</string>
     <string name="about">About</string>
     <string name="logout">Logout</string>
@@ -179,6 +192,7 @@
     <!-- About Dialog -->
     <string name="aboutLicenseValue">GNU GPL V3 License</string>
     <string name="aboutOriginalIdeaValue">Dirk Vranckaert</string>
+    <string name="aboutProgrammerValue">Ivo Janssen\nDirk Vranckaert</string>
     <string name="aboutWebsiteValue">http://code.google.com/p/my-episodes-watch-manager</string>
     <string name="aboutEmailValue">dirkvranckaert@gmail.com</string>
     <!-- What's new Dialog -->

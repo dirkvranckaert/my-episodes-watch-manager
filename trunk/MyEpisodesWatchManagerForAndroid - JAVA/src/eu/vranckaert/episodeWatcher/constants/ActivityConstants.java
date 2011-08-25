@@ -14,5 +14,5 @@ public class ActivityConstants {
 
     //BUNDLE VALUES
     public static final String EXTRA_BUNDLE_VALUE_WATCH = "watch";
-    public static final String EXTRA_BUNDLE_VALUE_AQUIRE = "aquire";
+    public static final String EXTRA_BUNDLE_VALUE_AQUIRE = "acquire";
 }

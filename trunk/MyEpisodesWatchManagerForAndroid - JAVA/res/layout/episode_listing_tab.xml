@@ -4,6 +4,34 @@
     	android:layout_width="fill_parent"
     	android:layout_height="fill_parent"
     >
+    
+    <LinearLayout style="@style/TitleBar">
+        <ImageButton style="@style/TitleBarAction"
+            android:contentDescription="@string/home"
+            android:src="@drawable/ic_title_home"
+            android:onClick="onHomeClick" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+        <TextView style="@style/TitleBarText" />
+
+        <ImageView style="@style/TitleBarSeparator"
+	        android:id="@+id/separator_collapse"
+	        android:visibility="gone"
+         />
+        <ImageButton style="@style/TitleBarAction"
+            android:id="@+id/btn_title_collapse"
+            android:visibility="gone"
+            android:contentDescription="@string/collapse"
+            android:src="@drawable/ic_title_collapse"
+            android:onClick="onCollapseClick" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+        <ImageButton style="@style/TitleBarAction"
+            android:id="@+id/btn_title_refresh"
+            android:contentDescription="@string/refresh"
+            android:src="@drawable/ic_title_refresh"
+            android:onClick="onRefreshClick" />
+    </LinearLayout>
 	
 	<TextView android:id="@+id/watchListTitle" 
 			  android:layout_width="fill_parent" 
@@ -24,7 +52,6 @@
 		android:id="@+id/android:list"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:choiceMode="singleChoice"
 	></ExpandableListView>
 	
 </LinearLayout>
