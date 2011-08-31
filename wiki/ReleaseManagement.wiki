@@ -10,7 +10,6 @@ Scheduled Release Date: Not Yet Scheduled<br>
 Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
   * Issue 86 (Layout the application)
   * Issue 90 (Keep collapsable lists opened)
-  * Issue 113 (Allow swiping between watched/acquired/coming)
   * Issue 115 (Random Episode Picker)
   * Issue 119 (Russian translation)
   * Issue 123 (Crash on Coming)
@@ -27,6 +26,7 @@ Content: Usability, New Features, Feature Improvements
   * Issue 102 (Disable tabs through preferences)
   * Issue 107 (Enable date-grouping through preferences)
   * Issue 109 (Offline Usage)
+  * Issue 113 (Allow swiping between watched/acquired/coming)
 
 === Market Releases ===
 ====Version 1.7.3====
