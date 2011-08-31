@@ -162,10 +162,11 @@ public class HomeActivity extends GuiceActivity {
 		if (requestCode == LOGIN_RESULT && resultCode == RESULT_OK)
 			getEpisodesInLoadingDialog();
 		if (requestCode == SETTINGS_RESULT && resultCode == RESULT_OK) {
+			EpisodesController.getInstance().deleteAll();
+			finish();
+			
 	        Intent homeActivity = new Intent(this.getApplicationContext(), HomeActivity.class);
 	        startActivity(homeActivity);
-	        
-	        finish();
 		}
 	}
     
