@@ -43,6 +43,7 @@ import java.util.*;
 public class EpisodeListingActivity extends GuiceExpandableListActivity {
 	private static final int EPISODE_LOADING_DIALOG = 0;
 	private static final int EXCEPTION_DIALOG = 2;
+	private static final int SETTINGS_RESULT = 6;
 	private static final String LOG_TAG = EpisodeListingActivity.class.getSimpleName();
 
 	private User user;
@@ -66,11 +67,38 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
 		super();
 		this.service = new EpisodesService();
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.home_menu, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+	        case R.id.preferences:
+	            openPreferencesActivity();
+	            return true;
+		}
+		return false;
+	}
 
 	@Override
     protected void onResume() {
     	super.onResume();    		
     }
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == SETTINGS_RESULT && resultCode == RESULT_OK) {
+			EpisodesController.getInstance().deleteAll();
+			finish();
+			
+			startActivity(new Intent(getApplicationContext(), HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); 
+		}
+	}
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
@@ -487,6 +515,11 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
 								 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodeType);
         startActivity(episodeDetailsSubActivity);
 	}
+	
+    private void openPreferencesActivity() {
+        Intent preferencesActivity = new Intent(this.getApplicationContext(), PreferencesActivity.class);
+        startActivityForResult(preferencesActivity, SETTINGS_RESULT);
+    }
 
 	private void checkPreferences() {
         //Checks preference for show sorting and sets the default to ascending (A-Z)
