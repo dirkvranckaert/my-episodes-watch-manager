@@ -5,24 +5,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <LinearLayout style="@style/TitleBar">
-        <ImageView style="@style/TitleBarLogo"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/logo" />
-
-        <View style="@style/TitleBarSpring" />
-
-        <!-- <ImageView style="@style/TitleBarSeparator" />
-        <ImageButton style="@style/TitleBarAction"
-            android:id="@+id/btn_title_refresh"
-            android:contentDescription="@string/refresh"
-            android:src="@drawable/refresh"
-            android:onClick="onRefreshClick" />
-        <ProgressBar style="@style/TitleBarProgressIndicator"
-            android:id="@+id/title_refresh_progress"
-            android:visibility="gone" /> -->
-    </LinearLayout>
-
      <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"

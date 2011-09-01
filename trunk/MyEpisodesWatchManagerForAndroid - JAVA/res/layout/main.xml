@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:deezapps="http://schemas.android.com/apk/res/com.deezapps.widget"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+    >
+    
+    <LinearLayout style="@style/TitleBar">
+        <ImageView style="@style/TitleBarLogo"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/logo" />
+
+        <TextView style="@style/TitleBarText" />
+        <ImageView style="@style/TitleBarAction"
+            android:id="@+id/menu_indicator"
+            android:src="@drawable/home_indicator1" />
+    </LinearLayout>
+
+    <eu.vranckaert.episodeWatcher.pager.HorizontalPager
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        >
+		
+		<!-- Watch tab -->
+		<include android:id="@+id/watchPage" layout="@layout/activity_home" />
+
+		<!-- Acquire tab -->
+		<include android:id="@+id/acquirePage" layout="@layout/activity_more" />
+            
+    </eu.vranckaert.episodeWatcher.pager.HorizontalPager>
+    
+    <eu.vranckaert.episodeWatcher.pager.PagerControl
+        android:id="@+id/control"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="4dip"
+        android:layout_margin="8dip"
+        />
+</LinearLayout>

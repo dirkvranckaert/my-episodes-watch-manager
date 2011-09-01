@@ -4,14 +4,6 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-
-    <LinearLayout style="@style/TitleBar">
-        <ImageView style="@style/TitleBarLogo"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/logo" />
-
-        <View style="@style/TitleBarSpring" />
-    </LinearLayout>
     
      <LinearLayout
         android:orientation="vertical"
@@ -64,8 +56,7 @@
             <Button android:id="@+id/btn_more"
                 style="@style/HomeButton"
                 android:text="@string/more"
-                android:drawableTop="@drawable/btn_more"
-                android:onClick="onMoreClick"/>
+                android:drawableTop="@drawable/btn_more"/>
         </LinearLayout>
     </LinearLayout>
     

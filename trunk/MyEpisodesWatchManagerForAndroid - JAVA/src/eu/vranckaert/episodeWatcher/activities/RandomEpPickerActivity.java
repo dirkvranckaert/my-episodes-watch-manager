@@ -84,14 +84,8 @@ public class RandomEpPickerActivity extends GuiceActivity {
     	exit();
     }
     
-	@Override
-	public final void onBackPressed() { exit(); }
-    
     private void exit() {
     	finish();
-    	
-        Intent manageShowsActivity = new Intent(this.getApplicationContext(), MoreActivity.class);
-        startActivity(manageShowsActivity);
 	}
 
 	public void onTweetClick(View v) {

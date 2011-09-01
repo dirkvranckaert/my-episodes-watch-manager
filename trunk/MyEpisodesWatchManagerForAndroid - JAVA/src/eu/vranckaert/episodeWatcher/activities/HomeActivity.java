@@ -1,7 +1,6 @@
 package eu.vranckaert.episodeWatcher.activities;
 
 import java.util.Locale;
-
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.constants.ActivityConstants;
 import eu.vranckaert.episodeWatcher.controllers.EpisodesController;
@@ -9,9 +8,12 @@ import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 import eu.vranckaert.episodeWatcher.enums.ListMode;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
+import eu.vranckaert.episodeWatcher.pager.HorizontalPager;
+import eu.vranckaert.episodeWatcher.pager.PagerControl;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 import eu.vranckaert.episodeWatcher.service.EpisodesService;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -25,9 +27,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import roboguice.activity.GuiceActivity;
+import android.widget.ImageView;
 
-public class HomeActivity extends GuiceActivity {
+public class HomeActivity extends Activity {
 	private EpisodesService service;
 	private User user;
 	private Resources res; // Resource object to get Drawables
@@ -51,6 +53,9 @@ public class HomeActivity extends GuiceActivity {
 		return true;
 	}
 	
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         init();
@@ -64,12 +69,32 @@ public class HomeActivity extends GuiceActivity {
     	super.onCreate(savedInstanceState);
     	this.service = new EpisodesService();
     	
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.main);
         user = new User(
         		Preferences.getPreference(this, User.USERNAME),
         		Preferences.getPreference(this, User.PASSWORD)
     		);
-    	
+
+        final PagerControl control = (PagerControl) findViewById(R.id.control);
+        final HorizontalPager pager = (HorizontalPager) findViewById(R.id.pager);
+        control.setNumPages(pager.getChildCount());
+        
+        pager.addOnScrollListener(new HorizontalPager.OnScrollListener() {
+            public void onScroll(int scrollX) {
+                float scale = (float) (pager.getPageWidth() * pager.getChildCount()) / (float) control.getWidth();
+                control.setPosition((int) (scrollX / scale));
+            }
+
+            public void onViewScrollFinished(int currentPage) {
+                control.setCurrentPage(currentPage);
+              
+                if (currentPage == 0) 
+                	((ImageView) findViewById(R.id.menu_indicator)).setImageResource(R.drawable.home_indicator1);
+                else
+                	((ImageView) findViewById(R.id.menu_indicator)).setImageResource(R.drawable.home_indicator2);
+            }
+        });
+
     	btnWatched = (Button) findViewById(R.id.btn_watched);
     	watchIntent = new Intent().setClass(this, EpisodeListingActivity.class)
 				 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_TO_WATCH)
@@ -101,6 +126,14 @@ public class HomeActivity extends GuiceActivity {
 			@Override
 			public void onClick(View v) {
 				startActivity(comingIntent);
+			}
+		});
+        
+        Button btnMore = (Button) findViewById(R.id.btn_more);
+        btnMore.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				pager.scrollRight();
 			}
 		});
     }
@@ -246,11 +279,6 @@ public class HomeActivity extends GuiceActivity {
         startActivity(manageShowsActivity);
     }
     
-    public void onMoreClick(View v) {
-        Intent manageShowsActivity = new Intent(this.getApplicationContext(), MoreActivity.class);
-        startActivity(manageShowsActivity);
-    }
-    
     public void onLogoutClick(View v) {
     	showDialog(LOGOUT_DIALOG);
     }
@@ -266,4 +294,19 @@ public class HomeActivity extends GuiceActivity {
 		Intent loginSubActivity = new Intent(this.getApplicationContext(), LoginActivity.class);
         startActivityForResult(loginSubActivity, LOGIN_RESULT);
 	}
+	
+    public void onAboutClick(View v) {
+        Intent manageShowsActivity = new Intent(this.getApplicationContext(), AboutActivity.class);
+        startActivity(manageShowsActivity);
+    }
+    
+    public void onTodoClick(View v) {
+        Intent manageShowsActivity = new Intent(this.getApplicationContext(), ChangelogActivity.class);
+        startActivity(manageShowsActivity);
+    }
+    
+    public void onRandomClick(View v) {
+        Intent randomActivity = new Intent(this.getApplicationContext(), RandomEpPickerActivity.class);
+        startActivity(randomActivity);
+    }
 }
