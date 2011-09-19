@@ -36,8 +36,11 @@ public class HomeActivity extends Activity {
 	private android.content.res.Configuration conf;
 	private static final int EPISODE_LOADING_DIALOG = 0;
 	private static final int LOGOUT_DIALOG = 1;
+	private static final int EXCEPTION_DIALOG = 2;
 	private static final int LOGIN_RESULT = 5;
 	private static final int SETTINGS_RESULT = 6;
+	
+	private boolean exception;
 	
 	private Button btnWatched;
 	private Button btnAcquired;
@@ -165,7 +168,7 @@ public class HomeActivity extends Activity {
 	    	            }
 	            		episodesController.setEpisodes(EpisodeType.EPISODES_COMING, service.retrieveEpisodes(EpisodeType.EPISODES_COMING, user));
 	        		} catch (InternetConnectivityException e) {
-	        			e.printStackTrace();
+	        			exception = true;
 	        		} catch (Exception e) {
 	        			e.printStackTrace();
 	        		}
@@ -175,8 +178,14 @@ public class HomeActivity extends Activity {
 	            @Override
 	            protected void onPostExecute(Object o) {
 	                removeDialog(EPISODE_LOADING_DIALOG);
-	            	btnWatched.setText(getString(R.string.watchhome, EpisodesController.getInstance().getEpisodesCount(EpisodeType.EPISODES_TO_WATCH)));
-	            	btnAcquired.setText(getString(R.string.acquirehome, EpisodesController.getInstance().getEpisodesCount(EpisodeType.EPISODES_TO_ACQUIRE)));
+	                
+	                if (exception) {
+	                	exception = false;
+	                	showDialog(EXCEPTION_DIALOG);
+	                } else {
+	                	btnWatched.setText(getString(R.string.watchhome, EpisodesController.getInstance().getEpisodesCount(EpisodeType.EPISODES_TO_WATCH)));
+	            		btnAcquired.setText(getString(R.string.acquirehome, EpisodesController.getInstance().getEpisodesCount(EpisodeType.EPISODES_TO_ACQUIRE)));
+	                }
 	            }
 	        };
 	        asyncTask.execute();
@@ -226,6 +235,25 @@ public class HomeActivity extends Activity {
 							});
 				AlertDialog alertDialog = alertBuilder.create();
 				dialog = alertDialog;
+				break;
+			case EXCEPTION_DIALOG:
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle(R.string.exceptionDialogTitle)
+					   .setMessage(R.string.internetConnectionFailureTryAgain)
+					   .setCancelable(false)
+					   .setPositiveButton(R.string.refresh, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				                removeDialog(EXCEPTION_DIALOG);
+				                getEpisodesInLoadingDialog();
+				           }
+				       })
+				       .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				                removeDialog(EXCEPTION_DIALOG);
+				                finish();
+				           }
+				       });
+				dialog = builder.create();
 				break;
 			case EPISODE_LOADING_DIALOG:
 				ProgressDialog progressDialog = new ProgressDialog(this);

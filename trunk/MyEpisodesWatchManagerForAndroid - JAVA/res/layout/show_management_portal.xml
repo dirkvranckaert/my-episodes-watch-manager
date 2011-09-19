@@ -29,7 +29,7 @@
             <Button android:id="@+id/selectionPanelFavoShows"
                 style="@style/HomeButton"
                 android:text="@string/favouriteShows"
-                android:drawableTop="@drawable/ic_menu_favorite"/>
+                android:drawableTop="@drawable/ic_menu_star"/>
             <Button android:id="@+id/selectionPanelIgnoredShows"
                 style="@style/HomeButton"
                 android:text="@string/ignoredShows"
@@ -44,7 +44,7 @@
             <Button android:id="@+id/selectionPanelAddShows"
                 style="@style/HomeButton"
                 android:text="@string/addShow"
-                android:drawableTop="@android:drawable/ic_menu_add"/>
+                android:drawableTop="@drawable/ic_menu_add"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
