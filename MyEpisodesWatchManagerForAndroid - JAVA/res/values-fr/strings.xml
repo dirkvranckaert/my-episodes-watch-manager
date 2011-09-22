@@ -29,10 +29,13 @@
     <string name="registerSuccessfull">Création utilisateur réussie!</string>
     <string name="registerFailed">Utilisateur déjà présent, choisissez un autre utilisateur.</string>	
 
-    <!-- watchtlist -->
+    <!-- episode_listing_tab -->
     <string name="watch">Regarder</string>
+    <string name="watchhome">Regarder (%d)</string>
     <string name="acquire">Acquérir</string>
+    <string name="acquirehome">Acquérir (%d)</string>
     <string name="coming">A venir</string>
+    <string name="more">Plus</string>
     <string name="watchListTitle">Liste des séries/épisodes</string>
     <string name="watchListSubTitleWatch">%d épisode a regardé</string>
     <string name="watchListSubTitleAcquire">%d épisode a acquérir</string>
@@ -44,12 +47,15 @@
     <string name="watchListFull">Limite de 200 épisodes atteinte.</string>
 
     <!-- Episode details -->
+    <string name="details">Détails</string>
     <string name="episodeDetailsSeasonLabel">Saison: </string>
     <string name="episodeDetailsEpisodeLabel">Episode: </string>
     <string name="episodeDetailsAirDateLabel">Date de diffusion: </string>
     <string name="episodeDetailsAirDateLabelDateNotFound">Format de date incorrect!</string>
     <string name="TweetTitle">Partager</string>
     <string name="Tweet">J\'ai regardé \'%s\' #MyEpisodesManager #Android</string>
+
+    <string name="randompickertext">La sélection aléatoire vous conseille de regarder: </string>
 
     <!-- Show management -->
     <!-- Show Panel -->
@@ -71,6 +77,10 @@
     <string name="favoIgnoredConfirmationIgnoreMessage">Etes-vous certains de vouloir ignorer cet épisode?</string>
     <string name="favoIgnoredConfirmationUnignoreMessage">Etes-vous certains de vouloir ne plus ignorer cet épisode?</string>
 
+	<!-- random episode picker -->
+	<string name="randompicker">Sélectionneur aléatoire d\'épisodes</string>
+	<string name="randompickershort">Sélectionneur aléatoire</string>
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Chargement...</string>
     <string name="progressLoadingBody">Envoi/Réception de données</string>
@@ -82,6 +92,7 @@
     <string name="aboutWebsite">Site Web:</string>
     <string name="aboutEmail">Courriel:</string>
     <string name="aboutOriginalIdea">Idée originale:</string>
+    <string name="aboutProgrammer">Développé par:</string>
 
     <!-- whatsNewDialog -->
     <string name="whatsNewTitle">Nouveautés</string>
@@ -95,6 +106,8 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Rafraîchir</string>
+    <string name="collapse">Dérouler</string>
+    <string name="home">Début</string>
     <string name="manageShows">Gérer les Episodes</string>
     <string name="about">A propos</string>
     <string name="logout">Quitter</string>

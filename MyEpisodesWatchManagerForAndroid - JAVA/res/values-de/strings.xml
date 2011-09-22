@@ -30,26 +30,32 @@
     <string name="registerFailed">Benutzername schon vergeben, bitte wähle einen anderen Namen.</string>
 
     <!-- episode_listing_tab -->
-    <string name="watch">Sehen</string>
+    <string name="watch">Schauen</string>
+    <string name="watchhome">Schauen (%d)</string>
     <string name="acquire">Erwerben</string>
+    <string name="acquirehome">Erwerben (%d)</string>
     <string name="coming">Kommend</string>
+    <string name="more">Mehr</string>
     <string name="watchListTitle">Liste der Serien/Folgen</string>
-    <string name="watchListSubTitleWatch">%d Folge zu sehen</string>
+    <string name="watchListSubTitleWatch">%d Folge zu schauen</string>
     <string name="watchListSubTitleAcquire">%d Folge zu erwerben</string>
     <string name="watchListSubTitleComing">%d zukünftige Folge</string>
-    <string name="watchListSubTitleWatchPlural">%d Folgen zu sehen</string>
+    <string name="watchListSubTitleWatchPlural">%d Folgen zu schauen</string>
     <string name="watchListSubTitleAcquirePlural">%d Folgen zu erwerben</string>
     <string name="watchListSubTitleComingPlural">%d zukünftige Folgen</string>
     <string name="watchListEmpty">Keine Folgen gefunden.</string>
-	<string name="watchListFull">Limit von 200 Folgen wurde erreicht.</string>
+    <string name="watchListFull">Limit von 200 Folgen wurde erreicht.</string>
 
     <!-- Episode details -->
+    <string name="details">Details</string>
     <string name="episodeDetailsSeasonLabel">Staffel: </string>
     <string name="episodeDetailsEpisodeLabel">Folge: </string>
     <string name="episodeDetailsAirDateLabel">Airdate: </string>
     <string name="episodeDetailsAirDateLabelDateNotFound">Datum nicht erkannt!</string>
     <string name="TweetTitle">Teilen</string>
     <string name="Tweet">Ich habe \'%s\' geguckt #MyEpisodesManager #Android</string>
+
+    <string name="randompickertext">Der Zufalls-Folgen-Wähler verlangt von dir zu schauen: </string>
 
     <!-- Show management -->
     <!-- Show Panel -->
@@ -71,6 +77,10 @@
     <string name="favoIgnoredConfirmationIgnoreMessage">Bist du sicher, dass du diese Serie ignorieren möchtest?</string>
     <string name="favoIgnoredConfirmationUnignoreMessage">Bist du sicher, dass du diese Serie nicht mehr ignorieren möchtest?</string>
 
+    <!-- random episode picker -->
+    <string name="randompicker">Zufalls-Folgen-Wähler</string>
+    <string name="randompickershort">Zufallswähler</string>
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Lädt...</string>
     <string name="progressLoadingBody">Sende/Empfange Daten</string>
@@ -82,6 +92,7 @@
     <string name="aboutWebsite">Webseite:</string>
     <string name="aboutEmail">E-Mail:</string>
     <string name="aboutOriginalIdea">Ursprüngliche Idee:</string>
+	<string name="aboutProgrammer">Programmiert von:</string>
     <!-- whatsNewDialog -->
     <string name="whatsNewTitle">Was ist neu?</string>
     <string name="whatsNewVersion">Version:</string>
@@ -93,6 +104,8 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Aktualisieren</string>
+    <string name="collapse">Zuklappen</string>
+    <string name="home">Home</string>
     <string name="manageShows">Serien verwalten</string>
     <string name="about">Info</string>
     <string name="logout">Abmelden</string>
@@ -134,13 +147,13 @@
     <string name="openDefaultPrompt">Standard Tab</string>
     <string name="openDefaultPromptExtra">Aktiver Tab nach Programmstart</string>
     <string-array name="openDefaultTabOptions">
-            <item>Sehen</item>
+            <item>Schauen</item>
             <item>Erwerben</item>
             <item>Kommend</item>
     </string-array>
     <!-- Change Theme -->
-    <string name="ThemePrompt">Wähle Thema</string>
-    <string name="ThemePromptExtra">Selektiere dein Thema</string>
+    <string name="ThemePrompt">Wähle Farbe</string>
+    <string name="ThemePromptExtra">Selektiere deine Farbe</string>
     <string-array name="ThemeOptions">
             <item>Hell</item>
             <item>Dunkel</item>

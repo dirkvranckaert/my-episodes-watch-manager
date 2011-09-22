@@ -31,25 +31,31 @@
 	
     <!-- episode_listing_tab -->
     <string name="watch">Vistos</string>
-    <string name="acquire">Adquiridos</string>
-    <string name="coming">Por emitir</string>
-    <string name="watchListTitle">Lista de series/episodios</string>
+    <string name="watchhome">Vistos (%d)</string>
+    <string name="acquire">Por adquirir</string>
+    <string name="acquirehome">Por adquirir (%d)</string>
+    <string name="coming">Próximamente</string>
+    <string name="more">Más</string>
+    <string name="watchListTitle">Lista de series / episodios</string>
     <string name="watchListSubTitleWatch">%d episodio por ver</string>
     <string name="watchListSubTitleAcquire">%d episodio por adquirir</string>
-    <string name="watchListSubTitleComing">%d futuro episodio</string>
+    <string name="watchListSubTitleComing">%d próximo episodio</string>
     <string name="watchListSubTitleWatchPlural">%d episodios por ver</string>
     <string name="watchListSubTitleAcquirePlural">%d episodios por adquirir</string>
-    <string name="watchListSubTitleComingPlural">%d futuros episodios</string>
+    <string name="watchListSubTitleComingPlural">%d próximos episodios</string>
     <string name="watchListEmpty">No se han encontrado episodios.</string>
     <string name="watchListFull">Alcanzado el límite de 200 episodios.</string>
 
    <!-- Episode details -->
+    <string name="details">Detalles</string>   
     <string name="episodeDetailsSeasonLabel">Temporada: </string>
     <string name="episodeDetailsEpisodeLabel">Episodio: </string>
     <string name="episodeDetailsAirDateLabel">Fecha de emisión: </string>
     <string name="episodeDetailsAirDateLabelDateNotFound">¡Formato de fecha no soportado!</string>
 	<string name="TweetTitle">Compartir</string>
     <string name="Tweet">Estoy viendo \'%s\' #MyEpisodesManager #Android</string>
+
+    <string name="randompickertext">El selctor al azar de episodios te recomienda ver:: </string>
 
     <!-- serie management -->
     <!-- serie Panel -->
@@ -71,6 +77,10 @@
     <string name="favoIgnoredConfirmationIgnoreMessage">¿Está seguro que quieres ignorar esta serie?</string>
     <string name="favoIgnoredConfirmationUnignoreMessage">¿Está seguro que quieres designorar esta serie?</string>
 
+	<!-- random episode picker -->
+	<string name="randompicker">Selector al azar de episodios</string>
+	<string name="randompickershort">Al azar</string>
+	
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Cargando...</string>
     <string name="progressLoadingBody">Enviando / Recibiendo datos</string>
@@ -82,10 +92,19 @@
     <string name="aboutWebsite">Website:</string>
     <string name="aboutEmail">Email:</string>
     <string name="aboutOriginalIdea">Idea original de:</string>
+    <string name="aboutProgrammer">Programado por:</string>
     <!-- whatsNewDialog -->
     <string name="whatsNewTitle">Novedades:</string>
     <string name="whatsNewVersion">Versión:</string>
     <string name="whatsNewText">Qué ha cambiado:</string>
+    <string-array name="whatsNewValues">
+        <!-- TODO update! -->
+        <item>Revisar código</item>
+        <item>Opción de listado (episodios de Hoy-Mañana)</item>
+        <item>Rehacer el cósigo</item>
+        <item>Agrupar por fecha (día de la semana y número de episodio) en la pestaña de próximamente</item>
+        <item>No mostrar episodios pasados</item>	
+	 </string-array>	
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">¿Estás seguro?</string>
     <string name="logoutDialogMessage">Tus credenciales no quedarán guardadas en el móvil.</string>
@@ -93,6 +112,8 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Recargar</string>
+	<string name="collapse">Cerrar</string>
+    <string name="home">Inicio</string>	
     <string name="manageShows">Gestionar series</string>
     <string name="about">Sobre</string>
     <string name="logout">Cerrar sesión</string>

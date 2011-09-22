@@ -31,8 +31,11 @@
 
     <!-- watchtlist -->
     <string name="watch">Te Bekijken</string>
+    <string name="watchhome">Te Bekijken (%d)</string>
     <string name="acquire">Te Verwerven</string>
+    <string name="acquirehome">Te Verwerven (%d)</string>
     <string name="coming">Binnenkort</string>
+    <string name="more">Meer</string>
     <string name="watchListTitle">Lijst series/afleveringen</string>
     <string name="watchListSubTitleWatch">%d aflevering te bekijken</string>
     <string name="watchListSubTitleAcquire">%d aflevering te verwerven</string>
@@ -44,12 +47,15 @@
     <string name="watchListFull">De limiet van 200 afleveringen is bereikt.</string>
 
     <!-- Episode details -->
+    <string name="details">Details</string>
     <string name="episodeDetailsSeasonLabel">Seizoen: </string>
     <string name="episodeDetailsEpisodeLabel">Aflevering: </string>
     <string name="episodeDetailsAirDateLabel">Uitzend-datum: </string>
     <string name="episodeDetailsAirDateLabelDateNotFound">Niet ondersteund datum-formaat!</string>
 	<string name="TweetTitle">Delen</string>
     <string name="Tweet">Ik heb zonet naar \'%s\' gekeken #MyEpisodesManager #Android</string>
+
+    <string name="randompickertext">De willekeurige aflevering-kiezer raad je aan te kijken naar: </string>
 
     <!-- Show management -->
     <!-- Show Panel -->
@@ -71,6 +77,10 @@
     <string name="favoIgnoredConfirmationIgnoreMessage">Weet u zeker dat u deze serie wilt blokkeren?</string>
     <string name="favoIgnoredConfirmationUnignoreMessage">Weet u zeker dat u deze serie wilt deblokkeren?</string>
 
+    <!-- random episode picker -->
+	<string name="randompicker">Willekeurige Aflevering-kiezer</string>
+	<string name="randompickershort">Willekeurige Kiezer</string>
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Laden...</string>
     <string name="progressLoadingBody">Verzenden/Ontvangen data</string>
@@ -82,6 +92,7 @@
     <string name="aboutWebsite">Website:</string>
     <string name="aboutEmail">Email:</string>
     <string name="aboutOriginalIdea">Oorspronkelijk idee:</string>
+    <string name="aboutProgrammer">Ontwikkeld door:</string>
     <!-- whatsNewDialog -->
     <string name="whatsNewTitle">Nieuwigheden...</string>
     <string name="whatsNewVersion">Versie:</string>
@@ -94,6 +105,8 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Vernieuwen</string>
+    <string name="collapse">Inklappen</string>
+    <string name="home">Home</string>
     <string name="manageShows">Beheer Series</string>    
     <string name="about">Over</string>
     <string name="logout">Afmelden</string>
