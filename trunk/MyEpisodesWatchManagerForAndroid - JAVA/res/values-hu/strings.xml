@@ -30,8 +30,11 @@
 	
     <!-- episode_listing_tab -->
     <string name="watch">Megnézendő</string>
+	<string name="watchhome">Megnézendő (%d)</string>
     <string name="acquire">Beszerzendő</string>
+	<string name="acquirehome">Beszerzendő (%d)</string>
     <string name="coming">Várható</string>
+	<string name="more">Egyebek</string>
     <string name="watchListTitle">Műsorok/részek listája</string>
     <string name="watchListSubTitleWatch">%d megnézendő rész</string>
     <string name="watchListSubTitleAcquire">%d beszerzendő rész</string>
@@ -43,6 +46,7 @@
 	<string name="watchListFull">200 rész megjelenítve. (Ez a maximum.)</string>
 
     <!-- Episode details -->
+	<string name="details">Részletek</string>
     <string name="episodeDetailsSeasonLabel">Évad: </string>
     <string name="episodeDetailsEpisodeLabel">Rész: </string>
     <string name="episodeDetailsAirDateLabel">Adás napja: </string>
@@ -50,6 +54,8 @@
 	<string name="TweetTitle">Megosztás</string>
     <string name="Tweet">Megnéztem a(z) \'%s\' részét #MyEpisodesManager #Android #snezes</string>
 
+	<string name="randompickertext">A véletlen rész-választó szólott, ezt kell megnézned: </string>
+	
     <!-- Show management -->
     <!-- Show Panel -->
     <string name="addShow">Műsor hozzáadása</string>
@@ -70,6 +76,10 @@
     <string name="favoIgnoredConfirmationIgnoreMessage">Biztos nem szeretnéd látni ezt a műsort a listákban mostantól?</string>
     <string name="favoIgnoredConfirmationUnignoreMessage">Biztos szeretnéd látni ezt a műsort a listákban mostantól?</string>
 
+	<!-- random episode picker -->
+	<string name="randompicker">Véletlen Rész-választó</string>
+	<string name="randompickershort">Véletlen rész</string>
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Betöltés...</string>
     <string name="progressLoadingBody">Adatok küldése/fogadása</string>
@@ -81,10 +91,19 @@
     <string name="aboutWebsite">Honlap:</string>
     <string name="aboutEmail">Email:</string>
     <string name="aboutOriginalIdea">Ötletgazda:</string>
+	<string name="aboutProgrammer">Fejleszti:</string>
     <!-- whatsNewDialog -->
     <string name="whatsNewTitle">Változások</string>
     <string name="whatsNewVersion">Verzió:</string>
     <string name="whatsNewText">Ami változott:</string>
+	<string-array name="whatsNewValues">
+        <!-- TODO update! -->
+        <item>Forráskód felülvizsgálata</item>
+        <item>Beszerzendő listánál \'Csak a tegnapiak\' lehetőség</item>
+        <item>Forráskód átdolgozása</item>
+        <item>Várható tab dátum szerinti csoportosításánál a hét napjai és epizódok száma</item>
+        <item>Múltbéli epizódok nem jelennek meg a várhatóak között</item>
+    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Biztos kijelentkezel?</string>
     <string name="logoutDialogMessage">A bejelentkezési adataid törölve lesznek a készülékről.</string>
@@ -92,6 +111,8 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Frissít</string>
+	<string name="collapse">Összecsukás</string>
+    <string name="home">Kezdőoldal</string>
     <string name="manageShows">Műsorkezelés</string>
     <string name="about">Névjegy</string>
     <string name="logout">Kijelentkezés</string>

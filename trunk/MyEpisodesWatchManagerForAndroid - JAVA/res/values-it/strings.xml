@@ -31,8 +31,11 @@
 
     <!-- watchtlist -->
     <string name="watch">Guardare</string>
+    <string name="watchhome">Guardare (%d)</string>
     <string name="acquire">Acquistare</string>
+    <string name="acquirehome">Acquistare (%d)</string>
     <string name="coming">A venire</string>
+    <string name="more">Di più</string>
     <string name="watchListTitle">Lista delle serie/episodi</string>
     <string name="watchListSubTitleWatch">%d episodio da guardare</string>
     <string name="watchListSubTitleAcquire">%d episodio da acquistare</string>
@@ -44,12 +47,15 @@
     <string name="watchListFull">Limite di 200 episodi raggiunto.</string>
     
     <!-- Episode details -->
+    <string name="details">Dettagli</string>
     <string name="episodeDetailsSeasonLabel">Stagione: </string>
     <string name="episodeDetailsEpisodeLabel">Episodio: </string>
     <string name="episodeDetailsAirDateLabel">Data di trasmissione: </string>
     <string name="episodeDetailsAirDateLabelDateNotFound">Data non riconosciuta!</string>
     <string name="TweetTitle">Condividere</string>
     <string name="Tweet">Ho guardato \'%s\' #MyEpisodesManager #Android</string>
+
+    <string name="randompickertext">Il selezionatore arbitrario di episodio vi racommanda di guardare: </string>
 
     <!-- Show management -->
     <!-- Show Panel -->
@@ -71,6 +77,10 @@
     <string name="favoIgnoredConfirmationIgnoreMessage">Siete sicuro che volete ignorare questo episodio?</string>
     <string name="favoIgnoredConfirmationUnignoreMessage">Siete sicuro che volete ripristinare l\'ignoramento?</string>
 
+	<!-- random episode picker -->
+	<string name="randompicker">Selezionatore arbitrario di episodio</string>
+	<string name="randompickershort">Selezionatore arbitrario</string>
+
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Caricamento...</string>
     <string name="progressLoadingBody">Invio/Richiamo di dati</string>
@@ -82,6 +92,7 @@
     <string name="aboutWebsite">Sito:</string>
     <string name="aboutEmail">Email:</string>
     <string name="aboutOriginalIdea">Idea originale:</string>
+    <string name="aboutProgrammer">Sviluppato da:</string>
     
     <!-- whatsNewDialog -->
     <string name="whatsNewTitle">Nuovità</string>
@@ -95,6 +106,8 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Ripristina</string>
+    <string name="collapse">Srotolare</string>
+    <string name="home">Inizio</string>
     <string name="manageShows">Gestire Episodi</string>
     <string name="about">A proposito</string>
     <string name="logout">Uscire</string>

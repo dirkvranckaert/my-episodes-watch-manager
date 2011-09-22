@@ -86,6 +86,24 @@
     <string name="whatsNewTitle">Nyheter</string>
     <string name="whatsNewVersion">Version:</string>
     <string name="whatsNewText">Förändringar:</string>
+    <string-array name="whatsNewValues">
+        <!-- TODO update! -->
+        <item>Registrering av ny användare</item>
+        <item>Hantering av TV-serier</item>
+        <item>Twitterintegrering</item>
+        <item>Tysk översättning</item>
+        <item>Lettisk översättning</item>
+        <item>Portugisisk översättning</item>
+        <item>Ny logo</item>
+        <item>Mörkt tema</item>
+        <item>Markera alla avsnitt (grupp) som sedda eller hämtade</item>
+        <item>Välja default tab vid start</item>
+        <item>Laddning av dialoger (ingen mer ANR)</item>
+        <item>Fix av datumbug</item>
+        <item>Koreanska överättningen stöds inte längre</item>
+        <item>Ny \"Om\"-dialog</item>
+        <item>Ny \"Nyheter\"-dialog</item>
+    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Är du säker?</string>
     <string name="logoutDialogMessage">Dina uppgifter kommer inte längre lagras i mobilen.</string>
