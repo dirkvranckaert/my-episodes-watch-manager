@@ -5,6 +5,17 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
+====Version 1.8.5====
+Scheduled Release Date: Not Yet Scheduled<br>
+Content: Usability, New Features, Feature Improvements
+  * Issue 38 (Mark several episodes as "Watched" at once)
+  * Issue 67 (Calender View)
+  * Issue 102 (Disable tabs through preferences)
+  * Issue 107 (Enable date-grouping through preferences)
+  * Issue 109 (Offline Usage)
+  * Issue 113 (Allow swiping between watched/acquired/coming)
+
+=== Market Releases ===
 ====Version 1.8.0====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
@@ -18,17 +29,6 @@ Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
   * Issue 126 (Back button in details)
   * Issue 127 (Settings in menu)
   * Issue 128 (Same episodes in coming)
-====Version 1.8.5====
-Scheduled Release Date: Not Yet Scheduled<br>
-Content: Usability, New Features, Feature Improvements
-  * Issue 38 (Mark several episodes as "Watched" at once)
-  * Issue 67 (Calender View)
-  * Issue 102 (Disable tabs through preferences)
-  * Issue 107 (Enable date-grouping through preferences)
-  * Issue 109 (Offline Usage)
-  * Issue 113 (Allow swiping between watched/acquired/coming)
-
-=== Market Releases ===
 ====Version 1.7.3====
 Release Date: August 4th 2011<br>
 Content: Bugfix
