@@ -87,27 +87,6 @@ public class EpisodesService {
 
         return episodes;
     }
-    
-    public int countEpisodes(EpisodeType episodesType,final User user) throws InternetConnectivityException, Exception {
-        String encryptedPassword = userService.encryptPassword(user.getPassword());
-        URL feedUrl = buildEpisodesUrl(episodesType, user.getUsername().replace(" ", "%20"), encryptedPassword);
-        
-        RssFeedParser rssFeedParser = new SaxRssFeedParser();
-        Feed rssFeed;
-		rssFeed = rssFeedParser.parseFeed(feedUrl);
-
-        int teller = 0;
-        
-        for (FeedItem item : rssFeed.getItems()) {
-            StringBuilder title = new StringBuilder(item.getTitle());
-            
-            if (title.length() > 0) {
-            	teller++;
-            }
-        }
-
-        return teller;
-    }
 
     public void watchedEpisode(Episode episode, User user) throws LoginFailedException
             , ShowUpdateFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
@@ -124,7 +103,9 @@ public class EpisodesService {
 
         for(Episode episode : episodes) {
             markAnEpisode(0, httpClient, episode);
-            EpisodesController.getInstance().deleteEpisode(episode.getType(), episode);
+            EpisodesController.getInstance().deleteEpisode(EpisodeType.EPISODES_COMING, episode);
+            EpisodesController.getInstance().deleteEpisode(EpisodeType.EPISODES_TO_ACQUIRE, episode);
+            EpisodesController.getInstance().deleteEpisode(EpisodeType.EPISODES_TO_WATCH, episode);
         }
 
         httpClient.getConnectionManager().shutdown();
