@@ -124,8 +124,8 @@ public class EpisodeDetailsActivity extends GuiceActivity {
 		Intent episodeListingActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
 		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode)
 							  .putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE, ActivityConstants.EXTRA_BUNDLE_VALUE_AQUIRE)
-						      .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episode.getType());
-		if (episode.getType() == EpisodeType.EPISODES_COMING)
+						      .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodesType);
+		if (episodesType == EpisodeType.EPISODES_COMING)
 			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
 		else
 			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
@@ -147,8 +147,8 @@ public class EpisodeDetailsActivity extends GuiceActivity {
 		Intent episodeListingActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
 		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode)
 							  .putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE, ActivityConstants.EXTRA_BUNDLE_VALUE_WATCH)
-						      .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episode.getType());
-		if (episode.getType() == EpisodeType.EPISODES_COMING)
+						      .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodesType);
+		if (episodesType == EpisodeType.EPISODES_COMING)
 			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
 		else
 			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);

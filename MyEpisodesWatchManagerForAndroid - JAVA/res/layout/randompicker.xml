@@ -29,7 +29,7 @@
 				  android:layout_width="fill_parent" 
 				  android:layout_height="fill_parent">
 		
-	<TextView android:text="@string/randompickertext" android:layout_margin="10sp" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+	<TextView android:text="@string/randompickertext" android:id="@+id/randomtexttitle" android:layout_margin="10sp" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
 
 	<TextView android:textSize="23px"
 	  	android:id="@+id/episodeDetShowName"

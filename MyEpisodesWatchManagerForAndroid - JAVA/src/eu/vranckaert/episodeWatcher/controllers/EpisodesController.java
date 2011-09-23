@@ -94,7 +94,7 @@ public class EpisodesController {
 		return false;
 	}
 	
-	public Episode getRamdomWatchEpisode() {
+	public Episode getRandomWatchEpisode() {
 		shows = new ArrayList<Show>();
         if (watchEpisodes != null && watchEpisodes.size() > 0) {
             for (Episode ep : watchEpisodes) {
