@@ -5,6 +5,10 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
+====Version 1.8.1====
+Scheduled Release Date: September 25th 2011<br>
+Content: Bugfix
+  * Issue 129 (Crash on Random Episode Picker)
 ====Version 1.8.5====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Usability, New Features, Feature Improvements
@@ -17,7 +21,7 @@ Content: Usability, New Features, Feature Improvements
 
 === Market Releases ===
 ====Version 1.8.0====
-Scheduled Release Date: Not Yet Scheduled<br>
+Scheduled Release Date: September 22th 2011<br>
 Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
   * Issue 86 (Layout the application)
   * Issue 90 (Keep collapsable lists opened)
