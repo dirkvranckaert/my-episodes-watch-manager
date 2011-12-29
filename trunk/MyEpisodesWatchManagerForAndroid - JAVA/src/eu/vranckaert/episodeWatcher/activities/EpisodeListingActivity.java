@@ -534,7 +534,7 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
     }
 
     private void reloadEpisodes() {
-    	saveListRows();
+    	saveListRows();    	
     	
     	AsyncTask<Object, Object, Object> asyncTask = new AsyncTask<Object, Object, Object>()  {
             @Override

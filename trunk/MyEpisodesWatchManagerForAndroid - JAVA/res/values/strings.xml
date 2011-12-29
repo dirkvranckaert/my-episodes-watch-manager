@@ -240,4 +240,7 @@
         <item>Spanish</item>
         <item>Swedish</item>
     </string-array>
+    <string name="daysBackwardCP">Days Backward</string>
+    <string name="daysBackwardCPExtra">Number of days backward to search for new episodes to watch</string>
+    <string name="daysBackwardEnable">Enable 200+ episodes</string>
 </resources>

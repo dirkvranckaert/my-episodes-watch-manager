@@ -3,6 +3,7 @@ package eu.vranckaert.episodeWatcher.activities;
 import java.util.Locale;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.constants.ActivityConstants;
+import eu.vranckaert.episodeWatcher.constants.MyEpisodeConstants;
 import eu.vranckaert.episodeWatcher.controllers.EpisodesController;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.enums.EpisodeType;
@@ -64,6 +65,17 @@ public class HomeActivity extends Activity {
         init();
         checkPreferences();
         String LanguageCode = Preferences.getPreference(this, PreferencesKeys.LANGUAGE_KEY);
+        
+        //fix issue where app run and no days back has been set by the user.
+        if(Preferences.getPreference(this, PreferencesKeys.DAYS_BACKWARDCP).equals(null) || Preferences.getPreference(this, PreferencesKeys.DAYS_BACKWARDCP) == ""){        	
+        	MyEpisodeConstants.DAYS_BACK_CP = "365";
+        	Preferences.setPreference(this, PreferencesKeys.DAYS_BACKWARDCP, MyEpisodeConstants.DAYS_BACK_CP);
+        } else {
+        	MyEpisodeConstants.DAYS_BACK_CP = Preferences.getPreference(this, PreferencesKeys.DAYS_BACKWARDCP);
+        }
+        
+        MyEpisodeConstants.DAYS_BACK_ENABLED = Preferences.getPreferenceBoolean(this, PreferencesKeys.DAYS_BACKWARD_ENABLED_KEY, false);     
+        
         conf.locale = new Locale(LanguageCode);
         res.updateConfiguration(conf, null);
         openLoginActivity();
@@ -295,6 +307,7 @@ public class HomeActivity extends Activity {
         Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[0]);
         Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
         Preferences.checkDefaultPreference(this, PreferencesKeys.ACQUIRE_KEY, "0");
+        Preferences.checkDefaultPreference(this, PreferencesKeys.DAYS_BACKWARDCP, "365");
     }
     
     private void openPreferencesActivity() {

@@ -5,10 +5,12 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +26,7 @@ import roboguice.activity.GuicePreferenceActivity;
 public class PreferencesActivity extends GuicePreferenceActivity {
     private static final int RELAOD_DIALOG = 0;
     private boolean refreshDialog;
+    private EditTextPreference daysBackCP;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,6 +65,44 @@ public class PreferencesActivity extends GuicePreferenceActivity {
         passwordPref.setKey(PreferencesKeys.STORE_PASSWORD_KEY);
         passwordPref.setTitle(R.string.storePasswordPrompt);
         root.addPreference(passwordPref);
+        
+        final CheckBoxPreference daysBackwardEnable = new CheckBoxPreference(this);
+        daysBackwardEnable.setDefaultValue(false);      
+        daysBackwardEnable.setKey(PreferencesKeys.DAYS_BACKWARD_ENABLED_KEY);
+        daysBackwardEnable.setTitle(R.string.daysBackwardEnable);
+        daysBackwardEnable.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {			
+        @Override
+		public boolean onPreferenceChange(Preference preference, Object newValue) {
+				refreshDialog = true;
+				if (daysBackwardEnable.isChecked()) {
+					daysBackCP.setEnabled(false);
+				} else {
+					daysBackCP.setEnabled(true);
+				}
+				return true;
+			}
+        });
+        root.addPreference(daysBackwardEnable);
+        
+        daysBackCP = new EditTextPreference(this);
+        daysBackCP.setTitle(R.string.daysBackwardCP);
+        daysBackCP.setKey(PreferencesKeys.DAYS_BACKWARDCP);
+        daysBackCP.setSummary(R.string.daysBackwardCPExtra);
+        daysBackCP.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
+        
+        daysBackCP.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {			
+            @Override
+    		public boolean onPreferenceChange(Preference preference, Object newValue) {
+    			refreshDialog = true;
+    			return true;    	    	
+    		}
+        });
+        
+        if (!daysBackwardEnable.isChecked()) {
+        	daysBackCP.setEnabled(false);
+        }
+        
+        root.addPreference(daysBackCP);
 
         ListPreference showOrderingPref = new ListPreference(this);
         showOrderingPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {

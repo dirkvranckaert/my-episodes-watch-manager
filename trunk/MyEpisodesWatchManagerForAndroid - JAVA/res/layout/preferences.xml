@@ -141,6 +141,35 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </TableRow>
+    
+	<View
+        android:layout_height="2dip"
+        android:background="#FF909090"/>
+        
+        <TableRow android:paddingTop="2dp"
+              android:paddingBottom="2dp">
+        <LinearLayout android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="70dp"
+                android:paddingLeft="10dp">
+            <TextView
+                android:text="@string/daysBackwardCP"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+			/>
+            
+            
+        </LinearLayout>
+        <LinearLayout android:gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingRight="10dp">
+        </LinearLayout>
+    </TableRow>
     <View
         android:layout_height="2dip"
         android:background="#FF909090"/>

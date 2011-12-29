@@ -1,6 +1,7 @@
 package eu.vranckaert.episodeWatcher.service;
 
 import android.util.Log;
+import eu.vranckaert.episodeWatcher.constants.MyEpisodeConstants;
 import eu.vranckaert.episodeWatcher.domain.Feed;
 import eu.vranckaert.episodeWatcher.domain.FeedItem;
 import eu.vranckaert.episodeWatcher.exception.FeedUrlParsingException;
@@ -13,6 +14,8 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -32,7 +35,13 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
     public Feed parseFeed(final URL url) throws ParserConfigurationException, SAXException, FeedUrlParsingException, RssFeedParserException, InternetConnectivityException {
         InputStream inputStream;
 		try {
-			inputStream = url.openConnection().getInputStream();
+			
+			//Log.e(LOG_TAG, "URL???: " + url.toString().substring(0, 16));
+			if(url.toString().substring(0, 16).equalsIgnoreCase("http://127.0.0.1")){
+				inputStream = new ByteArrayInputStream(MyEpisodeConstants.EXTENDED_EPISODES_XML.getBytes("UTF-8"));
+			}else{
+				inputStream = url.openConnection().getInputStream();
+			}
 		} catch (UnknownHostException e) {
 			String message = "Could not connect to host.";
 			Log.e(LOG_TAG, message, e);
@@ -58,7 +67,7 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
 			throw new RssFeedParserException(message, e);
 		}
 
-        Log.d(LOG_TAG, "Feed size: " + feed.getItems().size());
+        //Log.d(LOG_TAG, " Feed size: " + feed.getItems().size());
         
         return feed;
     }
