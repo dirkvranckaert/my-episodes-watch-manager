@@ -86,7 +86,7 @@ public class UserService {
             Log.w(LOG_TAG, message);
             throw new LoginFailedException(message);
         } else {
-            Log.i(LOG_TAG, "Successfull login to " + MyEpisodeConstants.MYEPISODES_LOGIN_PAGE);
+            Log.d(LOG_TAG, "Successful login to " + MyEpisodeConstants.MYEPISODES_LOGIN_PAGE);
             result = true;
         }
         return result;
@@ -169,7 +169,7 @@ public class UserService {
             Log.e(LOG_TAG, message, e);
             throw new PasswordEnctyptionFailedException(message, e);
         }
-        Log.d(LOG_TAG, "The encrypted password is " + encryptedPwd);
+        //Log.d(LOG_TAG, "The encrypted password is " + encryptedPwd); //don't print to the logs unless needed
         return encryptedPwd;
     }
 }

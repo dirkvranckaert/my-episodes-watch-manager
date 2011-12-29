@@ -3,6 +3,7 @@ package eu.vranckaert.episodeWatcher.preferences;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 import eu.vranckaert.episodeWatcher.utils.ApplicationUtil;
 import eu.vranckaert.episodeWatcher.utils.StringUtils;
 
@@ -19,11 +20,11 @@ public class Preferences {
 		return result;
 	}
 
-    public static boolean getPreferenceBoolean(Activity ac, String key) {
-		boolean result = getSharedPreferences(ac).getBoolean(key, true);
+    public static boolean getPreferenceBoolean(Activity ac, String key, boolean defaultSetting) {
+		boolean result = getSharedPreferences(ac).getBoolean(key, defaultSetting);
 		return result;
     }
-	
+    
 	public static void setPreference(Activity ac, String key, String value) {
 		Editor editor = getSharedPreferences(ac).edit();
 		editor.putString(key, value);
@@ -54,9 +55,10 @@ public class Preferences {
 
         if (result == null || result.equals(StringUtils.EMPTY)) {
             setPreference(ac, key, defaultValue);
+            Log.e(LOG_TAG, key + "  " + defaultValue);
         }
     }
-
+    
     public static int getPreferenceInt(Activity ac, String key) {
         String result = getSharedPreferences(ac).getString(key, "0");
         return Integer.parseInt(result);

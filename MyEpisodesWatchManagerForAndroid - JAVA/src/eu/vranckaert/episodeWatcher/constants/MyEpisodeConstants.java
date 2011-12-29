@@ -5,11 +5,18 @@ public class MyEpisodeConstants {
     public static final String PWD_REPLACEMENT_STRING = "[PWD]";
     public static final String FEED = "unwatched";
     public static final String SHOW_IGNORED = "0";
+    
+    public static String DAYS_BACK_CP = "365";    
+    public static Boolean DAYS_BACK_ENABLED = false;
+    
+    public static String EXTENDED_EPISODES_XML;
+    
     public static final String UNWATCHED_EPISODES_URL = "http://www.myepisodes.com/rss.php" +
                                                             "?feed=" + FEED +
                                                             "&showignored=" + SHOW_IGNORED +
                                                             "&uid=" + UID_REPLACEMENT_STRING +
                                                             "&pwdmd5=" + PWD_REPLACEMENT_STRING;
+    
     public static final String UNAQUIRED_EPISODES_URL = "http://www.myepisodes.com/rss.php?feed=unacquired" +
     														"&showignored=" + SHOW_IGNORED +
 															"&uid=" + UID_REPLACEMENT_STRING +
@@ -46,6 +53,12 @@ public class MyEpisodeConstants {
     public static final String MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT = "[ID]";
     public static final String MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT = "[S]";
     public static final String MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT = "[E]";
+    
+    public static final String MYEPISODES_FULL_UNWATCHED_LISTING = "http://www.myepisodes.com/views.php";
+    public static final String MYEPISODES_CONTROL_PANEL = "http://www.myepisodes.com/cp.php";
+    
+    
+    
     public static final int MYEPISODES_UPDATE_PAGE_SEEN = 1;
     public static final String MYEPISODES_UPDATE_WATCH = "http://www.myepisodes.com/myshows.php?action=Update" +
                                                             "&showid=" + MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT +
@@ -68,22 +81,6 @@ public class MyEpisodeConstants {
     public static final String MYEPISODES_ADD_SHOW_PAGE = "http://www.myepisodes.com/views.php?type=manageshow&mode=add&showid=";
     public static final String MYEPISODES_FAVO_IGNORE_PAGE = "http://www.myepisodes.com/shows.php?type=manage";
 
-    /*
-    public static final String MYEPISODES_FAVO_IGNORE_PAGE_PARAM_ACTION_IGNORE = "ignore";
-    public static final String MYEPISODES_FAVO_IGNORE_PAGE_PARAM_ACTION_IGNORE_VALUE = "Ignore >>";
-
-    public static final String MYEPISODES_FAVO_IGNORE_PAGE_PARAM_ACTION_UNIGNORE = "unignore";
-    public static final String MYEPISODES_FAVO_IGNORE_PAGE_PARAM_ACTION_UNIGNORE_VALUE = "<< Unignore";
-
-    public static final String MYEPISODES_FAVO_IGNORE_PAGE_PARAM_ACTION_FAVO_DELETE = "shows_delete";
-    public static final String MYEPISODES_FAVO_IGNORE_PAGE_PARAM_ACTION_FAVO_DELETE_VALUE = "Delete Selected";
-
-    public static final String MYEPISODES_FAVO_IGNORE_PAGE_PARAM_ACTION_IGNORE_DELETE = "ignore_delete";
-    public static final String MYEPISODES_FAVO_IGNORE_PAGE_PARAM_ACTION_IGNORE_DELETE_VALUE = "Delete Selected";
-
-    public static final String MYEPISODES_FAVO_IGNORE_PAGE_PARAM_ACTION_IGNORE_SHWOLIST = "shows[]";
-    public static final String MYEPISODES_FAVO_IGNORE_PAGE_PARAM_ACTION_UNIGNORE_SHOWLIST = "ignored_shows[]";
-    */
     public static final String MYEPISODES_FAVO_IGNORE_ULR = "http://www.myepisodes.com/myshows.php?action=Ignore&Ignore=1&showid=";
     public static final String MYEPISODES_FAVO_UNIGNORE_ULR = "http://www.myepisodes.com/myshows.php?action=Ignore&Ignore=0&showid=";
     public static final String MYEPISODES_FAVO_REMOVE_ULR = "http://www.myepisodes.com/myshows.php?action=Remove&Remove=1&showid=";
