@@ -4,7 +4,7 @@
       android:installLocation="auto"
       android:versionCode="26"
       android:versionName="1.8.5 - DEV">
-    <application android:icon="@drawable/icon" android:label="@string/app_name" android:name=".guice.Application" android:theme="@android:style/Theme.NoTitleBar">
+    <application android:icon="@drawable/icon" android:label="@string/app_name" android:name="MyEpisodes" android:theme="@android:style/Theme.NoTitleBar">
         <activity android:name=".activities.HomeActivity"
                   android:label="@string/app_name">
             <intent-filter>
