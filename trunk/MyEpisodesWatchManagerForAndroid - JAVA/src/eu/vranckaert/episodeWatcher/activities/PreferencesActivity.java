@@ -3,18 +3,29 @@ package eu.vranckaert.episodeWatcher.activities;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
@@ -24,6 +35,14 @@ import roboguice.activity.GuicePreferenceActivity;
  * @author Ivo Janssen
  */
 public class PreferencesActivity extends GuicePreferenceActivity {
+	private LinearLayout rootView;
+	
+	private LinearLayout topBarView;
+	private ImageButton topBarButton;
+	private ImageView topBarSeperator;
+	private TextView topBarText;
+	
+    private ListView preferenceView;
     private static final int RELAOD_DIALOG = 0;
     private boolean refreshDialog;
     private EditTextPreference daysBackCP;
@@ -49,22 +68,95 @@ public class PreferencesActivity extends GuicePreferenceActivity {
     public void onCreate(Bundle savedInstance) {
     	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);
     	super.onCreate(savedInstance);
+
+        rootView = new LinearLayout(this);
+        rootView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+        rootView.setOrientation(LinearLayout.VERTICAL);
         
+        //Stuff to make TopBar in code
+        topBarButton = new ImageButton(this);
+        topBarButton.setLayoutParams(new LayoutParams(R.dimen.title_height, LayoutParams.FILL_PARENT));
+        topBarButton.setBackgroundResource(R.drawable.title_button);
+        topBarButton.setContentDescription(getText(R.string.home));
+    	topBarButton.setImageResource(R.drawable.ic_title_home);
+        topBarButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onHomeClick();
+			}
+		});
+        
+        topBarSeperator = new ImageView(this);
+        topBarSeperator.setLayoutParams(new LayoutParams(1, LayoutParams.FILL_PARENT));
+        topBarSeperator.setBackgroundColor(R.color.title_separator);
+        
+        topBarText = new TextView(this);
+        topBarText.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1.0f));
+        topBarText.setGravity(Gravity.CENTER_VERTICAL);
+        topBarText.setPadding(12, 0, 12, 0);
+        topBarText.setTypeface(Typeface.DEFAULT_BOLD);
+        topBarText.setSingleLine(true);
+        topBarText.setEllipsize(TextUtils.TruncateAt.END);
+        topBarText.setText(R.string.preferences);
+        
+        topBarView = new LinearLayout(this);
+        topBarView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, R.dimen.title_height));
+        topBarView.setOrientation(LinearLayout.HORIZONTAL);
+        if (Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0) {
+        	topBarView.setBackgroundColor(R.color.title_background);
+        }
+        topBarView.addView(topBarButton);
+        topBarView.addView(topBarSeperator);
+        topBarView.addView(topBarText);
+        
+        preferenceView = new ListView(this);
+        preferenceView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+        preferenceView.setId(android.R.id.list);
+    	
         refreshDialog = false;
-        super.setTitle(R.string.preferences);
-        
         getPreferenceManager().setSharedPreferencesName(Preferences.PREF_NAME);
-        setPreferenceScreen(createPreferenceScreen());
+        PreferenceScreen screen = createPreferenceScreen();
+        screen.bind(preferenceView);
+        preferenceView.setAdapter(screen.getRootAdapter());
+        
+        rootView.addView(topBarView);
+        rootView.addView(preferenceView);
+        
+        this.setContentView(rootView);
+        setPreferenceScreen(screen);
     }
 
     private PreferenceScreen createPreferenceScreen() {
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen(this);
-
+        
+        PreferenceCategory general = new PreferenceCategory(this);
+        general.setTitle(R.string.generalPreferences);
+        root.addPreference(general);
+        
         CheckBoxPreference passwordPref = new CheckBoxPreference(this);
         passwordPref.setDefaultValue(true);
         passwordPref.setKey(PreferencesKeys.STORE_PASSWORD_KEY);
         passwordPref.setTitle(R.string.storePasswordPrompt);
         root.addPreference(passwordPref);
+        
+        ListPreference openThemePref = new ListPreference(this);
+        openThemePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				refreshDialog = true;
+				return true;
+			}
+        });
+        openThemePref.setKey(PreferencesKeys.THEME_KEY);
+        openThemePref.setTitle(R.string.ThemePrompt);
+        openThemePref.setSummary(R.string.ThemePromptExtra);
+        openThemePref.setEntries(R.array.ThemeOptions);
+        openThemePref.setEntryValues(R.array.ThemeValues);
+        root.addPreference(openThemePref);
+        
+        PreferenceCategory showSettings = new PreferenceCategory(this);
+        showSettings.setTitle(R.string.showPreferences);
+        root.addPreference(showSettings);
         
         final CheckBoxPreference daysBackwardEnable = new CheckBoxPreference(this);
         daysBackwardEnable.setDefaultValue(false);      
@@ -104,6 +196,25 @@ public class PreferencesActivity extends GuicePreferenceActivity {
         
         root.addPreference(daysBackCP);
 
+        ListPreference openAcquirePref = new ListPreference(this);
+        openAcquirePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				refreshDialog = true;
+				return true;
+			}
+        });
+        openAcquirePref.setKey(PreferencesKeys.ACQUIRE_KEY);
+        openAcquirePref.setTitle(R.string.openAcquirePrompt);
+        openAcquirePref.setSummary(R.string.openAcquirePromptExtra);
+        openAcquirePref.setEntries(R.array.openAcquireOptions);
+        openAcquirePref.setEntryValues(R.array.AcquireValues);
+        root.addPreference(openAcquirePref);
+        
+        PreferenceCategory orderSettings = new PreferenceCategory(this);
+        orderSettings.setTitle(R.string.orderPreferences);
+        root.addPreference(orderSettings);
+        
         ListPreference showOrderingPref = new ListPreference(this);
         showOrderingPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
@@ -133,35 +244,39 @@ public class PreferencesActivity extends GuicePreferenceActivity {
         episodeOrderingPref.setEntryValues(R.array.episodeOrderOptionsValues);
         root.addPreference(episodeOrderingPref);
 
-        ListPreference openAcquirePref = new ListPreference(this);
-        openAcquirePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				refreshDialog = true;
-				return true;
-			}
-        });
-        openAcquirePref.setKey(PreferencesKeys.ACQUIRE_KEY);
-        openAcquirePref.setTitle(R.string.openAcquirePrompt);
-        openAcquirePref.setSummary(R.string.openAcquirePromptExtra);
-        openAcquirePref.setEntries(R.array.openAcquireOptions);
-        openAcquirePref.setEntryValues(R.array.AcquireValues);
-        root.addPreference(openAcquirePref);
+        PreferenceCategory disableSettings = new PreferenceCategory(this);
+        disableSettings.setTitle(R.string.disablePreferences);
+        root.addPreference(disableSettings);
         
-        ListPreference openThemePref = new ListPreference(this);
-        openThemePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+        CheckBoxPreference disableAcquirePref = new CheckBoxPreference(this);
+        disableAcquirePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				refreshDialog = true;
 				return true;
 			}
         });
-        openThemePref.setKey(PreferencesKeys.THEME_KEY);
-        openThemePref.setTitle(R.string.ThemePrompt);
-        openThemePref.setSummary(R.string.ThemePromptExtra);
-        openThemePref.setEntries(R.array.ThemeOptions);
-        openThemePref.setEntryValues(R.array.ThemeValues);
-        root.addPreference(openThemePref);
+        disableAcquirePref.setDefaultValue(false);
+        disableAcquirePref.setKey(PreferencesKeys.DISABLE_ACQUIRE);
+        disableAcquirePref.setTitle(R.string.disableAcquire);
+        root.addPreference(disableAcquirePref);
+        
+        CheckBoxPreference disableComingPref = new CheckBoxPreference(this);
+        disableComingPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				refreshDialog = true;
+				return true;
+			}
+        });
+        disableComingPref.setDefaultValue(false);
+        disableComingPref.setKey(PreferencesKeys.DISABLE_COMING);
+        disableComingPref.setTitle(R.string.disableComing);
+        root.addPreference(disableComingPref);
+        
+        PreferenceCategory languageSettings = new PreferenceCategory(this);
+        languageSettings.setTitle(R.string.languagePreferences);
+        root.addPreference(languageSettings);
         
         ListPreference showLanguagePref = new ListPreference(this);
         showLanguagePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -216,6 +331,10 @@ public class PreferencesActivity extends GuicePreferenceActivity {
         {
         	super.finish();
         }
+    }
+    
+    public void onHomeClick() {
+    	finish();
     }
     
     private void startTabMain() {

@@ -11,4 +11,6 @@ public class PreferencesKeys {
     public static final String APPLICATION_VERSION_KEY = "app_version";
     public static final String DAYS_BACKWARDCP = "days_BackwardCP";
     public static final String DAYS_BACKWARD_ENABLED_KEY = "Days_Backward_Enabled";
+    public static final String DISABLE_ACQUIRE = "disable_acquire";
+    public static final String DISABLE_COMING = "disable_coming";
 }
