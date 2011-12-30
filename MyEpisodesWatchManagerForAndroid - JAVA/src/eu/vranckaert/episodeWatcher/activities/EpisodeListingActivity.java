@@ -217,7 +217,6 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
         listMode = (ListMode) data.getSerializable(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE);
         
         init();
-        checkPreferences();
 	}
 
 	@Override
@@ -324,6 +323,9 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
 		episodeAdapter.notifyDataSetChanged();
 		registerForContextMenu(getExpandableListView());
         
+    	((ImageView) findViewById(R.id.separator_collapse)).setVisibility(View.VISIBLE);
+    	((ImageButton) findViewById(R.id.btn_title_collapse)).setVisibility(View.VISIBLE);
+		
 		int countEpisodes = EpisodesController.getInstance().getEpisodesCount(episodesType);
 		
         if (countEpisodes == 200)
@@ -344,8 +346,6 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
                 openListRows(RowController.getInstance().getOpenAcquireRows());
                 break;
             case EPISODES_COMING:
-            	((ImageView) findViewById(R.id.separator_collapse)).setVisibility(View.VISIBLE);
-            	((ImageButton) findViewById(R.id.btn_title_collapse)).setVisibility(View.VISIBLE);
                 subTitle.setText(getString(R.string.watchListSubTitleComing, countEpisodes));
                 ((TextView) findViewById(R.id.title_text)).setText(R.string.coming);
                 openListRows(RowController.getInstance().getOpenComingRows());
@@ -367,8 +367,6 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
                 openListRows(RowController.getInstance().getOpenAcquireRows());
                 break;
             case EPISODES_COMING:
-            	((ImageView) findViewById(R.id.separator_collapse)).setVisibility(View.VISIBLE);
-            	((ImageButton) findViewById(R.id.btn_title_collapse)).setVisibility(View.VISIBLE);
                 subTitle.setText(getString(R.string.watchListSubTitleComingPlural, countEpisodes));
                 ((TextView) findViewById(R.id.title_text)).setText(R.string.coming);
                 openListRows(RowController.getInstance().getOpenComingRows());
@@ -437,12 +435,9 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
                     int countEp = (Integer) entry.getValue();
                 Calendar rightNow = Calendar.getInstance();
                 rightNow.add(Calendar.DATE, -1);
-                Date yesterday = rightNow.getTime();
-                if (date.after(yesterday)){
-                        map.put("episodeRowTitle", DateUtil.formatDateFull(date, getApplicationContext()) + " [ " + countEp + " ]");
-                        headerList.add(map);
-                        listedAirDates.put(date, null);
-                }
+                map.put("episodeRowTitle", DateUtil.formatDateFull(date, getApplicationContext()) + " [ " + countEp + " ]");
+                headerList.add(map);
+                listedAirDates.put(date, null);
             }
             break;
             }
@@ -461,37 +456,31 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
 	private List<? extends List<? extends Map<String, ?>>> createChilds() {
 		List<List<Map<String,String>>> childList = new ArrayList<List<Map<String,String>>>();
 
-        switch(episodesType) {
-        case EPISODES_COMING: {
+        switch(listMode) {
+        case EPISODES_BY_DATE: {
             for(Iterator iter = listedAirDates.entrySet().iterator(); iter.hasNext();) {
                 Map.Entry entry = (Map.Entry) iter.next();
                 Date listedAirDate = (Date) entry.getKey();
-                Calendar rightNow = Calendar.getInstance();
-                rightNow.add(Calendar.DATE, -1);
-                Date yesterday = rightNow.getTime();
-                if (listedAirDate.after(yesterday)){
-                        List<Episode> episodeList = new ArrayList<Episode>();
-    
-                        List<Map<String, String>> subListSecondLvl = new ArrayList<Map<String, String>>();
-                        for(Show show : shows) {
-                            for(Episode episode : show.getEpisodes()) {
-                                if(listedAirDate.equals(episode.getAirDate())) {
-                                    HashMap<String, String> map = new HashMap<String, String>();
-                                    map.put("episodeRowChildTitle", episode.getShowName());
-                                    map.put("episodeRowChildDetail", "S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName());
-                                    subListSecondLvl.add(map);
-                                    episodeList.add(episode);
-                                }
-                             }
-                         }
+                List<Episode> episodeList = new ArrayList<Episode>();
 
+                List<Map<String, String>> subListSecondLvl = new ArrayList<Map<String, String>>();
+                for(Show show : shows) {
+                    for(Episode episode : show.getEpisodes()) {
+                        if(listedAirDate.equals(episode.getAirDate())) {
+                            HashMap<String, String> map = new HashMap<String, String>();
+                            map.put("episodeRowChildTitle", episode.getShowName());
+                            map.put("episodeRowChildDetail", "S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName());
+                            subListSecondLvl.add(map);
+                            episodeList.add(episode);
+                        }
+                     }
+                 }
                 entry.setValue(episodeList);
                 childList.add(subListSecondLvl);
-                }   
             }
             break;
             }
-            default:
+        	case EPISODES_BY_SHOW: {
                 for (Show show : shows) {
                     List<Map<String, String>> subListSecondLvl = new ArrayList<Map<String, String>>();
                     for (Episode episode : show.getEpisodes()) {
@@ -502,8 +491,9 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
                     }
                     childList.add(subListSecondLvl);
                 }
+            break;
+        	}
         }
-
 		return childList;
 	}
 
@@ -519,18 +509,6 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
     private void openPreferencesActivity() {
         Intent preferencesActivity = new Intent(this.getApplicationContext(), PreferencesActivity.class);
         startActivityForResult(preferencesActivity, SETTINGS_RESULT);
-    }
-
-	private void checkPreferences() {
-        //Checks preference for show sorting and sets the default to ascending (A-Z)
-        String[] episodeOrderOptions = getResources().getStringArray(R.array.episodeOrderOptionsValues);
-        Preferences.checkDefaultPreference(this, PreferencesKeys.EPISODE_SORTING_KEY, episodeOrderOptions[0]);
-        //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
-        String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
-        Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[0]);
-        String[] acquireOptions = getResources().getStringArray(R.array.AcquireValues);
-        Preferences.checkDefaultPreference(this, PreferencesKeys.ACQUIRE_KEY, acquireOptions[0]);
-        Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
     }
 
     private void reloadEpisodes() {
@@ -636,7 +614,20 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
     }
 
     private void sortShows(List<Show> showList) {
-        String sorting = Preferences.getPreference(this, PreferencesKeys.SHOW_SORTING_KEY);
+    	String sorting = "";
+    	switch(episodesType) {
+        case EPISODES_TO_WATCH:
+        	sorting = Preferences.getPreference(this, PreferencesKeys.WATCH_SHOW_SORTING_KEY);
+            break;
+		case EPISODES_TO_YESTERDAY1:
+		case EPISODES_TO_YESTERDAY2:
+        case EPISODES_TO_ACQUIRE:
+        	sorting = Preferences.getPreference(this, PreferencesKeys.ACQUIRE_SHOW_SORTING_KEY);
+            break;
+        case EPISODES_COMING:
+        	sorting = Preferences.getPreference(this, PreferencesKeys.COMING_SHOW_SORTING_KEY);
+            break;
+        }
         String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
 
         if (sorting.equals(showOrderOptions[1])) {

@@ -110,10 +110,17 @@ public class HomeActivity extends Activity {
             }
         });
 
+        String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
+        
     	btnWatched = (Button) findViewById(R.id.btn_watched);
     	watchIntent = new Intent().setClass(this, EpisodeListingActivity.class)
-				 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_TO_WATCH)
-                 .putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+				 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_TO_WATCH);
+    	String watch_sorting = Preferences.getPreference(this, PreferencesKeys.WATCH_SHOW_SORTING_KEY);
+    	if (watch_sorting.equals(showOrderOptions[3])) {
+    		watchIntent.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
+    	} else {
+    		watchIntent.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+    	}
     	btnWatched.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -122,9 +129,13 @@ public class HomeActivity extends Activity {
 		});
     	
     	acquireIntent = new Intent().setClass(this, EpisodeListingActivity.class)
-    					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_TO_ACQUIRE)
-                         .putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
-    	
+    					 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_TO_ACQUIRE);
+    	String acquire_sorting = Preferences.getPreference(this, PreferencesKeys.ACQUIRE_SHOW_SORTING_KEY);
+    	if (acquire_sorting.equals(showOrderOptions[3])) {
+    		acquireIntent.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
+    	} else {
+    		acquireIntent.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+    	}
     	btnAcquired = (Button) findViewById(R.id.btn_acquired);
     	btnAcquired.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -138,8 +149,13 @@ public class HomeActivity extends Activity {
 
         Button btnComing = (Button) findViewById(R.id.btn_coming);
         comingIntent = new Intent().setClass(this, EpisodeListingActivity.class)
-				 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_COMING)
-                 .putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
+				 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_COMING);
+    	String coming_sorting = Preferences.getPreference(this, PreferencesKeys.COMING_SHOW_SORTING_KEY);
+    	if (coming_sorting.equals(showOrderOptions[3])) {
+    		comingIntent.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
+    	} else {
+    		comingIntent.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+    	}
         btnComing.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -228,6 +244,9 @@ public class HomeActivity extends Activity {
 	        Intent homeActivity = new Intent(this.getApplicationContext(), HomeActivity.class);
 	        startActivity(homeActivity);
 		}
+		if (requestCode == LOGIN_RESULT && resultCode != RESULT_OK) {
+			finish();
+		}
 	}
     
 	@Override
@@ -310,7 +329,9 @@ public class HomeActivity extends Activity {
         Preferences.checkDefaultPreference(this, PreferencesKeys.EPISODE_SORTING_KEY, episodeOrderOptions[0]);
         //Checks preference for episode sorting and sets default to ascending (oldest episode on top)
         String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
-        Preferences.checkDefaultPreference(this, PreferencesKeys.SHOW_SORTING_KEY, showOrderOptions[0]);
+        Preferences.checkDefaultPreference(this, PreferencesKeys.WATCH_SHOW_SORTING_KEY, showOrderOptions[0]);
+        Preferences.checkDefaultPreference(this, PreferencesKeys.ACQUIRE_SHOW_SORTING_KEY, showOrderOptions[0]);
+        Preferences.checkDefaultPreference(this, PreferencesKeys.COMING_SHOW_SORTING_KEY, showOrderOptions[3]);
         Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
         Preferences.checkDefaultPreference(this, PreferencesKeys.ACQUIRE_KEY, "0");
         Preferences.checkDefaultPreference(this, PreferencesKeys.DAYS_BACKWARDCP, "365");
