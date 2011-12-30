@@ -74,7 +74,7 @@ public class HomeActivity extends Activity {
         	MyEpisodeConstants.DAYS_BACK_CP = Preferences.getPreference(this, PreferencesKeys.DAYS_BACKWARDCP);
         }
         
-        MyEpisodeConstants.DAYS_BACK_ENABLED = Preferences.getPreferenceBoolean(this, PreferencesKeys.DAYS_BACKWARD_ENABLED_KEY, false);     
+        MyEpisodeConstants.DAYS_BACK_ENABLED = Preferences.getPreferenceBoolean(this, PreferencesKeys.DAYS_BACKWARD_ENABLED_KEY, false);
         
         conf.locale = new Locale(LanguageCode);
         res.updateConfiguration(conf, null);
@@ -132,7 +132,10 @@ public class HomeActivity extends Activity {
 				startActivity(acquireIntent);
 			}
 		});
-    	
+    	if (Preferences.getPreferenceBoolean(this, PreferencesKeys.DISABLE_ACQUIRE, false)) {
+    		btnAcquired.setVisibility(View.GONE);
+    	}
+
         Button btnComing = (Button) findViewById(R.id.btn_coming);
         comingIntent = new Intent().setClass(this, EpisodeListingActivity.class)
 				 .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, EpisodeType.EPISODES_COMING)
@@ -143,6 +146,9 @@ public class HomeActivity extends Activity {
 				startActivity(comingIntent);
 			}
 		});
+    	if (Preferences.getPreferenceBoolean(this, PreferencesKeys.DISABLE_COMING, false)) {
+    		btnComing.setVisibility(View.GONE);
+    	}
         
         Button btnMore = (Button) findViewById(R.id.btn_more);
         btnMore.setOnClickListener(new View.OnClickListener() {
@@ -308,6 +314,7 @@ public class HomeActivity extends Activity {
         Preferences.checkDefaultPreference(this, PreferencesKeys.LANGUAGE_KEY, conf.locale.getLanguage());
         Preferences.checkDefaultPreference(this, PreferencesKeys.ACQUIRE_KEY, "0");
         Preferences.checkDefaultPreference(this, PreferencesKeys.DAYS_BACKWARDCP, "365");
+        Preferences.getPreferenceBoolean(this, PreferencesKeys.DISABLE_COMING, false);
     }
     
     private void openPreferencesActivity() {

@@ -128,7 +128,14 @@
     <string name="menuEpisodeMarkWatched">Mark Watched</string>
     <string name="menuTweet">Tweet this!</string>
 
-    <!-- preferences Dialog -->
+	<!-- preferences titles -->
+    <string name="generalPreferences">General</string>
+    <string name="showPreferences">Shows</string>
+    <string name="orderPreferences">Order</string>
+    <string name="disablePreferences">Disable</string>
+    <string name="languagePreferences">Language</string>
+    
+    <!-- preferences -->
     <string name="applyPreferences">Because settings are changed, the episodes will be refreshed now!</string>
     <!-- Show sorting -->
     <string name="showOrderPrompt">Order of shows</string>
@@ -144,6 +151,10 @@
         <item>Oldest first</item>
         <item>Newest first</item>
     </string-array>
+    <!-- 200+ Episodes -->
+    <string name="daysBackwardEnable">Enable 200+ episodes</string>
+    <string name="daysBackwardCP">Days Backward</string>
+    <string name="daysBackwardCPExtra">Number of days backward to search for new episodes to watch</string>
     <!-- Acquire Settings -->
     <string name="openAcquirePrompt">Acquire Settings</string>
     <string name="openAcquirePromptExtra">All shows or only shows of yesterday</string>
@@ -168,6 +179,9 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Store password</string>
+    <!-- Disable -->
+    <string name="disableAcquire">Disable Acquire</string>
+    <string name="disableComing">Disable Coming</string>
     <!-- Change Language -->
     <string name="showLanguagePrompt">Change Language</string>
 
@@ -240,7 +254,4 @@
         <item>Spanish</item>
         <item>Swedish</item>
     </string-array>
-    <string name="daysBackwardCP">Days Backward</string>
-    <string name="daysBackwardCPExtra">Number of days backward to search for new episodes to watch</string>
-    <string name="daysBackwardEnable">Enable 200+ episodes</string>
 </resources>
