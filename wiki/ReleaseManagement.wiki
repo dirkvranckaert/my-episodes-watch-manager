@@ -8,6 +8,7 @@
 ====Version 1.8.1====
 Scheduled Release Date: Not Yet Scheduled<br>
   * Issue 102 (Disable tabs through preferences)
+  * Issue 107 (Enable date-grouping through preferences)
   * Issue 130 (200 unwatched limit removed. Parse views.php)
   * Issue 131 (Add Acra)
 ====Version 1.8.5====
@@ -15,7 +16,6 @@ Scheduled Release Date: Not Yet Scheduled<br>
 Content: Usability, New Features, Feature Improvements
   * Issue 38 (Mark several episodes as "Watched" at once)
   * Issue 67 (Calender View)
-  * Issue 107 (Enable date-grouping through preferences)
   * Issue 109 (Offline Usage)
   * Issue 113 (Allow swiping between watched/acquired/coming)
 
