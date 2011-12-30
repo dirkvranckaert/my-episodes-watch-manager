@@ -14,6 +14,13 @@ Version 1.8.1:
   * daysBackwardCPExtra
   * disableAcquire
   * disableComing
+  * showWatchOrderPrompt
+  * showAcquireOrderPrompt
+  * showComingOrderPrompt
+  * showOrderOptions (extra 4th option)
+
+- Deleted:
+  * showOrderPrompt
 
 Version 1.8.0:
   * watchhome
