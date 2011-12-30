@@ -46,6 +46,8 @@ public class PreferencesActivity extends GuicePreferenceActivity {
     private static final int RELAOD_DIALOG = 0;
     private boolean refreshDialog;
     private EditTextPreference daysBackCP;
+    private ListPreference showAcquireOrderingPref;
+    private ListPreference showComingOrderingPref;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -211,23 +213,99 @@ public class PreferencesActivity extends GuicePreferenceActivity {
         openAcquirePref.setEntryValues(R.array.AcquireValues);
         root.addPreference(openAcquirePref);
         
+        PreferenceCategory disableSettings = new PreferenceCategory(this);
+        disableSettings.setTitle(R.string.disablePreferences);
+        root.addPreference(disableSettings);
+        
+        final CheckBoxPreference disableAcquirePref = new CheckBoxPreference(this);
+        disableAcquirePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				refreshDialog = true;
+				if (disableAcquirePref.isChecked()) {
+					showAcquireOrderingPref.setEnabled(true);
+				} else {
+					showAcquireOrderingPref.setEnabled(false);
+				}
+				return true;
+			}
+        });
+        disableAcquirePref.setDefaultValue(false);
+        disableAcquirePref.setKey(PreferencesKeys.DISABLE_ACQUIRE);
+        disableAcquirePref.setTitle(R.string.disableAcquire);
+        root.addPreference(disableAcquirePref);
+        
+        final CheckBoxPreference disableComingPref = new CheckBoxPreference(this);
+        disableComingPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				refreshDialog = true;
+				if (disableComingPref.isChecked()) {
+					showComingOrderingPref.setEnabled(true);
+				} else {
+					showComingOrderingPref.setEnabled(false);
+				}
+				return true;
+			}
+        });
+        disableComingPref.setDefaultValue(false);
+        disableComingPref.setKey(PreferencesKeys.DISABLE_COMING);
+        disableComingPref.setTitle(R.string.disableComing);
+        root.addPreference(disableComingPref);
+        
         PreferenceCategory orderSettings = new PreferenceCategory(this);
         orderSettings.setTitle(R.string.orderPreferences);
         root.addPreference(orderSettings);
         
-        ListPreference showOrderingPref = new ListPreference(this);
-        showOrderingPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+        ListPreference showWatchOrderingPref = new ListPreference(this);
+        showWatchOrderingPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				refreshDialog = true;
 				return true;
 			}
         });
-        showOrderingPref.setKey(PreferencesKeys.SHOW_SORTING_KEY);
-        showOrderingPref.setTitle(R.string.showOrderPrompt);
-        showOrderingPref.setEntries(R.array.showOrderOptions);
-        showOrderingPref.setEntryValues(R.array.showOrderOptionsValues);
-        root.addPreference(showOrderingPref);
+        showWatchOrderingPref.setKey(PreferencesKeys.WATCH_SHOW_SORTING_KEY);
+        showWatchOrderingPref.setTitle(R.string.showWatchOrderPrompt);
+        showWatchOrderingPref.setEntries(R.array.showOrderOptions);
+        showWatchOrderingPref.setEntryValues(R.array.showOrderOptionsValues);
+        root.addPreference(showWatchOrderingPref);
+        
+        showAcquireOrderingPref = new ListPreference(this);
+        showAcquireOrderingPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				refreshDialog = true;
+				return true;
+			}
+        });
+        showAcquireOrderingPref.setKey(PreferencesKeys.ACQUIRE_SHOW_SORTING_KEY);
+        showAcquireOrderingPref.setTitle(R.string.showAcquireOrderPrompt);
+        showAcquireOrderingPref.setEntries(R.array.showOrderOptions);
+        showAcquireOrderingPref.setEntryValues(R.array.showOrderOptionsValues);
+        root.addPreference(showAcquireOrderingPref);
+        
+        if (disableAcquirePref.isChecked()) {
+        	showAcquireOrderingPref.setEnabled(false);
+        }
+        
+        showComingOrderingPref = new ListPreference(this);
+        showComingOrderingPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				refreshDialog = true;
+				return true;
+			}
+        });
+        showComingOrderingPref.setKey(PreferencesKeys.COMING_SHOW_SORTING_KEY);
+        showComingOrderingPref.setTitle(R.string.showComingOrderPrompt);
+        showComingOrderingPref.setEntries(R.array.showOrderOptions);
+        showComingOrderingPref.setEntryValues(R.array.showOrderOptionsValues);
+        root.addPreference(showComingOrderingPref);
+        
+        if (disableComingPref.isChecked()) {
+        	showComingOrderingPref.setEnabled(false);
+        }
 
         ListPreference episodeOrderingPref = new ListPreference(this);
         episodeOrderingPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
@@ -243,36 +321,6 @@ public class PreferencesActivity extends GuicePreferenceActivity {
         episodeOrderingPref.setEntries(R.array.episodeOrderOptions);
         episodeOrderingPref.setEntryValues(R.array.episodeOrderOptionsValues);
         root.addPreference(episodeOrderingPref);
-
-        PreferenceCategory disableSettings = new PreferenceCategory(this);
-        disableSettings.setTitle(R.string.disablePreferences);
-        root.addPreference(disableSettings);
-        
-        CheckBoxPreference disableAcquirePref = new CheckBoxPreference(this);
-        disableAcquirePref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				refreshDialog = true;
-				return true;
-			}
-        });
-        disableAcquirePref.setDefaultValue(false);
-        disableAcquirePref.setKey(PreferencesKeys.DISABLE_ACQUIRE);
-        disableAcquirePref.setTitle(R.string.disableAcquire);
-        root.addPreference(disableAcquirePref);
-        
-        CheckBoxPreference disableComingPref = new CheckBoxPreference(this);
-        disableComingPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				refreshDialog = true;
-				return true;
-			}
-        });
-        disableComingPref.setDefaultValue(false);
-        disableComingPref.setKey(PreferencesKeys.DISABLE_COMING);
-        disableComingPref.setTitle(R.string.disableComing);
-        root.addPreference(disableComingPref);
         
         PreferenceCategory languageSettings = new PreferenceCategory(this);
         languageSettings.setTitle(R.string.languagePreferences);
