@@ -661,6 +661,10 @@ public class EpisodesService {
     }
     
     private Date parseDate(String date) {
+		if (date.endsWith(".") || date.endsWith(";")  || date.endsWith(":") || date.endsWith(",")  || date.endsWith("-")) {
+			date = date.substring(0, date.length()-1);
+		}
+	
         DateTime parsedDate = new DateTime(date);
         return parsedDate.toDate();
     }
