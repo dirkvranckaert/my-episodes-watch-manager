@@ -11,6 +11,7 @@ Scheduled Release Date: Not Yet Scheduled<br>
   * Issue 107 (Enable date-grouping through preferences)
   * Issue 130 (200 unwatched limit removed. Parse views.php)
   * Issue 131 (Add Acra)
+  * Issue 132 (Crash on coming)
 ====Version 1.8.5====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Usability, New Features, Feature Improvements
