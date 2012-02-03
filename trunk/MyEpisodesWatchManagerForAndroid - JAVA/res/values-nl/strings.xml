@@ -99,7 +99,7 @@
 <string name="whatsNewText">Wat is veranderd:</string>
 <string-array name="whatsNewValues">
 <!-- TODO update! -->
-<item>Optie tot uischakelen van opties 'Te Verwerven' en 'Binnenkort'</item>
+<item>Optie tot uischakelen van opties \'Te Verwerven\' en \'Binnenkort\'</item>
 <item>Sorteer opties</item>
 <item>Nakijken code</item>
 <item>Nieuwe iconen</item>
@@ -198,9 +198,12 @@
 <string name="defaultExceptionMessage">Er is iets fout gegaan. Probeer de applicatie te herstarten en kijk uw internet verbinding na. Indien dit probleem blijft gelieve een bug te registreren op http://code.google.com/p/my-episodes-watch-manager/.</string>
 <string name="internetConnectionFailureTryAgain">Kan geen internetverbinding maken. Gelieve opnieuw te proberen.</string>
 <string name="internetConnectionFailureReload">Kan geen internetverbinding maken. Gebruik de menu-optie om the herladen en opnieuw te proberen.</string>
-<string name="networkIssues">Netwerk probleem!\nControleer je netwerkinstellingen en probeer handmatig te vernieuwen.</string>
-<string name="watchListUnableToReadFeed">Netwerk probleem!\nProbeer handmatig te vernieuwen.</string>
-<string name="watchListUnableToMarkWatched">Kan deze episode niet markeren als gezien!\nKijk uw internetverbinding na of herlaad de lijst!</string>
+<string name="networkIssues">Netwerk probleem!
+\nControleer je netwerkinstellingen en probeer handmatig te vernieuwen.</string>
+<string name="watchListUnableToReadFeed">Netwerk probleem!
+\nProbeer handmatig te vernieuwen.</string>
+<string name="watchListUnableToMarkWatched">Kan deze episode niet markeren als gezien!
+\nKijk uw internetverbinding na of herlaad de lijst!</string>
 <string name="searchShowUnabletoAdd">Kan deze serie niet toevoegen. Probeer het later eens opnieuw. Indien dit probleem zich blijft voordoen gelieve een bug te registreren!</string>
 
 <!-- The tags beneath may never be translated or will cause an application failure!!! -->
