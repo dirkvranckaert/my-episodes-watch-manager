@@ -44,7 +44,7 @@
     <string name="watchListSubTitleAcquirePlural">%d episodi da acquistare</string>
     <string name="watchListSubTitleComingPlural">%d episodi a venire</string>
     <string name="watchListEmpty">Nessun episodio trovato.</string>
-    <string name="watchListFull">Limite di 200 episodi raggiunto.</string>
+    <string name="watchListFull">Limite di 200 episodi raggiunto, considera permettere 200+ episodi nelle impostazioni.</string>
     
     <!-- Episode details -->
     <string name="details">Dettagli</string>
@@ -98,7 +98,14 @@
     <string name="whatsNewTitle">Nuovità</string>
     <string name="whatsNewVersion">Versione:</string>
     <string name="whatsNewText">Che cosa è cambiato:</string>
-
+    <string-array name="whatsNewValues">
+        <!-- TODO update! -->
+        <item>Disabilità Acquisti / A Venire</item>
+        <item>Opzioni Ordine</item>
+        <item>Refactoring codice</item>
+        <item>Nuove icon</item>
+        <item>Permettere 200+ episodi</item>
+    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Siete sicuro?</string>
     <string name="logoutDialogMessage">I vostri dati utente MyEpisodes.com non saranno più memorizzati sul vostro cellulare.</string>
@@ -122,14 +129,24 @@
     <string name="menuEpisodeMarkWatched">Contrassegna guardato</string>
     <string name="menuTweet">Condividere questo!</string>
 
+	<!-- preferences titles -->
+    <string name="generalPreferences">Generale</string>
+    <string name="showPreferences">Episodi</string>
+    <string name="orderPreferences">Ordine</string>
+    <string name="disablePreferences">Disabilità</string>
+    <string name="languagePreferences">Lingua</string>
+
     <!-- preferences Dialog -->
     <string name="applyPreferences">Impostazioni cambiate, episodi verrano ripristinati</string>
     <!-- Show sorting -->
-    <string name="showOrderPrompt">Ordine delle serie</string>
+    <string name="showWatchOrderPrompt">Ordine dei episodi già guardati</string>
+    <string name="showAcquireOrderPrompt">Ordine dei episodi acquistati</string>
+    <string name="showComingOrderPrompt">Ordine dei episodi a venire</string>
     <string-array name="showOrderOptions">
         <item>Automatico</item>
         <item>Crescente</item>
         <item>Discendente</item>
+        <item>Per Data</item>
     </string-array>
     <!-- Episode sorting -->
     <string name="episodeOrderPrompt">Ordine dei episodi</string>
@@ -138,6 +155,11 @@
         <item>Il più vecchio primo</item>
         <item>Il più recente primo</item>
     </string-array>
+    <!-- 200+ Episodes -->
+    <string name="daysBackwardEnable">Permetta 200+ episodi</string>
+    <string name="daysBackwardCP">Giorni del passato</string>
+    <string name="daysBackwardCPExtra">Quantita di giorni del passato per cercare nuovi episodi da guardare</string>
+        
     <!-- Acquire Settings -->
     <string name="openAcquirePrompt">Impostazioni Acquisti</string>
     <string name="openAcquirePromptExtra">Tutti gli episodi o soltanto quelli di ieri</string>
@@ -162,6 +184,9 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Registrare la password</string>
+    <!-- Disable -->
+    <string name="disableAcquire">Disabilita Acquisti</string>
+    <string name="disableComing">Disabilita A Venire</string>
 
     <!-- Change Language -->
     <string name="showLanguagePrompt">Cambiare di lingua</string>

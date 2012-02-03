@@ -44,7 +44,7 @@
     <string name="watchListSubTitleAcquirePlural">%d Folgen zu erwerben</string>
     <string name="watchListSubTitleComingPlural">%d zukünftige Folgen</string>
     <string name="watchListEmpty">Keine Folgen gefunden.</string>
-    <string name="watchListFull">Limit von 200 Folgen wurde erreicht.</string>
+    <string name="watchListFull">Limit von 200 Folgen wurde erreicht, erwäge 200+ Folgen in den Optionen zu aktivieren.</string>
 
     <!-- Episode details -->
     <string name="details">Details</string>
@@ -55,7 +55,7 @@
     <string name="TweetTitle">Teilen</string>
     <string name="Tweet">Ich habe \'%s\' geguckt #MyEpisodesManager #Android</string>
 
-    <string name="randompickertext">Der Zufalls-Folgen-Wähler verlangt von dir zu schauen: </string>
+    <string name="randompickertext">Der Zufalls-Folgen-Wähler verlangt von dir Folgendes zu schauen: </string>
 
     <!-- Show management -->
     <!-- Show Panel -->
@@ -97,6 +97,14 @@
     <string name="whatsNewTitle">Was ist neu?</string>
     <string name="whatsNewVersion">Version:</string>
     <string name="whatsNewText">Was geändert wurde:</string>
+	    <string-array name="whatsNewValues">
+        <!-- TODO update! -->
+        <item>Erwerben/Kommend deaktiverbar</item>
+        <item>Mehr Sortieroptionen</item>
+        <item>Code Überarbeitungen</item>
+        <item>Neue Icons</item>
+        <item>200+ Folgen aktivierbar</item>
+    </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Bist du dir sicher?</string>
     <string name="logoutDialogMessage">Deine Anmeldeinformationen werden nicht mehr auf diesen Gerät gespeichert.</string>
@@ -120,14 +128,24 @@
     <string name="menuEpisodeMarkWatched">Gesehen markieren</string>
     <string name="menuTweet">Tweeten!</string>
 
-    <!-- preferences Dialog -->
+	<!-- preferences titles -->
+    <string name="generalPreferences">Allgemein</string>
+    <string name="showPreferences">Serien</string>
+    <string name="orderPreferences">Anordnung</string>
+    <string name="disablePreferences">Deaktivieren</string>
+    <string name="languagePreferences">Sprache</string>
+	
+    <!-- preferences -->
     <string name="applyPreferences">Da Einstellungen geändert wurden, werden die Folgen jetzt aktualisiert!</string>
     <!-- Show sorting -->
-    <string name="showOrderPrompt">Anordnung der Serien</string>
+	<string name="showWatchOrderPrompt">Anordnung der gesehenen Serien</string>
+    <string name="showAcquireOrderPrompt">Anordnung der erworbenen Serien</string>
+    <string name="showComingOrderPrompt">Anordnung der kommenden Serien</string>
     <string-array name="showOrderOptions">
         <item>Standard</item>
         <item>Aufsteigend</item>
         <item>Absteigend</item>
+		<item>Nach Datum</item>
     </string-array>
     <!-- Episode sorting -->
     <string name="episodeOrderPrompt">Anordnung der Folgen</string>
@@ -136,6 +154,11 @@
         <item>Älteste zuerst</item>
         <item>Neuste zuerst</item>
     </string-array>
+    <!-- 200+ Episodes -->
+    <string name="daysBackwardEnable">Aktiviere 200+ Folgen</string>
+    <string name="daysBackwardCP">Tage nach hinten</string>
+    <string name="daysBackwardCPExtra">Anzahl der Tage, um nach neuen ungesehenen Folgen zu suchen</string>
+
     <!-- Acquire Settings -->
     <string name="openAcquirePrompt">Erwerben Einstellungen</string>
     <string name="openAcquirePromptExtra">Alle Serien oder nur Serien von gestern</string>
@@ -160,6 +183,9 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Passwort speichern</string>
+	<!-- Disable -->
+    <string name="disableAcquire">Deaktiviere Erwerben</string>
+    <string name="disableComing">Deaktiviere Kommend</string>
     <!-- Change Language -->
     <string name="showLanguagePrompt">Sprache ändern</string>
 

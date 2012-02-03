@@ -30,8 +30,8 @@
     <string name="registerFailed">El nombre de usuario ya existe. Por favor, elige otro.</string>
 	
     <!-- episode_listing_tab -->
-    <string name="watch">Vistos</string>
-    <string name="watchhome">Vistos (%d)</string>
+    <string name="watch">Por ver</string>
+    <string name="watchhome">Por ver (%d)</string>
     <string name="acquire">Por adquirir</string>
     <string name="acquirehome">Por adquirir (%d)</string>
     <string name="coming">Próximamente</string>
@@ -99,11 +99,11 @@
     <string name="whatsNewText">Qué ha cambiado:</string>
     <string-array name="whatsNewValues">
         <!-- TODO update! -->
-        <item>Revisar código</item>
-        <item>Opción de listado (episodios de Hoy-Mañana)</item>
-        <item>Rehacer el cósigo</item>
-        <item>Agrupar por fecha (día de la semana y número de episodio) en la pestaña de próximamente</item>
-        <item>No mostrar episodios pasados</item>	
+        <item>Desactivado Adquirir / Próximamente</item>
+        <item>Opción de listado </item>
+        <item>Rehecho el código</item>
+        <item>Nuevos iconos</item>
+        <item>Permitidos más de 200 episodios</item>	
 	 </string-array>	
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">¿Estás seguro?</string>
@@ -128,14 +128,24 @@
     <string name="menuEpisodeMarkWatched">Marcar como Visto</string>
    <string name="menuTweet">¡Twitealo!</string>
    
+	<!-- preferences titles -->
+    <string name="generalPreferences">General</string>
+    <string name="showPreferences">Series</string>
+    <string name="orderPreferences">Orden</string>
+    <string name="disablePreferences">Deshabilitar</string>
+    <string name="languagePreferences">Lenguaje</string>
+   
     <!-- preferences Dialog -->
     <string name="applyPreferences">Las preferencias se han cambiado. La lista de episodios se recargará ahora.</string>
     <!-- show sorting -->
-    <string name="showOrderPrompt">Orden de las series</string>
+    <string name="showOrderPrompt">Ordena por series</string>
+    <string name="showAcquireOrderPrompt">Ordena por series adquiridas</string>
+    <string name="showComingOrderPrompt">Ordena por emisión de las series</string>
     <string-array name="showOrderOptions">
         <item>Por defecto</item>
         <item>Ascendente</item>
         <item>Descendente</item>
+        <item>Por fecha</item>
     </string-array>
     <!-- episode sorting -->
     <string name="episodeOrderPrompt">Orden de los capítulos</string>
@@ -144,6 +154,11 @@
         <item>Primero los más antiguos</item>
         <item>Primero los más nuevos</item>
     </string-array>
+    <!-- 200+ Episodes -->
+    <string name="daysBackwardEnable">Permitir + de 200 episodios</string>
+    <string name="daysBackwardCP">Histórico de días</string>
+    <string name="daysBackwardCPExtra">Número de días atrasados para buscar nuevos episodios</string>
+        
      <!-- Acquire Settings -->
     <string name="openAcquirePrompt">Configuración de adquisión</string>
     <string name="openAcquirePromptExtra">Todas las series o sólo las de ayer</string>
@@ -168,6 +183,9 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Guardar contraseña</string>
+    <!-- Disable -->
+    <string name="disableAcquire">Deshabilitar adquirir</string>
+    <string name="disableComing">Deshabilitar próximamente</string>
     <!-- Change Language -->
     <string name="serieLanguagePrompt">Cambiar el idioma</string>
 

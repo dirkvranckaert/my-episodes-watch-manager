@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Revision #93 -->
 <resources>
     <!-- default values -->
     <string name="yes">Igen</string>
@@ -43,7 +44,7 @@
     <string name="watchListSubTitleAcquirePlural">%d beszerzendő rész</string>
     <string name="watchListSubTitleComingPlural">%d jövőbeni rész</string>
     <string name="watchListEmpty">Nincs egy rész se.</string>
-	<string name="watchListFull">200 rész megjelenítve. (Ez a maximum.)</string>
+	<string name="watchListFull">200 rész megjelenítve, esetleg engedélyezd a 200+ módot a beállításoknál.</string>
 
     <!-- Episode details -->
 	<string name="details">Részletek</string>
@@ -98,11 +99,11 @@
     <string name="whatsNewText">Ami változott:</string>
 	<string-array name="whatsNewValues">
         <!-- TODO update! -->
-        <item>Forráskód felülvizsgálata</item>
-        <item>Beszerzendő listánál \'Csak a tegnapiak\' lehetőség</item>
-        <item>Forráskód átdolgozása</item>
-        <item>Várható tab dátum szerinti csoportosításánál a hét napjai és epizódok száma</item>
-        <item>Múltbéli epizódok nem jelennek meg a várhatóak között</item>
+        <item>Beszerzendők/Várhatók tiltása</item>
+        <item>Rendezési lehetőségek</item>
+        <item>Kód tisztogatás</item>
+        <item>Új ikonok</item>
+        <item>200+ mód engedélyezése</item>
     </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Biztos kijelentkezel?</string>
@@ -126,15 +127,25 @@
     <string name="menuEpisodeMarkAcquired">Beszereztem</string>
     <string name="menuEpisodeMarkWatched">Megnéztem</string>
 	<string name="menuTweet">Tweet erről!</string>
+	
+	<!-- preferences titles -->
+    <string name="generalPreferences">Általános</string>
+    <string name="showPreferences">Műsorok</string>
+    <string name="orderPreferences">Sorrend</string>
+    <string name="disablePreferences">Letiltás</string>
+    <string name="languagePreferences">Nyelv</string>
 
     <!-- preferences Dialog -->
     <string name="applyPreferences">Mivel a beállítások megváltoztak, a részek listája most frissül!</string>
     <!-- Show sorting -->
-    <string name="showOrderPrompt">Műsorok sorrendje</string>
+    <string name="showWatchOrderPrompt">Megnézendők sorrendje</string>
+    <string name="showAcquireOrderPrompt">Beszerzendők sorrendje</string>
+    <string name="showComingOrderPrompt">Várhatók sorrendje</string>
     <string-array name="showOrderOptions">
         <item>Alapértelmezett</item>
         <item>Növekvő</item>
         <item>Csökkenő</item>
+		<item>Dátum szerint</item>
     </string-array>
     <!-- Episode sorting -->
     <string name="episodeOrderPrompt">A részek sorrendje</string>
@@ -143,6 +154,11 @@
         <item>Régiek elől</item>
         <item>Újak elől</item>
     </string-array>
+	<!-- 200+ Episodes -->
+    <string name="daysBackwardEnable">200+ részes mód engedélyezése</string>
+    <string name="daysBackwardCP">Nap visszafele</string>
+    <string name="daysBackwardCPExtra">Megnézendő epizódokat ennyi napig visszamenőleg keressük.</string>
+	
 	<!-- Acquire Settings -->
     <string name="openAcquirePrompt">Beszerzendő lista opciói</string>
     <string name="openAcquirePromptExtra">Mindegyik műsör megjelenítése, vagy csak a tegnapiaké.</string>
@@ -167,6 +183,9 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Jelszó tárolása</string>
+	<!-- Disable -->
+    <string name="disableAcquire">Beszerzendők tiltása</string>
+    <string name="disableComing">Várhatók tiltása</string>
     <!-- Change Language -->
     <string name="showLanguagePrompt">Nyelvváltás</string>
 
