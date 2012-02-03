@@ -31,8 +31,11 @@
 	
     <!-- episode_listing_tab -->
     <string name="watch">Se</string>
+    <string name="watchhome">Se (%d)</string>
     <string name="acquire">Hämta</string>
+    <string name="acquirehome">Hämta (%d)</string>
     <string name="coming">Kommande</string>
+    <string name="more">Mer</string>
     <string name="watchListTitle">TV-Serier/Avsnitt</string>
     <string name="watchListSubTitleWatch">%d avsnitt att se</string>
     <string name="watchListSubTitleAcquire">%d avsnitt att hämta</string>
@@ -41,15 +44,18 @@
     <string name="watchListSubTitleAcquirePlural">%d avsnitt att hämta</string>
     <string name="watchListSubTitleComingPlural">%d framtida avsnitt</string>
     <string name="watchListEmpty">Inga avsnitt hittade.</string>
-    <string name="watchListFull">Tak på max 200 avsnitt nått.</string>
+    <string name="watchListFull">Tak på max 200 avsnitt nått, försölå på 200+ i inställningarna.</string>
 
     <!-- Episode details -->
+    <string name="details">Info</string>
     <string name="episodeDetailsSeasonLabel">Säsong: </string>
     <string name="episodeDetailsEpisodeLabel">Avsnitt: </string>
     <string name="episodeDetailsAirDateLabel">Sändes: </string>
     <string name="episodeDetailsAirDateLabelDateNotFound">Datumformat stöds ej!</string>
 	<string name="TweetTitle">Dela via Twitter</string>
     <string name="Tweet">Jag har sett \'%s\' #MyEpisodesManager #Android</string>
+    
+    <string name="randompickertext">Slumpen kräver att du tittar på:</string>
 
     <!-- Show management -->
     <!-- Show Panel -->
@@ -66,10 +72,14 @@
     <!-- Favo and ingored shows -->
     <string name="favoIgnoredDeleteShow">Ta bort TV-serie</string>
     <string name="favoIgnoredIgnoreShow">Ignorera TV-serie</string>
-    <string name="favoIgnoredUnignoreShow">\"Av\"-igorera TV-serie</string>
+    <string name="favoIgnoredUnignoreShow">Hämta tillbaka TV-serie från Ignoreralistan</string>
     <string name="favoIgnoredConfirmationDeleteMessage">Är du säker på att du vill ta bort denna TV-serie?</string>
     <string name="favoIgnoredConfirmationIgnoreMessage">Är du säker på att du vill ignorera denna TV-serie?</string>
-    <string name="favoIgnoredConfirmationUnignoreMessage">Är du säker på att du vill \"av\"-ignorera denna TV-serie?</string>
+    <string name="favoIgnoredConfirmationUnignoreMessage">Är du säker på att du vill hämta tillbaka denna TV-serie från Ignoreralistan?</string>
+
+	<!-- random episode picker -->
+	<string name="randompicker">Slumpgenerera avsnitt</string>
+	<string name="randompickershort">Slumpgenerator</string>
 
     <!-- progressDialog -->
     <string name="progressLoadingTitle">Laddar...</string>
@@ -82,27 +92,18 @@
     <string name="aboutWebsite">Website:</string>
     <string name="aboutEmail">Email:</string>
     <string name="aboutOriginalIdea">Ursprunglig idé:</string>
+    <string name="aboutProgrammer">Programmerat av:</string>
     <!-- whatsNewDialog -->
     <string name="whatsNewTitle">Nyheter</string>
     <string name="whatsNewVersion">Version:</string>
     <string name="whatsNewText">Förändringar:</string>
     <string-array name="whatsNewValues">
         <!-- TODO update! -->
-        <item>Registrering av ny användare</item>
-        <item>Hantering av TV-serier</item>
-        <item>Twitterintegrering</item>
-        <item>Tysk översättning</item>
-        <item>Lettisk översättning</item>
-        <item>Portugisisk översättning</item>
-        <item>Ny logo</item>
-        <item>Mörkt tema</item>
-        <item>Markera alla avsnitt (grupp) som sedda eller hämtade</item>
-        <item>Välja default tab vid start</item>
-        <item>Laddning av dialoger (ingen mer ANR)</item>
-        <item>Fix av datumbug</item>
-        <item>Koreanska överättningen stöds inte längre</item>
-        <item>Ny \"Om\"-dialog</item>
-        <item>Ny \"Nyheter\"-dialog</item>
+        <item>Möjlighet att slå av Hämta/Kommande</item>
+        <item>Sorteringsinställningar</item>
+        <item>Omstrukturering av kod</item>
+        <item>Nya ikoner</item>
+        <item>Slå på 200+ avsnitt</item>
     </string-array>
     <!-- logoutDialog -->
     <string name="logoutDialogTitle">Är du säker?</string>
@@ -111,6 +112,8 @@
     <!-- menu's -->
     <!-- main menu -->
     <string name="refresh">Uppdatera</string>
+    <string name="collapse">Minska</string>
+    <string name="home">Hem</string>
     <string name="manageShows">Hantera TV-serier</string>
     <string name="about">Om</string>
     <string name="logout">Logga ut</string>
@@ -125,14 +128,24 @@
     <string name="menuEpisodeMarkWatched">Markera som \"Sett\"</string>
     <string name="menuTweet">Posta till Twitter!</string>
 
-    <!-- preferences Dialog -->
+  <!-- preferences Dialog -->
+    <string name="generalPreferences">Allmänt</string>
+    <string name="showPreferences">TV-Serier</string>
+    <string name="orderPreferences">Sortering</string>
+    <string name="disablePreferences">Avaktivera</string>
+    <string name="languagePreferences">Språk</string>
+
+    <!-- preferences -->
     <string name="applyPreferences">För att spara inställningarna, starta om programmet, eller ladda om listan med avsnitt.</string>
     <!-- Show sorting -->
-    <string name="showOrderPrompt">Sortering av serier</string>
+    <string name="showWatchOrderPrompt">Sortering av sedda serier</string>
+    <string name="showAcquireOrderPrompt">Sortering av hämtade serier</string>
+    <string name="showComingOrderPrompt">Sortering av kommande serier</string>
     <string-array name="showOrderOptions">
         <item>Default</item>
         <item>Stigande</item>
         <item>Fallande</item>
+        <item>Datumordning</item>
     </string-array>
     <!-- Episode sorting -->
     <string name="episodeOrderPrompt">Sortering av avsnitt</string>
@@ -141,6 +154,11 @@
         <item>Äldsta först</item>
         <item>Nyaste först</item>
     </string-array>
+    <!-- 200+ Episodes -->
+    <string name="daysBackwardEnable">Aktivera 200+ avsnitt</string>
+    <string name="daysBackwardCP">Dagar bakåt</string>
+    <string name="daysBackwardCPExtra">Antal dagar bakåt för sökning av avsnitt</string>
+
     <!-- Acquire Settings -->
     <string name="openAcquirePrompt">Hämtningsinställnig</string>
     <string name="openAcquirePromptExtra">Visa alla avsnitt eller bara gårdagens</string>
@@ -165,6 +183,9 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Lagra lösenord</string>
+    <!-- Disable -->
+    <string name="disableAcquire">Avaktivera \"Att hämta\"</string>
+    <string name="disableComing">Avaktivera \"Kommande\"</string>
     <!-- Change Language -->
     <string name="showLanguagePrompt">Ändra språk</string>
 
