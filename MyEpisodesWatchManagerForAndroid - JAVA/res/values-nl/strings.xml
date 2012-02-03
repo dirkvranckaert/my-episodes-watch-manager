@@ -206,43 +206,7 @@
 \nKijk uw internetverbinding na of herlaad de lijst!</string>
 <string name="searchShowUnabletoAdd">Kan deze serie niet toevoegen. Probeer het later eens opnieuw. Indien dit probleem zich blijft voordoen gelieve een bug te registreren!</string>
 
-<!-- The tags beneath may never be translated or will cause an application failure!!! -->
-<!-- The tags shouldn't even be copied to the custom translation files. -->
-<!-- Application Name -->
-<!-- About Dialog -->
-<!-- What's new Dialog -->
 <!-- Preferences -->
-<string-array name="showOrderOptionsValues">
-<item></item>
-<item></item>
-<item></item>
-<item></item>
-</string-array>
-<string-array name="episodeOrderOptionsValues">
-<item></item>
-<item></item>
-</string-array>
-<string-array name="ThemeValues">
-<item></item>
-<item></item>
-</string-array>
-<string-array name="AcquireValues">
-<item></item>
-<item></item>
-</string-array>
-<!-- Next two arrays should be in the same order always!!! -->
-<string-array name="showLanguageOptionsValues">
-<item></item>
-<item></item>
-<item></item>
-<item></item>
-<item></item>
-<item></item>
-<item></item>
-<item></item>
-<item></item>
-<item></item>
-</string-array>
 <string-array name="showLanguageOptions">
 <item>Nederlands</item>
 <item>Engels</item>
