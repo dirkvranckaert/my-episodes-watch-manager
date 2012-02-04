@@ -7,7 +7,7 @@
    	<TextView
         android:id="@+id/episodeRowTitle"
         android:textStyle="bold"
-        android:paddingLeft="35px"
+        android:paddingLeft="45px"
         android:paddingTop="8px"
         android:paddingBottom="8px"
         android:layout_width="fill_parent"
