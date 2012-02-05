@@ -110,9 +110,10 @@
     <!-- Show sorting -->
     <string name="showOrderPrompt">Raidījumu secība</string>
     <string-array name="showOrderOptions">
-        <item>Sākotnējā</item>
-        <item>Augoša</item>
-        <item>Dilstoša</item>
+        <item>Default</item>
+        <item>Ascending</item>
+        <item>Descending</item>
+        <item>By Date</item>
     </string-array>
     <!-- Episode sorting -->
     <string name="episodeOrderPrompt">Sēriju secība</string>

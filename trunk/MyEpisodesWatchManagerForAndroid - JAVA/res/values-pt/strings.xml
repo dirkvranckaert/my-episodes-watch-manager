@@ -113,6 +113,7 @@
         <item>Padrão</item>
         <item>Ascendente</item>
         <item>Descendente</item>
+        <item>By Date</item>
     </string-array>
     <!-- Episode sorting -->
     <string name="episodeOrderPrompt">Ordem dos episódios</string>
