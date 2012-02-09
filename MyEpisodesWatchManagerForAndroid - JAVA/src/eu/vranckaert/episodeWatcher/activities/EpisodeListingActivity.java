@@ -127,7 +127,14 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
 			}
 		} else {
 			int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
-			menu.setHeaderTitle(shows.get(groupid).getShowName());
+	        switch(listMode) {
+	            case EPISODES_BY_SHOW:
+	            	menu.setHeaderTitle(shows.get(groupid).getShowName());
+	                break;
+	            case EPISODES_BY_DATE:
+	            	menu.setHeaderTitle(DateUtil.formatDateLong(determineDate(groupid), this));
+	                break;
+	        }
 			MenuInflater inflater = getMenuInflater();
 			inflater.inflate(R.menu.episode_listing_tab_group_list_menu, menu);
 			
@@ -158,7 +165,7 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
                 episode = shows.get(listGroupId).getEpisodes().get(listChildId);
                 break;
             case EPISODES_BY_DATE:
-                Iterator iter = listedAirDates.entrySet().iterator();
+            	Iterator iter = listedAirDates.entrySet().iterator();
                 int i = 0;
                 while(iter.hasNext()) {
                     Map.Entry entry = (Map.Entry) iter.next();
@@ -172,6 +179,60 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
                 break;
         }
         return episode;
+    }
+    
+    private List<Episode> determineGroup(int listGroupId) {
+    	List<Episode> episodes = null;
+
+        if(listGroupId < 0) {
+            return null;
+        }
+        
+        switch(listMode) {
+            case EPISODES_BY_SHOW:
+                episodes = shows.get(listGroupId).getEpisodes();
+                break;
+            case EPISODES_BY_DATE:
+            	Iterator iter = listedAirDates.entrySet().iterator();
+                int i = 0;
+                while(iter.hasNext()) {
+                    Map.Entry entry = (Map.Entry) iter.next();
+                    if(i == listGroupId) {
+                        episodes = listedAirDates.get(entry.getKey());
+                        break;
+                    } else {
+                        i++;
+                    }
+                }
+                break;
+        }
+        return episodes;
+    }
+    
+    private Date determineDate(int listGroupId) {
+    	List<Episode> episodes = null;
+
+        if(listGroupId < 0) {
+            return null;
+        }
+        
+        switch(listMode) {
+            case EPISODES_BY_SHOW:
+                return shows.get(listGroupId).getEpisodes().get(0).getAirDate();
+		case EPISODES_BY_DATE:
+            	Iterator iter = listedAirDates.entrySet().iterator();
+                int i = 0;
+                while(iter.hasNext()) {
+                    Map.Entry entry = (Map.Entry) iter.next();
+                    if(i == listGroupId) {
+                        return (Date) entry.getKey();
+                    } else {
+                        i++;
+                    }
+                }
+                break;
+        }
+        return null;
     }
 
 	@Override
@@ -225,10 +286,8 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
 		int groupid = ExpandableListView.getPackedPositionGroup(info.packedPosition);
 		int childid = ExpandableListView.getPackedPositionChild(info.packedPosition);
         Episode selectedEpisode = determineEpisode(groupid, childid);
-        Show selectedShow = null;
-        if(!listMode.equals(ListMode.EPISODES_BY_DATE)) {
-            selectedShow = shows.get(groupid);
-        }
+        List<Episode> selectedGroup = null;
+    	selectedGroup = determineGroup(groupid);
 			switch(item.getItemId()) {
 			case R.id.episodeMenuWatched:
                 tracker.trackEvent(CustomTracker.Event.MARK_WATCHED);
@@ -250,10 +309,10 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
 				openEpisodeDetails(selectedEpisode, episodesType);
 				return true;
 			case R.id.showMenuWatched:
-				markShowEpisodes(0, selectedShow);
+				markEpisodes(0, selectedGroup);
 				return true;
 			case R.id.showMenuAcquired:
-				markShowEpisodes(1, selectedShow);
+				markEpisodes(1, selectedGroup);
 				return true;
 			default:
 				return false;
@@ -417,27 +476,23 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
             listedAirDates = new LinkedHashMap<Date, List<Episode>>();
             Map<Date, Integer> workingMap = new TreeMap<Date, Integer>();
             for (Show show : shows) {
-                    for(Episode episode : show.getEpisodes()) {
-                            Date airDate = episode.getAirDate();
-                            if(!workingMap.containsKey(airDate)) {
-                                    workingMap.put(airDate, 1);
-                            } else {
-                                    int count = workingMap.get(airDate);
-                                    workingMap.put(airDate, ++count);
-                            }
-                    }
+	            for(Episode episode : show.getEpisodes()) {
+	                Date airDate = episode.getAirDate();
+	                if(!workingMap.containsKey(airDate)) {
+	                        workingMap.put(airDate, 1);
+	                } else {
+	                        int count = workingMap.get(airDate);
+	                        workingMap.put(airDate, ++count);
+	                }
+	            }
             }
             
-            for(Iterator iter = workingMap.entrySet().iterator(); iter.hasNext();) {
-                    Map<String, String> map = new HashMap<String, String>();
-                    Map.Entry entry = (Map.Entry) iter.next();
-                    Date date = (Date) entry.getKey();
-                    int countEp = (Integer) entry.getValue();
-                Calendar rightNow = Calendar.getInstance();
-                rightNow.add(Calendar.DATE, -1);
-                map.put("episodeRowTitle", DateUtil.formatDateFull(date, getApplicationContext()) + " [ " + countEp + " ]");
+            for(Date key : workingMap.keySet()) {
+                Map<String, String> map = new HashMap<String, String>();
+                int countEp = workingMap.get(key);
+                map.put("episodeRowTitle", DateUtil.formatDateFull(key, getApplicationContext()) + " [ " + countEp + " ]");
                 headerList.add(map);
-                listedAirDates.put(date, null);
+                listedAirDates.put(key, null);
             }
             break;
             }
@@ -679,6 +734,38 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
                     exceptionMessageResId = null;
                 } else {
                 	EpisodesController.getInstance().deleteEpisode(episode.getType(), episode);
+                    returnEpisodes();
+                }
+            }
+        };
+        asyncTask.execute();
+	}
+    
+    private void markEpisodes(final int episodeStatus, final List<Episode> episodes) {
+    	AsyncTask<Object, Object, Object> asyncTask = new AsyncTask<Object, Object, Object>() {
+
+            @Override
+            protected void onPreExecute() {
+                showDialog(EPISODE_LOADING_DIALOG);
+            }
+
+            @Override
+            protected Object doInBackground(Object... objects) {
+                markAllEpisodes(episodeStatus, episodes);
+                if (exceptionMessageResId == null || exceptionMessageResId.equals("")) {
+                    getEpisodes();
+                }
+                return 100L;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                if (exceptionMessageResId != null && !exceptionMessageResId.equals("")) {
+                    removeDialog(EPISODE_LOADING_DIALOG);
+                    showDialog(EXCEPTION_DIALOG);
+                    exceptionMessageResId = null;
+                } else {
+                    removeDialog(EPISODE_LOADING_DIALOG);
                     returnEpisodes();
                 }
             }

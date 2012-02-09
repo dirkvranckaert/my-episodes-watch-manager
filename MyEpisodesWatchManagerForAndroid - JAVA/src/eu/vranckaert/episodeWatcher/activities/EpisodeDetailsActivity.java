@@ -121,14 +121,34 @@ public class EpisodeDetailsActivity extends GuiceActivity {
     private void closeAndAcquireEpisode(Episode episode) {
     	finish();
     	
+    	String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
+    	
 		Intent episodeListingActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
 		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode)
 							  .putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE, ActivityConstants.EXTRA_BUNDLE_VALUE_AQUIRE)
 						      .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodesType);
-		if (episodesType == EpisodeType.EPISODES_COMING)
-			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
-		else
-			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+		
+    	String sorting = ""; 
+    	
+        switch(episodesType) {
+	        case EPISODES_TO_WATCH:
+	        	sorting = Preferences.getPreference(this, PreferencesKeys.WATCH_SHOW_SORTING_KEY);
+	        	break;
+			case EPISODES_TO_YESTERDAY1:
+			case EPISODES_TO_YESTERDAY2:
+	        case EPISODES_TO_ACQUIRE:
+	        	sorting = Preferences.getPreference(this, PreferencesKeys.ACQUIRE_SHOW_SORTING_KEY);
+	        	break;
+	        case EPISODES_COMING:
+	        	sorting = Preferences.getPreference(this, PreferencesKeys.COMING_SHOW_SORTING_KEY);
+	        	break;
+        }
+    	
+    	if (sorting.equals(showOrderOptions[3])) {
+    		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
+    	} else {
+    		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+    	}
 		
         startActivity(episodeListingActivity);
 	}
@@ -144,14 +164,34 @@ public class EpisodeDetailsActivity extends GuiceActivity {
     private void closeAndMarkWatched(Episode episode) {
     	finish();
     	
+    	String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
+    	
 		Intent episodeListingActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
 		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode)
 							  .putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE, ActivityConstants.EXTRA_BUNDLE_VALUE_WATCH)
 						      .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodesType);
-		if (episodesType == EpisodeType.EPISODES_COMING)
-			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
-		else
-			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+
+    	String sorting = ""; 
+    	
+        switch(episodesType) {
+	        case EPISODES_TO_WATCH:
+	        	sorting = Preferences.getPreference(this, PreferencesKeys.WATCH_SHOW_SORTING_KEY);
+	        	break;
+			case EPISODES_TO_YESTERDAY1:
+			case EPISODES_TO_YESTERDAY2:
+	        case EPISODES_TO_ACQUIRE:
+	        	sorting = Preferences.getPreference(this, PreferencesKeys.ACQUIRE_SHOW_SORTING_KEY);
+	        	break;
+	        case EPISODES_COMING:
+	        	sorting = Preferences.getPreference(this, PreferencesKeys.COMING_SHOW_SORTING_KEY);
+	        	break;
+        }
+        
+    	if (sorting.equals(showOrderOptions[3])) {
+    		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
+    	} else {
+    		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+    	}
 		
         startActivity(episodeListingActivity);
 	}
@@ -166,12 +206,32 @@ public class EpisodeDetailsActivity extends GuiceActivity {
     private void exit() {
     	finish();
     	
+    	String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
+    	
     	Intent episodeListingActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
 		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodesType);
-		if (episodesType == EpisodeType.EPISODES_COMING)
-			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
-		else
-			episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+    	
+		String sorting = ""; 
+    	
+        switch(episodesType) {
+	        case EPISODES_TO_WATCH:
+	        	sorting = Preferences.getPreference(this, PreferencesKeys.WATCH_SHOW_SORTING_KEY);
+	        	break;
+			case EPISODES_TO_YESTERDAY1:
+			case EPISODES_TO_YESTERDAY2:
+	        case EPISODES_TO_ACQUIRE:
+	        	sorting = Preferences.getPreference(this, PreferencesKeys.ACQUIRE_SHOW_SORTING_KEY);
+	        	break;
+	        case EPISODES_COMING:
+	        	sorting = Preferences.getPreference(this, PreferencesKeys.COMING_SHOW_SORTING_KEY);
+	        	break;
+        }
+        
+    	if (sorting.equals(showOrderOptions[3])) {
+    		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
+    	} else {
+    		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
+    	}
 		
         startActivity(episodeListingActivity);
 	}
