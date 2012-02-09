@@ -134,8 +134,6 @@ public class EpisodesService {
         List<Episode> episodes = new ArrayList<Episode>();
         episodes.add(episode);
         watchedEpisodes(episodes, user);
-        
-       
     }
 
     public void watchedEpisodes(List<Episode> episodes, User user) throws LoginFailedException
@@ -163,9 +161,10 @@ public class EpisodesService {
 
     public void acquireEpisodes(List<Episode> episodes, User user) throws LoginFailedException
                     , ShowUpdateFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
-                HttpClient httpClient = new DefaultHttpClient();
+        HttpClient httpClient = new DefaultHttpClient();
 
-                userService.login(httpClient, user.getUsername(), user.getPassword());
+        userService.login(httpClient, user.getUsername(), user.getPassword());
+        
         for(Episode episode : episodes) {
                     markAnEpisode(1, httpClient, episode);
                     EpisodesController.getInstance().deleteEpisode(EpisodeType.EPISODES_TO_ACQUIRE, episode);
@@ -352,8 +351,6 @@ public class EpisodesService {
     			//set the days back to what they are in the settigns
     			setDaysBack(controlPanelSettings, httpClient,true);
     			setViewFilters(false ,httpClient);
-    			
-    			
     		}
     	} catch (UnknownHostException e) {
     		String message = "Could not connect to host.";
