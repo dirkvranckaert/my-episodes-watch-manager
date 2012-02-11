@@ -13,6 +13,7 @@ public class Episode implements Serializable {
     private int episode;
     private Date airDate;
     private String myEpisodeID;
+    private String TVRageWebSite;
     private EpisodeType type;
 
     /**
@@ -163,7 +164,14 @@ public class Episode implements Serializable {
 		this.type = type;
 	}
 
+	public String getTVRageWebSite() {
+		return TVRageWebSite;
+	}
 
+	public void setTVRageWebSite(String tVRageWebSite) {
+		TVRageWebSite = tVRageWebSite;
+	}
+	
     @Override
     public String toString() {
         return showName + " S" + getSeasonString() + "E" + getEpisodeString() + " - " + name + " (" + myEpisodeID + ") (" + airDate + ")";

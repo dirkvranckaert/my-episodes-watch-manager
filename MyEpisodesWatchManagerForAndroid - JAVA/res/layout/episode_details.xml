@@ -45,14 +45,14 @@
 	/>
 
 	<LinearLayout android:layout_width="fill_parent" 
-		android:paddingTop="25px" 
+		android:paddingTop="25dp" 
 		android:layout_height="wrap_content" 
 		android:orientation="horizontal"
 	>
 	<TextView android:text="@string/episodeDetailsSeasonLabel" 
-		android:paddingLeft="10px" 
+		android:paddingLeft="10dp" 
 		android:id="@+id/episodeDetSeasonLabel" 
-		android:layout_width="120px"
+		android:layout_width="120dp"
 		android:layout_height="wrap_content"
 	/>
 	
@@ -67,9 +67,9 @@
 		android:orientation="horizontal"
 	>
 	<TextView android:text="@string/episodeDetailsEpisodeLabel" 
-		android:paddingLeft="10px" 
+		android:paddingLeft="10dp" 
 		android:id="@+id/episodeDetEpisodeLabel" 
-		android:layout_width="120px" 
+		android:layout_width="120dp" 
 		android:layout_height="wrap_content"
 	/>
 	
@@ -82,11 +82,12 @@
 	<LinearLayout android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
 		android:orientation="horizontal"
+		android:paddingBottom="25dp"
 	>
 	<TextView android:text="@string/episodeDetailsAirDateLabel" 
-		android:paddingLeft="10px" 
+		android:paddingLeft="10dp" 
 		android:id="@+id/episodeDetAirdateLabel" 
-		android:layout_width="120px" 
+		android:layout_width="120dp" 
 		android:layout_height="wrap_content"
 	/>
 	
@@ -95,11 +96,12 @@
 		android:layout_height="wrap_content"
 	/>
 	</LinearLayout>
-
-	<LinearLayout android:id="@+id/LinearLayout01" 
-		android:layout_width="wrap_content" 
-		android:layout_height="30px"
-	/>
+	
+     <TextView android:id="@+id/tvrageWebsite"
+               android:layout_width="fill_parent"
+               android:gravity="center"
+               android:layout_height="wrap_content"
+               android:paddingBottom="25dp"/>
 	
 	<Button android:text="@string/menuEpisodeMarkAcquired" 
 			android:id="@+id/markAsAcquiredButton" 
