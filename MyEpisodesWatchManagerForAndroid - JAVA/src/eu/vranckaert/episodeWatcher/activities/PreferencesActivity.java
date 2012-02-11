@@ -1,9 +1,9 @@
 package eu.vranckaert.episodeWatcher.activities;
 
+import roboguice.activity.GuicePreferenceActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -13,37 +13,22 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.text.InputType;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
-import roboguice.activity.GuicePreferenceActivity;
 
 /**
  * @author Ivo Janssen
  */
+
 public class PreferencesActivity extends GuicePreferenceActivity {
-	private LinearLayout rootView;
-	
-	private LinearLayout topBarView;
-	private ImageButton topBarButton;
-	private ImageView topBarSeperator;
-	private TextView topBarText;
-	
-    private ListView preferenceView;
-    private static final int RELAOD_DIALOG = 0;
+    private static final int RELOAD_DIALOG = 0;
     private boolean refreshDialog;
     private EditTextPreference daysBackCP;
     private ListPreference showAcquireOrderingPref;
@@ -70,61 +55,14 @@ public class PreferencesActivity extends GuicePreferenceActivity {
     public void onCreate(Bundle savedInstance) {
     	setTheme(Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0 ? android.R.style.Theme_Light_NoTitleBar : android.R.style.Theme_NoTitleBar);
     	super.onCreate(savedInstance);
-
-        rootView = new LinearLayout(this);
-        rootView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-        rootView.setOrientation(LinearLayout.VERTICAL);
-        
-        //Stuff to make TopBar in code
-        topBarButton = new ImageButton(this);
-        topBarButton.setLayoutParams(new LayoutParams(R.dimen.title_height, LayoutParams.FILL_PARENT));
-        topBarButton.setBackgroundResource(R.drawable.title_button);
-        topBarButton.setContentDescription(getText(R.string.home));
-    	topBarButton.setImageResource(R.drawable.ic_title_home);
-        topBarButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				onHomeClick();
-			}
-		});
-        
-        topBarSeperator = new ImageView(this);
-        topBarSeperator.setLayoutParams(new LayoutParams(1, LayoutParams.FILL_PARENT));
-        topBarSeperator.setBackgroundColor(R.color.title_separator);
-        
-        topBarText = new TextView(this);
-        topBarText.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1.0f));
-        topBarText.setGravity(Gravity.CENTER_VERTICAL);
-        topBarText.setPadding(12, 0, 12, 0);
-        topBarText.setTypeface(Typeface.DEFAULT_BOLD);
-        topBarText.setSingleLine(true);
-        topBarText.setEllipsize(TextUtils.TruncateAt.END);
-        topBarText.setText(R.string.preferences);
-        
-        topBarView = new LinearLayout(this);
-        topBarView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, R.dimen.title_height));
-        topBarView.setOrientation(LinearLayout.HORIZONTAL);
-        if (Preferences.getPreferenceInt(this, PreferencesKeys.THEME_KEY) == 0) {
-        	topBarView.setBackgroundColor(R.color.title_background);
-        }
-        topBarView.addView(topBarButton);
-        topBarView.addView(topBarSeperator);
-        topBarView.addView(topBarText);
-        
-        preferenceView = new ListView(this);
-        preferenceView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-        preferenceView.setId(android.R.id.list);
     	
-        refreshDialog = false;
+    	setContentView(R.layout.preferences);
+    	
+    	((TextView) findViewById(R.id.title_text)).setText(R.string.preferences);
+        
         getPreferenceManager().setSharedPreferencesName(Preferences.PREF_NAME);
         PreferenceScreen screen = createPreferenceScreen();
-        screen.bind(preferenceView);
-        preferenceView.setAdapter(screen.getRootAdapter());
         
-        rootView.addView(topBarView);
-        rootView.addView(preferenceView);
-        
-        this.setContentView(rootView);
         setPreferenceScreen(screen);
     }
 
@@ -347,7 +285,7 @@ public class PreferencesActivity extends GuicePreferenceActivity {
 	protected Dialog onCreateDialog(int id) {
 		Dialog dialog = null;
 		switch (id) {
-			case RELAOD_DIALOG:
+			case RELOAD_DIALOG:
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				builder.setTitle(R.string.attention)
 					   .setMessage(R.string.applyPreferences)
@@ -371,17 +309,15 @@ public class PreferencesActivity extends GuicePreferenceActivity {
     public void finish() {
         Log.d("PreferencesActivity", "Closing the preferences screen!");
         
-        if (refreshDialog)
-        {
-        	showDialog(RELAOD_DIALOG);
+        if (refreshDialog) {
+        	showDialog(RELOAD_DIALOG);
         }
-        else
-        {
+        else {
         	super.finish();
         }
     }
     
-    public void onHomeClick() {
+    public void onHomeClick(View v) {
     	finish();
     }
     
