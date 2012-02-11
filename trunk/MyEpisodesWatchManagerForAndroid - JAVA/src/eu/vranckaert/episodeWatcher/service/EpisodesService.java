@@ -41,7 +41,6 @@ import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
 
-
 public class EpisodesService {
     private static final String LOG_TAG = EpisodesService.class.getSimpleName();
     private UserService userService;
@@ -109,7 +108,8 @@ public class EpisodesService {
                     }
                         episode.setAirDate(airDate);
                         episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
-                       
+                        episode.setTVRageWebSite(item.getLink());
+                        
                         Log.d(LOG_TAG, "Episode from feed: " + episode.getShowName() + " - S" + episode.getSeasonString() + "E" + episode.getEpisodeString());
                        
                         episodes.add(episode);
@@ -117,7 +117,8 @@ public class EpisodesService {
                         //Solves problem mentioned in Issue 20
                         episode.setName(episodeInfo[2].trim() + "...");
                         episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
-                       
+                        episode.setTVRageWebSite(item.getLink());
+                        
                         episodes.add(episode);
                     } else {
                         String message = "Problem parsing a feed item. Feed details: " + item.toString();

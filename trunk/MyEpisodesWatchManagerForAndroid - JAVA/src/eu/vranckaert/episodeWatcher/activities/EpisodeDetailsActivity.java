@@ -2,6 +2,7 @@ package eu.vranckaert.episodeWatcher.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -62,6 +63,10 @@ public class EpisodeDetailsActivity extends GuiceActivity {
         
         airdateText.setText(" " + formattedAirDate);
         
+        TextView aboutWebsite = (TextView) findViewById(R.id.tvrageWebsite);
+        aboutWebsite.setText(episode.getTVRageWebSite());
+        Linkify.addLinks(aboutWebsite, Linkify.WEB_URLS);
+        
         Button markAsAcquiredButton = (Button) findViewById(R.id.markAsAcquiredButton);
         Button markAsSeenButton = (Button) findViewById(R.id.markAsSeenButton);
         
@@ -121,56 +126,23 @@ public class EpisodeDetailsActivity extends GuiceActivity {
     private void closeAndAcquireEpisode(Episode episode) {
     	finish();
     	
-    	String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
-    	
-		Intent episodeListingActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
-		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode)
-							  .putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE, ActivityConstants.EXTRA_BUNDLE_VALUE_AQUIRE)
-						      .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodesType);
-		
-    	String sorting = ""; 
-    	
-        switch(episodesType) {
-	        case EPISODES_TO_WATCH:
-	        	sorting = Preferences.getPreference(this, PreferencesKeys.WATCH_SHOW_SORTING_KEY);
-	        	break;
-			case EPISODES_TO_YESTERDAY1:
-			case EPISODES_TO_YESTERDAY2:
-	        case EPISODES_TO_ACQUIRE:
-	        	sorting = Preferences.getPreference(this, PreferencesKeys.ACQUIRE_SHOW_SORTING_KEY);
-	        	break;
-	        case EPISODES_COMING:
-	        	sorting = Preferences.getPreference(this, PreferencesKeys.COMING_SHOW_SORTING_KEY);
-	        	break;
-        }
-    	
-    	if (sorting.equals(showOrderOptions[3])) {
-    		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
-    	} else {
-    		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_SHOW);
-    	}
-		
-        startActivity(episodeListingActivity);
+    	OpenListingActivity(episode, ActivityConstants.EXTRA_BUNDLE_VALUE_WATCH);
 	}
-    
-    private void tweetThis() {
-    	String tweet = episode.getShowName() + " S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName();
-    	Intent i = new Intent(android.content.Intent.ACTION_SEND);
-    	i.setType("text/plain");
-    	i.putExtra(Intent.EXTRA_TEXT, getString(R.string.Tweet, tweet));
-    	startActivity(Intent.createChooser(i, getString(R.string.TweetTitle)));
-    }
     
     private void closeAndMarkWatched(Episode episode) {
     	finish();
     	
+    	OpenListingActivity(episode, ActivityConstants.EXTRA_BUNDLE_VALUE_AQUIRE);
+	}
+    
+    private void OpenListingActivity(Episode episode, String type) {
     	String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
     	
 		Intent episodeListingActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
 		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_EPISODE, episode)
-							  .putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE, ActivityConstants.EXTRA_BUNDLE_VALUE_WATCH)
+							  .putExtra(ActivityConstants.EXTRA_BUNDLE_VAR_MARK_EPISODE, type)
 						      .putExtra(ActivityConstants.EXTRA_BUNLDE_VAR_EPISODE_TYPE, episodesType);
-
+		
     	String sorting = ""; 
     	
         switch(episodesType) {
@@ -186,7 +158,7 @@ public class EpisodeDetailsActivity extends GuiceActivity {
 	        	sorting = Preferences.getPreference(this, PreferencesKeys.COMING_SHOW_SORTING_KEY);
 	        	break;
         }
-        
+    	
     	if (sorting.equals(showOrderOptions[3])) {
     		episodeListingActivity.putExtra(ActivityConstants.EXTRA_BUILD_VAR_LIST_MODE, ListMode.EPISODES_BY_DATE);
     	} else {
@@ -196,16 +168,7 @@ public class EpisodeDetailsActivity extends GuiceActivity {
         startActivity(episodeListingActivity);
 	}
     
-	@Override
-	public final void onBackPressed() { exit(); }
-    
-    public void onHomeClick(View v) {
-    	exit();
-    }
-    
-    private void exit() {
-    	finish();
-    	
+    private void OpenListingActivity() {
     	String[] showOrderOptions = getResources().getStringArray(R.array.showOrderOptionsValues);
     	
     	Intent episodeListingActivity = new Intent(this.getApplicationContext(), EpisodeListingActivity.class);
@@ -234,6 +197,27 @@ public class EpisodeDetailsActivity extends GuiceActivity {
     	}
 		
         startActivity(episodeListingActivity);
+	}
+    
+	private void tweetThis() {
+    	String tweet = episode.getShowName() + " S" + episode.getSeasonString() + "E" + episode.getEpisodeString() + " - " + episode.getName();
+    	Intent i = new Intent(android.content.Intent.ACTION_SEND);
+    	i.setType("text/plain");
+    	i.putExtra(Intent.EXTRA_TEXT, getString(R.string.Tweet, tweet));
+    	startActivity(Intent.createChooser(i, getString(R.string.TweetTitle)));
+    }
+    
+	@Override
+	public final void onBackPressed() { exit(); }
+    
+    public void onHomeClick(View v) {
+    	exit();
+    }
+    
+    private void exit() {
+    	finish();
+    	
+    	OpenListingActivity();
 	}
 
 	public void onTweetClick(View v) {
