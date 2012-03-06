@@ -44,11 +44,11 @@ public class RegisterActivity extends GuiceActivity {
         
         init();
         
+    	tracker = CustomAnalyticsTracker.getInstance(this);
+        
         if (!checkLoginCredentials()) {
-        	tracker = CustomAnalyticsTracker.getInstance(this);
         	tracker.trackPageView(CustomTracker.PageView.REGISTER_USER);
-        	
-	        setContentView(R.layout.register);
+        	setContentView(R.layout.register);
 	        
 	        registerButton = (Button) findViewById(R.id.registerRegister);
 	        registerButton.setOnClickListener(new View.OnClickListener() {
