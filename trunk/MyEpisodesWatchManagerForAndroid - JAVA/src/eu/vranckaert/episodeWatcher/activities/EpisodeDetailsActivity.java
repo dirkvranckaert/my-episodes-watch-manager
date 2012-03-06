@@ -126,13 +126,13 @@ public class EpisodeDetailsActivity extends GuiceActivity {
     private void closeAndAcquireEpisode(Episode episode) {
     	finish();
     	
-    	OpenListingActivity(episode, ActivityConstants.EXTRA_BUNDLE_VALUE_WATCH);
+    	OpenListingActivity(episode, ActivityConstants.EXTRA_BUNDLE_VALUE_ACQUIRE);
 	}
     
     private void closeAndMarkWatched(Episode episode) {
     	finish();
     	
-    	OpenListingActivity(episode, ActivityConstants.EXTRA_BUNDLE_VALUE_AQUIRE);
+    	OpenListingActivity(episode, ActivityConstants.EXTRA_BUNDLE_VALUE_WATCH);
 	}
     
     private void OpenListingActivity(Episode episode, String type) {
