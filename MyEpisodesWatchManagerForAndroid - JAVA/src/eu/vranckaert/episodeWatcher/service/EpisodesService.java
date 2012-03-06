@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -73,10 +74,10 @@ public class EpisodesService {
         		//if not enabling the extended functions
         		feedUrl = buildEpisodesUrl(episodesType, user.getUsername().replace(" ", "%20"), encryptedPassword);
         	}
-        }else{        
+        } else {      
         	feedUrl = buildEpisodesUrl(episodesType, user.getUsername().replace(" ", "%20"), encryptedPassword);        	
-        }        
-                
+        }
+        
         RssFeedParser rssFeedParser = new SaxRssFeedParser();
         Feed rssFeed;
         rssFeed = rssFeedParser.parseFeed(feedUrl);
@@ -95,12 +96,12 @@ public class EpisodesService {
                     String[] episodeInfo = title.toString().split(MyEpisodeConstants.FEED_TITLE_SEPERATOR);
                 episode.setShowName(episodeInfo[0].trim());
                 getSeasonAndEpisodeNumber(episodeInfo[1], episode);
-                   
+                Date airDate = null;
                     if (episodeInfo.length == MyEpisodeConstants.FEED_TITLE_EPISODE_FIELDS) {
                         episode.setName(episodeInfo[2].trim());
                     String airDateString = episodeInfo[3].trim();
                     episode.setType(episodesType);
-                    Date airDate = null;
+                    
                     try {
                         airDate = parseDate(airDateString);
                     } catch (Exception e) {
@@ -111,18 +112,26 @@ public class EpisodesService {
                         episode.setTVRageWebSite(item.getLink());
                         
                         Log.d(LOG_TAG, "Episode from feed: " + episode.getShowName() + " - S" + episode.getSeasonString() + "E" + episode.getEpisodeString());
-                       
-                        episodes.add(episode);
                     } else if (episodeInfo.length == MyEpisodeConstants.FEED_TITLE_EPISODE_FIELDS - 1) {
                         //Solves problem mentioned in Issue 20
                         episode.setName(episodeInfo[2].trim() + "...");
                         episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
                         episode.setTVRageWebSite(item.getLink());
-                        
-                        episodes.add(episode);
                     } else {
-                        String message = "Problem parsing a feed item. Feed details: " + item.toString();
+                    	String message = "Problem parsing a feed item. Feed details: " + item.toString();
                         Log.e(LOG_TAG, message);
+                    }
+                    
+                    
+                    if (!episodesType.equals(EpisodeType.EPISODES_COMING)) {
+                    	episodes.add(episode);
+                    } else {
+                    	Calendar rightNow = Calendar.getInstance();
+                    	rightNow.add(Calendar.DATE, -1);
+                    	Date yesterday = rightNow.getTime();
+						if (airDate.after(yesterday)) {
+                    		episodes.add(episode);
+                    	}
                     }
             }
         }
