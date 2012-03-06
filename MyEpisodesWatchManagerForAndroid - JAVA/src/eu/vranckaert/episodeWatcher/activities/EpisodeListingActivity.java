@@ -356,7 +356,7 @@ public class EpisodeListingActivity extends GuiceExpandableListActivity {
 	            tracker.trackEvent(CustomTracker.Event.MARK_WATCHED);
 	            markEpisodes(0, episode);
 	        }
-	        else if (markEpisode.equals(ActivityConstants.EXTRA_BUNDLE_VALUE_AQUIRE)) {
+	        else if (markEpisode.equals(ActivityConstants.EXTRA_BUNDLE_VALUE_ACQUIRE)) {
 	            tracker.trackEvent(CustomTracker.Event.MARK_ACQUIRED);
 	            markEpisodes(1, episode);
 	        }
