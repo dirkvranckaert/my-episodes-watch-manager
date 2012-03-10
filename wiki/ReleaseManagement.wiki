@@ -5,14 +5,11 @@
 <wiki:toc max_depth="4" />
 == Release management ==
 === Scheduled releases ===
-====Version 1.8.1====
-Scheduled Release Date: Not Yet Scheduled<br>
-  * Issue 102 (Disable tabs through preferences)
-  * Issue 107 (Enable date-grouping through preferences)
-  * Issue 130 (200 unwatched limit removed. Parse views.php)
-  * Issue 131 (Add Acra)
-  * Issue 132 (Crash on coming)
+====Version 1.8.2====
+Scheduled Release Date: March 15th 2012<br>
+Content: Bugfix
   * Issue 133 (Add Norwegian translations)
+  * Issue 135 (Past episodes in Coming list)
 ====Version 1.8.5====
 Scheduled Release Date: Not Yet Scheduled<br>
 Content: Usability, New Features, Feature Improvements
@@ -22,12 +19,20 @@ Content: Usability, New Features, Feature Improvements
   * Issue 113 (Allow swiping between watched/acquired/coming)
 
 === Market Releases ===
+====Version 1.8.1====
+Release Date: February 5th 2012<br>
+Content: Bugfix, New Features
+  * Issue 102 (Disable tabs through preferences)
+  * Issue 107 (Enable date-grouping through preferences)
+  * Issue 130 (200 unwatched limit removed. Parse views.php)
+  * Issue 131 (Add Acra)
+  * Issue 132 (Crash on coming)
 ====Version 1.8.0====
 Scheduled Release Date: September 24th 2011<br>
 Content: Bugfix
   * Issue 129 (Crash on Random Episode Picker)
 ====Version 1.8.0====
-Scheduled Release Date: September 22th 2011<br>
+Release Date: September 22th 2011<br>
 Content: Stability, Usability, Eyecandy, New Features, Feature Improvements
   * Issue 86 (Layout the application)
   * Issue 90 (Keep collapsable lists opened)
