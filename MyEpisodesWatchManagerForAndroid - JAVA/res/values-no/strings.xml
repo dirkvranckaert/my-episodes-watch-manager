@@ -129,6 +129,7 @@
         <item>Default</item>
         <item>Stigende</item>
         <item>Synkende</item>
+        <item>By Date</item>
     </string-array>
     <!-- Episode sorting -->
     <string name="episodeOrderPrompt">Sortering av episoder</string>
