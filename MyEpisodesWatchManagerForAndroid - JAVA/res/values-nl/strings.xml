@@ -205,18 +205,4 @@
 <string name="watchListUnableToMarkWatched">Kan deze episode niet markeren als gezien!
 \nKijk uw internetverbinding na of herlaad de lijst!</string>
 <string name="searchShowUnabletoAdd">Kan deze serie niet toevoegen. Probeer het later eens opnieuw. Indien dit probleem zich blijft voordoen gelieve een bug te registreren!</string>
-
-<!-- Preferences -->
-<string-array name="showLanguageOptions">
-<item>Nederlands</item>
-<item>Engels</item>
-<item>Frans</item>
-<item>Duits</item>
-<item>Hongaars</item>
-<item>Italiaans</item>
-<item>Lets</item>
-<item>Portugees</item>
-<item>Spaans</item>
-<item>Zweeds</item>
-</string-array>
 </resources>
