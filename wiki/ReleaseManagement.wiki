@@ -8,7 +8,6 @@
 ====Version 1.8.2====
 Scheduled Release Date: March 15th 2012<br>
 Content: Bugfix
-  * Issue 133 (Add Norwegian translations)
   * Issue 135 (Past episodes in Coming list)
 ====Version 1.8.5====
 Scheduled Release Date: Not Yet Scheduled<br>
@@ -17,6 +16,7 @@ Content: Usability, New Features, Feature Improvements
   * Issue 67 (Calender View)
   * Issue 109 (Offline Usage)
   * Issue 113 (Allow swiping between watched/acquired/coming)
+  * Issue 133 (Add Norwegian translations)
 
 === Market Releases ===
 ====Version 1.8.1====
