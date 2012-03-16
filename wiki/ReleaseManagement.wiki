@@ -12,13 +12,13 @@ Content: Usability, New Features, Feature Improvements
   * Issue 67 (Calender View)
   * Issue 109 (Offline Usage)
   * Issue 113 (Allow swiping between watched/acquired/coming)
-  * Issue 133 (Add Norwegian translations)
 
 === Market Releases ===
 ====Version 1.8.2====
 Release Date: March 16th 2012<br>
 Content: Bugfix
   * Issue 135 (Past episodes in Coming list)
+  * Issue 133 (Add Norwegian translations)
 ====Version 1.8.1====
 Release Date: February 5th 2012<br>
 Content: Bugfix, New Features
