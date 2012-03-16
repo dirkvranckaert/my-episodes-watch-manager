@@ -246,6 +246,7 @@
         <item>pt</item>
         <item>es</item>
         <item>sv</item>
+        <item>no</item>
     </string-array>
     <string-array name="showLanguageOptions">
         <item>Dutch</item>
@@ -258,5 +259,6 @@
         <item>Portuguese</item>
         <item>Spanish</item>
         <item>Swedish</item>
+        <item>Norwegian</item>
     </string-array>
 </resources>
