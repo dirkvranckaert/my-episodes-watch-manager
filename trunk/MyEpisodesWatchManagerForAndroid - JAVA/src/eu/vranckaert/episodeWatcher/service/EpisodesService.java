@@ -56,7 +56,7 @@ public class EpisodesService {
         URL feedUrl;
                 
         //downloadFullUnwatched list 
-        if(episodesType.toString() == "EPISODES_TO_WATCH"){
+        if(episodesType.toString() == "EPISODES_TO_WATCH") {
         	//override with download from http://myepisodes.com/views.php
         	
         	Log.d(LOG_TAG, "MyEpisodeConstants.DAYS_BACK_ENABLED: " + MyEpisodeConstants.DAYS_BACK_ENABLED);
@@ -67,14 +67,31 @@ public class EpisodesService {
         		HttpClient httpClientAllEps = new DefaultHttpClient();
         		
         		//this is causing the issues.
-        		MyEpisodeConstants.EXTENDED_EPISODES_XML = downloadFullUnwatched(httpClientAllEps, user ).toString();
+        		MyEpisodeConstants.EXTENDED_EPISODES_XML = downloadFullUnwatched(httpClientAllEps, user, true).toString();
         		
         		feedUrl = new URL("http://127.0.0.1"); //this is used in the parse to confirm that this has been run.
         	}else{
         		//if not enabling the extended functions
         		feedUrl = buildEpisodesUrl(episodesType, user.getUsername().replace(" ", "%20"), encryptedPassword);
         	}
-        } else {      
+        } else if (episodesType.toString() == "EPISODES_TO_ACQUIRE") {
+        	Log.d(LOG_TAG, "MyEpisodeConstants.DAYS_BACK_ENABLED: " + MyEpisodeConstants.DAYS_BACK_ENABLED);
+        	Log.d(LOG_TAG, "MyEpisodeConstants.DAYS_BACK_CP: " + MyEpisodeConstants.DAYS_BACK_CP);
+        	
+
+        	if(MyEpisodeConstants.DAYS_BACK_ENABLED){
+        		HttpClient httpClientAllEps = new DefaultHttpClient();
+        		
+        		//this is causing the issues.
+        		MyEpisodeConstants.EXTENDED_EPISODES_XML = downloadFullUnwatched(httpClientAllEps, user, false).toString();
+        		
+        		feedUrl = new URL("http://127.0.0.1"); //this is used in the parse to confirm that this has been run.
+        	}else{
+        		//if not enabling the extended functions
+        		feedUrl = buildEpisodesUrl(episodesType, user.getUsername().replace(" ", "%20"), encryptedPassword);
+        	}
+        }
+        else {      
         	feedUrl = buildEpisodesUrl(episodesType, user.getUsername().replace(" ", "%20"), encryptedPassword);        	
         }
         
@@ -102,11 +119,8 @@ public class EpisodesService {
                     String airDateString = episodeInfo[3].trim();
                     episode.setType(episodesType);
                     
-                    try {
-                        airDate = parseDate(airDateString);
-                    } catch (Exception e) {
                         airDate = DateUtil.convertToDate(airDateString);
-                    }
+                        
                         episode.setAirDate(airDate);
                         episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
                         episode.setTVRageWebSite(item.getLink());
@@ -129,8 +143,10 @@ public class EpisodesService {
                     	Calendar rightNow = Calendar.getInstance();
                     	rightNow.add(Calendar.DATE, -1);
                     	Date yesterday = rightNow.getTime();
-						if (airDate.after(yesterday)) {
-                    		episodes.add(episode);
+                    	if (airDate != null) {
+							if (airDate.after(yesterday)) {
+	                    		episodes.add(episode);
+	                    	}
                     	}
                     }
             }
@@ -224,7 +240,7 @@ public class EpisodesService {
      * parse the views.php page to show a full list of unwatched apps
      */
     
-    private StringWriter downloadFullUnwatched(HttpClient httpClient, User user) throws LoginFailedException, ShowUpdateFailedException, InternetConnectivityException, UnsupportedHttpPostEncodingException{
+    private StringWriter downloadFullUnwatched(HttpClient httpClient, User user, boolean isWatched) throws LoginFailedException, ShowUpdateFailedException, InternetConnectivityException, UnsupportedHttpPostEncodingException{
     	String urlRep =  MyEpisodeConstants.MYEPISODES_FULL_UNWATCHED_LISTING;
     	//login to myepisodes
     	userService.login(httpClient, user.getUsername(), user.getPassword());
@@ -241,7 +257,7 @@ public class EpisodesService {
     		setDaysBack(controlPanelSettings, httpClient, false); 
     		    		
     		// set the filter to only show eps that have not yet been watched
-    		setViewFilters(true ,httpClient);
+			setViewFilters(true, isWatched ,httpClient);
 
         	Log.d(LOG_TAG, "DOWNLOADING FULL LIST");
         	//get request to download the myviews.php for processing to xml
@@ -360,7 +376,7 @@ public class EpisodesService {
     			Log.d(LOG_TAG, "Resetting webview controlpanel settings and views.php filters");
     			//set the days back to what they are in the settigns
     			setDaysBack(controlPanelSettings, httpClient,true);
-    			setViewFilters(false ,httpClient);
+    			setViewFilters(false, false ,httpClient);
     		}
     	} catch (UnknownHostException e) {
     		String message = "Could not connect to host.";
@@ -596,10 +612,12 @@ public class EpisodesService {
     		HttpPost httppostCP = new HttpPost(MyEpisodeConstants.MYEPISODES_CONTROL_PANEL);
     		List<NameValuePair> nameValuePairsCP = new ArrayList<NameValuePair>(17);
     		
-    		for(int i =0;i<controlPanelOrder.length;i++){
+    		for(int i=0;i<controlPanelOrder.length;i++){
     			//when setting the value for the download
-    			if(i==5  && restore == false && controlPanelSettings[i] != null){
+    			if(i==5 && restore == false && controlPanelSettings[i] != null){
     				nameValuePairsCP.add(new BasicNameValuePair(controlPanelOrder[i], MyEpisodeConstants.DAYS_BACK_CP));
+    			} else if(i==6 && restore == false && controlPanelSettings[i] != null){
+    				nameValuePairsCP.add(new BasicNameValuePair(controlPanelOrder[i], "1"));
     			}
     			else{
     				if(controlPanelSettings[i] != null){
@@ -621,18 +639,23 @@ public class EpisodesService {
     	}
     }
     
-    private void setViewFilters(Boolean setForDownload,HttpClient httpClient){
+    private void setViewFilters(Boolean setForDownload, Boolean isWatched,HttpClient httpClient){
     	HttpPost httppost = new HttpPost(MyEpisodeConstants.MYEPISODES_FULL_UNWATCHED_LISTING);
     	try{
     		if(setForDownload){
     			//send POST request to only show episodes with the filter Watch
     			//eps_filters[]=2&action=Filter
-    			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-    			nameValuePairs.add(new BasicNameValuePair("eps_filters[]", "2"));
-    			nameValuePairs.add(new BasicNameValuePair("action", "Filter"));
-    			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-
+    			if (isWatched) {
+	    			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+	    			nameValuePairs.add(new BasicNameValuePair("eps_filters[]", "2"));
+	    			nameValuePairs.add(new BasicNameValuePair("action", "Filter"));
+	    			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+    			} else {
+	    			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+	    			nameValuePairs.add(new BasicNameValuePair("eps_filters[]", "1"));
+	    			nameValuePairs.add(new BasicNameValuePair("action", "Filter"));
+	    			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+    			}
     		}else{
     			//set back to user default settings for the view filters
     			// need to work on detecting the settings to use.
@@ -668,10 +691,6 @@ public class EpisodesService {
     }
     
     private Date parseDate(String date) {
-		if (date.endsWith(".") || date.endsWith(";")  || date.endsWith(":") || date.endsWith(",")  || date.endsWith("-")) {
-			date = date.substring(0, date.length()-1);
-		}
-	
         DateTime parsedDate = new DateTime(date);
         return parsedDate.toDate();
     }
