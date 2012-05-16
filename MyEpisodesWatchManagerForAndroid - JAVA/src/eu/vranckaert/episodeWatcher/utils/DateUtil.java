@@ -17,7 +17,7 @@ import java.util.Locale;
 public final class DateUtil {
     private static final String LOG_TAG = DateUtil.class.getSimpleName();
     //http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html#rfc822timezone
-    private static final String[] dateFormats = {"dd-MM-yyyy"};
+    private static final String[] dateFormats = {"d/M/y", "d-M-y"};
 
     /**
      * Formats a given date in the {@link java.text.DateFormat#LONG} format.
@@ -88,6 +88,10 @@ public final class DateUtil {
      * @return A date instance. Null if the date pattern could not be determined!
      */
     public static Date convertToDate(String dateString) {
+		if (dateString.endsWith(".") || dateString.endsWith(";")  || dateString.endsWith(":") || dateString.endsWith(",")  || dateString.endsWith("-")) {
+			dateString = dateString.substring(0, dateString.length()-1);
+		}
+    	
         for(String dateFormat : dateFormats) {
             DateFormat format = new SimpleDateFormat(dateFormat);
             format.setLenient(false);
