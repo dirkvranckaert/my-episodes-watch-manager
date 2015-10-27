@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_height="fill_parent"
+              android:layout_width="fill_parent">
+    <LinearLayout style="@style/TitleBar">
+        <ImageButton style="@style/TitleBarAction"
+            android:contentDescription="@string/home"
+            android:src="@drawable/ic_title_home"
+            android:onClick="onHomeClick" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+        <TextView style="@style/TitleBarText" />
+    </LinearLayout>
+    <RelativeLayout android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_marginBottom="10dp"
+                    style="@android:style/ButtonBar">
+        <ImageButton android:id="@+id/searchButton"
+                     android:src="@drawable/ic_btn_search_go"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentTop="true"
+                     android:layout_alignParentRight="true"/>
+        <EditText android:id="@+id/searchQuery"
+                  android:hint="@string/showSearchHint"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_centerVertical="true"
+                  android:singleLine="true"
+                  android:layout_toLeftOf="@id/searchButton"
+                  android:layout_marginTop="4dp"/>
+    </RelativeLayout>
+    <TextView android:id="@+id/showNameSearchNumberOfResults"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:visibility="gone"/>
+    <ListView android:id="@+id/android:list"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:choiceMode="singleChoice"/>
+    <TextView android:id="@+id/android:empty"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/showSearchNoSearchResults"/>
+</LinearLayout>

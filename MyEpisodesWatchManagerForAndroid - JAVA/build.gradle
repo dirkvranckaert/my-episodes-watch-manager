@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 8
+    buildToolsVersion "23.0.0"
+
+    defaultConfig {
+        applicationId "eu.vranckaert.episodeWatcher"
+        minSdkVersion 4
+        targetSdkVersion 8
+        versionCode 35
+        versionName "1.8.5"
+    }
+    signingConfigs {
+        debug {
+            storeFile file('../keystore/debug.keystore')
+        }
+        release {
+            storeFile file('../keystore/dvr-android.keystore')
+            storePassword System.getenv("storepwd")
+            keyAlias System.getenv("keyalias")
+            keyPassword System.getenv("keypwd")
+        }
+    }
+    buildTypes {
+        debug {
+            versionNameSuffix " - DEBUG"
+            applicationIdSuffix ".debug"
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}

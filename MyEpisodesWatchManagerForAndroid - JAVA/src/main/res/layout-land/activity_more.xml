@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_root"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+     <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="6dip">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <Button android:id="@+id/btn_watched"
+                style="@style/HomeButton"
+                android:text="@string/about"
+                android:drawableTop="@drawable/btn_about"
+                android:onClick="onAboutClick"/>
+            <Button android:id="@+id/btn_acquired"
+                style="@style/HomeButton"
+                android:text="@string/whatsNew"
+                android:drawableTop="@drawable/btn_new"
+                android:onClick="onTodoClick"/>
+            <Button android:id="@+id/btn_coming"
+                style="@style/HomeButton"
+                android:text="@string/randompickershort"
+                android:drawableTop="@drawable/btn_random"
+                android:onClick="onRandomClick"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
