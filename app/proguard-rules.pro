@@ -16,6 +16,8 @@
 
 -dontwarn javax.naming.**
 -dontwarn com.google.**
+-dontwarn android.**
+-dontwarn roboguice.**
 
 -keepclasseswithmembernames class * {
     native <methods>;
