@@ -14,6 +14,15 @@
 -keep public class * extends android.preference.Preference
 -keep public class com.android.vending.licensing.ILicensingService
 
+-keep public class com.google.android.maps.MapActivity
+-keep public class javax.naming.Context
+-keep public class javax.naming.NamingException
+-keep public class javax.naming.spi.InitialContextFactory
+-keep public class javax.naming.Binding
+-keep public class javax.naming.NamingEnumeration
+-keep public class javax.naming.NameParser
+-keep public class javax.naming.InitialContext
+
 -keepclasseswithmembernames class * {
     native <methods>;
 }
