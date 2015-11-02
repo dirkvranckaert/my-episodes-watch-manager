@@ -65,12 +65,17 @@ public class MyEpisodeConstants {
                                                             "&season=" + MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT +
                                                             "&episode=" + MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT +
                                                             "&seen=" + MYEPISODES_UPDATE_PAGE_SEEN;
+    public static final String MYEPISODES_UPDATE_WATCH_NEW = "http://www.myepisodes.com/ajax/service.php?mode=eps_update";
+    public static final String MYEPISODES_UPDATE_WATCH_FORM = "V" + MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT + "-" + MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT + "-" + MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT;
+
     public static final int MYEPISODES_UPDATE_PAGE_UNSEEN = 0;
     public static final String MYEPISODES_UPDATE_ACQUIRE = "http://www.myepisodes.com/allinone/?action=Update" +
     														"&showid=" + MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT +
     														"&season=" + MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT +
     														"&episode=" + MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT +
     														"&seen=" + MYEPISODES_UPDATE_PAGE_UNSEEN;
+    public static final String MYEPISODES_UPDATE_ACQUIRE_NEW = "http://www.myepisodes.com/ajax/service.php?mode=eps_update";
+    public static final String MYEPISODES_UPDATE_ACQUIRED_FORM = "A" + MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT + "-" + MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT + "-" + MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT;
 
     public static final String MYEPISODES_SEARCH_PAGE = "http://www.myepisodes.com/search.php";
     public static final String MYEPISODES_SEARCH_PAGE_PARAM_SHOW = "tvshow";

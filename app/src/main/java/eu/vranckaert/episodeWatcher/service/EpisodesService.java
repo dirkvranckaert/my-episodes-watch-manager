@@ -1,34 +1,12 @@
 package eu.vranckaert.episodeWatcher.service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.util.EntityUtils;
-import org.pojava.datetime.DateTime;
-import org.xmlpull.v1.XmlSerializer;
-
 import android.util.Log;
 import android.util.Xml;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 import eu.vranckaert.episodeWatcher.constants.MyEpisodeConstants;
 import eu.vranckaert.episodeWatcher.controllers.EpisodesController;
 import eu.vranckaert.episodeWatcher.domain.Episode;
@@ -42,6 +20,22 @@ import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.exception.ShowUpdateFailedException;
 import eu.vranckaert.episodeWatcher.exception.UnsupportedHttpPostEncodingException;
 import eu.vranckaert.episodeWatcher.utils.DateUtil;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.pojava.datetime.DateTime;
+import org.xmlpull.v1.XmlSerializer;
+
+import javax.net.ssl.SSLContext;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
+import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class EpisodesService {
     private static final String LOG_TAG = EpisodesService.class.getSimpleName();
@@ -51,11 +45,45 @@ public class EpisodesService {
         userService = new UserService();
     }
 
-    public HttpClient getHttpClient() {
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-        httpClient.getParams().setParameter(CoreProtocolPNames.USER_AGENT,
-                "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36");
-        return httpClient;
+    public static Request buildRequest(OkHttpClient okokHttpClient, String fullUrl) {
+        Request request = new Request.Builder()
+                .url(fullUrl)
+                .build();
+        return request;
+    }
+
+    public static Request buildPostRequest(OkHttpClient httpClient, String fullUrl, RequestBody body) {
+        Request request = new Request.Builder()
+                .url(fullUrl)
+                .post(body)
+                .build();
+        return request;
+    }
+
+    public static Request buildPostRequest(OkHttpClient httpClient, String fullUrl, List<NameValuePair> nvps) {
+        FormEncodingBuilder bodyBuilder = new FormEncodingBuilder();
+        for (NameValuePair nvp : nvps) {
+            bodyBuilder.add(nvp.getName(), nvp.getValue());
+        }
+
+        Request request = new Request.Builder()
+                .url(fullUrl)
+                .post(bodyBuilder.build())
+                .build();
+        return request;
+    }
+
+    public static OkHttpClient getOkHttpClient() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        SSLContext sslContext;
+        try {
+            sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, null, null);
+        } catch (GeneralSecurityException e) {
+            throw new AssertionError(); // The system has no TLS. Just give up.
+        }
+        okHttpClient.setSslSocketFactory(sslContext.getSocketFactory());
+        return okHttpClient;
     }
 
     public List<Episode> retrieveEpisodes(EpisodeType episodesType, final User user)
@@ -73,11 +101,11 @@ public class EpisodesService {
 
 
             if (MyEpisodeConstants.DAYS_BACK_ENABLED) {
-                HttpClient httpClientAllEps = getHttpClient();
+                OkHttpClient okHttpClientAllEps = getOkHttpClient();
 
                 //this is causing the issues.
                 MyEpisodeConstants.EXTENDED_EPISODES_XML =
-                        downloadFullUnwatched(httpClientAllEps, user, true).toString();
+                        downloadFullUnwatched(okHttpClientAllEps, user, true).toString();
 
                 feedUrl = new URL("http://127.0.0.1"); //this is used in the parse to confirm that this has been run.
             } else {
@@ -90,11 +118,11 @@ public class EpisodesService {
 
 
             if (MyEpisodeConstants.DAYS_BACK_ENABLED) {
-                HttpClient httpClientAllEps = getHttpClient();
+                OkHttpClient okHttpClientAllEps = getOkHttpClient();
 
                 //this is causing the issues.
                 MyEpisodeConstants.EXTENDED_EPISODES_XML =
-                        downloadFullUnwatched(httpClientAllEps, user, false).toString();
+                        downloadFullUnwatched(okHttpClientAllEps, user, false).toString();
 
                 feedUrl = new URL("http://127.0.0.1"); //this is used in the parse to confirm that this has been run.
             } else {
@@ -176,18 +204,16 @@ public class EpisodesService {
 
     public void watchedEpisodes(List<Episode> episodes, User user) throws LoginFailedException
             , ShowUpdateFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
-        HttpClient httpClient = getHttpClient();
+        OkHttpClient okHttpClient = getOkHttpClient();
 
-        userService.login(httpClient, user.getUsername(), user.getPassword());
+        userService.login(okHttpClient, user.getUsername(), user.getPassword());
 
         for (Episode episode : episodes) {
-            markAnEpisode(0, httpClient, episode);
+            markAnEpisode(0, okHttpClient, episode);
             EpisodesController.getInstance().deleteEpisode(EpisodeType.EPISODES_COMING, episode);
             EpisodesController.getInstance().deleteEpisode(EpisodeType.EPISODES_TO_ACQUIRE, episode);
             EpisodesController.getInstance().deleteEpisode(EpisodeType.EPISODES_TO_WATCH, episode);
         }
-
-        httpClient.getConnectionManager().shutdown();
     }
 
     public void acquireEpisode(Episode episode, User user) throws LoginFailedException
@@ -199,39 +225,52 @@ public class EpisodesService {
 
     public void acquireEpisodes(List<Episode> episodes, User user) throws LoginFailedException
             , ShowUpdateFailedException, UnsupportedHttpPostEncodingException, InternetConnectivityException {
-        HttpClient httpClient = getHttpClient();
+        OkHttpClient okHttpClient = getOkHttpClient();
 
-        userService.login(httpClient, user.getUsername(), user.getPassword());
+        userService.login(okHttpClient, user.getUsername(), user.getPassword());
 
         for (Episode episode : episodes) {
-            markAnEpisode(1, httpClient, episode);
+            markAnEpisode(1, okHttpClient, episode);
             EpisodesController.getInstance().deleteEpisode(EpisodeType.EPISODES_TO_ACQUIRE, episode);
             EpisodesController.getInstance().addEpisode(EpisodeType.EPISODES_TO_WATCH, episode);
         }
-
-        httpClient.getConnectionManager().shutdown();
     }
 
-    private void markAnEpisode(int EpisodeStatus, HttpClient httpClient, Episode episode)
+    private void markAnEpisode(int EpisodeStatus, OkHttpClient okHttpClient, Episode episode)
             throws ShowUpdateFailedException, InternetConnectivityException {
-        String urlRep = "";
+        // The old URL's that stopped working
+        //        urlRep = EpisodeStatus == 0 ? MyEpisodeConstants.MYEPISODES_UPDATE_WATCH :
+        //                MyEpisodeConstants.MYEPISODES_UPDATE_ACQUIRE;
 
-        urlRep = EpisodeStatus == 0 ? MyEpisodeConstants.MYEPISODES_UPDATE_WATCH :
-                MyEpisodeConstants.MYEPISODES_UPDATE_ACQUIRE;
+        String urlRep = EpisodeStatus == 0 ? MyEpisodeConstants.MYEPISODES_UPDATE_WATCH_NEW :
+                MyEpisodeConstants.MYEPISODES_UPDATE_ACQUIRE_NEW;
+        String inputName = EpisodeStatus == 0 ? MyEpisodeConstants.MYEPISODES_UPDATE_WATCH_FORM :
+                MyEpisodeConstants.MYEPISODES_UPDATE_ACQUIRED_FORM;
 
-        urlRep = urlRep.replace(MyEpisodeConstants.MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT,
+
+        // In the old way of working (using the hardcoded website URL's we had to replace parts of the URL
+        //        urlRep = urlRep.replace(MyEpisodeConstants.MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT,
+        //                String.valueOf(episode.getEpisode()));
+        //        urlRep = urlRep.replace(MyEpisodeConstants.MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT,
+        //                String.valueOf(episode.getSeason()));
+        //        urlRep = urlRep.replace(MyEpisodeConstants.MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT, episode.getMyEpisodeID());
+        inputName = inputName.replace(MyEpisodeConstants.MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT,
                 String.valueOf(episode.getEpisode()));
-        urlRep = urlRep.replace(MyEpisodeConstants.MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT,
+        inputName = inputName.replace(MyEpisodeConstants.MYEPISODES_UPDATE_PAGE_SEASON_REPLACEMENT,
                 String.valueOf(episode.getSeason()));
-        urlRep = urlRep.replace(MyEpisodeConstants.MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT, episode.getMyEpisodeID());
+        inputName = inputName
+                .replace(MyEpisodeConstants.MYEPISODES_UPDATE_PAGE_SHOWID_REPLACEMENT, episode.getMyEpisodeID());
 
-        HttpGet get = new HttpGet(urlRep);
+        RequestBody form = new FormEncodingBuilder().add(inputName, "true").build();
+        Request request = buildPostRequest(okHttpClient, urlRep, form);
 
         int status = 200;
 
         try {
-            HttpResponse response = httpClient.execute(get);
-            status = response.getStatusLine().getStatusCode();
+            Response response = okHttpClient.newCall(request).execute();
+            Log.d(LOG_TAG, "Result of markAnEpsisode: " + response.code());
+            Log.d(LOG_TAG, "Result of markAnEpsisode: " + response.body().string());
+            status = response.code();
         } catch (UnknownHostException e) {
             String message = "Could not connect to host.";
             Log.e(LOG_TAG, message, e);
@@ -256,12 +295,12 @@ public class EpisodesService {
      * parse the views.php page to show a full list of unwatched apps
      */
 
-    private StringWriter downloadFullUnwatched(HttpClient httpClient, User user, boolean isWatched)
+    private StringWriter downloadFullUnwatched(OkHttpClient okHttpClient, User user, boolean isWatched)
             throws LoginFailedException, ShowUpdateFailedException, InternetConnectivityException,
             UnsupportedHttpPostEncodingException {
         String urlRep = MyEpisodeConstants.MYEPISODES_FULL_UNWATCHED_LISTING;
         //login to myepisodes
-        userService.login(httpClient, user.getUsername(), user.getPassword());
+        userService.login(okHttpClient, user.getUsername(), user.getPassword());
 
         int status = 200;
 
@@ -269,136 +308,121 @@ public class EpisodesService {
 
         try {
             // Get current days back so users view is not broken.
-            String[] controlPanelSettings = getDaysBack(httpClient);
+            String[] controlPanelSettings = getDaysBack(okHttpClient);
 
             // Set the days back to retrieve unwatched eps.
-            setDaysBack(controlPanelSettings, httpClient, false);
+            setDaysBack(controlPanelSettings, okHttpClient, false);
 
             // set the filter to only show eps that have not yet been watched
-            setViewFilters(true, isWatched, httpClient);
+            setViewFilters(true, isWatched, okHttpClient);
 
             Log.d(LOG_TAG, "DOWNLOADING FULL LIST");
             //get request to download the myviews.php for processing to xml
-            HttpGet get = new HttpGet(urlRep);
+            Request request = buildRequest(okHttpClient, urlRep);
             //start the process of downloading the files.
-            HttpResponse response = httpClient.execute(get);
-            status = response.getStatusLine().getStatusCode();
+            Response response = okHttpClient.newCall(request).execute();
+            status = response.code();
 
             // Get hold of the response entity
-            HttpEntity entity = response.getEntity();
+            String HTMLtoDecode = response.body().string();
 
-            // If the response does not enclose an entity, there is no need to worry about connection release
-            if (entity != null) {
-                InputStream instream = entity.getContent();
+            //read html file.
+            int startTable = HTMLtoDecode.indexOf(
+                    "<table class=\"mylist\" width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">") +
+                    78 + 202;
+            HTMLtoDecode = HTMLtoDecode.substring(startTable);
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(instream));
+            int endTable = HTMLtoDecode.indexOf("</table>") - 8;
 
-                StringBuilder HTML = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    HTML.append(line);
-                }
-
-                String HTMLtoDecode = HTML.toString();
-
-                //read html file.
-                int startTable = HTMLtoDecode.indexOf(
-                        "<table class=\"mylist\" width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">") +
-                        78 + 202;
-                HTMLtoDecode = HTMLtoDecode.substring(startTable);
-
-                int endTable = HTMLtoDecode.indexOf("</table>") - 8;
-
-                if (endTable < 1) {
-                    //prevent index out of bounds exception below when defining HTMLtoDecode.
-                    endTable = 1;
-                    Log.d(LOG_TAG, "No episodes to display");
-                }
-
-                HTMLtoDecode = HTMLtoDecode.substring(1, endTable);
-
-                //split each table row into an array for processing
-                String[] EpisodeTable = HTMLtoDecode.split("</tr>");
-
-                Log.d(LOG_TAG, "Number of eps found: " + EpisodeTable.length);
-
-                //Download complete, now start rebuilding the RSS feed file.
-                XmlSerializer xs = Xml.newSerializer();
-
-                xs.setOutput(sw);
-                xs.startDocument(null, null);
-                xs.startTag(null, "channel");
-
-                for (String a : EpisodeTable) {
-                    //split each column into a array
-                    if (a.equals("")) {
-                        Log.d(LOG_TAG, "No Episodes found.");
-                    } else {
-                        String[] rowProcess = a.split("</td>");
-
-                        //name of show
-                        int index = rowProcess[2].indexOf("showid=");
-                        String Show = rowProcess[2].substring(index + 7);
-                        int index1 = Show.indexOf("\">") + 1;
-                        Show = Show.substring(index1);
-                        Show = Show.substring(1, Show.length() - 4);
-
-                        // get Series and Episode
-                        String SeriesEp = rowProcess[3].substring(28);
-
-                        //Get episode name
-                        int indexEp = rowProcess[4].indexOf("_blank") + 7;
-                        String EpisodeName = rowProcess[4].substring(indexEp);
-                        EpisodeName = EpisodeName.substring(1, EpisodeName.length() - 4);
-
-                        //Get episode link - doesn't work yet.
-                        int indexEpLink = rowProcess[4].indexOf("a href=") + 8;
-                        String EpisodeLink = rowProcess[4].substring(indexEpLink);
-                        int indexEpLink1 = EpisodeLink.indexOf("\"");
-                        EpisodeLink = EpisodeLink.substring(0, indexEpLink1);
-
-                        //get air date
-                        int indexAirDate = rowProcess[0].length() - 15;
-                        String AirDate = rowProcess[0].substring(indexAirDate, indexAirDate + 11);
-
-                        //Get GUID
-                        int indexGUID = rowProcess[5].indexOf("name=") + 7;
-                        String GUID = rowProcess[5].substring(indexGUID);
-                        int indexGUID1 = GUID.indexOf("\"");
-                        GUID = GUID.substring(0, indexGUID1);
-
-                        String HeaderRow =
-                                "[ " + Show + " ]" + "[ " + SeriesEp + " ]" + "[ " + EpisodeName + " ]" + "[ " +
-                                        AirDate + " ]";
-
-                        xs.startTag(null, "item");
-                        xs.startTag(null, "guid");
-                        xs.text(GUID);
-                        xs.endTag(null, "guid");
-
-                        xs.startTag(null, "title");
-                        xs.text(HeaderRow);
-                        xs.endTag(null, "title");
-
-                        xs.startTag(null, "link");
-                        xs.text(EpisodeLink);
-                        xs.endTag(null, "link");
-
-                        xs.startTag(null, "description");
-                        xs.endTag(null, "description");
-
-                        xs.endTag(null, "item");
-                    }
-                }
-
-                xs.endTag(null, "channel");
-                xs.endDocument();
-                Log.d(LOG_TAG, "Finished Download and RSS built");
-                Log.d(LOG_TAG, "Resetting webview controlpanel settings and views.php filters");
-                //set the days back to what they are in the settigns
-                setDaysBack(controlPanelSettings, httpClient, true);
-                setViewFilters(false, false, httpClient);
+            if (endTable < 1) {
+                //prevent index out of bounds exception below when defining HTMLtoDecode.
+                endTable = 1;
+                Log.d(LOG_TAG, "No episodes to display");
             }
+
+            HTMLtoDecode = HTMLtoDecode.substring(1, endTable);
+
+            //split each table row into an array for processing
+            String[] EpisodeTable = HTMLtoDecode.split("</tr>");
+
+            Log.d(LOG_TAG, "Number of eps found: " + EpisodeTable.length);
+
+            //Download complete, now start rebuilding the RSS feed file.
+            XmlSerializer xs = Xml.newSerializer();
+
+            xs.setOutput(sw);
+            xs.startDocument(null, null);
+            xs.startTag(null, "channel");
+
+            for (String a : EpisodeTable) {
+                //split each column into a array
+                if (a.equals("")) {
+                    Log.d(LOG_TAG, "No Episodes found.");
+                } else {
+                    String[] rowProcess = a.split("</td>");
+
+                    //name of show
+                    int index = rowProcess[2].indexOf("showid=");
+                    String Show = rowProcess[2].substring(index + 7);
+                    int index1 = Show.indexOf("\">") + 1;
+                    Show = Show.substring(index1);
+                    Show = Show.substring(1, Show.length() - 4);
+
+                    // get Series and Episode
+                    String SeriesEp = rowProcess[3].substring(28);
+
+                    //Get episode name
+                    int indexEp = rowProcess[4].indexOf("_blank") + 7;
+                    String EpisodeName = rowProcess[4].substring(indexEp);
+                    EpisodeName = EpisodeName.substring(1, EpisodeName.length() - 4);
+
+                    //Get episode link - doesn't work yet.
+                    int indexEpLink = rowProcess[4].indexOf("a href=") + 8;
+                    String EpisodeLink = rowProcess[4].substring(indexEpLink);
+                    int indexEpLink1 = EpisodeLink.indexOf("\"");
+                    EpisodeLink = EpisodeLink.substring(0, indexEpLink1);
+
+                    //get air date
+                    int indexAirDate = rowProcess[0].length() - 15;
+                    String AirDate = rowProcess[0].substring(indexAirDate, indexAirDate + 11);
+
+                    //Get GUID
+                    int indexGUID = rowProcess[5].indexOf("name=") + 7;
+                    String GUID = rowProcess[5].substring(indexGUID);
+                    int indexGUID1 = GUID.indexOf("\"");
+                    GUID = GUID.substring(0, indexGUID1);
+
+                    String HeaderRow =
+                            "[ " + Show + " ]" + "[ " + SeriesEp + " ]" + "[ " + EpisodeName + " ]" + "[ " +
+                                    AirDate + " ]";
+
+                    xs.startTag(null, "item");
+                    xs.startTag(null, "guid");
+                    xs.text(GUID);
+                    xs.endTag(null, "guid");
+
+                    xs.startTag(null, "title");
+                    xs.text(HeaderRow);
+                    xs.endTag(null, "title");
+
+                    xs.startTag(null, "link");
+                    xs.text(EpisodeLink);
+                    xs.endTag(null, "link");
+
+                    xs.startTag(null, "description");
+                    xs.endTag(null, "description");
+
+                    xs.endTag(null, "item");
+                }
+            }
+
+            xs.endTag(null, "channel");
+            xs.endDocument();
+            Log.d(LOG_TAG, "Finished Download and RSS built");
+            Log.d(LOG_TAG, "Resetting webview controlpanel settings and views.php filters");
+            //set the days back to what they are in the settigns
+            setDaysBack(controlPanelSettings, okHttpClient, true);
+            setViewFilters(false, false, okHttpClient);
         } catch (UnknownHostException e) {
             String message = "Could not connect to host.";
             Log.e(LOG_TAG, message, e);
@@ -421,7 +445,7 @@ public class EpisodesService {
     }
 
     //get the users web browser settings to keep them the same
-    private String[] getDaysBack(HttpClient httpClient) {
+    private String[] getDaysBack(OkHttpClient okHttpClient) {
         String[] controlPanelSettings = new String[20];
 
         //control panel settings to read.
@@ -450,155 +474,137 @@ public class EpisodesService {
         action = "Save";
 
         try {
-
-            HttpGet get = new HttpGet(MyEpisodeConstants.MYEPISODES_CONTROL_PANEL);
+            Request request = buildRequest(okHttpClient, MyEpisodeConstants.MYEPISODES_CONTROL_PANEL);
             //start the process of downloading the files.
-            HttpResponse response = httpClient.execute(get);
-            response.getStatusLine().getStatusCode();
+            Response response = okHttpClient.newCall(request).execute();
 
-            // Get hold of the response entity
-            HttpEntity entity = response.getEntity();
+            //need to store and send all the settings sending just the daysback setting doesn't work.
+            String settingsHTML = response.body().string();
 
-            // If the response does not enclose an entity, there is no need to worry about connection release
-            if (entity != null) {
-                InputStream instream = entity.getContent();
+            ce_dback = settingsHTML.substring(settingsHTML.indexOf("name=\"ce_dback\" value=\"") + 23);
+            ce_dback = ce_dback.substring(0, ce_dback.indexOf("\""));
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(instream));
+            eps_time_offset =
+                    settingsHTML.substring(settingsHTML.indexOf("name=\"eps_time_offset\" value=\"") + 30);
+            eps_time_offset = eps_time_offset.substring(0, eps_time_offset.indexOf("\""));
 
-                StringBuilder HTMLcp = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    HTMLcp.append(line);
+            dateformat = settingsHTML.substring(settingsHTML.indexOf("name=\"dateformat\" value=\"") + 25);
+            dateformat = dateformat.substring(0, dateformat.indexOf("\""));
+
+            timeformat = settingsHTML.substring(settingsHTML.indexOf("name=\"timeformat\" value=\"") + 25);
+            timeformat = timeformat.substring(0, timeformat.indexOf("\""));
+
+            eps_number_format =
+                    settingsHTML.substring(settingsHTML.indexOf("name=\"eps_number_format\" value=\"") + 32);
+            eps_number_format = eps_number_format.substring(0, eps_number_format.indexOf("\""));
+
+            ce_dforward = settingsHTML.substring(settingsHTML.indexOf("name=\"ce_dforward\" value=\"") + 26);
+            ce_dforward = ce_dforward.substring(0, ce_dforward.indexOf("\""));
+
+            colorpast1 = settingsHTML.substring(settingsHTML.indexOf("'link1');\" type=\"text\" value=\"") + 30);
+            colorpast1 = colorpast1.substring(0, colorpast1.indexOf("\""));
+
+            colorpast2 = settingsHTML.substring(settingsHTML.indexOf("'link2');\" type=\"text\" value=\"") + 30);
+            colorpast2 = colorpast2.substring(0, colorpast2.indexOf("\""));
+
+            colortoday = settingsHTML.substring(settingsHTML.indexOf("'link3');\" type=\"text\" value=\"") + 30);
+            colortoday = colortoday.substring(0, colortoday.indexOf("\""));
+
+            color1 = settingsHTML.substring(settingsHTML.indexOf("'link4');\" type=\"text\" value=\"") + 30);
+            color1 = color1.substring(0, color1.indexOf("\""));
+
+            color2 = settingsHTML.substring(settingsHTML.indexOf("'link5');\" type=\"text\" value=\"") + 30);
+            color2 = color2.substring(0, color2.indexOf("\""));
+
+            colorhover = settingsHTML.substring(settingsHTML.indexOf("'link6');\" type=\"text\" value=\"") + 30);
+            colorhover = colorhover.substring(0, colorhover.indexOf("\""));
+
+            sw_acquire_delay =
+                    settingsHTML.substring(settingsHTML.indexOf("name=\"sw_acquire_delay\" value=\"") + 31);
+            sw_acquire_delay = sw_acquire_delay.substring(0, sw_acquire_delay.indexOf("\""));
+
+            cal_firstday = settingsHTML.substring(settingsHTML.indexOf("name=\"cal_firstday\""));
+            cal_firstday = cal_firstday
+                    .substring(cal_firstday.indexOf("selected") - 3, cal_firstday.indexOf("selected") - 2);
+
+            int timeZoneIndex = settingsHTML.indexOf("name=\"eps_timezone\"");
+            eps_timezone = settingsHTML.substring(timeZoneIndex);
+            int timeZoneSelectedIndex = eps_timezone.indexOf("</select>");
+            String TimezoneRange = settingsHTML.substring(timeZoneIndex, timeZoneIndex + timeZoneSelectedIndex);
+            String[] SplitTimeZones = TimezoneRange.split("</option>");
+
+            for (String a : SplitTimeZones) {
+                int selectedIndex = a.indexOf("selected");
+                if (selectedIndex > 1) {
+                    eps_timezone = a.substring(a.indexOf(">") + 1);
                 }
-
-                //need to store and send all the settings sending just the daysback setting doesn't work.
-                String settingsHTML = HTMLcp.toString();
-
-                ce_dback = settingsHTML.substring(settingsHTML.indexOf("name=\"ce_dback\" value=\"") + 23);
-                ce_dback = ce_dback.substring(0, ce_dback.indexOf("\""));
-
-                eps_time_offset =
-                        settingsHTML.substring(settingsHTML.indexOf("name=\"eps_time_offset\" value=\"") + 30);
-                eps_time_offset = eps_time_offset.substring(0, eps_time_offset.indexOf("\""));
-
-                dateformat = settingsHTML.substring(settingsHTML.indexOf("name=\"dateformat\" value=\"") + 25);
-                dateformat = dateformat.substring(0, dateformat.indexOf("\""));
-
-                timeformat = settingsHTML.substring(settingsHTML.indexOf("name=\"timeformat\" value=\"") + 25);
-                timeformat = timeformat.substring(0, timeformat.indexOf("\""));
-
-                eps_number_format =
-                        settingsHTML.substring(settingsHTML.indexOf("name=\"eps_number_format\" value=\"") + 32);
-                eps_number_format = eps_number_format.substring(0, eps_number_format.indexOf("\""));
-
-                ce_dforward = settingsHTML.substring(settingsHTML.indexOf("name=\"ce_dforward\" value=\"") + 26);
-                ce_dforward = ce_dforward.substring(0, ce_dforward.indexOf("\""));
-
-                colorpast1 = settingsHTML.substring(settingsHTML.indexOf("'link1');\" type=\"text\" value=\"") + 30);
-                colorpast1 = colorpast1.substring(0, colorpast1.indexOf("\""));
-
-                colorpast2 = settingsHTML.substring(settingsHTML.indexOf("'link2');\" type=\"text\" value=\"") + 30);
-                colorpast2 = colorpast2.substring(0, colorpast2.indexOf("\""));
-
-                colortoday = settingsHTML.substring(settingsHTML.indexOf("'link3');\" type=\"text\" value=\"") + 30);
-                colortoday = colortoday.substring(0, colortoday.indexOf("\""));
-
-                color1 = settingsHTML.substring(settingsHTML.indexOf("'link4');\" type=\"text\" value=\"") + 30);
-                color1 = color1.substring(0, color1.indexOf("\""));
-
-                color2 = settingsHTML.substring(settingsHTML.indexOf("'link5');\" type=\"text\" value=\"") + 30);
-                color2 = color2.substring(0, color2.indexOf("\""));
-
-                colorhover = settingsHTML.substring(settingsHTML.indexOf("'link6');\" type=\"text\" value=\"") + 30);
-                colorhover = colorhover.substring(0, colorhover.indexOf("\""));
-
-                sw_acquire_delay =
-                        settingsHTML.substring(settingsHTML.indexOf("name=\"sw_acquire_delay\" value=\"") + 31);
-                sw_acquire_delay = sw_acquire_delay.substring(0, sw_acquire_delay.indexOf("\""));
-
-                cal_firstday = settingsHTML.substring(settingsHTML.indexOf("name=\"cal_firstday\""));
-                cal_firstday = cal_firstday
-                        .substring(cal_firstday.indexOf("selected") - 3, cal_firstday.indexOf("selected") - 2);
-
-                int timeZoneIndex = settingsHTML.indexOf("name=\"eps_timezone\"");
-                eps_timezone = settingsHTML.substring(timeZoneIndex);
-                int timeZoneSelectedIndex = eps_timezone.indexOf("</select>");
-                String TimezoneRange = settingsHTML.substring(timeZoneIndex, timeZoneIndex + timeZoneSelectedIndex);
-                String[] SplitTimeZones = TimezoneRange.split("</option>");
-
-                for (String a : SplitTimeZones) {
-                    int selectedIndex = a.indexOf("selected");
-                    if (selectedIndex > 1) {
-                        eps_timezone = a.substring(a.indexOf(">") + 1);
-                    }
-                }
-
-                int loginpageIndex = settingsHTML.indexOf("name=\"loginpage\"") + 17;
-                loginpage = settingsHTML.substring(loginpageIndex);
-                int loginpageSelectedIndex = loginpage.indexOf("</select>");
-                String loginpageRange = settingsHTML.substring(loginpageIndex, loginpageIndex + loginpageSelectedIndex);
-                String[] Splitloginpage = loginpageRange.split("</option>");
-
-                for (String a : Splitloginpage) {
-                    int selectedIndex = a.indexOf("selected");
-                    if (selectedIndex > 1) {
-                        loginpage = a.substring(a.indexOf("=") + 2);
-                        loginpage = loginpage.substring(0, loginpage.indexOf("\""));
-                    }
-                }
-
-                sw_hidefuture = settingsHTML.substring(settingsHTML.indexOf("name=\"sw_hidefuture\""));
-                sw_hidefuture = sw_hidefuture.substring(21, 28);
-                if (sw_hidefuture.equals("checked")) {
-                    sw_hidefuture = "on";
-                } else {
-                    sw_hidefuture = null;
-                }
-
-                sw_presentonly = settingsHTML.substring(settingsHTML.indexOf("name=\"sw_presentonly\""));
-                sw_presentonly = sw_presentonly.substring(22, 29);
-                if (sw_presentonly.equals("checked")) {
-                    sw_presentonly = "on";
-                } else {
-                    sw_presentonly = null;
-                }
-
-                sw_currentseasononly = settingsHTML.substring(settingsHTML.indexOf("name=\"sw_currentseasononly\""));
-                sw_currentseasononly = sw_currentseasononly.substring(28, 35);
-                if (sw_currentseasononly.equals("checked")) {
-                    sw_currentseasononly = "on";
-                } else {
-                    sw_currentseasononly = null;
-                }
-
-                controlPanelSettings[0] = eps_timezone;
-                controlPanelSettings[1] = eps_time_offset;
-                controlPanelSettings[2] = dateformat;
-                controlPanelSettings[3] = timeformat;
-                controlPanelSettings[4] = eps_number_format;
-                controlPanelSettings[5] = ce_dback;
-                controlPanelSettings[6] = ce_dforward;
-                controlPanelSettings[7] = colorpast1;
-                controlPanelSettings[8] = colorpast2;
-                controlPanelSettings[9] = colortoday;
-                controlPanelSettings[10] = color1;
-                controlPanelSettings[11] = color2;
-                controlPanelSettings[12] = colorhover;
-                controlPanelSettings[13] = sw_acquire_delay;
-                controlPanelSettings[14] = cal_firstday;
-                controlPanelSettings[15] = action;
-                controlPanelSettings[16] = loginpage;
-                controlPanelSettings[17] = sw_hidefuture;
-                controlPanelSettings[18] = sw_presentonly;
-                controlPanelSettings[19] = sw_currentseasononly;
-
-                StringBuilder builder = new StringBuilder();
-                for (String value : controlPanelSettings) {
-                    builder.append("   " + value);
-                }
-                //display all settings which will be set for cp.php
-                //Log.d(LOG_TAG, builder.toString());
             }
+
+            int loginpageIndex = settingsHTML.indexOf("name=\"loginpage\"") + 17;
+            loginpage = settingsHTML.substring(loginpageIndex);
+            int loginpageSelectedIndex = loginpage.indexOf("</select>");
+            String loginpageRange = settingsHTML.substring(loginpageIndex, loginpageIndex + loginpageSelectedIndex);
+            String[] Splitloginpage = loginpageRange.split("</option>");
+
+            for (String a : Splitloginpage) {
+                int selectedIndex = a.indexOf("selected");
+                if (selectedIndex > 1) {
+                    loginpage = a.substring(a.indexOf("=") + 2);
+                    loginpage = loginpage.substring(0, loginpage.indexOf("\""));
+                }
+            }
+
+            sw_hidefuture = settingsHTML.substring(settingsHTML.indexOf("name=\"sw_hidefuture\""));
+            sw_hidefuture = sw_hidefuture.substring(21, 28);
+            if (sw_hidefuture.equals("checked")) {
+                sw_hidefuture = "on";
+            } else {
+                sw_hidefuture = null;
+            }
+
+            sw_presentonly = settingsHTML.substring(settingsHTML.indexOf("name=\"sw_presentonly\""));
+            sw_presentonly = sw_presentonly.substring(22, 29);
+            if (sw_presentonly.equals("checked")) {
+                sw_presentonly = "on";
+            } else {
+                sw_presentonly = null;
+            }
+
+            sw_currentseasononly = settingsHTML.substring(settingsHTML.indexOf("name=\"sw_currentseasononly\""));
+            sw_currentseasononly = sw_currentseasononly.substring(28, 35);
+            if (sw_currentseasononly.equals("checked")) {
+                sw_currentseasononly = "on";
+            } else {
+                sw_currentseasononly = null;
+            }
+
+            controlPanelSettings[0] = eps_timezone;
+            controlPanelSettings[1] = eps_time_offset;
+            controlPanelSettings[2] = dateformat;
+            controlPanelSettings[3] = timeformat;
+            controlPanelSettings[4] = eps_number_format;
+            controlPanelSettings[5] = ce_dback;
+            controlPanelSettings[6] = ce_dforward;
+            controlPanelSettings[7] = colorpast1;
+            controlPanelSettings[8] = colorpast2;
+            controlPanelSettings[9] = colortoday;
+            controlPanelSettings[10] = color1;
+            controlPanelSettings[11] = color2;
+            controlPanelSettings[12] = colorhover;
+            controlPanelSettings[13] = sw_acquire_delay;
+            controlPanelSettings[14] = cal_firstday;
+            controlPanelSettings[15] = action;
+            controlPanelSettings[16] = loginpage;
+            controlPanelSettings[17] = sw_hidefuture;
+            controlPanelSettings[18] = sw_presentonly;
+            controlPanelSettings[19] = sw_currentseasononly;
+
+            StringBuilder builder = new StringBuilder();
+            for (String value : controlPanelSettings) {
+                builder.append("   " + value);
+            }
+            //display all settings which will be set for cp.php
+            //Log.d(LOG_TAG, builder.toString());
         } catch (IOException e) {
             String message = "Error setting days back";
             Log.e(LOG_TAG, message, e);
@@ -606,7 +612,7 @@ public class EpisodesService {
         return controlPanelSettings;
     }
 
-    private void setDaysBack(String[] controlPanelSettings, HttpClient httpClient, Boolean restore) {
+    private void setDaysBack(String[] controlPanelSettings, OkHttpClient okHttpClient, Boolean restore) {
         //send POST to set just the number of days in the past to show..
         Log.d(LOG_TAG, "Setting number of days back");
         String[] controlPanelOrder = new String[20];
@@ -635,7 +641,6 @@ public class EpisodesService {
 
 
         try {
-            HttpPost httppostCP = new HttpPost(MyEpisodeConstants.MYEPISODES_CONTROL_PANEL);
             List<NameValuePair> nameValuePairsCP = new ArrayList<NameValuePair>(17);
 
             for (int i = 0; i < controlPanelOrder.length; i++) {
@@ -650,63 +655,41 @@ public class EpisodesService {
                     }
                 }
             }
-            httppostCP.setEntity(new UrlEncodedFormEntity(nameValuePairsCP));
+            Request request =
+                    buildPostRequest(okHttpClient, MyEpisodeConstants.MYEPISODES_CONTROL_PANEL, nameValuePairsCP);
 
             // 	Execute HTTP Post Request
-            HttpResponse responsePostCP = httpClient.execute(httppostCP);
-            responsePostCP.getStatusLine();
-
-            EntityUtils.toString(responsePostCP.getEntity());
-
+            okHttpClient.newCall(request).execute();
         } catch (IOException e) {
             String message = "Error setting days back";
             Log.e(LOG_TAG, message, e);
         }
     }
 
-    private void setViewFilters(Boolean setForDownload, Boolean isWatched, HttpClient httpClient) {
-        HttpPost httppost = new HttpPost(MyEpisodeConstants.MYEPISODES_FULL_UNWATCHED_LISTING);
+    private void setViewFilters(Boolean setForDownload, Boolean isWatched, OkHttpClient okHttpClient) {
         try {
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             if (setForDownload) {
                 //send POST request to only show episodes with the filter Watch
                 //eps_filters[]=2&action=Filter
                 if (isWatched) {
-                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                     nameValuePairs.add(new BasicNameValuePair("eps_filters[]", "2"));
                     nameValuePairs.add(new BasicNameValuePair("action", "Filter"));
-                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 } else {
-                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
                     nameValuePairs.add(new BasicNameValuePair("eps_filters[]", "1"));
                     nameValuePairs.add(new BasicNameValuePair("action", "Filter"));
-                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 }
             } else {
                 //set back to user default settings for the view filters
                 // need to work on detecting the settings to use.
-                List<NameValuePair> nameValuePairs2 = new ArrayList<NameValuePair>(2);
-                nameValuePairs2.add(new BasicNameValuePair("eps_filters[]", "1"));
-                nameValuePairs2.add(new BasicNameValuePair("eps_filters[]", "2"));
-                nameValuePairs2.add(new BasicNameValuePair("action", "Filter"));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs2));
+                nameValuePairs.add(new BasicNameValuePair("eps_filters[]", "1"));
+                nameValuePairs.add(new BasicNameValuePair("eps_filters[]", "2"));
+                nameValuePairs.add(new BasicNameValuePair("action", "Filter"));
             }
             // 	Execute HTTP Post Request
-            HttpResponse responsePost = httpClient.execute(httppost);
-            responsePost.getStatusLine();
-
-            EntityUtils.toString(responsePost.getEntity());
-            // Get hold of the response entity - need to read to the end to prevent "Invalid use of SingleClient...."
-            /*HttpEntity entity = responsePost.getEntity();
-            if (entity != null) {
-    			InputStream instream = entity.getContent();    			
-    			BufferedReader reader = new BufferedReader(new InputStreamReader(instream));
-    			StringBuilder HTMLcp = new StringBuilder();
-    			String line;
-    			while ((line = reader.readLine()) != null) {
-    				HTMLcp.append(line);
-    			}
-    		}*/
-
+            Request request = buildPostRequest(okHttpClient, MyEpisodeConstants.MYEPISODES_FULL_UNWATCHED_LISTING,
+                    nameValuePairs);
+            okHttpClient.newCall(request).execute();
         } catch (IOException e) {
             String message = "Error setting days back";
             Log.e(LOG_TAG, message, e);
