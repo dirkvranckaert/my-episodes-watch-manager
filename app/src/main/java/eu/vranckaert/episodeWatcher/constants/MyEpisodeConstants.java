@@ -46,7 +46,7 @@ public class MyEpisodeConstants {
     public static final String MYEPISODES_REGISTER_PAGE_PARAM_PASSWORD = "password";
     public static final String MYEPISODES_REGISTER_PAGE_PARAM_EMAIL = "user_email";
     public static final String MYEPISODES_REGISTER_PAGE_PARAM_ACTION_VALUE = "Register";
-    public static final String MYEPISODES_LOGIN_PAGE = "http://www.myepisodes.com/login.php";
+    public static final String MYEPISODES_LOGIN_PAGE = "http://www.myepisodes.com/login.php?action=login";
     public static final String MYEPISODES_LOGIN_PAGE_PARAM_USERNAME = "username";
     public static final String MYEPISODES_LOGIN_PAGE_PARAM_PASSWORD = "password";
     public static final String MYEPISODES_LOGIN_PAGE_PARAM_ACTION_VALUE = "Login";
