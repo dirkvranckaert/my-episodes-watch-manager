@@ -106,11 +106,19 @@ public class ShowService {
 
                         String htmlPart = split[i];
                         htmlPart = htmlPart.replace("href=\"views.php?type=epsbyshow&showid=", "");
+
                         //Get the showid
-                        String showSeperator = "\">";
-                        int showIdSeperatorIndex = StringUtils.indexOf(htmlPart, showSeperator);
-                        showId = htmlPart.substring(0, showIdSeperatorIndex);
-                        htmlPart = htmlPart.replace(showId + showSeperator, "");
+                        htmlPart = htmlPart.replace("href=\"/epsbyshow/", "");
+                        int indexOfSlash = htmlPart.indexOf("/");
+                        showId = htmlPart.substring(0, indexOfSlash);
+                        int closingIndex = htmlPart.indexOf("\">");
+                        htmlPart = htmlPart.substring(closingIndex+2);
+
+//                        //Get the showid
+//                        String showSeperator = "\">";
+//                        int showIdSeperatorIndex = StringUtils.indexOf(htmlPart, showSeperator);
+//                        showId = htmlPart.substring(0, showIdSeperatorIndex);
+//                        htmlPart = htmlPart.replace(showId + showSeperator, "");
                         //Get the showName
                         showName = htmlPart.substring(0, StringUtils.indexOf(htmlPart, "</a></td>"));
 
