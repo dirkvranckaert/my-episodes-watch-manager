@@ -19,9 +19,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import eu.vranckaert.framework.util.KeyboardHelper;
-import eu.vranckaert.trains.be.R;
-import eu.vranckaert.trains.be.util.MenuHandler;
+import eu.vranckaert.episodeWatcher.twopointo.util.KeyboardHelper;
+import eu.vranckaert.episodeWatcher.R;
 
 import java.util.List;
 

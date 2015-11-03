@@ -39,8 +39,9 @@
         <uses-library android:name="android.test.runner" />
 
 
-        <activity android:name=".twopointo.StartupActivity"
-                  android:label="ME 2.0">
+        <activity android:name=".twopointo.context.StartupActivity"
+                  android:label="ME 2.0"
+                  android:theme="@style/NewAppThemeLight">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

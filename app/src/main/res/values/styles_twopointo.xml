@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="NewAppThemeLight" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:colorPrimary" tools:targetApi="lollipop">@color/primary_color</item>
+        <item name="android:colorPrimaryDark" tools:targetApi="lollipop">@color/primary_dark_color</item>
+        <item name="android:colorAccent" tools:targetApi="lollipop">@color/accent_color</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textColorPrimary">@color/primary_text_color</item>
+        <!--<item name="android:buttonStyle">@style/ButtonAppTheme</item>-->
+        <item name="colorButtonNormal">@color/primary_color</item>
+
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryDark">@color/primary_dark_color</item>
+        <item name="colorAccent">@color/accent_color</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/toolbar_title</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="android:colorControlNormal" tools:targetApi="lollipop">@color/toolbar_title</item>
+        <item name="colorControlNormal">@color/toolbar_title</item>
+    </style>
+
+    <style name="ToolbarTitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">@color/toolbar_title</item>
+    </style>
+
+    <style name="ToolbarSubtitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textColor">@color/toolbar_title</item>
+    </style>
+</resources>
