@@ -337,51 +337,51 @@ public class EpisodesService {
                         String[] rowProcess = a.split("</td>");
 
                         //name of show
-                        int index = rowProcess[2].indexOf("showid=");
-                        String Show = rowProcess[2].substring(index + 7);
-                        int index1 = Show.indexOf("\">") + 1;
-                        Show = Show.substring(index1);
-                        Show = Show.substring(1, Show.length() - 4);
+                        int indexName = rowProcess[2].indexOf("showname\">") + 10;
+                        String showPart = rowProcess[2].substring(indexName);
+                        indexName = showPart.indexOf(">") + 1;
+                        int indexNameEndTag = showPart.indexOf("</a>");
+                        String show = showPart.substring(indexName, indexNameEndTag);
 
                         // get Series and Episode
-                        String SeriesEp = rowProcess[3].substring(28);
+                        String seriesEps = rowProcess[3].substring(28);
 
                         //Get episode name
-                        int indexEp = rowProcess[4].indexOf("_blank") + 7;
-                        String EpisodeName = rowProcess[4].substring(indexEp);
-                        EpisodeName = EpisodeName.substring(1, EpisodeName.length() - 4);
+                        int indexEp = rowProcess[4].indexOf("epname\">") + 8;
+                        String episodeName = rowProcess[4].substring(indexEp);
 
                         //Get episode link - doesn't work yet.
                         int indexEpLink = rowProcess[4].indexOf("a href=") + 8;
-                        String EpisodeLink = rowProcess[4].substring(indexEpLink);
-                        int indexEpLink1 = EpisodeLink.indexOf("\"");
-                        EpisodeLink = EpisodeLink.substring(0, indexEpLink1);
+                        String episodeLink = rowProcess[4].substring(indexEpLink);
+                        int indexEpLink1 = episodeLink.indexOf("\"");
+                        episodeLink = episodeLink.substring(0, indexEpLink1);
+                        episodeLink = "";
 
                         //get air date
                         int indexAirDate = rowProcess[0].length() - 15;
-                        String AirDate = rowProcess[0].substring(indexAirDate, indexAirDate + 11);
+                        String airDate = rowProcess[0].substring(indexAirDate, indexAirDate + 11);
 
-                        //Get GUID
+                        //Get guid
                         int indexGUID = rowProcess[5].indexOf("name=") + 7;
-                        String GUID = rowProcess[5].substring(indexGUID);
-                        int indexGUID1 = GUID.indexOf("\"");
-                        GUID = GUID.substring(0, indexGUID1);
+                        String guid = rowProcess[5].substring(indexGUID);
+                        int indexGUID1 = guid.indexOf("\"");
+                        guid = guid.substring(0, indexGUID1);
 
-                        String HeaderRow =
-                                "[ " + Show + " ]" + "[ " + SeriesEp + " ]" + "[ " + EpisodeName + " ]" + "[ " +
-                                        AirDate + " ]";
+                        String headerRow =
+                                "[ " + show + " ]" + "[ " + seriesEps + " ]" + "[ " + episodeName + " ]" + "[ " +
+                                        airDate + " ]";
 
                         xs.startTag(null, "item");
                         xs.startTag(null, "guid");
-                        xs.text(GUID);
+                        xs.text(guid);
                         xs.endTag(null, "guid");
 
                         xs.startTag(null, "title");
-                        xs.text(HeaderRow);
+                        xs.text(headerRow);
                         xs.endTag(null, "title");
 
                         xs.startTag(null, "link");
-                        xs.text(EpisodeLink);
+                        xs.text(episodeLink);
                         xs.endTag(null, "link");
 
                         xs.startTag(null, "description");

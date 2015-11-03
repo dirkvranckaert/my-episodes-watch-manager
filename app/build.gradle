@@ -9,7 +9,7 @@ android {
         applicationId "eu.vranckaert.episodeWatcher"
         minSdkVersion 7
         targetSdkVersion 23
-        versionCode 35
+        versionCode 36
         versionName "1.8.5"
     }
     signingConfigs {
