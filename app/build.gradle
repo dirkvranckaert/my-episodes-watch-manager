@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 8
+    compileSdkVersion 21
     buildToolsVersion "23.0.0"
 
     defaultConfig {
         applicationId "eu.vranckaert.episodeWatcher"
-        minSdkVersion 4
-        targetSdkVersion 8
+        minSdkVersion 7
+        targetSdkVersion 21
         versionCode 35
         versionName "1.8.5"
     }
@@ -38,4 +38,5 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.2.1'
 }
