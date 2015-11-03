@@ -103,7 +103,9 @@ public class SaxRssFeedParser extends DefaultHandler implements RssFeedParser {
             tempTitle = new StringBuilder();
         }
         if (inItem && localName.equals("link")) {
-            item.setLink(nodeValue.toString());
+            if (nodeValue != null) {
+                item.setLink(nodeValue.toString());
+            }
         }
         if (inItem && localName.equals("description")) {
             item.setDescription("");

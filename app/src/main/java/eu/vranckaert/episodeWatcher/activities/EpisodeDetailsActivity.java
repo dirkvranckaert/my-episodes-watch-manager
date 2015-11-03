@@ -2,6 +2,7 @@ package eu.vranckaert.episodeWatcher.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -64,8 +65,12 @@ public class EpisodeDetailsActivity extends GuiceActivity {
         airdateText.setText(" " + formattedAirDate);
         
         TextView aboutWebsite = (TextView) findViewById(R.id.tvrageWebsite);
-        aboutWebsite.setText(episode.getTVRageWebSite());
-        Linkify.addLinks(aboutWebsite, Linkify.WEB_URLS);
+		if (!TextUtils.isEmpty(episode.getTVRageWebSite())) {
+			aboutWebsite.setText(episode.getTVRageWebSite());
+			Linkify.addLinks(aboutWebsite, Linkify.WEB_URLS);
+		} else {
+			aboutWebsite.setVisibility(View.GONE);
+		}
         
         Button markAsAcquiredButton = (Button) findViewById(R.id.markAsAcquiredButton);
         Button markAsSeenButton = (Button) findViewById(R.id.markAsSeenButton);
