@@ -2,35 +2,45 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       android:installLocation="auto"
       package="eu.vranckaert.episodeWatcher">
-    <application android:icon="@drawable/icon" android:label="@string/app_name" android:name="MyEpisodes" android:theme="@android:style/Theme.NoTitleBar">
+    <application android:icon="@drawable/icon" android:label="@string/app_name" android:name="MyEpisodes" android:theme="@style/NewAppThemeLight">
         <activity android:name=".activities.HomeActivity"
-                  android:label="@string/app_name">
+                  android:label="@string/app_name"
+                  android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.EpisodeListingActivity"
-                  android:configChanges="orientation|keyboardHidden"/>
+                  android:configChanges="orientation|keyboardHidden"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activities.LoginActivity"
-                  android:configChanges="orientation|keyboardHidden"/>
+                  android:configChanges="orientation|keyboardHidden"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activities.RegisterActivity"
-                  android:configChanges="orientation|keyboardHidden"/>
+                  android:configChanges="orientation|keyboardHidden"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activities.EpisodeDetailsActivity"
-                  android:configChanges="orientation|keyboardHidden"/>
+                  android:configChanges="orientation|keyboardHidden"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activities.PreferencesActivity"
                   android:configChanges="orientation|keyboardHidden"
-                  android:label="@string/preferences"/>
+                  android:label="@string/preferences"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activities.ShowManagementPortalActivity"
-                  android:label="@string/manageShows"/>
+                  android:label="@string/manageShows"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activities.ShowManagementActivity"
                   android:configChanges="orientation|keyboardHidden"
-                  android:label="@string/manageShows"/>
+                  android:label="@string/manageShows"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activities.ShowManagementAddActivity"
                   android:configChanges="orientation|keyboardHidden"
-                  android:label="@string/manageShows"/>
+                  android:label="@string/manageShows"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activities.RandomEpPickerActivity"
-                  android:configChanges="orientation|keyboardHidden"/>
+                  android:configChanges="orientation|keyboardHidden"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activities.AboutActivity"
                   android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".activities.ChangelogActivity"
@@ -40,13 +50,13 @@
 
 
         <activity android:name=".twopointo.context.StartupActivity"
-                  android:label="ME 2.0"
-                  android:theme="@style/NewAppThemeLight">
+                  android:label="ME 2.0">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".twopointo.context.LoginActivity"/>
     </application>
     
     <uses-permission android:name="android.permission.INTERNET" />

@@ -7,7 +7,6 @@
         <item name="android:colorAccent" tools:targetApi="lollipop">@color/accent_color</item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textColorPrimary">@color/primary_text_color</item>
-        <!--<item name="android:buttonStyle">@style/ButtonAppTheme</item>-->
         <item name="colorButtonNormal">@color/primary_color</item>
 
         <item name="colorPrimary">@color/primary_color</item>

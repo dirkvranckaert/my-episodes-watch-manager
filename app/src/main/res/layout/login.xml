@@ -29,7 +29,7 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center"
-		android:padding="15px"
+		android:padding="15sp"
 		android:text="@string/loginFormTitle"
 	/>
 	
@@ -60,7 +60,7 @@
 		android:id="@+id/registerForm"
 		android:paddingTop="5px"
 		android:paddingRight="15px"
-		android:textSize="12px"
+		android:textSize="12sp"
 		android:gravity="right"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"

@@ -34,7 +34,6 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
         OnClickListener {
     private static final String SELECTED_MENU_ITEM_ID = "selectedMenuItemId";
 
-    private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationView mNavigationView;
@@ -58,13 +57,9 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View view = layoutInflater.inflate(R.layout.activity_menu, null);
 
-        // Setup the ToolBar
-        mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-
         // Setup the ActionBarDrawerToggle
         mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.general_drawer_open,
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getToolbar(), R.string.general_drawer_open,
                 R.string.general_drawer_close);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();

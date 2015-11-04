@@ -19,7 +19,7 @@ public class StartupActivity extends Activity {
         if (isLoggedIn()) {
             Toast.makeText(this, "Already logged on", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Should logon first", Toast.LENGTH_LONG).show();
+            NavigationManager.startLogon(this);
         }
         finish();
     }
