@@ -17,7 +17,7 @@ public class StartupActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (isLoggedIn()) {
-            Toast.makeText(this, "Already logged on", Toast.LENGTH_LONG).show();
+            NavigationManager.startApp(this);
         } else {
             NavigationManager.startLogon(this);
         }

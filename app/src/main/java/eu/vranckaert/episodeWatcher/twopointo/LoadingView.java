@@ -3,7 +3,7 @@ package eu.vranckaert.episodeWatcher.twopointo;
 import android.content.Context;
 import android.widget.TextView;
 import eu.vranckaert.episodeWatcher.R;
-import eu.vranckaert.episodeWatcher.twopointo.view.AbstractViewHolder;
+import eu.vranckaert.episodeWatcher.twopointo.view.base.AbstractViewHolder;
 
 /**
  * Date: 14/04/14

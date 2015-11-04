@@ -1,4 +1,4 @@
-package eu.vranckaert.episodeWatcher.twopointo.context;
+package eu.vranckaert.episodeWatcher.twopointo.context.login;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -11,8 +11,10 @@ import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.service.UserService;
 import eu.vranckaert.episodeWatcher.twopointo.CustomTask;
 import eu.vranckaert.episodeWatcher.twopointo.ErrorMapping;
-import eu.vranckaert.episodeWatcher.twopointo.view.LoginView;
-import eu.vranckaert.episodeWatcher.twopointo.view.LoginView.LoginListener;
+import eu.vranckaert.episodeWatcher.twopointo.context.NavigationManager;
+import eu.vranckaert.episodeWatcher.twopointo.context.base.BaseActivity;
+import eu.vranckaert.episodeWatcher.twopointo.view.login.LoginView;
+import eu.vranckaert.episodeWatcher.twopointo.view.login.LoginView.LoginListener;
 
 /**
  * Date: 03/11/15

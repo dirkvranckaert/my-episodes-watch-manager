@@ -56,7 +56,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".twopointo.context.LoginActivity"/>
+        <activity android:name=".twopointo.context.login.LoginActivity"/>
+        <activity android:name=".twopointo.context.MainActivity"/>
     </application>
     
     <uses-permission android:name="android.permission.INTERNET" />

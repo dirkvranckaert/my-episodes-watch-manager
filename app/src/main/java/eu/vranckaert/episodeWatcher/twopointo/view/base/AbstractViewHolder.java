@@ -1,4 +1,4 @@
-package eu.vranckaert.episodeWatcher.twopointo.view;
+package eu.vranckaert.episodeWatcher.twopointo.view.base;
 
 import android.content.Context;
 import android.content.res.Resources;

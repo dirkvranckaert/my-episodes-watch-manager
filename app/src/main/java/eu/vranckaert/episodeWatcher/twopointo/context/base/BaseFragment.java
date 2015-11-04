@@ -1,4 +1,4 @@
-package eu.vranckaert.episodeWatcher.twopointo.context;
+package eu.vranckaert.episodeWatcher.twopointo.context.base;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -278,8 +278,6 @@ public abstract class BaseFragment extends Fragment {
     public void navigateToMenuItem(int menuItemId) {
         ((BaseMenuActivity) getActivity()).navigateToMenuItem(menuItemId);
     }
-
-    protected abstract String getAnalyticsScreenName();
 
     @Override
     public void onPause() {

@@ -1,4 +1,4 @@
-package eu.vranckaert.episodeWatcher.twopointo.context;
+package eu.vranckaert.episodeWatcher.twopointo.context.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

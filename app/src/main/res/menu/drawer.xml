@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_item_episodes"
+            android:title="@string/drawer_item_episodes"
+            android:icon="@drawable/ic_format_list_bulleted_white_36dp"/>
+    </group>
+</menu>

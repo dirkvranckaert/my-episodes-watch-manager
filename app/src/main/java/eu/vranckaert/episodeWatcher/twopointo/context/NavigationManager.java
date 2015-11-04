@@ -3,6 +3,7 @@ package eu.vranckaert.episodeWatcher.twopointo.context;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import eu.vranckaert.episodeWatcher.twopointo.context.login.LoginActivity;
 
 /**
  * Date: 03/11/15
@@ -24,7 +25,8 @@ public class NavigationManager {
     }
 
     public static void startApp(Activity activity) {
-        // TODO
+        Intent intent = new Intent(activity, MainActivity.class);
+        activity.startActivity(intent);
         activity.finish();
     }
 
