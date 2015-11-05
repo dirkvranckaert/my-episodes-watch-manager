@@ -9,10 +9,10 @@ import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
 import eu.vranckaert.episodeWatcher.exception.LoginFailedException;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.service.UserService;
-import eu.vranckaert.episodeWatcher.twopointo.CustomTask;
-import eu.vranckaert.episodeWatcher.twopointo.ErrorMapping;
+import eu.vranckaert.android.threading.CustomTask;
+import eu.vranckaert.android.threading.ErrorMapping;
 import eu.vranckaert.episodeWatcher.twopointo.context.NavigationManager;
-import eu.vranckaert.episodeWatcher.twopointo.context.base.BaseActivity;
+import eu.vranckaert.android.context.BaseActivity;
 import eu.vranckaert.episodeWatcher.twopointo.view.login.LoginView;
 import eu.vranckaert.episodeWatcher.twopointo.view.login.LoginView.LoginListener;
 

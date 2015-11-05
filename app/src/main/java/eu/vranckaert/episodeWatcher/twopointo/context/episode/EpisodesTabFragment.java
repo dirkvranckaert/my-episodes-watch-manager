@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import eu.vranckaert.episodeWatcher.twopointo.context.base.BaseFragment;
+import eu.vranckaert.android.context.BaseFragment;
+import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.twopointo.view.episode.EpisodesTabsView;
 
 /**
@@ -15,6 +16,13 @@ import eu.vranckaert.episodeWatcher.twopointo.view.episode.EpisodesTabsView;
  */
 public class EpisodesTabFragment extends BaseFragment {
     private EpisodesTabsView mView;
+
+    @Override
+    protected void doCreate(Bundle savedInstanceState) {
+        super.doCreate(savedInstanceState);
+
+        setTitle(R.string.watchListTitle);
+    }
 
     @Override
     protected View doCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

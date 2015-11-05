@@ -1,8 +1,9 @@
 package eu.vranckaert.episodeWatcher.twopointo.context;
 
 
+import eu.vranckaert.android.context.AbstractMenuHandler;
 import eu.vranckaert.episodeWatcher.R;
-import eu.vranckaert.episodeWatcher.twopointo.context.base.BaseFragment;
+import eu.vranckaert.android.context.BaseFragment;
 import eu.vranckaert.episodeWatcher.twopointo.context.episode.EpisodesTabFragment;
 
 /**
@@ -11,8 +12,9 @@ import eu.vranckaert.episodeWatcher.twopointo.context.episode.EpisodesTabFragmen
  *
  * @author Dirk Vranckaert
  */
-public class MenuHandler {
-    public static BaseFragment navigate(int itemId) {
+public class MenuHandler extends AbstractMenuHandler {
+    @Override
+    public BaseFragment navigate(int itemId) {
         BaseFragment baseFragment = null;
         switch (itemId) {
             case R.id.drawer_item_episodes:

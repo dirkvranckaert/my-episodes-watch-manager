@@ -1,11 +1,10 @@
 package eu.vranckaert.episodeWatcher.twopointo.view.episode;
 
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import eu.vranckaert.android.viewholder.AbstractViewHolder;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Episode;
-import eu.vranckaert.episodeWatcher.twopointo.view.base.AbstractViewHolder;
 
 import java.util.List;
 

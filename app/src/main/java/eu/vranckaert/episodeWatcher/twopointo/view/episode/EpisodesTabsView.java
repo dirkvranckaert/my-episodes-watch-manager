@@ -1,12 +1,11 @@
 package eu.vranckaert.episodeWatcher.twopointo.view.episode;
 
-import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import eu.vranckaert.android.viewholder.AbstractViewHolder;
 import eu.vranckaert.episodeWatcher.R;
-import eu.vranckaert.episodeWatcher.twopointo.view.base.AbstractViewHolder;
 
 /**
  * Date: 04/11/15

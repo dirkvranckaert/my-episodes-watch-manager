@@ -1,7 +1,8 @@
 package eu.vranckaert.episodeWatcher.twopointo.context;
 
+import eu.vranckaert.android.context.AbstractMenuHandler;
 import eu.vranckaert.episodeWatcher.R;
-import eu.vranckaert.episodeWatcher.twopointo.context.base.BaseMenuActivity;
+import eu.vranckaert.android.context.BaseMenuActivity;
 
 /**
  * Date: 04/11/15
@@ -10,6 +11,22 @@ import eu.vranckaert.episodeWatcher.twopointo.context.base.BaseMenuActivity;
  * @author Dirk Vranckaert
  */
 public class MainActivity extends BaseMenuActivity {
+    private MenuHandler mMenuHandler;
+
+    @Override
+    protected int getMenuResId() {
+        return R.menu.drawer;
+    }
+
+    @Override
+    public AbstractMenuHandler getMenuHandler() {
+        if (mMenuHandler == null) {
+            mMenuHandler = new MenuHandler();
+        }
+
+        return mMenuHandler;
+    }
+
     @Override
     protected int getDefaultMenuItem() {
         return R.id.drawer_item_episodes;

@@ -5,8 +5,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import eu.vranckaert.android.viewholder.AbstractViewHolder;
 import eu.vranckaert.episodeWatcher.R;
-import eu.vranckaert.episodeWatcher.twopointo.view.base.AbstractViewHolder;
 
 /**
  * Date: 03/11/15
