@@ -13,6 +13,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import android.os.SystemClock;
+import eu.vranckaert.episodeWatcher.BuildConfig;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -60,6 +62,33 @@ public class EpisodesService {
 
     public List<Episode> retrieveEpisodes(EpisodeType episodesType, final User user)
             throws InternetConnectivityException, Exception {
+        if (BuildConfig.DEBUG) {
+            //SystemClock.sleep(1000L);
+
+            String[] shows = new String[]{"Fargo", "How I Met Your Mother", "The Big Bang Theory", "Dexter", "Thuis", "Familie", "24", "Chuck", "The Americans", "The White House"};
+
+            List<Episode> episodes = new ArrayList<>();
+            int numberOfEpisodes = (int) (Math.random() * 10);
+            for (int i=0; i<numberOfEpisodes; i++) {
+                String showName = shows[i];
+                String episodeName = "Name of the episode " + i;
+
+                Episode episode = new Episode();
+                episode.setName(episodeName);
+                episode.setShowName(showName);
+                episode.setMyEpisodeID("23525" + i);
+                episode.setType(episodesType);
+                episode.setSeason(i);
+                episode.setEpisode(i);
+                episode.setAirDate(new Date());
+                episodes.add(episode);
+            }
+
+
+            return episodes;
+        }
+
+
         String encryptedPassword = userService.encryptPassword(user.getPassword());
 
         URL feedUrl;
