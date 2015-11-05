@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import eu.vranckaert.android.viewholder.AbstractViewHolder;
 import eu.vranckaert.episodeWatcher.R;
+import eu.vranckaert.episodeWatcher.domain.Episode;
+
+import java.util.List;
 
 /**
  * Date: 04/11/15
@@ -30,6 +33,21 @@ public class EpisodesTabsView extends AbstractViewHolder {
             }
         });
         mAdapter = new EpisodesTabsAdapter(getContext());
+        mViewpager.setAdapter(mAdapter);
+    }
+
+    public void startLoadingAll() {
+        mAdapter.setLoadingEpisodesToWatch(true);
+        mAdapter.setLoadingEpisodesToWatch(true);
+    }
+
+    public void setEpisodesToWatch(List<Episode> episodes) {
+        mAdapter.setEpisodesToWatch(episodes);
+        mViewpager.setAdapter(mAdapter);
+    }
+
+    public void setEpisodesToAcquire(List<Episode> episodes) {
+        mAdapter.setEpisodesToAcquire(episodes);
         mViewpager.setAdapter(mAdapter);
     }
 }

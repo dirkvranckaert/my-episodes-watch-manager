@@ -48,6 +48,7 @@ public class EpisodesTabsAdapter extends PagerAdapter {
         if (mEpisodesToWatchView != null) {
             mEpisodesToWatchView.setEpisodes(mEpisodesToWatch);
         }
+        notifyDataSetChanged();
     }
 
     public void setLoadingEpisodesToAcquire(boolean loading) {
@@ -64,6 +65,7 @@ public class EpisodesTabsAdapter extends PagerAdapter {
         if (mEpisodesToAcquireView != null) {
             mEpisodesToAcquireView.setEpisodes(mEpisodesToAcquire);
         }
+        notifyDataSetChanged();
     }
 
     @Override

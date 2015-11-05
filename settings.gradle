@@ -1,1 +1,1 @@
-include ':app', ':context', ':viewholder', ':widget', ':general', ':threading'
+include ':app', ':context', ':viewholder', ':widget', ':general', ':threading', ':recyclerview'
