@@ -2,6 +2,8 @@ package eu.vranckaert.episodeWatcher.twopointo.view.episode;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import eu.vranckaert.android.viewholder.AbstractRecyclerViewHolder;
@@ -14,7 +16,7 @@ import eu.vranckaert.episodeWatcher.domain.Episode;
  *
  * @author Dirk Vranckaert
  */
-public class EpisodeListItemView extends AbstractRecyclerViewHolder {
+public class EpisodeListItemView extends AbstractRecyclerViewHolder implements OnClickListener {
     private final TextView mShowName;
     private final TextView mEpisodeName;
     private final TextView mEpisodeNumber;
@@ -30,6 +32,8 @@ public class EpisodeListItemView extends AbstractRecyclerViewHolder {
         mAirDate = findViewById(R.id.air_date);
         mLink = findViewById(R.id.link);
         // TODO linkify!
+
+        getView().setOnClickListener(this);
     }
 
     public void setEpisode(Episode episode) {
@@ -44,5 +48,10 @@ public class EpisodeListItemView extends AbstractRecyclerViewHolder {
             mLink.setVisibility(VISIBLE);
             mLink.setText(episode.getTVRageWebSite());
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
