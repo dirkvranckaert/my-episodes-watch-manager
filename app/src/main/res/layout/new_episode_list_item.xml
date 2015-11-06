@@ -13,18 +13,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/show_name"
-        android:textStyle="bold"
-        android:textSize="22dp"
-        android:lines="1"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:ellipsize="end"
-        tools:text="Fargo"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/episode_name"
         android:textSize="18dp"
         android:lines="1"

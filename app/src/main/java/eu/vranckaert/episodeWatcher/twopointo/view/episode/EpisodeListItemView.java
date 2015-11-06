@@ -17,7 +17,6 @@ import eu.vranckaert.episodeWatcher.domain.Episode;
  * @author Dirk Vranckaert
  */
 public class EpisodeListItemView extends AbstractRecyclerViewHolder implements OnClickListener {
-    private final TextView mShowName;
     private final TextView mEpisodeName;
     private final TextView mEpisodeNumber;
     private final TextView mAirDate;
@@ -26,7 +25,6 @@ public class EpisodeListItemView extends AbstractRecyclerViewHolder implements O
     public EpisodeListItemView(LayoutInflater inflater, ViewGroup parent) {
         super(inflater, parent, R.layout.new_episode_list_item);
 
-        mShowName = findViewById(R.id.show_name);
         mEpisodeName = findViewById(R.id.episode_name);
         mEpisodeNumber = findViewById(R.id.episode_number);
         mAirDate = findViewById(R.id.air_date);
@@ -37,7 +35,6 @@ public class EpisodeListItemView extends AbstractRecyclerViewHolder implements O
     }
 
     public void setEpisode(Episode episode) {
-        mShowName.setText(episode.getShowName());
         mEpisodeName.setText(episode.getName());
         mEpisodeNumber.setText(episode.getSeason() + "x" + episode.getEpisode()); // TODO check the formatting in the current app for seasonXepisode
         mAirDate.setText(episode.getAirDate().toString()); // TODO format the air date

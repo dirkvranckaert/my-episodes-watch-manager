@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "eu.vranckaert.episodeWatcher"
-        minSdkVersion 7
+        minSdkVersion 9
         targetSdkVersion 23
         versionCode 36
         versionName "1.8.5"

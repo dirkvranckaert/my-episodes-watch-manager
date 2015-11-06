@@ -84,6 +84,15 @@ public class EpisodesService {
                 episodes.add(episode);
             }
 
+            Episode fixedEpisode = new Episode();
+            fixedEpisode.setAirDate(new Date());
+            fixedEpisode.setShowName(shows[0]);
+            fixedEpisode.setEpisode(5);
+            fixedEpisode.setSeason(3);
+            fixedEpisode.setName("Some random episode");
+            fixedEpisode.setType(episodesType);
+            episodes.add(fixedEpisode);
+
 
             return episodes;
         }
