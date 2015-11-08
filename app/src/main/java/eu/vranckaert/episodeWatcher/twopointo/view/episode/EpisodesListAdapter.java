@@ -1,12 +1,9 @@
 package eu.vranckaert.episodeWatcher.twopointo.view.episode;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import com.tonicartos.superslim.GridSLM;
-import com.tonicartos.superslim.LinearSLM;
+import eu.vranckaert.android.recyclerview.SectionedAdapter;
 import eu.vranckaert.android.viewholder.AbstractRecyclerViewHolder;
 import eu.vranckaert.episodeWatcher.domain.Episode;
 
@@ -21,9 +18,7 @@ import java.util.List;
  *
  * @author Dirk Vranckaert
  */
-public class EpisodesListAdapter extends Adapter<AbstractRecyclerViewHolder> {
-    private static final int VIEW_TYPE_HEADER_ELEMENT = 0x01;
-    private static final int VIEW_TYPE_LIST_ELEMENT = 0x02;
+public class EpisodesListAdapter extends SectionedAdapter<AbstractRecyclerViewHolder> {
 
     public final Context mContext;
 
@@ -67,40 +62,44 @@ public class EpisodesListAdapter extends Adapter<AbstractRecyclerViewHolder> {
     }
 
     @Override
-    public int getItemViewType(int position) {
-        return mListItems.get(position).isHeader() ? VIEW_TYPE_HEADER_ELEMENT : VIEW_TYPE_LIST_ELEMENT;
+    public boolean isHeader(int position) {
+        return mListItems.get(position).isHeader();
     }
 
     @Override
-    public AbstractRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_LIST_ELEMENT) {
-            EpisodeListItemView view = new EpisodeListItemView(LayoutInflater.from(mContext), parent);
-            return view;
-        } else {
-            EpisodeHeaderItemView view = new EpisodeHeaderItemView(LayoutInflater.from(mContext), parent);
-            return view;
-        }
+    public boolean isLinear() {
+        return true;
     }
 
     @Override
-    public void onBindViewHolder(AbstractRecyclerViewHolder holder, int position) {
+    public AbstractRecyclerViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
+        return new EpisodeHeaderItemView(LayoutInflater.from(mContext), parent);
+    }
+
+    @Override
+    public AbstractRecyclerViewHolder onCreateElementViewHolder(ViewGroup parent) {
+        return new EpisodeListItemView(LayoutInflater.from(mContext), parent);
+    }
+
+    @Override
+    protected void onBindHeaderViewHolder(AbstractRecyclerViewHolder holder, int position) {
+        ((EpisodeHeaderItemView) holder).setShowName(((HeaderElement) mListItems.get(position)).getShowName());
+    }
+
+    @Override
+    protected void onBindElementViewHolder(AbstractRecyclerViewHolder holder, int position) {
+        ListElement listElement = (ListElement) mListItems.get(position);
+        ((EpisodeListItemView) holder).setEpisode(listElement.getEpisode());
+    }
+
+    @Override
+    protected int getHeaderPosition(int position) {
         ListItem listItem = mListItems.get(position);
-
-        int viewType = getItemViewType(position);
-        int headerPosition = position;
-        if (viewType == VIEW_TYPE_LIST_ELEMENT) {
-            ListElement listElement = (ListElement) listItem;
-            ((EpisodeListItemView) holder).setEpisode(listElement.getEpisode());
-            headerPosition = listElement.getHeaderPosition();
-        } else if (viewType == VIEW_TYPE_HEADER_ELEMENT) {
-            ((EpisodeHeaderItemView) holder).setShowName(((HeaderElement) listItem).getShowName());
+        if (listItem.isHeader()) {
+            return position;
+        } else {
+            return ((ListElement) listItem).getHeaderPosition();
         }
-
-        View itemView = holder.getView();
-        final GridSLM.LayoutParams lp = GridSLM.LayoutParams.from(itemView.getLayoutParams());
-        lp.setSlm(LinearSLM.ID);
-        lp.setFirstPosition(headerPosition);
-        itemView.setLayoutParams(lp);
     }
 
     @Override

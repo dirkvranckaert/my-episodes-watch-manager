@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.tonicartos.superslim.LayoutManager;
 import eu.vranckaert.android.recyclerview.ListItemDividerDecoration;
+import eu.vranckaert.android.recyclerview.RecyclerViewUtil;
 import eu.vranckaert.android.viewholder.AbstractViewHolder;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Episode;
@@ -25,13 +26,9 @@ public class EpisodesListView extends AbstractViewHolder {
         super(inflater, parent, R.layout.new_episodes_list);
 
         mList = findViewById(R.id.list);
-        //RecyclerViewUtil.init(mList, R.color.divider_color);
-        // TODO move to library project
-        LayoutManager layoutManager = new LayoutManager(getContext());
-        mList.setLayoutManager(layoutManager);
+        RecyclerViewUtil.initSuperSlim(mList, R.color.divider_color);
         mAdapter = new EpisodesListAdapter(getContext());
         mList.setAdapter(mAdapter);
-        //mList.addItemDecoration(new ListItemDividerDecoration(getContext(), R.color.divider_color, 1));
 
     }
 

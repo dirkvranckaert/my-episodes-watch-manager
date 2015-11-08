@@ -16,4 +16,10 @@ public class RecyclerViewUtil {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new ListItemDividerDecoration(recyclerView.getContext(), dividerColor, 1));
     }
+
+    public static void initSuperSlim(RecyclerView recyclerView, @ColorRes int dividerColor) {
+        com.tonicartos.superslim.LayoutManager layoutManager = new com.tonicartos.superslim.LayoutManager(recyclerView.getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new ListItemDividerDecoration(recyclerView.getContext(), dividerColor, 1));
+    }
 }
