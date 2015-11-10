@@ -30,17 +30,20 @@ public class EpisodesListAdapter extends SectionedAdapter<AbstractRecyclerViewHo
 
     private final Context mContext;
     private final EpisodeType mType;
+    private final EpisodesListListener mListener;
     private final MultiSelector mMultiSelector;
 
     private final List<ListItem> mListItems = new ArrayList<>();
 
-    public EpisodesListAdapter(Context context, EpisodeType type) {
+    public EpisodesListAdapter(Context context, EpisodeType type, EpisodesListListener listener) {
         mContext = context;
         mType = type;
+        mListener = listener;
         mMultiSelector = new MultiSelector((Activity) context, this, this);
     }
 
     public void setEpisodes(List<Episode> episodes) {
+        int countBefore = mListItems.size();
         mListItems.clear();
 
         Collections.sort(episodes, new Comparator<Episode>() {
@@ -70,7 +73,47 @@ public class EpisodesListAdapter extends SectionedAdapter<AbstractRecyclerViewHo
             mListItems.add(listElement);
         }
 
+        int countAfter = mListItems.size();
+        if (countBefore != countAfter) {
+            mListener.episodeCountHasUpdated();
+        }
+
         notifyDataSetChanged();
+    }
+
+    public void removeAllEpisodes(List<Episode> episodes) {
+        List<Episode> existingEpisodes = getEpisodes();
+
+        for (Episode episode : episodes) {
+            if (existingEpisodes.contains(episode)) {
+                existingEpisodes.remove(episode);
+            }
+        }
+
+        setEpisodes(existingEpisodes);
+    }
+
+    public void addAllEpisodes(List<Episode> episodes) {
+        List<Episode> existingEpisodes = getEpisodes();
+
+        for (Episode episode : episodes) {
+            if (!existingEpisodes.contains(episode)) {
+                existingEpisodes.add(episode);
+            }
+        }
+
+        setEpisodes(existingEpisodes);
+    }
+
+    private List<Episode> getEpisodes() {
+        List<Episode> existingEpisodes = new ArrayList<>();
+        for (ListItem listItem : mListItems) {
+            if (!listItem.isHeader()) {
+                ListElement listElement = (ListElement) listItem;
+                existingEpisodes.add(listElement.getEpisode());
+            }
+        }
+        return existingEpisodes;
     }
 
     @Override
@@ -130,12 +173,31 @@ public class EpisodesListAdapter extends SectionedAdapter<AbstractRecyclerViewHo
 
     @Override
     public boolean onActionItemClicked(MultiSelector multiSelector, MenuItem item) {
+        List<Episode> selectedEpisodes = new ArrayList<>();
+        List<Integer> positions = multiSelector.getSelectedPositions();
+        int count = positions.size();
+        for (int i = 0; i < count; i++) {
+            ListItem listItem = mListItems.get(positions.get(i));
+            if (!listItem.isHeader()) {
+                ListElement listElement = (ListElement) listItem;
+                selectedEpisodes.add(listElement.getEpisode());
+            }
+        }
+
+        if (item.getItemId() == R.id.watched) {
+            mListener.markWatched(selectedEpisodes);
+            return true;
+        } else if (item.getItemId() == R.id.acquired) {
+            mListener.markAcquired(selectedEpisodes);
+            return true;
+        }
         return false;
     }
 
     @Override
     public int getMenuRes() {
-        return mType.equals(EpisodeType.EPISODES_TO_WATCH) ? R.menu.action_mode_to_watch : R.menu.action_mode_to_acquire;
+        return mType.equals(EpisodeType.EPISODES_TO_WATCH) ? R.menu.action_mode_to_watch :
+                R.menu.action_mode_to_acquire;
     }
 
     @Override
@@ -197,5 +259,13 @@ public class EpisodesListAdapter extends SectionedAdapter<AbstractRecyclerViewHo
         public Episode getEpisode() {
             return episode;
         }
+    }
+
+    public interface EpisodesListListener {
+        void markWatched(List<Episode> episodes);
+
+        void markAcquired(List<Episode> episodes);
+
+        void episodeCountHasUpdated();
     }
 }

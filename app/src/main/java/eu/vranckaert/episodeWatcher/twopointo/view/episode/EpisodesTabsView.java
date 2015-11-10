@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import eu.vranckaert.android.viewholder.AbstractViewHolder;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Episode;
+import eu.vranckaert.episodeWatcher.twopointo.view.episode.EpisodesListAdapter.EpisodesListListener;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
     private final ViewPager mViewpager;
     private final EpisodesTabsAdapter mAdapter;
 
-    public EpisodesTabsView(LayoutInflater inflater, ViewGroup container) {
+    public EpisodesTabsView(LayoutInflater inflater, ViewGroup container, EpisodesListListener listener) {
         super(inflater, container, R.layout.new_episodes_tab);
 
         mTabs = findViewById(R.id.tabs);
@@ -33,7 +34,7 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
                 mTabs.setupWithViewPager(mViewpager);
             }
         });
-        mAdapter = new EpisodesTabsAdapter(getContext());
+        mAdapter = new EpisodesTabsAdapter(getContext(), listener);
         mViewpager.setAdapter(mAdapter);
 
         mViewpager.addOnPageChangeListener(this);
@@ -46,12 +47,10 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
 
     public void setEpisodesToWatch(List<Episode> episodes) {
         mAdapter.setEpisodesToWatch(episodes);
-        mTabs.setupWithViewPager(mViewpager);
     }
 
     public void setEpisodesToAcquire(List<Episode> episodes) {
         mAdapter.setEpisodesToAcquire(episodes);
-        mTabs.setupWithViewPager(mViewpager);
     }
 
     @Override
@@ -67,5 +66,25 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    public void onEpisodesMarkedAcquired(List<Episode> episodes) {
+        mAdapter.onEpisodesMarkedAcquired(episodes);
+    }
+
+    public void onEpisodesMarkedWatched(List<Episode> episodes) {
+        mAdapter.onEpisodesMarkedWatched(episodes);
+    }
+
+    public void episodeCountHasUpdated() {
+        final int tabPosition = mTabs.getSelectedTabPosition();
+        mTabs.setupWithViewPager(mViewpager);
+        mViewpager.setAdapter(mAdapter);
+        mTabs.post(new Runnable() {
+            @Override
+            public void run() {
+                mTabs.getTabAt(tabPosition).select();
+            }
+        });
     }
 }

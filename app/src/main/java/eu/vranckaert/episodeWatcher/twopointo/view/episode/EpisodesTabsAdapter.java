@@ -10,6 +10,7 @@ import eu.vranckaert.android.viewholder.AbstractViewHolder;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.enums.EpisodeType;
+import eu.vranckaert.episodeWatcher.twopointo.view.episode.EpisodesListAdapter.EpisodesListListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.List;
 public class EpisodesTabsAdapter extends PagerAdapter {
     private final Context mContext;
     private final LayoutInflater mLayoutInflater;
+    private final EpisodesListListener mListener;
 
     private List<Episode> mEpisodesToWatch = new ArrayList<>();
     private boolean mLoadingEpisodesToWatch;
@@ -32,9 +34,10 @@ public class EpisodesTabsAdapter extends PagerAdapter {
     private EpisodesListView mEpisodesToWatchView;
     private EpisodesListView mEpisodesToAcquireView;
 
-    public EpisodesTabsAdapter(Context context) {
+    public EpisodesTabsAdapter(Context context, EpisodesListListener listener) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
+        mListener = listener;
     }
 
     public void setLoadingEpisodesToWatch(boolean loading) {
@@ -90,14 +93,14 @@ public class EpisodesTabsAdapter extends PagerAdapter {
         EpisodesListView view;
         if (position == 0) {
             if (mEpisodesToWatchView == null) {
-                mEpisodesToWatchView = new EpisodesListView(mLayoutInflater, container, EpisodeType.EPISODES_TO_WATCH);
+                mEpisodesToWatchView = new EpisodesListView(mLayoutInflater, container, EpisodeType.EPISODES_TO_WATCH, mListener);
                 mEpisodesToWatchView.setLoading(mLoadingEpisodesToWatch);
                 mEpisodesToWatchView.setEpisodes(mEpisodesToWatch);
             }
             view = mEpisodesToWatchView;
         } else {
             if (mEpisodesToAcquireView == null) {
-                mEpisodesToAcquireView = new EpisodesListView(mLayoutInflater, container, EpisodeType.EPISODES_TO_ACQUIRE);
+                mEpisodesToAcquireView = new EpisodesListView(mLayoutInflater, container, EpisodeType.EPISODES_TO_ACQUIRE, mListener);
                 mEpisodesToWatchView.setLoading(mLoadingEpisodesToAcquire);
                 mEpisodesToAcquireView.setEpisodes(mEpisodesToAcquire);
             }
@@ -126,5 +129,23 @@ public class EpisodesTabsAdapter extends PagerAdapter {
         } else {
             mEpisodesToWatchView.cancelContextualActionbar();
         }
+    }
+
+    public void onEpisodesMarkedAcquired(List<Episode> episodes) {
+        mEpisodesToAcquire.removeAll(episodes);
+        mEpisodesToWatch.addAll(episodes);
+        notifyDataSetChanged();
+
+        mEpisodesToAcquireView.removeAllEpisodes(episodes);
+        mEpisodesToWatchView.addAllEpisodes(episodes);
+    }
+
+    public void onEpisodesMarkedWatched(List<Episode> episodes) {
+        mEpisodesToAcquire.removeAll(episodes);
+        mEpisodesToWatch.removeAll(episodes);
+        notifyDataSetChanged();
+
+        mEpisodesToAcquireView.removeAllEpisodes(episodes);
+        mEpisodesToWatchView.removeAllEpisodes(episodes);
     }
 }

@@ -4,5 +4,6 @@
     <item android:title="@string/menuEpisodeMarkWatched"
           android:icon="@drawable/ic_remove_red_eye_white_36dp"
           android:showAsAction="always"
-          app:showAsAction="always"/>
+          app:showAsAction="always"
+          android:id="@+id/watched"/>
 </menu>
