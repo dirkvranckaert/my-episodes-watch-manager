@@ -80,7 +80,7 @@ public class UserService {
             throw new LoginFailedException(message, e);
         }
 
-        if (responsePage.contains("Wrong username/password") || responsePage.contains("ERR_INVALID_REQ") || !responsePage.contains(username)) {
+        if (responsePage.contains("Wrong username/password") || responsePage.contains("ERR_INVALID_REQ")) { // || !responsePage.contains(username)) {
             String message = "Login to MyEpisodes failed. Login page: " + MyEpisodeConstants.MYEPISODES_LOGIN_PAGE + " Username: " + username +
             					" Password: ***** Leaving with status code " + result;
             Log.w(LOG_TAG, message);
