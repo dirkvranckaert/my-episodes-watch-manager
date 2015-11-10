@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import eu.vranckaert.episodeWatcher.BuildConfig;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -58,6 +59,103 @@ public class EpisodesService {
         httpClient.getParams().setParameter(CoreProtocolPNames.USER_AGENT,
                 "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36");
         return httpClient;
+    }
+
+    public List<Episode> retrieveUnlimitedNumberOfEpisodes(final EpisodeType episodesType, final User user) throws Exception {
+        String encryptedPassword = userService.encryptPassword(user.getPassword());
+
+        URL normalFeedUrl;
+        URL fullFeedUrl;
+
+        if (EpisodeType.EPISODES_TO_WATCH.equals(episodesType)) {
+            normalFeedUrl = buildEpisodesUrl(episodesType, user.getUsername().replace(" ", "%20"), encryptedPassword);
+            HttpClient httpClientAllEps = getHttpClient();
+            MyEpisodeConstants.EXTENDED_EPISODES_XML = downloadFullUnwatched(httpClientAllEps, user, true).toString();
+            fullFeedUrl = new URL("http://127.0.0.1");
+        } else if (EpisodeType.EPISODES_TO_ACQUIRE.equals(episodesType)) {
+            normalFeedUrl = buildEpisodesUrl(episodesType, user.getUsername().replace(" ", "%20"), encryptedPassword);
+            HttpClient httpClientAllEps = getHttpClient();
+            MyEpisodeConstants.EXTENDED_EPISODES_XML = downloadFullUnwatched(httpClientAllEps, user, false).toString();
+            fullFeedUrl = new URL("http://127.0.0.1");
+        } else {
+            normalFeedUrl = buildEpisodesUrl(episodesType, user.getUsername().replace(" ", "%20"), encryptedPassword);
+            fullFeedUrl = null;
+        }
+
+        List<Episode> episodes = getEpisodesForUrl(episodesType, normalFeedUrl);
+        List<Episode> fullEpisodes = getEpisodesForUrl(episodesType, fullFeedUrl);
+
+        for (Episode episode : fullEpisodes) {
+            if (!episodes.contains(episode)) {
+                episodes.add(episode);
+            }
+        }
+
+        return episodes;
+    }
+
+    @NonNull
+    private List<Episode> getEpisodesForUrl(EpisodeType episodesType, URL normalFeedUrl) throws Exception {
+        RssFeedParser rssFeedParser = new SaxRssFeedParser();
+        Feed rssFeed;
+        rssFeed = rssFeedParser.parseFeed(normalFeedUrl);
+
+        List<Episode> episodes = new ArrayList<>(0);
+
+        for (FeedItem item : rssFeed.getItems()) {
+            Episode episode = new Episode();
+
+            StringBuilder title = new StringBuilder(item.getTitle());
+
+            if (title.length() > 0) {
+                //Sample title: [ Reaper ][ 01x14 ][ Rebellion ][ 23-Apr-2008 ]
+                title = title.replace(0, 2, ""); //Strip off first bracket [
+                title = title.replace(title.length() - 2, title.length(), ""); //Strip off last bracket ]
+                String[] episodeInfo = title.toString().split(MyEpisodeConstants.FEED_TITLE_SEPERATOR);
+                episode.setShowName(episodeInfo[0].trim());
+                getSeasonAndEpisodeNumber(episodeInfo[1], episode);
+                Date airDate = null;
+                if (episodeInfo.length == MyEpisodeConstants.FEED_TITLE_EPISODE_FIELDS) {
+                    episode.setName(episodeInfo[2].trim());
+                    String airDateString = episodeInfo[3].trim();
+                    episode.setType(episodesType);
+
+                    airDate = DateUtil.convertToDate(airDateString);
+
+                    episode.setAirDate(airDate);
+                    episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
+                    episode.setTVRageWebSite(item.getLink());
+
+                    Log.d(LOG_TAG,
+                            "Episode from feed: " + episode.getShowName() + " - S" + episode.getSeasonString() + "E" +
+                                    episode.getEpisodeString());
+                } else if (episodeInfo.length == MyEpisodeConstants.FEED_TITLE_EPISODE_FIELDS - 1) {
+                    //Solves problem mentioned in Issue 20
+                    episode.setName(episodeInfo[2].trim() + "...");
+                    episode.setMyEpisodeID(item.getGuid().split("-")[0].trim());
+                    episode.setTVRageWebSite(item.getLink());
+                } else {
+                    String message = "Problem parsing a feed item. Feed details: " + item.toString();
+                    Log.e(LOG_TAG, message);
+                }
+
+
+                if (!episodesType.equals(EpisodeType.EPISODES_COMING)) {
+                    episodes.add(episode);
+                } else {
+                    Calendar rightNow = Calendar.getInstance();
+                    rightNow.add(Calendar.DATE, -1);
+                    Date yesterday = rightNow.getTime();
+                    if (airDate != null) {
+                        if (airDate.after(yesterday)) {
+                            episodes.add(episode);
+                        }
+                    }
+                }
+            }
+        }
+
+        return episodes;
     }
 
     public List<Episode> retrieveEpisodes(EpisodeType episodesType, final User user)
@@ -298,6 +396,7 @@ public class EpisodesService {
             throws LoginFailedException, ShowUpdateFailedException, InternetConnectivityException,
             UnsupportedHttpPostEncodingException {
         String urlRep = MyEpisodeConstants.MYEPISODES_FULL_UNWATCHED_LISTING;
+        urlRep = "https://www.myepisodes.com/ajax/service.php?mode=view_privatelist";
         //login to myepisodes
         userService.login(httpClient, user.getUsername(), user.getPassword());
 
@@ -317,9 +416,11 @@ public class EpisodesService {
 
             Log.d(LOG_TAG, "DOWNLOADING FULL LIST");
             //get request to download the myviews.php for processing to xml
-            HttpGet get = new HttpGet(urlRep);
+            //HttpGet get = new HttpGet(urlRep);
+            HttpPost post = new HttpPost(urlRep);
             //start the process of downloading the files.
-            HttpResponse response = httpClient.execute(get);
+            //HttpResponse response = httpClient.execute(get);
+            HttpResponse response = httpClient.execute(post);
             status = response.getStatusLine().getStatusCode();
 
             // Get hold of the response entity
@@ -342,10 +443,12 @@ public class EpisodesService {
                 //read html file.
                 int startTable = HTMLtoDecode.indexOf(
                         "<table class=\"mylist\" width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">") +
-                        78 + 202;
+                        274;
                 HTMLtoDecode = HTMLtoDecode.substring(startTable);
 
-                int endTable = HTMLtoDecode.indexOf("</table>") - 8;
+                int endTable = HTMLtoDecode.indexOf("</table>");
+                int rest = HTMLtoDecode.length() - endTable;
+                endTable -= (8 + rest);
 
                 if (endTable < 1) {
                     //prevent index out of bounds exception below when defining HTMLtoDecode.
@@ -368,64 +471,83 @@ public class EpisodesService {
                 xs.startTag(null, "channel");
 
                 for (String a : EpisodeTable) {
-                    //split each column into a array
-                    if (a.equals("")) {
-                        Log.d(LOG_TAG, "No Episodes found.");
-                    } else {
-                        String[] rowProcess = a.split("</td>");
+                    try {
+                        //split each column into a array
+                        if (a.equals("")) {
+                            Log.d(LOG_TAG, "No Episodes found.");
+                        } else {
+                            String[] rowProcess = a.split("</td>");
 
-                        //name of show
-                        int indexName = rowProcess[2].indexOf("showname\">") + 10;
-                        String showPart = rowProcess[2].substring(indexName);
-                        indexName = showPart.indexOf(">") + 1;
-                        int indexNameEndTag = showPart.indexOf("</a>");
-                        String show = showPart.substring(indexName, indexNameEndTag);
+                            //name of show
+                            int indexName = rowProcess[2].indexOf("showname\">") + 10;
+                            String showPart = rowProcess[2].substring(indexName);
+                            indexName = showPart.indexOf(">") + 1;
+                            int indexNameEndTag = showPart.indexOf("</a>");
+                            String show = showPart.substring(indexName, indexNameEndTag);
 
-                        // get Series and Episode
-                        String seriesEps = rowProcess[3].substring(28);
+                            // get Series and Episode
+                            String seriesEps = rowProcess[3].substring(28);
 
-                        //Get episode name
-                        int indexEp = rowProcess[4].indexOf("epname\">") + 8;
-                        String episodeName = rowProcess[4].substring(indexEp);
+                            //Get episode name
+                            int indexEp = rowProcess[4].indexOf("epname\">") + 8;
+                            String episodeName = rowProcess[4].substring(indexEp);
 
-                        //Get episode link - doesn't work yet.
-                        int indexEpLink = rowProcess[4].indexOf("a href=") + 8;
-                        String episodeLink = rowProcess[4].substring(indexEpLink);
-                        int indexEpLink1 = episodeLink.indexOf("\"");
-                        episodeLink = episodeLink.substring(0, indexEpLink1);
-                        episodeLink = "";
+                            //Get episode link - doesn't work yet.
+                            int indexEpLink = rowProcess[4].indexOf("a href=") + 8;
+                            String episodeLink = rowProcess[4].substring(indexEpLink);
+                            int indexEpLink1 = episodeLink.indexOf("\"");
+                            episodeLink = episodeLink.substring(0, indexEpLink1);
+                            episodeLink = "";
 
-                        //get air date
-                        int indexAirDate = rowProcess[0].length() - 15;
-                        String airDate = rowProcess[0].substring(indexAirDate, indexAirDate + 11);
+                            //get air date
+                            int indexAirDate = rowProcess[0].length() - 15;
+                            String airDate = rowProcess[0].substring(indexAirDate, indexAirDate + 11);
 
-                        //Get guid
-                        int indexGUID = rowProcess[5].indexOf("name=") + 7;
-                        String guid = rowProcess[5].substring(indexGUID);
-                        int indexGUID1 = guid.indexOf("\"");
-                        guid = guid.substring(0, indexGUID1);
+                            boolean watchedEpisode = rowProcess[6].contains("checked");
+                            boolean acquiredEpisode = rowProcess[5].contains("checked");
 
-                        String headerRow =
-                                "[ " + show + " ]" + "[ " + seriesEps + " ]" + "[ " + episodeName + " ]" + "[ " +
-                                        airDate + " ]";
+                            boolean keepEpisode = false;
+                            if (!watchedEpisode || !acquiredEpisode) {
+                                if (isWatched && !watchedEpisode && acquiredEpisode) {
+                                    keepEpisode = true;
+                                } else if (!isWatched && !acquiredEpisode) {
+                                    keepEpisode = true;
+                                }
+                            }
 
-                        xs.startTag(null, "item");
-                        xs.startTag(null, "guid");
-                        xs.text(guid);
-                        xs.endTag(null, "guid");
+                            if (keepEpisode) {
+                                //Get guid
+                                int indexGUID = rowProcess[5].indexOf("name=") + 7;
+                                String guid = rowProcess[5].substring(indexGUID);
+                                int indexGUID1 = guid.indexOf("\"");
+                                guid = guid.substring(0, indexGUID1);
 
-                        xs.startTag(null, "title");
-                        xs.text(headerRow);
-                        xs.endTag(null, "title");
+                                String headerRow =
+                                        "[ " + show + " ]" + "[ " + seriesEps + " ]" + "[ " + episodeName + " ]" +
+                                                "[ " +
+                                                airDate + " ]";
 
-                        xs.startTag(null, "link");
-                        xs.text(episodeLink);
-                        xs.endTag(null, "link");
+                                xs.startTag(null, "item");
+                                xs.startTag(null, "guid");
+                                xs.text(guid);
+                                xs.endTag(null, "guid");
 
-                        xs.startTag(null, "description");
-                        xs.endTag(null, "description");
+                                xs.startTag(null, "title");
+                                xs.text(headerRow);
+                                xs.endTag(null, "title");
 
-                        xs.endTag(null, "item");
+                                xs.startTag(null, "link");
+                                xs.text(episodeLink);
+                                xs.endTag(null, "link");
+
+                                xs.startTag(null, "description");
+                                xs.endTag(null, "description");
+
+                                xs.endTag(null, "item");
+                            }
+                        }
+                    } catch (Exception e) {
+                        // NA
                     }
                 }
 

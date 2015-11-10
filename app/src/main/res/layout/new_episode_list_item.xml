@@ -34,14 +34,4 @@
         android:id="@+id/air_date"
         android:paddingTop="@dimen/vertical_padding"
         tools:text="25/02/2015"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/link"
-        android:lines="1"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:ellipsize="end"
-        tools:text="http://tvrage.com/124523"/>
 </LinearLayout>

@@ -43,11 +43,11 @@ public class EpisodesTabsView extends AbstractViewHolder {
 
     public void setEpisodesToWatch(List<Episode> episodes) {
         mAdapter.setEpisodesToWatch(episodes);
-        mViewpager.setAdapter(mAdapter);
+        mTabs.setupWithViewPager(mViewpager);
     }
 
     public void setEpisodesToAcquire(List<Episode> episodes) {
         mAdapter.setEpisodesToAcquire(episodes);
-        mViewpager.setAdapter(mAdapter);
+        mTabs.setupWithViewPager(mViewpager);
     }
 }

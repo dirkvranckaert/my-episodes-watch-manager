@@ -1,6 +1,5 @@
 package eu.vranckaert.episodeWatcher.twopointo.view.episode;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +19,6 @@ public class EpisodeListItemView extends AbstractRecyclerViewHolder implements O
     private final TextView mEpisodeName;
     private final TextView mEpisodeNumber;
     private final TextView mAirDate;
-    private final TextView mLink;
 
     public EpisodeListItemView(LayoutInflater inflater, ViewGroup parent) {
         super(inflater, parent, R.layout.new_episode_list_item);
@@ -28,8 +26,6 @@ public class EpisodeListItemView extends AbstractRecyclerViewHolder implements O
         mEpisodeName = findViewById(R.id.episode_name);
         mEpisodeNumber = findViewById(R.id.episode_number);
         mAirDate = findViewById(R.id.air_date);
-        mLink = findViewById(R.id.link);
-        // TODO linkify!
 
         getView().setOnClickListener(this);
     }
@@ -38,13 +34,6 @@ public class EpisodeListItemView extends AbstractRecyclerViewHolder implements O
         mEpisodeName.setText(episode.getName());
         mEpisodeNumber.setText(episode.getSeason() + "x" + episode.getEpisode()); // TODO check the formatting in the current app for seasonXepisode
         mAirDate.setText(episode.getAirDate().toString()); // TODO format the air date
-
-        if (TextUtils.isEmpty(episode.getTVRageWebSite())) {
-            mLink.setVisibility(GONE);
-        } else {
-            mLink.setVisibility(VISIBLE);
-            mLink.setText(episode.getTVRageWebSite());
-        }
     }
 
     @Override

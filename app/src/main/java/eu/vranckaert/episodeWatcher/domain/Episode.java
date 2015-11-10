@@ -176,4 +176,33 @@ public class Episode implements Serializable {
     public String toString() {
         return showName + " S" + getSeasonString() + "E" + getEpisodeString() + " - " + name + " (" + myEpisodeID + ") (" + airDate + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Episode episode1 = (Episode) o;
+
+        if (season != episode1.season) {
+            return false;
+        }
+        if (episode != episode1.episode) {
+            return false;
+        }
+        return !(myEpisodeID != null ? !myEpisodeID.equals(episode1.myEpisodeID) : episode1.myEpisodeID != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = season;
+        result = 31 * result + episode;
+        result = 31 * result + (myEpisodeID != null ? myEpisodeID.hashCode() : 0);
+        return result;
+    }
 }

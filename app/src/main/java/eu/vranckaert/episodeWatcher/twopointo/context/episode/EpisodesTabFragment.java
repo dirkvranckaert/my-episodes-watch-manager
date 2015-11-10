@@ -82,8 +82,8 @@ public class EpisodesTabFragment extends BaseFragment {
                     Preferences.getPreference(mFragment.getActivity(), User.PASSWORD)
             );
             EpisodesService episodesService = new EpisodesService();
-            mEpisodesToWatch = episodesService.retrieveEpisodes(EpisodeType.EPISODES_TO_WATCH, user);
-            mEpisodesToAcquire = episodesService.retrieveEpisodes(EpisodeType.EPISODES_TO_ACQUIRE, user);
+            mEpisodesToWatch = episodesService.retrieveUnlimitedNumberOfEpisodes(EpisodeType.EPISODES_TO_WATCH, user);
+            mEpisodesToAcquire = episodesService.retrieveUnlimitedNumberOfEpisodes(EpisodeType.EPISODES_TO_ACQUIRE, user);
             return null;
         }
 
