@@ -62,7 +62,7 @@ public class EpisodesService {
 
     public List<Episode> retrieveEpisodes(EpisodeType episodesType, final User user)
             throws InternetConnectivityException, Exception {
-        if (BuildConfig.DEBUG) {
+        if (false && BuildConfig.DEBUG) {
             //SystemClock.sleep(1000L);
 
             String[] shows = new String[]{"Fargo", "How I Met Your Mother", "The Big Bang Theory", "Dexter", "Thuis", "Familie", "24", "Chuck", "The Americans", "The White House"};
