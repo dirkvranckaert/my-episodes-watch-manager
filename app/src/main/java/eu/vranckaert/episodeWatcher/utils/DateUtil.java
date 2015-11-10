@@ -17,7 +17,7 @@ import java.util.Locale;
 public final class DateUtil {
     private static final String LOG_TAG = DateUtil.class.getSimpleName();
     //http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html#rfc822timezone
-    private static final String[] dateFormats = {"d/M/y", "d-M-y"};
+    private static final String[] dateFormats = {"d/M/y", "d-M-y", "d-MM-y", "d-MMM-y"};
 
     /**
      * Formats a given date in the {@link java.text.DateFormat#LONG} format.
@@ -29,7 +29,7 @@ public final class DateUtil {
         Locale locale = getCurrentLocale(context);
         return formatDateLong(date, locale);
     }
-    
+
     /**
      * Formats a given date in the {@link java.text.DateFormat#FULL} format.
      * @param date The date to format.
@@ -40,7 +40,7 @@ public final class DateUtil {
         Locale locale = getCurrentLocale(context);
         return formatDateFull(date, locale);
     }
-    
+
     /**
      * Formats a given date in the {@link java.text.DateFormat#FULL} format.
      * @param date The date to format.
@@ -88,12 +88,12 @@ public final class DateUtil {
      * @return A date instance. Null if the date pattern could not be determined!
      */
     public static Date convertToDate(String dateString) {
-		if (dateString.endsWith(".") || dateString.endsWith(";")  || dateString.endsWith(":") || dateString.endsWith(",")  || dateString.endsWith("-")) {
-			dateString = dateString.substring(0, dateString.length()-1);
-		}
-    	
+        if (dateString.endsWith(".") || dateString.endsWith(";")  || dateString.endsWith(":") || dateString.endsWith(",")  || dateString.endsWith("-")) {
+            dateString = dateString.substring(0, dateString.length()-1);
+        }
+
         for(String dateFormat : dateFormats) {
-            DateFormat format = new SimpleDateFormat(dateFormat);
+            DateFormat format = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
             format.setLenient(false);
             try {
                 Date date = format.parse(dateString);
