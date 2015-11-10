@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="@string/menuEpisodeMarkAcquired"
+          android:icon="@drawable/ic_cloud_download_white_36dp"
+          android:showAsAction="always"
+          app:showAsAction="always"/>
+    <item android:title="@string/menuEpisodeMarkWatched"
+          android:icon="@drawable/ic_remove_red_eye_white_36dp"
+          android:showAsAction="always"
+          app:showAsAction="always"/>
+</menu>

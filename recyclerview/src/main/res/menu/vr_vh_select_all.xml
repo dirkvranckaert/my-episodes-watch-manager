@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/vr_vh_action_mode_item_select_all"
+          android:icon="@drawable/ic_select_all_white_36dp"
+          android:id="@+id/vr_vh_select_all"
+          android:showAsAction="always"/>
+</menu>

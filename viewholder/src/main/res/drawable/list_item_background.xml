@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ripple
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="?android:colorControlActivated">
-    <item android:id="@android:id/mask" android:drawable="?android:colorControlActivated"/>
-    <item>
-        <selector>
-            <item
-                android:drawable="?android:colorControlHighlight"
-                android:state_selected="true"/>
-            <item
-                android:drawable="@android:color/transparent"/>
-        </selector>
-    </item>
-</ripple>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="?android:colorControlHighlight"
+        android:state_selected="true"/>
+    <item
+        android:drawable="@android:color/transparent"/>
+</selector>

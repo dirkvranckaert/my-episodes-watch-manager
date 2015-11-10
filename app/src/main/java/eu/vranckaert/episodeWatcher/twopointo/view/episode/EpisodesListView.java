@@ -3,12 +3,11 @@ package eu.vranckaert.episodeWatcher.twopointo.view.episode;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.tonicartos.superslim.LayoutManager;
-import eu.vranckaert.android.recyclerview.ListItemDividerDecoration;
 import eu.vranckaert.android.recyclerview.RecyclerViewUtil;
 import eu.vranckaert.android.viewholder.AbstractViewHolder;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Episode;
+import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 
 import java.util.List;
 
@@ -22,12 +21,12 @@ public class EpisodesListView extends AbstractViewHolder {
     private final RecyclerView mList;
     private final EpisodesListAdapter mAdapter;
 
-    public EpisodesListView(LayoutInflater inflater, ViewGroup parent) {
+    public EpisodesListView(LayoutInflater inflater, ViewGroup parent, EpisodeType type) {
         super(inflater, parent, R.layout.new_episodes_list);
 
         mList = findViewById(R.id.list);
         RecyclerViewUtil.initSuperSlim(mList, R.color.divider_color);
-        mAdapter = new EpisodesListAdapter(getContext());
+        mAdapter = new EpisodesListAdapter(getContext(), type);
         mList.setAdapter(mAdapter);
 
     }
@@ -38,5 +37,9 @@ public class EpisodesListView extends AbstractViewHolder {
 
     public void setEpisodes(List<Episode> episodes) {
         mAdapter.setEpisodes(episodes);
+    }
+
+    public void cancelContextualActionbar() {
+        mAdapter.cancelContextualActionbar();
     }
 }

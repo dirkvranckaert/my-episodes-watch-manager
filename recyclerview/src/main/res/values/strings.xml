@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="vr_vh_action_mode_item_select_all">Select all</string>
+    <string name="vr_vh_action_mode_title_selection_zero">0 items selected</string>
+    <string name="vr_vh_action_mode_title_selection_one">1 item selected</string>
+    <string name="vr_vh_action_mode_title_selection_multiple">%1$s items selected</string>
+</resources>

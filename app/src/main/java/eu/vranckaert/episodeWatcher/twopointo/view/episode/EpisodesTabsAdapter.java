@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import eu.vranckaert.android.viewholder.AbstractViewHolder;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Episode;
+import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,14 +90,14 @@ public class EpisodesTabsAdapter extends PagerAdapter {
         EpisodesListView view;
         if (position == 0) {
             if (mEpisodesToWatchView == null) {
-                mEpisodesToWatchView = new EpisodesListView(mLayoutInflater, container);
+                mEpisodesToWatchView = new EpisodesListView(mLayoutInflater, container, EpisodeType.EPISODES_TO_WATCH);
                 mEpisodesToWatchView.setLoading(mLoadingEpisodesToWatch);
                 mEpisodesToWatchView.setEpisodes(mEpisodesToWatch);
             }
             view = mEpisodesToWatchView;
         } else {
             if (mEpisodesToAcquireView == null) {
-                mEpisodesToAcquireView = new EpisodesListView(mLayoutInflater, container);
+                mEpisodesToAcquireView = new EpisodesListView(mLayoutInflater, container, EpisodeType.EPISODES_TO_ACQUIRE);
                 mEpisodesToWatchView.setLoading(mLoadingEpisodesToAcquire);
                 mEpisodesToAcquireView.setEpisodes(mEpisodesToAcquire);
             }
@@ -117,5 +118,13 @@ public class EpisodesTabsAdapter extends PagerAdapter {
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view.getTag() != null && view.getTag().equals(object);
+    }
+
+    public void onPageChanged(int position) {
+        if (position == 0) {
+            mEpisodesToAcquireView.cancelContextualActionbar();
+        } else {
+            mEpisodesToWatchView.cancelContextualActionbar();
+        }
     }
 }

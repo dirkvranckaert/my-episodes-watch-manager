@@ -2,6 +2,7 @@ package eu.vranckaert.episodeWatcher.twopointo.view.episode;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import eu.vranckaert.android.viewholder.AbstractViewHolder;
@@ -16,7 +17,7 @@ import java.util.List;
  *
  * @author Dirk Vranckaert
  */
-public class EpisodesTabsView extends AbstractViewHolder {
+public class EpisodesTabsView extends AbstractViewHolder implements OnPageChangeListener {
     private final TabLayout mTabs;
     private final ViewPager mViewpager;
     private final EpisodesTabsAdapter mAdapter;
@@ -34,6 +35,8 @@ public class EpisodesTabsView extends AbstractViewHolder {
         });
         mAdapter = new EpisodesTabsAdapter(getContext());
         mViewpager.setAdapter(mAdapter);
+
+        mViewpager.addOnPageChangeListener(this);
     }
 
     public void startLoadingAll() {
@@ -49,5 +52,20 @@ public class EpisodesTabsView extends AbstractViewHolder {
     public void setEpisodesToAcquire(List<Episode> episodes) {
         mAdapter.setEpisodesToAcquire(episodes);
         mTabs.setupWithViewPager(mViewpager);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        mAdapter.onPageChanged(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }
