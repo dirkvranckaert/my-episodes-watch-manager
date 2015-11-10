@@ -5,5 +5,10 @@
             android:id="@+id/drawer_item_episodes"
             android:title="@string/drawer_item_episodes"
             android:icon="@drawable/ic_format_list_bulleted_white_36dp"/>
+        <item
+            android:id="@+id/drawer_item_logout"
+            android:title="@string/logout"
+            android:icon="@drawable/ic_person_white_36dp"
+            android:checkable="false"/>
     </group>
 </menu>

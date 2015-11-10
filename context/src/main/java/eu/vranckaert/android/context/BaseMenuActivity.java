@@ -14,6 +14,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.internal.view.menu.ActionMenuItem;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -56,9 +57,13 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         View view = layoutInflater.inflate(R.layout.activity_menu, null);
 
+        // Setup the ToolBar
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         // Setup the ActionBarDrawerToggle
         mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getToolbar(), R.string.general_drawer_open,
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.general_drawer_open,
                 R.string.general_drawer_close);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
@@ -67,11 +72,14 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
         // Setup the NavigationView
         mNavigationView = (NavigationView) view.findViewById(R.id.navigation_view);
         initNavigationView();
-        mNavigationView.getMenu().findItem(getDefaultMenuItem()).setChecked(true);
+        MenuItem defaultMenuItem = mNavigationView.getMenu().findItem(getDefaultMenuItem());
+        if (defaultMenuItem != null) {
+            defaultMenuItem.setChecked(true);
+        }
         mNavigationView.setNavigationItemSelectedListener(this);
 
         if (mSelectedMenuItemId == -1) {
-            BaseFragment fragment = getMenuHandler().navigate(getDefaultMenuItem());
+            BaseFragment fragment = getMenuHandler().navigate(this, getDefaultMenuItem());
             if (fragment != null) {
                 putFragment(fragment, false);
             }
@@ -91,7 +99,7 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
         }
     }
 
-    private int getHeaderResId() {
+    public int getHeaderResId() {
         return -1;
     }
 
@@ -130,23 +138,27 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
     public boolean onNavigationItemSelected(final MenuItem menuItem) {
         Log.d("dirk", "onNavigationItemSelected");
 
-        // update highlighted item in the navigation menu
-        menuItem.setChecked(true);
-
         // allow some time after closing the drawer before performing real navigation
         // so the user can see what is happening
         mDrawerLayout.closeDrawer(GravityCompat.START);
-        handleNavigationItemSelected(menuItem);
+        boolean startedNewFragment = handleNavigationItemSelected(menuItem);
+
+        // update highlighted item in the navigation menu
+        menuItem.setChecked(startedNewFragment);
 
         return true;
     }
 
-    private void handleNavigationItemSelected(MenuItem menuItem) {
+    private boolean handleNavigationItemSelected(MenuItem menuItem) {
         if (menuItem.getItemId() == mSelectedMenuItemId) {
-            return;
+            return true;
         }
-        mSelectedMenuItemId = menuItem.getItemId();
-        handleNavigationItemSelected(mSelectedMenuItemId);
+        int selectedMenuItemId = menuItem.getItemId();
+        boolean fragmentStarted = handleNavigationItemSelected(selectedMenuItemId);
+        if (fragmentStarted) {
+            mSelectedMenuItemId = selectedMenuItemId;
+        }
+        return fragmentStarted;
     }
 
     @Override
@@ -172,11 +184,13 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
         }
     }
 
-    private void handleNavigationItemSelected(int menuId) {
-        BaseFragment fragment = getMenuHandler().navigate(menuId);
+    private boolean handleNavigationItemSelected(int menuId) {
+        BaseFragment fragment = getMenuHandler().navigate(this, menuId);
         if (fragment != null) {
             putFragment(fragment, false);
+            return true;
         }
+        return false;
     }
 
     private int getFragmentCount() {
@@ -330,7 +344,7 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
 
     public void navigateToMenuItem(int menuItemId) {
         ActionMenuItem menuItem = new ActionMenuItem(null, -1, menuItemId, -1, -1, "");
-        handleNavigationItemSelected(menuItem);
-        mNavigationView.getMenu().findItem(menuItemId).setChecked(true);
+        boolean startedNewFragment = handleNavigationItemSelected(menuItem);
+        mNavigationView.getMenu().findItem(menuItemId).setChecked(startedNewFragment);
     }
 }

@@ -14,6 +14,11 @@ public class MainActivity extends BaseMenuActivity {
     private MenuHandler mMenuHandler;
 
     @Override
+    public int getHeaderResId() {
+        return R.layout.drawer_header;
+    }
+
+    @Override
     protected int getMenuResId() {
         return R.menu.drawer;
     }
