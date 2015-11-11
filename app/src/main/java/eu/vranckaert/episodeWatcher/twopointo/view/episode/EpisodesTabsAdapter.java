@@ -27,9 +27,7 @@ public class EpisodesTabsAdapter extends PagerAdapter {
     private final EpisodesListListener mListener;
 
     private List<Episode> mEpisodesToWatch = new ArrayList<>();
-    private boolean mLoadingEpisodesToWatch;
     private List<Episode> mEpisodesToAcquire = new ArrayList<>();
-    private boolean mLoadingEpisodesToAcquire;
 
     private EpisodesListView mEpisodesToWatchView;
     private EpisodesListView mEpisodesToAcquireView;
@@ -40,34 +38,18 @@ public class EpisodesTabsAdapter extends PagerAdapter {
         mListener = listener;
     }
 
-    public void setLoadingEpisodesToWatch(boolean loading) {
-        mLoadingEpisodesToWatch = loading;
-        if (mEpisodesToWatchView != null) {
-            mEpisodesToWatchView.setLoading(mLoadingEpisodesToWatch);
-        }
-    }
-
     public void setEpisodesToWatch(List<Episode> episodes) {
         mEpisodesToWatch.clear();
         mEpisodesToWatch.addAll(episodes);
-        setLoadingEpisodesToWatch(false);
         if (mEpisodesToWatchView != null) {
             mEpisodesToWatchView.setEpisodes(mEpisodesToWatch);
         }
         notifyDataSetChanged();
     }
 
-    public void setLoadingEpisodesToAcquire(boolean loading) {
-        mLoadingEpisodesToAcquire = loading;
-        if (mEpisodesToAcquireView != null) {
-            mEpisodesToAcquireView.setLoading(mLoadingEpisodesToAcquire);
-        }
-    }
-
     public void setEpisodesToAcquire(List<Episode> episodes) {
         mEpisodesToAcquire.clear();
         mEpisodesToAcquire.addAll(episodes);
-        setLoadingEpisodesToAcquire(false);
         if (mEpisodesToAcquireView != null) {
             mEpisodesToAcquireView.setEpisodes(mEpisodesToAcquire);
         }
@@ -94,14 +76,12 @@ public class EpisodesTabsAdapter extends PagerAdapter {
         if (position == 0) {
             if (mEpisodesToWatchView == null) {
                 mEpisodesToWatchView = new EpisodesListView(mLayoutInflater, container, EpisodeType.EPISODES_TO_WATCH, mListener);
-                mEpisodesToWatchView.setLoading(mLoadingEpisodesToWatch);
                 mEpisodesToWatchView.setEpisodes(mEpisodesToWatch);
             }
             view = mEpisodesToWatchView;
         } else {
             if (mEpisodesToAcquireView == null) {
                 mEpisodesToAcquireView = new EpisodesListView(mLayoutInflater, container, EpisodeType.EPISODES_TO_ACQUIRE, mListener);
-                mEpisodesToWatchView.setLoading(mLoadingEpisodesToAcquire);
                 mEpisodesToAcquireView.setEpisodes(mEpisodesToAcquire);
             }
             view = mEpisodesToAcquireView;

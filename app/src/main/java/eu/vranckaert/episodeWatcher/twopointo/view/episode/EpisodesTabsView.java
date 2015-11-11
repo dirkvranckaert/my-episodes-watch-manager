@@ -3,6 +3,8 @@ package eu.vranckaert.episodeWatcher.twopointo.view.episode;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import eu.vranckaert.android.viewholder.AbstractViewHolder;
@@ -18,15 +20,21 @@ import java.util.List;
  *
  * @author Dirk Vranckaert
  */
-public class EpisodesTabsView extends AbstractViewHolder implements OnPageChangeListener {
+public class EpisodesTabsView extends AbstractViewHolder implements OnPageChangeListener, OnRefreshListener {
+    private final EpisodesTabListener mListener;
     private final TabLayout mTabs;
+    private final SwipeRefreshLayout mRefresh;
     private final ViewPager mViewpager;
     private final EpisodesTabsAdapter mAdapter;
 
-    public EpisodesTabsView(LayoutInflater inflater, ViewGroup container, EpisodesListListener listener) {
+    private boolean[] mLoadingTabs;
+
+    public EpisodesTabsView(LayoutInflater inflater, ViewGroup container, EpisodesTabListener episodesTabListener,  EpisodesListListener episodesListListener) {
         super(inflater, container, R.layout.new_episodes_tab);
+        mListener = episodesTabListener;
 
         mTabs = findViewById(R.id.tabs);
+        mRefresh = findViewById(R.id.refresh);
         mViewpager = findViewById(R.id.viewpager);
         mTabs.post(new Runnable() {
             @Override
@@ -34,22 +42,49 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
                 mTabs.setupWithViewPager(mViewpager);
             }
         });
-        mAdapter = new EpisodesTabsAdapter(getContext(), listener);
+        mAdapter = new EpisodesTabsAdapter(getContext(), episodesListListener);
         mViewpager.setAdapter(mAdapter);
 
         mViewpager.addOnPageChangeListener(this);
+
+        mRefresh.setOnRefreshListener(this);
+        mRefresh.setColorSchemeResources(R.color.accent_color, R.color.primary_color);
+
+        mLoadingTabs = new boolean[2];
     }
 
-    public void startLoadingAll() {
-        mAdapter.setLoadingEpisodesToWatch(true);
-        mAdapter.setLoadingEpisodesToWatch(true);
+    public void setLoadingEpisodesToWatch(boolean loading) {
+        mLoadingTabs[0] = loading;
+        syncLoadingState();
+    }
+
+    public void setLoadingEpisodesToAcquire(boolean loading) {
+        mLoadingTabs[1] = loading;
+        syncLoadingState();
+    }
+
+    private void syncLoadingState() {
+        boolean isOneTabLoading = false;
+
+        int size = mLoadingTabs.length;
+        for (int i = 0; i < size; i++) {
+            boolean loading = mLoadingTabs[i];
+            if (loading) {
+                isOneTabLoading = true;
+                break;
+            }
+        }
+
+        mRefresh.setRefreshing(isOneTabLoading);
     }
 
     public void setEpisodesToWatch(List<Episode> episodes) {
+        setLoadingEpisodesToWatch(false);
         mAdapter.setEpisodesToWatch(episodes);
     }
 
     public void setEpisodesToAcquire(List<Episode> episodes) {
+        setLoadingEpisodesToAcquire(false);
         mAdapter.setEpisodesToAcquire(episodes);
     }
 
@@ -86,5 +121,21 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
                 mTabs.getTabAt(tabPosition).select();
             }
         });
+    }
+
+    @Override
+    public void onRefresh() {
+        int currentTab = mViewpager.getCurrentItem();
+        if (currentTab == 0) {
+            mListener.startRefreshingEpisodesToWatch();
+        } else if (currentTab == 1) {
+            mListener.startRefreshingEpisodesToAcquire();
+        }
+    }
+
+    public interface EpisodesTabListener {
+        void startRefreshingEpisodesToWatch();
+
+        void startRefreshingEpisodesToAcquire();
     }
 }

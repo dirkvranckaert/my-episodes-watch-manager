@@ -32,10 +32,6 @@ public class EpisodesListView extends AbstractViewHolder {
 
     }
 
-    public void setLoading(boolean loading) {
-        // TODO set loading correctly
-    }
-
     public void setEpisodes(List<Episode> episodes) {
         mAdapter.setEpisodes(episodes);
     }

@@ -14,6 +14,7 @@ import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.service.EpisodesService;
 import eu.vranckaert.episodeWatcher.twopointo.view.episode.EpisodesListAdapter.EpisodesListListener;
 import eu.vranckaert.episodeWatcher.twopointo.view.episode.EpisodesTabsView;
+import eu.vranckaert.episodeWatcher.twopointo.view.episode.EpisodesTabsView.EpisodesTabListener;
 
 import java.util.List;
 
@@ -23,9 +24,10 @@ import java.util.List;
  *
  * @author Dirk Vranckaert
  */
-public class EpisodesTabFragment extends BaseFragment implements EpisodesListListener {
+public class EpisodesTabFragment extends BaseFragment implements EpisodesListListener, EpisodesTabListener {
     private EpisodesTabsView mView;
-    private LoadAllEpisodesTask mLoadingTask;
+    private LoadEpisodesTask mLoadingEpisodesToWatchTask;
+    private LoadEpisodesTask mLoadingEpisodesToAcquireTask;
     private MarkAllEpisodesTask mMarkEpisodesTask;
 
     @Override
@@ -37,25 +39,53 @@ public class EpisodesTabFragment extends BaseFragment implements EpisodesListLis
 
     @Override
     protected View doCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = new EpisodesTabsView(inflater, container, this);
+        mView = new EpisodesTabsView(inflater, container, this, this);
         loadAllEpisodes();
         return mView.getView();
     }
 
     private void loadAllEpisodes() {
-        if (mLoadingTask != null) {
-            mLoadingTask.cancel();
+        loadAllEpisodesToWatch();
+        loadAllEpisodesToAcquire();
+    }
+
+    private void loadAllEpisodesToWatch() {
+        if (mLoadingEpisodesToWatchTask != null) {
+            mLoadingEpisodesToWatchTask.cancel();
         }
 
-        mLoadingTask = new LoadAllEpisodesTask(this);
-        mLoadingTask.execute();
+        mLoadingEpisodesToWatchTask = new LoadEpisodesTask(this, EpisodeType.EPISODES_TO_WATCH);
+        mLoadingEpisodesToWatchTask.execute();
+    }
+
+    private void loadAllEpisodesToAcquire() {
+        if (mLoadingEpisodesToAcquireTask != null) {
+            mLoadingEpisodesToAcquireTask.cancel();
+        }
+
+        mLoadingEpisodesToAcquireTask = new LoadEpisodesTask(this, EpisodeType.EPISODES_TO_ACQUIRE);
+        mLoadingEpisodesToAcquireTask.execute();
+    }
+
+    @Override
+    public void startRefreshingEpisodesToWatch() {
+        loadAllEpisodesToWatch();
+    }
+
+    @Override
+    public void startRefreshingEpisodesToAcquire() {
+        loadAllEpisodesToAcquire();
     }
 
     @Override
     public void onDestroyView() {
-        if (mLoadingTask != null) {
-            mLoadingTask.cancel();
-            mLoadingTask = null;
+        if (mLoadingEpisodesToWatchTask != null) {
+            mLoadingEpisodesToWatchTask.cancel();
+            mLoadingEpisodesToWatchTask = null;
+        }
+        if (mLoadingEpisodesToAcquireTask != null) {
+            mLoadingEpisodesToAcquireTask.cancel();
+            mLoadingEpisodesToAcquireTask = null;
         }
 
         if (mMarkEpisodesTask != null) {
@@ -97,39 +127,43 @@ public class EpisodesTabFragment extends BaseFragment implements EpisodesListLis
         mView.onEpisodesMarkedWatched(episodes);
     }
 
-    public final class LoadAllEpisodesTask extends CustomTask<Void> {
+    public final class LoadEpisodesTask extends CustomTask<List<Episode>> {
         private final EpisodesTabFragment mFragment;
+        private final EpisodeType mType;
 
-        private List<Episode> mEpisodesToWatch;
-        private List<Episode> mEpisodesToAcquire;
-
-        public LoadAllEpisodesTask(EpisodesTabFragment fragment) {
+        public LoadEpisodesTask(EpisodesTabFragment fragment, EpisodeType type) {
             super(fragment.getContext());
             mFragment = fragment;
+            mType = type;
         }
 
         @Override
         public void preExecute() {
-            mFragment.mView.startLoadingAll();
+            if (EpisodeType.EPISODES_TO_WATCH.equals(mType)) {
+                mFragment.mView.setLoadingEpisodesToWatch(true);
+            } else if (EpisodeType.EPISODES_TO_ACQUIRE.equals(mType)) {
+                mFragment.mView.setLoadingEpisodesToAcquire(true);
+            }
         }
 
         @Override
-        public Void doInBackground() throws Exception {
+        public List<Episode> doInBackground() throws Exception {
             User user = new User(
                     Preferences.getPreference(mFragment.getActivity(), User.USERNAME),
                     Preferences.getPreference(mFragment.getActivity(), User.PASSWORD)
             );
             EpisodesService episodesService = new EpisodesService();
-            mEpisodesToWatch = episodesService.retrieveUnlimitedNumberOfEpisodes(EpisodeType.EPISODES_TO_WATCH, user);
-            mEpisodesToAcquire = episodesService.retrieveUnlimitedNumberOfEpisodes(EpisodeType.EPISODES_TO_ACQUIRE,
-                    user);
-            return null;
+            List<Episode> episodes = episodesService.retrieveUnlimitedNumberOfEpisodes(mType, user);
+            return episodes;
         }
 
         @Override
-        public void onTaskCompleted(Void result) {
-            mFragment.mView.setEpisodesToWatch(mEpisodesToWatch);
-            mFragment.mView.setEpisodesToAcquire(mEpisodesToAcquire);
+        public void onTaskCompleted(List<Episode> result) {
+            if (EpisodeType.EPISODES_TO_WATCH.equals(mType)) {
+                mFragment.mView.setEpisodesToWatch(result);
+            } else if (EpisodeType.EPISODES_TO_ACQUIRE.equals(mType)) {
+                mFragment.mView.setEpisodesToAcquire(result);
+            }
         }
     }
 
