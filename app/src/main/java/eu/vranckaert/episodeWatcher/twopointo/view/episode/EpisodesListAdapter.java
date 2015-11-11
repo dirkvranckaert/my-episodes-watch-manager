@@ -39,7 +39,11 @@ public class EpisodesListAdapter extends SectionedAdapter<AbstractRecyclerViewHo
         mContext = context;
         mType = type;
         mListener = listener;
-        mMultiSelector = new MultiSelector((Activity) context, this, this);
+        if (EpisodeType.EPISODES_TO_WATCH.equals(type) || EpisodeType.EPISODES_TO_ACQUIRE.equals(type)) {
+            mMultiSelector = new MultiSelector((Activity) context, this, this);
+        } else {
+            mMultiSelector = null;
+        }
     }
 
     public void setEpisodes(List<Episode> episodes) {
@@ -163,7 +167,9 @@ public class EpisodesListAdapter extends SectionedAdapter<AbstractRecyclerViewHo
     }
 
     public void cancelContextualActionbar() {
-        mMultiSelector.cancelActionMode();
+        if (mMultiSelector != null) {
+            mMultiSelector.cancelActionMode();
+        }
     }
 
     @Override
