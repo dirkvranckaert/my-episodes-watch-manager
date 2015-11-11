@@ -47,4 +47,8 @@ public class EpisodesListView extends AbstractViewHolder {
     public void addAllEpisodes(List<Episode> episodes) {
         mAdapter.addAllEpisodes(episodes);
     }
+
+    public RecyclerView getList() {
+        return mList;
+    }
 }

@@ -5,8 +5,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnScrollChangedListener;
+import android.widget.ListView;
 import eu.vranckaert.android.viewholder.AbstractViewHolder;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Episode;
@@ -27,6 +32,7 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
     private final ViewPager mViewpager;
     private final EpisodesTabsAdapter mAdapter;
 
+    private int mCurrentPage = 0;
     private boolean[] mLoadingTabs;
 
     public EpisodesTabsView(LayoutInflater inflater, ViewGroup container, EpisodesTabListener episodesTabListener,  EpisodesListListener episodesListListener) {
@@ -45,12 +51,48 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
         mAdapter = new EpisodesTabsAdapter(getContext(), episodesListListener);
         mViewpager.setAdapter(mAdapter);
 
-        mViewpager.addOnPageChangeListener(this);
-
         mRefresh.setOnRefreshListener(this);
         mRefresh.setColorSchemeResources(R.color.accent_color, R.color.primary_color);
 
         mLoadingTabs = new boolean[2];
+
+        fixSwipeRefreshLayoutWithTabsAndLists();
+    }
+
+    private void fixSwipeRefreshLayoutWithTabsAndLists() {
+        // http://stackoverflow.com/questions/25978462/swiperefreshlayout-viewpager-limit-horizontal-scroll-only
+        // Fixes issue where you start scrolling in the viewpager, while scrolling go a little down and the refresh
+        // takes over and resets the view pager to it's original place.
+        mViewpager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_MOVE:
+                        mRefresh.setEnabled(false);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        mRefresh.setEnabled(true);
+                        break;
+                }
+                return false;
+            }
+        });
+        mViewpager.addOnPageChangeListener(this);
+
+        mRefresh.getViewTreeObserver().addOnScrollChangedListener(new OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                RecyclerView list = mAdapter.getListFor(mCurrentPage);
+                if (list != null) {
+                    if (list.computeVerticalScrollOffset() == 0)
+                        mRefresh.setEnabled(true);
+                    else
+                        mRefresh.setEnabled(false);
+                }
+            }
+        });
     }
 
     public void setLoadingEpisodesToWatch(boolean loading) {
@@ -95,6 +137,7 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
 
     @Override
     public void onPageSelected(int position) {
+        mCurrentPage = position;
         mAdapter.onPageChanged(position);
     }
 

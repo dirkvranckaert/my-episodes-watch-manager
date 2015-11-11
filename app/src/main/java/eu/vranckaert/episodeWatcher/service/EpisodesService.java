@@ -83,11 +83,13 @@ public class EpisodesService {
         }
 
         List<Episode> episodes = getEpisodesForUrl(episodesType, normalFeedUrl);
-        List<Episode> fullEpisodes = getEpisodesForUrl(episodesType, fullFeedUrl);
+        if (episodes.size() == 200) {
+            List<Episode> fullEpisodes = getEpisodesForUrl(episodesType, fullFeedUrl);
 
-        for (Episode episode : fullEpisodes) {
-            if (!episodes.contains(episode)) {
-                episodes.add(episode);
+            for (Episode episode : fullEpisodes) {
+                if (!episodes.contains(episode)) {
+                    episodes.add(episode);
+                }
             }
         }
 

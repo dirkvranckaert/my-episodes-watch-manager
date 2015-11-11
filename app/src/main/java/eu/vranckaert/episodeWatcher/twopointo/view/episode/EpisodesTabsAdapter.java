@@ -2,6 +2,7 @@ package eu.vranckaert.episodeWatcher.twopointo.view.episode;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -127,5 +128,14 @@ public class EpisodesTabsAdapter extends PagerAdapter {
 
         mEpisodesToAcquireView.removeAllEpisodes(episodes);
         mEpisodesToWatchView.removeAllEpisodes(episodes);
+    }
+
+    public RecyclerView getListFor(int page) {
+        if (page == 0 && mEpisodesToWatchView != null) {
+            return mEpisodesToWatchView.getList();
+        } else if (page == 1 && mEpisodesToAcquireView != null) {
+            return mEpisodesToAcquireView.getList();
+        }
+        return null;
     }
 }
