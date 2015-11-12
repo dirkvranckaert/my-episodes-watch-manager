@@ -32,6 +32,16 @@ public class LoginView extends AbstractViewHolder implements OnClickListener {
         registerButton.setOnClickListener(this);
     }
 
+    public void setUsername(String username) {
+        mUsername.setText(username);
+        mUsername.post(new Runnable() {
+            @Override
+            public void run() {
+                mPassword.requestFocus();
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.login) {

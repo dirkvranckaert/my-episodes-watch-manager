@@ -1,6 +1,7 @@
 package eu.vranckaert.episodeWatcher.twopointo.context.login;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import eu.vranckaert.episodeWatcher.R;
@@ -35,6 +36,10 @@ public class LoginActivity extends BaseActivity implements LoginListener {
     @Override
     protected View doCreateView() {
         mView = new LoginView(this, this);
+        String username = Preferences.getPreference(this, User.USERNAME);
+        if (!TextUtils.isEmpty(username)) {
+            mView.setUsername(username);
+        }
         return mView.getView();
     }
 
