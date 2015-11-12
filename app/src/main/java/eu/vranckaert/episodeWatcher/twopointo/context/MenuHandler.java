@@ -37,7 +37,7 @@ public class MenuHandler extends AbstractMenuHandler {
                             public void onClick(DialogInterface dialog, int which) {
                                 Preferences.setPreference(MyEpisodes.getContext(), User.USERNAME, null);
                                 Preferences.setPreference(MyEpisodes.getContext(), User.PASSWORD, null);
-                                NavigationManager.restartApplication(activity);
+                                NavigationManager.restartApplication(activity, false);
                             }
                         })
                         .setNegativeButton(R.string.close, null)

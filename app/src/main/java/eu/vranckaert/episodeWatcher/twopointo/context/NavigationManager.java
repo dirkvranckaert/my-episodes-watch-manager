@@ -30,8 +30,9 @@ public class NavigationManager {
         activity.finish();
     }
 
-    public static void restartApplication(Activity activity) {
+    public static void restartApplication(Activity activity, boolean skipForgetPwd) {
         Intent intent = new Intent(activity, StartupActivity.class);
+        intent.putExtra(StartupActivity.SKIP_FORGET_PWD_CHECK, skipForgetPwd);
         activity.startActivity(intent);
         activity.finish();
     }

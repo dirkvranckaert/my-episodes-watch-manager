@@ -14,10 +14,18 @@ import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
  * @author Dirk Vranckaert
  */
 public class StartupActivity extends Activity {
+    public static final String SKIP_FORGET_PWD_CHECK = "skip_forget_pwd_check";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (isLoggedIn()) {
+
+        boolean skipForgetPwd = false;
+        if (getIntent() != null && getIntent().hasExtra(SKIP_FORGET_PWD_CHECK)) {
+            skipForgetPwd = getIntent().getBooleanExtra(SKIP_FORGET_PWD_CHECK, false);
+        }
+
+        if (isLoggedIn(skipForgetPwd)) {
             NavigationManager.startApp(this);
         } else {
             NavigationManager.startLogon(this);
@@ -25,8 +33,8 @@ public class StartupActivity extends Activity {
         finish();
     }
 
-    private boolean isLoggedIn() {
-        if (!Preferences.getPreferenceBoolean(this, PreferencesKeys.STORE_PASSWORD_KEY, true)) {
+    private boolean isLoggedIn(boolean skipForgetPwd) {
+        if (!skipForgetPwd && !Preferences.getPreferenceBoolean(this, PreferencesKeys.STORE_PASSWORD_KEY, true)) {
             Preferences.removePreference(this, User.PASSWORD);
         }
 

@@ -117,7 +117,7 @@ public class LoginActivity extends BaseActivity implements LoginListener {
             if (result) {
                 Preferences.setPreference(mActivity, User.USERNAME, mUser.getUsername());
                 Preferences.setPreference(mActivity, User.PASSWORD, mUser.getPassword());
-                NavigationManager.restartApplication(mActivity);
+                NavigationManager.restartApplication(mActivity, true);
             }
         }
     }

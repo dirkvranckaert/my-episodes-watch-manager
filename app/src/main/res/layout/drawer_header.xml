@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="120dp">
-    <TextView
+              android:layout_height="200dp">
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TEST"/>
+        android:layout_height="match_parent"
+        android:src="@drawable/header_walking_dead"
+        android:scaleType="fitCenter"/>
 </LinearLayout>
