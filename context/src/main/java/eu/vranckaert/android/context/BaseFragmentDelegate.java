@@ -1,6 +1,8 @@
 package eu.vranckaert.android.context;
 
 import android.app.Activity;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import eu.vranckaert.android.general.KeyboardHelper;
+
+import java.util.Locale;
 
 /**
  * Date: 12/11/15
@@ -72,7 +76,7 @@ public final class BaseFragmentDelegate {
     }
 
     protected void setTitle(@StringRes int titleResId) {
-        ((BaseActivity) mFragment.getActivity()).getToolbar().setTitle(titleResId);
+        mFragment.getActivity().setTitle(titleResId);
         setSubtitle(null);
         mTitle = mFragment.getString(titleResId);
     }
@@ -263,5 +267,12 @@ public final class BaseFragmentDelegate {
 
     protected void navigateToMenuItem(int menuItemId) {
         ((BaseMenuActivity) mFragment.getActivity()).navigateToMenuItem(menuItemId);
+    }
+
+    protected void applyLanguage(String language) {
+        Activity activity = mFragment.getActivity();
+        if (activity instanceof BaseActivity) {
+            ((BaseActivity) activity).applyLanguage(language);
+        }
     }
 }

@@ -58,12 +58,15 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
         View view = layoutInflater.inflate(R.layout.activity_menu, null);
 
         // Setup the ToolBar
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        // This needs to be done here, if we wait for the onCreate of the BaseMenuActivity to finish, and then
+        // do the toolbar setup in the onCreate of the BaseActivity we might be to late and no titles for example can be
+        // set and the drawer layout as well will be overwritten (as this is configured on the toolbar we are
+        // initializing here).
+        initToolbar(view);
 
         // Setup the ActionBarDrawerToggle
         mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.general_drawer_open,
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getToolbar(), R.string.general_drawer_open,
                 R.string.general_drawer_close);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
@@ -84,7 +87,7 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
                 putFragment(fragment, false);
             }
         } else {
-            // Let's what happens now :-)
+            // Let's see what happens now :-)
         }
 
         return view;

@@ -197,6 +197,10 @@ public abstract class BaseFragment extends Fragment implements BaseAppcompatFrag
         getDelegate().navigateToMenuItem(menuItemId);
     }
 
+    public void applyLanguage(String language) {
+        getDelegate().applyLanguage(language);
+    }
+
     private BaseFragmentDelegate getDelegate() {
         if (mDelegate == null) {
             mDelegate = BaseFragmentDelegate.getDelegate(this);

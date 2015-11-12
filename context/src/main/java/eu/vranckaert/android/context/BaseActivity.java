@@ -1,10 +1,15 @@
 package eu.vranckaert.android.context;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.util.Locale;
 
 /**
  * Date: 11/06/15
@@ -24,15 +29,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mView == null) {
             mView = doCreateView();
         }
-        setContentView(mView);
 
         // Setup the ToolBar
-        mToolbar = (Toolbar) mView.findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+        if (mToolbar == null) {
+            initToolbar(mView);
+        }
 
+        setContentView(mView);
         doCreate(savedInstanceState);
 
         onViewCreated();
+    }
+
+    public final void initToolbar(View view) {
+        if (view.findViewById(R.id.toolbar) != null) {
+            mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
+            setSupportActionBar(mToolbar);
+        }
     }
 
     public Toolbar getToolbar() {
@@ -60,5 +73,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void applyLanguage(String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        Resources resources = getResources();
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 }

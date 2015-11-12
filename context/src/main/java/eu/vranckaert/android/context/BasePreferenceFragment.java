@@ -186,6 +186,10 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat im
         getDelegate().navigateToMenuItem(menuItemId);
     }
 
+    public void applyLanguage(String language) {
+        getDelegate().applyLanguage(language);
+    }
+
     private BaseFragmentDelegate getDelegate() {
         if (mDelegate == null) {
             mDelegate = BaseFragmentDelegate.getDelegate(this);
