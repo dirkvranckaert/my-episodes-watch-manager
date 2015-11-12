@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/generalPreferences">
+        <SwitchPreferenceCompat android:key="store_password"
+                                android:title="@string/storePasswordPrompt"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/languagePreferences">
+        <ListPreference
+            android:dialogTitle="@string/showLanguagePrompt"
+            android:entries="@array/showLanguageOptions"
+            android:entryValues="@array/showLanguageOptionsValues"
+            android:key="language"
+            android:title="@string/showLanguagePrompt" />
+    </PreferenceCategory>
+</PreferenceScreen>

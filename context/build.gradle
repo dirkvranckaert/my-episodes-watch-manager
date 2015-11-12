@@ -19,6 +19,8 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
+    compile 'com.android.support:preference-v7:' + rootProject.ext.supportLibraryVersion
+    compile 'com.android.support:preference-v14:' + rootProject.ext.supportLibraryVersion
     compile 'com.android.support:design:' + rootProject.ext.supportLibraryVersion
     compile project(':general')
     compile project(':widget')

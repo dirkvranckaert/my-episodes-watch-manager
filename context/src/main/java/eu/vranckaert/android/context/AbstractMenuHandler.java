@@ -10,5 +10,5 @@ import android.app.Activity;
  * @author Dirk Vranckaert
  */
 public abstract class AbstractMenuHandler {
-    public abstract BaseFragment navigate(Activity activity, int itemId);
+    public abstract BaseAppcompatFragment navigate(Activity activity, int itemId);
 }

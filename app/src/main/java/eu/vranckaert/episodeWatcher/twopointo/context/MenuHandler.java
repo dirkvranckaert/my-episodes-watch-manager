@@ -6,13 +6,13 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.support.v7.app.AlertDialog;
 import eu.vranckaert.android.context.AbstractMenuHandler;
+import eu.vranckaert.android.context.BaseAppcompatFragment;
 import eu.vranckaert.episodeWatcher.MyEpisodes;
 import eu.vranckaert.episodeWatcher.R;
-import eu.vranckaert.android.context.BaseFragment;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
-import eu.vranckaert.episodeWatcher.service.UserService;
 import eu.vranckaert.episodeWatcher.twopointo.context.episode.EpisodesTabFragment;
+import eu.vranckaert.episodeWatcher.twopointo.context.settings.SettingsFragment;
 
 /**
  * Date: 12/06/15
@@ -22,8 +22,8 @@ import eu.vranckaert.episodeWatcher.twopointo.context.episode.EpisodesTabFragmen
  */
 public class MenuHandler extends AbstractMenuHandler {
     @Override
-    public BaseFragment navigate(final Activity activity, int itemId) {
-        BaseFragment baseFragment = null;
+    public BaseAppcompatFragment navigate(final Activity activity, int itemId) {
+        BaseAppcompatFragment baseFragment = null;
         switch (itemId) {
             case R.id.drawer_item_episodes:
                 baseFragment = new EpisodesTabFragment();
@@ -43,6 +43,8 @@ public class MenuHandler extends AbstractMenuHandler {
                         .setNegativeButton(R.string.close, null)
                         .show();
                 break;
+            case R.id.drawer_item_settings:
+                baseFragment = new SettingsFragment();
         }
 
         return baseFragment;

@@ -1,23 +1,20 @@
 package eu.vranckaert.android.context;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
 /**
- * Date: 15/06/15
- * Time: 07:52
+ * Date: 12/11/15
+ * Time: 11:40
  *
  * @author Dirk Vranckaert
  */
-public abstract class BaseFragment extends Fragment implements BaseAppcompatFragment {
+public abstract class BasePreferenceFragment extends PreferenceFragmentCompat implements BaseAppcompatFragment {
     private static final String LOG_TAG = BaseFragment.class.getSimpleName();
 
     private BaseFragmentDelegate mDelegate;
@@ -38,20 +35,12 @@ public abstract class BaseFragment extends Fragment implements BaseAppcompatFrag
         setTitle("");
     }
 
-    @Nullable
     @Override
-    public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "onCreateView");
-        if (getDelegate().mView == null) {
-            getDelegate().mView = doCreateView(inflater, container, savedInstanceState);
-        }
-        detachViewFromParent(getDelegate().mView);
-        return getDelegate().mView;
+    public final void onCreatePreferences(Bundle savedInstanceState, String rootkey) {
+        doCreatePreferences(savedInstanceState, rootkey);
     }
 
-    protected View doCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return null;
-    }
+    public abstract void doCreatePreferences(Bundle savedInstanceState, String rootkey);
 
     @Override
     public final String getName() {

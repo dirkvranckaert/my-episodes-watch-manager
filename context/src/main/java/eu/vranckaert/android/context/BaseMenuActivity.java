@@ -37,7 +37,7 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationView mNavigationView;
-    private BaseFragment mContentFragment;
+    private BaseAppcompatFragment mContentFragment;
     private int mSelectedMenuItemId = -1;
 
     private final Handler mDrawerActionHandler = new Handler();
@@ -79,7 +79,7 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
         mNavigationView.setNavigationItemSelectedListener(this);
 
         if (mSelectedMenuItemId == -1) {
-            BaseFragment fragment = getMenuHandler().navigate(this, getDefaultMenuItem());
+            BaseAppcompatFragment fragment = getMenuHandler().navigate(this, getDefaultMenuItem());
             if (fragment != null) {
                 putFragment(fragment, false);
             }
@@ -185,7 +185,7 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
     }
 
     private boolean handleNavigationItemSelected(int menuId) {
-        BaseFragment fragment = getMenuHandler().navigate(this, menuId);
+        BaseAppcompatFragment fragment = getMenuHandler().navigate(this, menuId);
         if (fragment != null) {
             putFragment(fragment, false);
             return true;
@@ -230,7 +230,7 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Fragment previousFragment = mContentFragment;
+            Fragment previousFragment = mContentFragment.get();
             KeyboardHelper.hideKeyboard(getWindow().getDecorView(), this);
 
             int numberOfFragments = getFragmentCount();
@@ -275,7 +275,7 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
         }
     }
 
-    public final void putFragment(BaseFragment fragment, boolean addToBackstack) {
+    public final void putFragment(BaseAppcompatFragment fragment, boolean addToBackstack) {
         Log.d("dirk", "putFragment");
 
         // update the main content by replacing fragments
@@ -284,7 +284,7 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
         FragmentTransaction ft = fragmentManager.beginTransaction();
 
         if (fragment == null && mContentFragment != null) {
-            ft.remove(mContentFragment).commitAllowingStateLoss();
+            ft.remove(mContentFragment.get()).commitAllowingStateLoss();
         } else if (fragment != null) {
             if (addToBackstack) {
                 ft.addToBackStack(fragment.getName());
@@ -298,22 +298,22 @@ public abstract class BaseMenuActivity extends BaseActivity implements OnNavigat
                 }
                 fragment.setTopLevelFragment(true);
             }
-            ft.replace(R.id.content, fragment).commitAllowingStateLoss();
+            ft.replace(R.id.content, fragment.get()).commitAllowingStateLoss();
         }
 
         boolean isFirstContentFragment = mContentFragment == null;
         mContentFragment = fragment;
         if (isFirstContentFragment) {
-            onContentSet(fragment);
+            onContentSet(fragment.get());
         }
     }
 
-    protected void onContentSet(BaseFragment fragment) {
+    protected void onContentSet(Fragment fragment) {
 
     }
 
-    protected BaseFragment getContentFragment() {
-        return mContentFragment;
+    protected Fragment getContentFragment() {
+        return mContentFragment.get();
     }
 
     boolean mBackNavigation;

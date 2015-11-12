@@ -17,4 +17,6 @@
         <item name="spinBars">true</item>
         <item name="color">@color/toolbar_title</item>
     </style>
+
+    <style name="AppCompatPreferenceTheme" parent="PreferenceThemeOverlay"></style>
 </resources>
