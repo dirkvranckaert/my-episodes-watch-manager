@@ -130,6 +130,18 @@ public class EpisodesTabsAdapter extends PagerAdapter {
         mEpisodesToWatchView.removeAllEpisodes(episodes);
     }
 
+    public void onEpisodesNotMarkedAcquired(List<Episode> episodes) {
+        mEpisodesToAcquire.addAll(episodes);
+        notifyDataSetChanged();
+        mEpisodesToAcquireView.addAllEpisodes(episodes);
+    }
+
+    public void onEpisodesNotMarkedWatched(List<Episode> episodes) {
+        mEpisodesToWatch.addAll(episodes);
+        notifyDataSetChanged();
+        mEpisodesToWatchView.addAllEpisodes(episodes);
+    }
+
     public RecyclerView getListFor(int page) {
         if (page == 0 && mEpisodesToWatchView != null) {
             return mEpisodesToWatchView.getList();

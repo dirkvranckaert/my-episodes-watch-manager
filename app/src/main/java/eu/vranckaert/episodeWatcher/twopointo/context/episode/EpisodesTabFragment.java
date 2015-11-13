@@ -127,6 +127,14 @@ public class EpisodesTabFragment extends BaseFragment implements EpisodesListLis
         mView.onEpisodesMarkedWatched(episodes);
     }
 
+    private void episodesNotMarkedAcquired(List<Episode> episodes) {
+        mView.onEpisodesNotMarkedAcquired(episodes);
+    }
+
+    private void episodesNotMarkedWatched(List<Episode> episodes) {
+        mView.onEpisodesNotMarkedWatched(episodes);
+    }
+
     public final class LoadEpisodesTask extends CustomTask<List<Episode>> {
         private final EpisodesTabFragment mFragment;
         private final EpisodeType mType;
@@ -143,6 +151,15 @@ public class EpisodesTabFragment extends BaseFragment implements EpisodesListLis
                 mFragment.mView.setLoadingEpisodesToWatch(true);
             } else if (EpisodeType.EPISODES_TO_ACQUIRE.equals(mType)) {
                 mFragment.mView.setLoadingEpisodesToAcquire(true);
+            }
+        }
+
+        @Override
+        public void onError(Exception exception) {
+            if (EpisodeType.EPISODES_TO_WATCH.equals(mType)) {
+                mFragment.mView.setLoadingEpisodesToWatch(false);
+            } else if (EpisodeType.EPISODES_TO_ACQUIRE.equals(mType)) {
+                mFragment.mView.setLoadingEpisodesToAcquire(false);
             }
         }
 
@@ -186,6 +203,15 @@ public class EpisodesTabFragment extends BaseFragment implements EpisodesListLis
         @Override
         protected boolean isProgressTask() {
             return true;
+        }
+
+        @Override
+        public void onError(Exception exception) {
+            if (mAction == ACTION_MARK_WATHCED) {
+                mFragment.episodesNotMarkedWatched(mEpisodes);
+            } else if (mAction == ACTION_MARK_ACQUIRED) {
+                mFragment.episodesNotMarkedAcquired(mEpisodes);
+            }
         }
 
         @Override

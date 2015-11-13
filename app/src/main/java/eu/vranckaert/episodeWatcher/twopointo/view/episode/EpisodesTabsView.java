@@ -154,6 +154,14 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
         mAdapter.onEpisodesMarkedWatched(episodes);
     }
 
+    public void onEpisodesNotMarkedAcquired(List<Episode> episodes) {
+        mAdapter.onEpisodesNotMarkedAcquired(episodes);
+    }
+
+    public void onEpisodesNotMarkedWatched(List<Episode> episodes) {
+        mAdapter.onEpisodesNotMarkedWatched(episodes);
+    }
+
     public void episodeCountHasUpdated() {
         final int tabPosition = mTabs.getSelectedTabPosition();
         mTabs.setupWithViewPager(mViewpager);
