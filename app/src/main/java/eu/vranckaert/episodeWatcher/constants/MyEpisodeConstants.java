@@ -72,6 +72,9 @@ public class MyEpisodeConstants {
     														"&episode=" + MYEPISODES_UPDATE_PAGE_EPISODE_REPLACEMENT +
     														"&seen=" + MYEPISODES_UPDATE_PAGE_UNSEEN;
 
+    public static final String NEW_MYEPISODES_SEARCH = "https://www.myepisodes.com/ajax/service.php?mode=search_showname";
+    public static final String NEW_MYEPISODES_SEARCH_PARAM_NEEDLE = "search";
+
     public static final String MYEPISODES_SEARCH_PAGE = "http://www.myepisodes.com/search.php";
     public static final String MYEPISODES_SEARCH_PAGE_PARAM_SHOW = "tvshow";
     public static final String MYEPISODES_SEARCH_PAGE_PARAM_ACTION_VALUE = "Search myepisodes.com";

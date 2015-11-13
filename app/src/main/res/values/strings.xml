@@ -70,6 +70,7 @@
     <string name="showSearchAddShow">Are you sure you want to add this show to your list of shows?</string>    
     <string name="showSearchFinished">Are you done adding shows or do you want to continue?</string>
     <string name="showSearchEpisodeCount">%1$d Episode(s)</string>
+    <string name="showSearchAlreadyAdded">This show is already in your list!</string>
     <!-- Favo and ingored shows -->
     <string name="favoIgnoredDeleteShow">Delete show</string>
     <string name="favoIgnoredIgnoreShow">Ignore show</string>

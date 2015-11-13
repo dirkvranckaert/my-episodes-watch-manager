@@ -6,6 +6,7 @@ import java.util.List;
 public class Show {
 	private String showName;
 	private int episodeCount;
+	private boolean added;
 	private List<Episode> episodes = new ArrayList<Episode>(0);
     private String myEpisodeID;
 
@@ -42,6 +43,14 @@ public class Show {
 
 	public void setEpisodeCount(int episodeCount) {
 		this.episodeCount = episodeCount;
+	}
+
+	public boolean isAdded() {
+		return added;
+	}
+
+	public void setAdded(boolean added) {
+		this.added = added;
 	}
 
 	public void addEpisode(Episode episode) {

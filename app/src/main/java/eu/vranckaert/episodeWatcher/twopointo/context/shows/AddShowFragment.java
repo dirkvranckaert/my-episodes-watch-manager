@@ -85,7 +85,7 @@ public class AddShowFragment extends BaseFragment implements AddShowsListener {
                     Preferences.getPreference(getContext(), User.USERNAME),
                     Preferences.getPreference(getContext(), User.PASSWORD)
             );
-            return new ShowService().searchShows(mNeedle.toString(), user);
+            return new ShowService().newSearchShows(mNeedle.toString(), user);
         }
 
         @Override

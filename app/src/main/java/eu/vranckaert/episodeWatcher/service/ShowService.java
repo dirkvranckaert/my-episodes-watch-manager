@@ -1,6 +1,10 @@
 package eu.vranckaert.episodeWatcher.service;
 
 import android.util.Log;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import eu.vranckaert.episodeWatcher.constants.MyEpisodeConstants;
 import eu.vranckaert.episodeWatcher.domain.Show;
 import eu.vranckaert.episodeWatcher.domain.User;
@@ -37,39 +41,87 @@ public class ShowService {
         userService = new UserService();
     }
 
-    public List<Show> searchShows(String search, User user) throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
+    public List<Show> newSearchShows(CharSequence needle, User user)
+            throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
         HttpClient httpClient = new DefaultHttpClient();
         String username = user.getUsername();
         userService.login(httpClient, username, user.getPassword());
 
-    	HttpPost post = new HttpPost(MyEpisodeConstants.MYEPISODES_SEARCH_PAGE);
-
-    	List <NameValuePair> nvps = new ArrayList<NameValuePair>();
-        nvps.add(new BasicNameValuePair(MyEpisodeConstants.MYEPISODES_SEARCH_PAGE_PARAM_SHOW, search));
-        nvps.add(new BasicNameValuePair(MyEpisodeConstants.MYEPISODES_FORM_PARAM_ACTION, MyEpisodeConstants.MYEPISODES_SEARCH_PAGE_PARAM_ACTION_VALUE));
+        HttpPost post = new HttpPost(MyEpisodeConstants.NEW_MYEPISODES_SEARCH);
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        nvps.add(new BasicNameValuePair(MyEpisodeConstants.NEW_MYEPISODES_SEARCH_PARAM_NEEDLE, needle.toString()));
 
         try {
-			post.setEntity(new UrlEncodedFormEntity(nvps));
-		} catch (UnsupportedEncodingException e) {
-			String message = "Could not start search because the HTTP post encoding is not supported";
-			Log.e(LOG_TAG, message, e);
-			throw new UnsupportedHttpPostEncodingException(message, e);
-		}
+            post.setEntity(new UrlEncodedFormEntity(nvps));
+        } catch (UnsupportedEncodingException e) {
+            String message = "Could not start search because the HTTP post encoding is not supported";
+            Log.e(LOG_TAG, message, e);
+            throw new UnsupportedHttpPostEncodingException(message, e);
+        }
 
-		String responsePage = "";
+        String responsePage = "";
         HttpResponse response;
         try {
             response = httpClient.execute(post);
             responsePage = EntityUtils.toString(response.getEntity());
         } catch (ClientProtocolException e) {
             String message = "Could not connect to host.";
-			Log.e(LOG_TAG, message, e);
-			throw new InternetConnectivityException(message, e);
+            Log.e(LOG_TAG, message, e);
+            throw new InternetConnectivityException(message, e);
         } catch (UnknownHostException e) {
-			String message = "Could not connect to host.";
-			Log.e(LOG_TAG, message, e);
-			throw new InternetConnectivityException(message, e);
-		} catch (IOException e) {
+            String message = "Could not connect to host.";
+            Log.e(LOG_TAG, message, e);
+            throw new InternetConnectivityException(message, e);
+        } catch (IOException e) {
+            String message = "Search on MyEpisodes failed.";
+            Log.w(LOG_TAG, message, e);
+            throw new LoginFailedException(message, e);
+        } finally {
+            httpClient.getConnectionManager().shutdown();
+        }
+
+        List<Show> shows = extractNewSearchResults(responsePage);
+
+        Log.d(LOG_TAG, shows.size() + " shows found for search value " + needle);
+
+        return shows;
+    }
+
+    public List<Show> searchShows(String search, User user)
+            throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
+        HttpClient httpClient = new DefaultHttpClient();
+        String username = user.getUsername();
+        userService.login(httpClient, username, user.getPassword());
+
+        HttpPost post = new HttpPost(MyEpisodeConstants.MYEPISODES_SEARCH_PAGE);
+
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        nvps.add(new BasicNameValuePair(MyEpisodeConstants.MYEPISODES_SEARCH_PAGE_PARAM_SHOW, search));
+        nvps.add(new BasicNameValuePair(MyEpisodeConstants.MYEPISODES_FORM_PARAM_ACTION,
+                MyEpisodeConstants.MYEPISODES_SEARCH_PAGE_PARAM_ACTION_VALUE));
+
+        try {
+            post.setEntity(new UrlEncodedFormEntity(nvps));
+        } catch (UnsupportedEncodingException e) {
+            String message = "Could not start search because the HTTP post encoding is not supported";
+            Log.e(LOG_TAG, message, e);
+            throw new UnsupportedHttpPostEncodingException(message, e);
+        }
+
+        String responsePage = "";
+        HttpResponse response;
+        try {
+            response = httpClient.execute(post);
+            responsePage = EntityUtils.toString(response.getEntity());
+        } catch (ClientProtocolException e) {
+            String message = "Could not connect to host.";
+            Log.e(LOG_TAG, message, e);
+            throw new InternetConnectivityException(message, e);
+        } catch (UnknownHostException e) {
+            String message = "Could not connect to host.";
+            Log.e(LOG_TAG, message, e);
+            throw new InternetConnectivityException(message, e);
+        } catch (IOException e) {
             String message = "Search on MyEpisodes failed.";
             Log.w(LOG_TAG, message, e);
             throw new LoginFailedException(message, e);
@@ -84,23 +136,47 @@ public class ShowService {
         return shows;
     }
 
+    private List<Show> extractNewSearchResults(String json) {
+        List<Show> shows = new ArrayList<>();
+
+        JsonElement element = new JsonParser().parse(json);
+        JsonArray jsonArray = element.getAsJsonArray();
+        int showCount = jsonArray.size();
+        for (int i = 0; i < showCount; i++) {
+            JsonElement showElement = jsonArray.get(i);
+            JsonObject showObject = showElement.getAsJsonObject();
+            String showId = showObject.get("id").getAsString();
+            String showName = showObject.get("name").getAsString();
+            int episodeCount = showObject.get("episodes").getAsInt();
+            boolean added = showObject.get("added").getAsBoolean();
+
+            Show show = new Show(showName, showId);
+            show.setEpisodeCount(episodeCount);
+            show.setAdded(added);
+            shows.add(show);
+        }
+
+        return shows;
+    }
+
     /**
      * Extract a list of shows from the MyEpisodes.com HTML output!
+     *
      * @param html The MyEpisodes.com HTML output
      * @return A List of {@link eu.vranckaert.episodeWatcher.domain.Show} instances.
      */
     private List<Show> extractSearchResults(String html) {
         List<Show> shows = new ArrayList<Show>();
-        if(html.contains("No results found.")) {
+        if (html.contains("No results found.")) {
             return shows;
         }
         String[] split = html.split(MyEpisodeConstants.MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_SEARCH_RESULTS);
-        if(split.length == 2) {
+        if (split.length == 2) {
             split = split[1].split(MyEpisodeConstants.MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TABLE_END_TAG);
-            if(split.length > 0) {
+            if (split.length > 0) {
                 split = split[0].split(MyEpisodeConstants.MYEPISODES_SEARCH_RESULT_PAGE_SPLITTER_TD_START_TAG);
-                for(int i=0; i<split.length; i++) {
-                    if(i>0) {
+                for (int i = 0; i < split.length; i++) {
+                    if (i > 0) {
                         String showName = "";
                         String showId = "";
 
@@ -112,13 +188,13 @@ public class ShowService {
                         int indexOfSlash = htmlPart.indexOf("/");
                         showId = htmlPart.substring(0, indexOfSlash);
                         int closingIndex = htmlPart.indexOf("\">");
-                        htmlPart = htmlPart.substring(closingIndex+2);
+                        htmlPart = htmlPart.substring(closingIndex + 2);
 
-//                        //Get the showid
-//                        String showSeperator = "\">";
-//                        int showIdSeperatorIndex = StringUtils.indexOf(htmlPart, showSeperator);
-//                        showId = htmlPart.substring(0, showIdSeperatorIndex);
-//                        htmlPart = htmlPart.replace(showId + showSeperator, "");
+                        //                        //Get the showid
+                        //                        String showSeperator = "\">";
+                        //                        int showIdSeperatorIndex = StringUtils.indexOf(htmlPart, showSeperator);
+                        //                        showId = htmlPart.substring(0, showIdSeperatorIndex);
+                        //                        htmlPart = htmlPart.replace(showId + showSeperator, "");
                         //Get the showName
                         showName = htmlPart.substring(0, StringUtils.indexOf(htmlPart, "</a></td>"));
 
@@ -130,7 +206,9 @@ public class ShowService {
         return shows;
     }
 
-    public void addShow(String myEpsidodesShowId, User user) throws InternetConnectivityException, LoginFailedException, UnsupportedHttpPostEncodingException, ShowAddFailedException {
+    public void addShow(String myEpsidodesShowId, User user)
+            throws InternetConnectivityException, LoginFailedException, UnsupportedHttpPostEncodingException,
+            ShowAddFailedException {
         HttpClient httpClient = new DefaultHttpClient();
         userService.login(httpClient, user.getUsername(), user.getPassword());
         String url = MyEpisodeConstants.MYEPISODES_ADD_SHOW_PAGE + myEpsidodesShowId;
@@ -140,12 +218,12 @@ public class ShowService {
 
         try {
             HttpResponse response = httpClient.execute(get);
-        	status = response.getStatusLine().getStatusCode();
+            status = response.getStatusLine().getStatusCode();
         } catch (UnknownHostException e) {
-			String message = "Could not connect to host.";
-			Log.e(LOG_TAG, message, e);
-			throw new InternetConnectivityException(message, e);
-		} catch (IOException e) {
+            String message = "Could not connect to host.";
+            Log.e(LOG_TAG, message, e);
+            throw new InternetConnectivityException(message, e);
+        } catch (IOException e) {
             String message = "Adding the show status failed for URL " + url;
             Log.w(LOG_TAG, message, e);
             throw new ShowAddFailedException(message, e);
@@ -162,26 +240,27 @@ public class ShowService {
         }
     }
 
-    public List<Show> getFavoriteOrIgnoredShows(User user, ShowType showType) throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
+    public List<Show> getFavoriteOrIgnoredShows(User user, ShowType showType)
+            throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
         HttpClient httpClient = new DefaultHttpClient();
         userService.login(httpClient, user.getUsername(), user.getPassword());
 
         HttpGet get = new HttpGet(MyEpisodeConstants.MYEPISODES_FAVO_IGNORE_PAGE);
 
-		String responsePage = "";
+        String responsePage = "";
         HttpResponse response;
         try {
             response = httpClient.execute(get);
             responsePage = EntityUtils.toString(response.getEntity());
         } catch (ClientProtocolException e) {
             String message = "Could not connect to host.";
-			Log.e(LOG_TAG, message, e);
-			throw new InternetConnectivityException(message, e);
+            Log.e(LOG_TAG, message, e);
+            throw new InternetConnectivityException(message, e);
         } catch (UnknownHostException e) {
-			String message = "Could not connect to host.";
-			Log.e(LOG_TAG, message, e);
-			throw new InternetConnectivityException(message, e);
-		} catch (IOException e) {
+            String message = "Could not connect to host.";
+            Log.e(LOG_TAG, message, e);
+            throw new InternetConnectivityException(message, e);
+        } catch (IOException e) {
             String message = "Search on MyEpisodes failed.";
             Log.w(LOG_TAG, message, e);
             throw new LoginFailedException(message, e);
@@ -203,7 +282,7 @@ public class ShowService {
         String optionStartTag = "<option value=\"";
         String optionEndTag = "</option>";
 
-        switch(showType) {
+        switch (showType) {
             case FAVOURITE_SHOWS:
                 startTag += "shows\"";
                 break;
@@ -213,7 +292,7 @@ public class ShowService {
         }
         int startPosition = html.indexOf(startTag);
 
-        if(startPosition == -1) {
+        if (startPosition == -1) {
             return shows;
         }
 
@@ -221,19 +300,19 @@ public class ShowService {
         int endPosition = selectTag.indexOf(endTag);
         selectTag = selectTag.substring(0, endPosition);
 
-        while(selectTag.length() > 0) {
+        while (selectTag.length() > 0) {
             int startPosistionOption = selectTag.indexOf(optionStartTag);
             int endPositionOption = selectTag.indexOf(optionEndTag);
 
-            if(startPosistionOption == -1 || endPositionOption == -1 || endPositionOption < startPosistionOption) {
+            if (startPosistionOption == -1 || endPositionOption == -1 || endPositionOption < startPosistionOption) {
                 break;
             }
 
             String optionTag = selectTag.substring(startPosistionOption + optionStartTag.length(), endPositionOption);
-            selectTag = selectTag.replace(optionStartTag+optionTag+optionEndTag, "");
+            selectTag = selectTag.replace(optionStartTag + optionTag + optionEndTag, "");
 
             String[] values = optionTag.split("\">");
-            if(values.length != 2) {
+            if (values.length != 2) {
                 break;
             }
 
@@ -245,12 +324,13 @@ public class ShowService {
         return shows;
     }
 
-    public List<Show> markShow(User user, Show show, ShowAction showAction, ShowType showType) throws LoginFailedException, InternetConnectivityException, UnsupportedHttpPostEncodingException {
+    public List<Show> markShow(User user, Show show, ShowAction showAction, ShowType showType)
+            throws LoginFailedException, InternetConnectivityException, UnsupportedHttpPostEncodingException {
         HttpClient httpClient = new DefaultHttpClient();
         userService.login(httpClient, user.getUsername(), user.getPassword());
 
         String url = "";
-        switch(showAction) {
+        switch (showAction) {
             case IGNORE:
                 Log.d(LOG_TAG, "IGNORING SHOWS");
                 url = MyEpisodeConstants.MYEPISODES_FAVO_IGNORE_ULR;
@@ -284,7 +364,7 @@ public class ShowService {
         } finally {
             httpClient.getConnectionManager().shutdown();
         }
-        
+
         List<Show> shows = getFavoriteOrIgnoredShows(user, showType);
 
         return shows;

@@ -18,18 +18,22 @@ import eu.vranckaert.episodeWatcher.domain.Show;
 public class AddShowsListItemView extends AbstractRecyclerViewHolder implements OnClickListener {
     private final TextView mShowName;
     private final TextView mEpisodeCount;
+    private final TextView mAdded;
 
     public AddShowsListItemView(LayoutInflater inflater, ViewGroup parent) {
         super(inflater, parent, R.layout.new_add_shows_list_item);
 
         mShowName = findViewById(R.id.name);
         mEpisodeCount = findViewById(R.id.episode_count);
+        mAdded = findViewById(R.id.added);
         getView().setOnClickListener(this);
     }
 
     public void setShow(Show show) {
         mShowName.setText(show.getShowName());
         mEpisodeCount.setText(getString(R.string.showSearchEpisodeCount, show.getEpisodeCount()));
+        mAdded.setVisibility(show.isAdded() ? VISIBLE : GONE);
+        getView().setClickable(!show.isAdded());
     }
 
     @Override
