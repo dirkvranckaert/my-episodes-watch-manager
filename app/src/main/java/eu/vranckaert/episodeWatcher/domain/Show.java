@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Show {
 	private String showName;
+	private int episodeCount;
 	private List<Episode> episodes = new ArrayList<Episode>(0);
     private String myEpisodeID;
 
@@ -33,6 +34,14 @@ public class Show {
      */
 	public void setShowName(String showName) {
 		this.showName = showName;
+	}
+
+	public int getEpisodeCount() {
+		return episodeCount;
+	}
+
+	public void setEpisodeCount(int episodeCount) {
+		this.episodeCount = episodeCount;
 	}
 
 	public void addEpisode(Episode episode) {
