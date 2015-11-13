@@ -23,7 +23,7 @@ public abstract class BaseFragment extends Fragment implements BaseAppcompatFrag
     private BaseFragmentDelegate mDelegate;
 
     @Override
-    public Fragment get() {
+    public final Fragment get() {
         return this;
     }
 

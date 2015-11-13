@@ -3,7 +3,10 @@ package eu.vranckaert.episodeWatcher.twopointo.context;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import eu.vranckaert.android.context.BaseFragment;
 import eu.vranckaert.episodeWatcher.twopointo.context.login.LoginActivity;
+import eu.vranckaert.episodeWatcher.twopointo.context.shows.AddShowFragment;
+import eu.vranckaert.episodeWatcher.twopointo.context.shows.ManageShowsFragment;
 
 /**
  * Date: 03/11/15
@@ -35,5 +38,9 @@ public class NavigationManager {
         intent.putExtra(StartupActivity.SKIP_FORGET_PWD_CHECK, skipForgetPwd);
         activity.startActivity(intent);
         activity.finish();
+    }
+
+    public static void startAddShow(BaseFragment fragment, int requestCode) {
+        fragment.startFragmentForResult(new AddShowFragment(), requestCode);
     }
 }

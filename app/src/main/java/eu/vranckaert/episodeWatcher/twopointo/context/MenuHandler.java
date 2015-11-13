@@ -13,6 +13,7 @@ import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.twopointo.context.episode.EpisodesTabFragment;
 import eu.vranckaert.episodeWatcher.twopointo.context.settings.SettingsFragment;
+import eu.vranckaert.episodeWatcher.twopointo.context.shows.ManageShowsFragment;
 
 /**
  * Date: 12/06/15
@@ -27,6 +28,9 @@ public class MenuHandler extends AbstractMenuHandler {
         switch (itemId) {
             case R.id.drawer_item_episodes:
                 baseFragment = new EpisodesTabFragment();
+                break;
+            case R.id.drawer_item_manage_shows:
+                baseFragment = new ManageShowsFragment();
                 break;
             case R.id.drawer_item_logout:
                 new AlertDialog.Builder(activity)

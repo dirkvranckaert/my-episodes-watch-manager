@@ -4,6 +4,10 @@
         <item
             android:id="@+id/drawer_item_episodes"
             android:title="@string/drawer_item_episodes"
+            android:icon="@drawable/ic_remove_red_eye_white_36dp"/>
+        <item
+            android:id="@+id/drawer_item_manage_shows"
+            android:title="@string/manageShows"
             android:icon="@drawable/ic_format_list_bulleted_white_36dp"/>
         <item
             android:id="@+id/drawer_item_settings"

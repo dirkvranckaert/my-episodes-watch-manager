@@ -20,7 +20,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat im
     private BaseFragmentDelegate mDelegate;
 
     @Override
-    public Fragment get() {
+    public final Fragment get() {
         return this;
     }
 
