@@ -14,6 +14,7 @@ import eu.vranckaert.android.threading.CustomTask;
 import eu.vranckaert.android.threading.ErrorMapping;
 import eu.vranckaert.episodeWatcher.twopointo.context.NavigationManager;
 import eu.vranckaert.android.context.BaseActivity;
+import eu.vranckaert.episodeWatcher.twopointo.threading.MyEpisodesTask;
 import eu.vranckaert.episodeWatcher.twopointo.view.login.LoginView;
 import eu.vranckaert.episodeWatcher.twopointo.view.login.LoginView.LoginListener;
 
@@ -75,7 +76,7 @@ public class LoginActivity extends BaseActivity implements LoginListener {
         NavigationManager.openUrl(this, "http://www.myepisodes.com/register.php");
     }
 
-    public final class LoginTask extends CustomTask<Boolean> {
+    public final class LoginTask extends MyEpisodesTask<Boolean> {
         private final LoginActivity mActivity;
         private final User mUser;
 

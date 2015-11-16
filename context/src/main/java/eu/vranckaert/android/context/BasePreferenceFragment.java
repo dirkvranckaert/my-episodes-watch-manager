@@ -15,7 +15,9 @@ import android.view.View;
  * @author Dirk Vranckaert
  */
 public abstract class BasePreferenceFragment extends PreferenceFragmentCompat implements BaseAppcompatFragment {
-    private static final String LOG_TAG = BaseFragment.class.getSimpleName();
+    protected static int RESULT_CANCELLED = BaseFragmentDelegate.RESULT_CANCELLED;
+    protected static int RESULT_OK = BaseFragmentDelegate.RESULT_OK;
+    protected static int RESULT_DELETED = BaseFragmentDelegate.RESULT_DELETED;
 
     private BaseFragmentDelegate mDelegate;
 

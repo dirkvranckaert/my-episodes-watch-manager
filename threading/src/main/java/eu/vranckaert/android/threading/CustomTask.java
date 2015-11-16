@@ -62,6 +62,9 @@ public abstract class CustomTask<T extends Object> {
         this.context = context;
         setShowErrorDialog(false);
         setErrorCancellable(true);
+        setRetryButton(R.string.general_retry_button);
+        setRetryCancelButton(R.string.general_retry_cancel_button);
+        setOkButton(R.string.general_ok);
     }
 
     public Context getContext() {

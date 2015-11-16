@@ -12,6 +12,7 @@ import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.service.EpisodesService;
+import eu.vranckaert.episodeWatcher.twopointo.threading.MyEpisodesTask;
 import eu.vranckaert.episodeWatcher.twopointo.view.episode.EpisodesListAdapter.EpisodesListListener;
 import eu.vranckaert.episodeWatcher.twopointo.view.episode.EpisodesTabsView;
 import eu.vranckaert.episodeWatcher.twopointo.view.episode.EpisodesTabsView.EpisodesTabListener;
@@ -135,7 +136,7 @@ public class EpisodesTabFragment extends BaseFragment implements EpisodesListLis
         mView.onEpisodesNotMarkedWatched(episodes);
     }
 
-    public final class LoadEpisodesTask extends CustomTask<List<Episode>> {
+    public final class LoadEpisodesTask extends MyEpisodesTask<List<Episode>> {
         private final EpisodesTabFragment mFragment;
         private final EpisodeType mType;
 
@@ -184,7 +185,7 @@ public class EpisodesTabFragment extends BaseFragment implements EpisodesListLis
         }
     }
 
-    public final class MarkAllEpisodesTask extends CustomTask<List<Episode>> {
+    public final class MarkAllEpisodesTask extends MyEpisodesTask<List<Episode>> {
         public static final int ACTION_MARK_WATHCED = 0;
         public static final int ACTION_MARK_ACQUIRED = 1;
 

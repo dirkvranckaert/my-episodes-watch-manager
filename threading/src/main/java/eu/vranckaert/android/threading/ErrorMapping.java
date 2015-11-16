@@ -9,7 +9,7 @@ package eu.vranckaert.android.threading;
 public class ErrorMapping {
     private String title;
     private String message;
-    private boolean tryAgain;
+    private boolean tryAgain = true;
     private String retryButton;
 
     public String getTitle() {
@@ -31,7 +31,7 @@ public class ErrorMapping {
     public static class Builder {
         private String title;
         private String message;
-        private boolean tryAgain;
+        private boolean tryAgain = true;
         private String retryButton;
 
         public Builder setTitle(String title) {

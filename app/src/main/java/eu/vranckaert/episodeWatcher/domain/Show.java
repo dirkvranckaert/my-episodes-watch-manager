@@ -1,9 +1,10 @@
 package eu.vranckaert.episodeWatcher.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Show {
+public class Show implements Serializable {
 	private String showName;
 	private int episodeCount;
 	private boolean added;
@@ -76,4 +77,24 @@ public class Show {
     public void setMyEpisodeID(String myEpisodeID) {
         this.myEpisodeID = myEpisodeID;
     }
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		Show show = (Show) o;
+
+		return myEpisodeID.equals(show.myEpisodeID);
+
+	}
+
+	@Override
+	public int hashCode() {
+		return myEpisodeID.hashCode();
+	}
 }

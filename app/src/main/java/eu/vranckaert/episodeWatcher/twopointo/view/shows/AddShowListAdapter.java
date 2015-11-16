@@ -19,9 +19,11 @@ import java.util.List;
 public class AddShowListAdapter extends Adapter<AddShowsListItemView> {
     private final List<Show> mShows = new ArrayList<>();
     private final LayoutInflater mLayoutInflater;
+    private final AddShowsListener mListener;
 
     public AddShowListAdapter(Context context, AddShowsListener listener) {
         mLayoutInflater = LayoutInflater.from(context);
+        mListener = listener;
     }
 
     public void setShows(List<Show> shows) {
@@ -37,7 +39,7 @@ public class AddShowListAdapter extends Adapter<AddShowsListItemView> {
 
     @Override
     public AddShowsListItemView onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new AddShowsListItemView(mLayoutInflater, parent);
+        return new AddShowsListItemView(mLayoutInflater, parent, mListener);
     }
 
     @Override

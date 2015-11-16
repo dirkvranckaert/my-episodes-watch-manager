@@ -80,5 +80,7 @@ public class AddShowView extends AbstractViewHolder {
         void searchShows(CharSequence needle);
 
         void cancelPreviousSearch();
+
+        void addShow(Show show);
     }
 }
