@@ -10,4 +10,5 @@
           android:paddingBottom="@dimen/vertical_margin"
           android:id="@+id/show"
           android:textSize="20dp"
-          tools:text="How I Met Your Mother"/>
+          tools:text="How I Met Your Mother"
+          android:background="@drawable/list_item_background"/>

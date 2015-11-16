@@ -19,6 +19,7 @@ import eu.vranckaert.episodeWatcher.service.ShowService;
 import eu.vranckaert.episodeWatcher.twopointo.context.NavigationManager;
 import eu.vranckaert.episodeWatcher.twopointo.threading.MyEpisodesTask;
 import eu.vranckaert.episodeWatcher.twopointo.view.shows.ManageShowsView;
+import eu.vranckaert.episodeWatcher.twopointo.view.shows.ManageShowsView.ManageShowsListener;
 
 import java.util.List;
 
@@ -28,9 +29,10 @@ import java.util.List;
  *
  * @author Dirk Vranckaert
  */
-public class ManageShowsFragment extends BaseFragment {
+public class ManageShowsFragment extends BaseFragment implements ManageShowsListener {
     private static final int REQUEST_CODE_ADD_SHOW = 0;
 
+    private boolean mShowsInitialized = false;
     private ManageShowsView mView;
     private ListShowsTask mListShowsTask;
 
@@ -41,7 +43,7 @@ public class ManageShowsFragment extends BaseFragment {
 
     @Override
     protected View doCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = new ManageShowsView(inflater, container);
+        mView = new ManageShowsView(inflater, container, this);
         loadShows();
         return mView.getView();
     }
@@ -51,10 +53,12 @@ public class ManageShowsFragment extends BaseFragment {
             mListShowsTask.cancel();
         }
         mListShowsTask = new ListShowsTask(this);
+        mListShowsTask.attachSwipeRefreshLayout(mView.getRefreshView());
         mListShowsTask.execute();
     }
 
     private void onShowsLoaded(List<Show> shows) {
+        mShowsInitialized = true;
         mView.setShows(shows);
     }
 
@@ -85,10 +89,19 @@ public class ManageShowsFragment extends BaseFragment {
 
     @Override
     protected void onFragmentResult(int requestCode, int resultCode, Bundle data) {
-        if (resultCode == REQUEST_CODE_ADD_SHOW && resultCode == RESULT_OK && data != null) {
-            Show show = (Show) data.getSerializable(AddShowFragment.EXTRA_SHOW);
-            mView.addShow(show);
+        if (mShowsInitialized) {
+            if (resultCode == REQUEST_CODE_ADD_SHOW && resultCode == RESULT_OK && data != null) {
+                Show show = (Show) data.getSerializable(AddShowFragment.EXTRA_SHOW);
+                mView.addShow(show);
+            }
+        } else {
+            loadShows();
         }
+    }
+
+    @Override
+    public void refresh() {
+        loadShows();
     }
 
     public static class ListShowsTask extends MyEpisodesTask<List<Show>> {
@@ -97,16 +110,6 @@ public class ManageShowsFragment extends BaseFragment {
         public ListShowsTask(ManageShowsFragment fragment) {
             super(fragment.getContext());
             mFragment = fragment;
-        }
-
-        @Override
-        protected boolean isProgressTask() {
-            return true;
-        }
-
-        @Override
-        public int getLoadingMessageResId() {
-            return R.string.progressLoadingTitle;
         }
 
         @Override
