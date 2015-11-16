@@ -90,7 +90,7 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
     @Override
     protected void onFragmentResult(int requestCode, int resultCode, Bundle data) {
         if (mShowsInitialized) {
-            if (resultCode == REQUEST_CODE_ADD_SHOW && resultCode == RESULT_OK && data != null) {
+            if (requestCode == REQUEST_CODE_ADD_SHOW && resultCode == RESULT_OK && data != null) {
                 Show show = (Show) data.getSerializable(AddShowFragment.EXTRA_SHOW);
                 mView.addShow(show);
             }

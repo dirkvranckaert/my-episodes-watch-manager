@@ -279,6 +279,8 @@ public abstract class CustomTask<T extends Object> {
             return;
         }
 
+        Log.d(CustomTask.class.getSimpleName(), "Cancelling task");
+
         onCancel();
         stopped = true;
         if (t != null) {

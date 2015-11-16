@@ -95,6 +95,7 @@ public class AddShowFragment extends BaseFragment implements AddShowsListener {
         Bundle data = new Bundle();
         data.putSerializable(EXTRA_SHOW, show);
         setResult(RESULT_OK, data);
+        finish();
     }
 
     public static class SearchShowsTask extends MyEpisodesTask<List<Show>> {
