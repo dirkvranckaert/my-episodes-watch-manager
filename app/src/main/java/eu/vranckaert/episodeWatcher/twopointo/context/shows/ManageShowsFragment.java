@@ -1,8 +1,9 @@
 package eu.vranckaert.episodeWatcher.twopointo.context.shows;
 
-import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import eu.vranckaert.android.context.BaseFragment;
-import eu.vranckaert.android.threading.CustomTask;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Show;
 import eu.vranckaert.episodeWatcher.domain.User;
@@ -102,6 +102,26 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
     @Override
     public void refresh() {
         loadShows();
+    }
+
+    @Override
+    public void onShowClick(Show mShow) {
+        new AlertDialog.Builder(getContext())
+                .setTitle(mShow.getShowName())
+                .setPositiveButton(R.string.favoIgnoredDeleteShow, new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setNegativeButton(R.string.favoIgnoredIgnoreShow, new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setNeutralButton(R.string.close, null)
+                .show();
     }
 
     public static class ListShowsTask extends MyEpisodesTask<List<Show>> {

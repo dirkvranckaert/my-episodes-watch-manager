@@ -8,6 +8,7 @@ import android.widget.TextView;
 import eu.vranckaert.android.viewholder.AbstractRecyclerViewHolder;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Show;
+import eu.vranckaert.episodeWatcher.twopointo.view.shows.ManageShowsView.ManageShowsListener;
 
 /**
  * Date: 16/11/15
@@ -16,11 +17,13 @@ import eu.vranckaert.episodeWatcher.domain.Show;
  * @author Dirk Vranckaert
  */
 public class ManageShowsListItemView extends AbstractRecyclerViewHolder implements OnClickListener {
+    private final ManageShowsListener mListener;
     private final TextView mShowName;
     private Show mShow;
 
-    public ManageShowsListItemView(LayoutInflater inflater, ViewGroup parent) {
+    public ManageShowsListItemView(LayoutInflater inflater, ViewGroup parent, ManageShowsListener listener) {
         super(inflater, parent, R.layout.new_manage_shows_list_item);
+        mListener = listener;
 
         mShowName = findViewById(R.id.show);
 
@@ -34,6 +37,6 @@ public class ManageShowsListItemView extends AbstractRecyclerViewHolder implemen
 
     @Override
     public void onClick(View v) {
-
+        mListener.onShowClick(mShow);
     }
 }

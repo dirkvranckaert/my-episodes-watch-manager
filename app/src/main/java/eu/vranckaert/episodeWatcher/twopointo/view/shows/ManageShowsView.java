@@ -32,7 +32,7 @@ public class ManageShowsView extends AbstractViewHolder implements OnRefreshList
         mRefresh.setOnRefreshListener(this);
         mList = findViewById(R.id.list);
         RecyclerViewUtil.init(mList, R.color.divider_color);
-        mAdapter = new ManageShowsAdapter(getContext());
+        mAdapter = new ManageShowsAdapter(getContext(), listener);
         mList.setAdapter(mAdapter);
     }
 
@@ -55,5 +55,7 @@ public class ManageShowsView extends AbstractViewHolder implements OnRefreshList
 
     public interface ManageShowsListener {
         void refresh();
+
+        void onShowClick(Show mShow);
     }
 }

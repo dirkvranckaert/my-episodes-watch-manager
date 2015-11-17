@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import eu.vranckaert.episodeWatcher.domain.Show;
+import eu.vranckaert.episodeWatcher.twopointo.view.shows.ManageShowsView.ManageShowsListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,10 +20,12 @@ import java.util.List;
  */
 public class ManageShowsAdapter extends Adapter<ManageShowsListItemView> {
     private final LayoutInflater mLayoutInflater;
+    private final ManageShowsListener mListener;
     private final List<Show> mShows = new ArrayList<>();
 
-    public ManageShowsAdapter(Context context) {
+    public ManageShowsAdapter(Context context, ManageShowsListener listener) {
         mLayoutInflater = LayoutInflater.from(context);
+        mListener = listener;
     }
 
     protected void addShow(Show show) {
@@ -55,7 +58,7 @@ public class ManageShowsAdapter extends Adapter<ManageShowsListItemView> {
 
     @Override
     public ManageShowsListItemView onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ManageShowsListItemView(mLayoutInflater, parent);
+        return new ManageShowsListItemView(mLayoutInflater, parent, mListener);
     }
 
     @Override
