@@ -26,7 +26,7 @@ public class EpisodesListView extends AbstractViewHolder {
         super(inflater, parent, R.layout.new_episodes_list);
 
         mList = findViewById(R.id.list);
-        RecyclerViewUtil.initSuperSlim(mList, R.color.divider_color);
+        RecyclerViewUtil.initSuperSlim(mList);
         mAdapter = new EpisodesListAdapter(getContext(), type, listener);
         mList.setAdapter(mAdapter);
 

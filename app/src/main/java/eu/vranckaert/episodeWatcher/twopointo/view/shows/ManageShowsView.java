@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import eu.vranckaert.android.recyclerview.RecyclerViewUtil;
-import eu.vranckaert.android.recyclerview.SwipeBackgroundItemDecoration;
+import eu.vranckaert.android.recyclerview.decorator.SwipeBackgroundItemDecoration;
 import eu.vranckaert.android.viewholder.AbstractViewHolder;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Show;
@@ -38,7 +38,7 @@ public class ManageShowsView extends AbstractViewHolder implements OnRefreshList
         mList = findViewById(R.id.list);
         mList.addItemDecoration(new SwipeBackgroundItemDecoration(getContext(), android.R.color.holo_red_dark,
                 R.drawable.ic_delete_white_36dp));
-        RecyclerViewUtil.init(mList, R.color.divider_color);
+        RecyclerViewUtil.init(mList);
         mAdapter = new ManageShowsAdapter(getContext(), listener);
         mList.setAdapter(mAdapter);
 

@@ -5,10 +5,8 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import eu.vranckaert.android.recyclerview.RecyclerViewUtil;
 import eu.vranckaert.android.viewholder.AbstractViewHolder;
@@ -40,7 +38,7 @@ public class AddShowView extends AbstractViewHolder {
         mList = findViewById(R.id.list);
         mAdapter = new AddShowListAdapter(getContext(), listener);
         mList.setAdapter(mAdapter);
-        RecyclerViewUtil.init(mList, R.color.divider_color);
+        RecyclerViewUtil.init(mList);
 
         mSearch.addTextChangedListener(new TextWatcher() {
             @Override

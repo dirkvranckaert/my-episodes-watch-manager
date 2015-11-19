@@ -1,4 +1,4 @@
-package eu.vranckaert.android.recyclerview;
+package eu.vranckaert.android.recyclerview.decorator;
 
 import android.content.Context;
 import android.content.res.Resources;

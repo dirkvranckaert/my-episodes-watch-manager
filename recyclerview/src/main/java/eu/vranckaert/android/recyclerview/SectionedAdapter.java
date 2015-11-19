@@ -10,7 +10,7 @@ import com.tonicartos.superslim.LinearSLM;
 
 /**
  * Uses the SuperSlim RecyclerView framework to create sectioned adapters. Make sure to use the
- * {@link RecyclerViewUtil#initSuperSlim(RecyclerView, int)} method to setup your recyclerview to be able to handle this
+ * {@link RecyclerViewUtil#initSuperSlim(RecyclerView)} method to setup your recyclerview to be able to handle this
  * adapter.<br/>
  * <br/>
  * Don't forget to edit your header's layout file to indicate that it's a header using:
