@@ -62,6 +62,41 @@ public class EpisodesService {
     }
 
     public List<Episode> retrieveUnlimitedNumberOfEpisodes(final EpisodeType episodesType, final User user) throws Exception {
+        if (false && BuildConfig.DEBUG) {
+            //SystemClock.sleep(1000L);
+
+            String[] shows = new String[]{"Fargo", "How I Met Your Mother", "The Big Bang Theory", "Dexter", "Thuis", "Familie", "24", "Chuck", "The Americans", "The White House"};
+
+            List<Episode> episodes = new ArrayList<>();
+            int numberOfEpisodes = (int) (Math.random() * 10);
+            for (int i=0; i<numberOfEpisodes; i++) {
+                String showName = shows[i];
+                String episodeName = "Name of the episode " + i;
+
+                Episode episode = new Episode();
+                episode.setName(episodeName);
+                episode.setShowName(showName);
+                episode.setMyEpisodeID("23525" + i);
+                episode.setType(episodesType);
+                episode.setSeason(i);
+                episode.setEpisode(i);
+                episode.setAirDate(new Date());
+                episodes.add(episode);
+            }
+
+            Episode fixedEpisode = new Episode();
+            fixedEpisode.setAirDate(new Date());
+            fixedEpisode.setShowName(shows[0]);
+            fixedEpisode.setEpisode(5);
+            fixedEpisode.setSeason(3);
+            fixedEpisode.setName("Some random episode");
+            fixedEpisode.setType(episodesType);
+            episodes.add(fixedEpisode);
+
+
+            return episodes;
+        }
+
         String encryptedPassword = userService.encryptPassword(user.getPassword());
 
         URL normalFeedUrl;
@@ -162,42 +197,6 @@ public class EpisodesService {
 
     public List<Episode> retrieveEpisodes(EpisodeType episodesType, final User user)
             throws InternetConnectivityException, Exception {
-        if (false && BuildConfig.DEBUG) {
-            //SystemClock.sleep(1000L);
-
-            String[] shows = new String[]{"Fargo", "How I Met Your Mother", "The Big Bang Theory", "Dexter", "Thuis", "Familie", "24", "Chuck", "The Americans", "The White House"};
-
-            List<Episode> episodes = new ArrayList<>();
-            int numberOfEpisodes = (int) (Math.random() * 10);
-            for (int i=0; i<numberOfEpisodes; i++) {
-                String showName = shows[i];
-                String episodeName = "Name of the episode " + i;
-
-                Episode episode = new Episode();
-                episode.setName(episodeName);
-                episode.setShowName(showName);
-                episode.setMyEpisodeID("23525" + i);
-                episode.setType(episodesType);
-                episode.setSeason(i);
-                episode.setEpisode(i);
-                episode.setAirDate(new Date());
-                episodes.add(episode);
-            }
-
-            Episode fixedEpisode = new Episode();
-            fixedEpisode.setAirDate(new Date());
-            fixedEpisode.setShowName(shows[0]);
-            fixedEpisode.setEpisode(5);
-            fixedEpisode.setSeason(3);
-            fixedEpisode.setName("Some random episode");
-            fixedEpisode.setType(episodesType);
-            episodes.add(fixedEpisode);
-
-
-            return episodes;
-        }
-
-
         String encryptedPassword = userService.encryptPassword(user.getPassword());
 
         URL feedUrl;

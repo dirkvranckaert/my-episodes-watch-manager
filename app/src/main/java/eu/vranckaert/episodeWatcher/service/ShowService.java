@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import eu.vranckaert.episodeWatcher.BuildConfig;
 import eu.vranckaert.episodeWatcher.constants.MyEpisodeConstants;
 import eu.vranckaert.episodeWatcher.domain.Show;
 import eu.vranckaert.episodeWatcher.domain.User;
@@ -89,6 +90,7 @@ public class ShowService {
 
     public List<Show> searchShows(String search, User user)
             throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
+
         HttpClient httpClient = new DefaultHttpClient();
         String username = user.getUsername();
         userService.login(httpClient, username, user.getPassword());
@@ -242,6 +244,15 @@ public class ShowService {
 
     public List<Show> getFavoriteOrIgnoredShows(User user, ShowType showType)
             throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
+        if (BuildConfig.DEBUG) {
+            List<Show> shows = new ArrayList<>();
+            for (int i=0; i<20; i++) {
+                Show show = new Show("Show number " + i, "EPSIODE" + i);
+                shows.add(show);
+            }
+            return shows;
+        }
+
         HttpClient httpClient = new DefaultHttpClient();
         userService.login(httpClient, user.getUsername(), user.getPassword());
 

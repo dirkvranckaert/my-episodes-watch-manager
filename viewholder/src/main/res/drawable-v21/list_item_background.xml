@@ -9,7 +9,7 @@
                 android:drawable="?android:colorControlHighlight"
                 android:state_selected="true"/>
             <item
-                android:drawable="@android:color/transparent"/>
+                android:drawable="@android:color/white"/>
         </selector>
     </item>
 </ripple>

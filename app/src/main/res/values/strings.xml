@@ -8,6 +8,7 @@
     <string name="attention">Attention</string>
     <string name="done">Done</string>
     <string name="search">Search</string>
+    <string name="undo">Undo</string>
 
     <!-- login form -->
     <string name="loginFormTitle">Provide your user details for the MyEpisodes.com website below.</string>
@@ -74,6 +75,8 @@
     <!-- Favo and ingored shows -->
     <string name="favoIgnoredDeleteShow">Delete show</string>
     <string name="favoIgnoredIgnoreShow">Ignore show</string>
+    <string name="favoIgnoredDeletedShow">Deleted show</string>
+    <string name="favoIgnoredIgnoredShow">Ignored show</string>
     <string name="favoIgnoredUnignoreShow">Unignore show</string>
     <string name="favoIgnoredConfirmationDeleteMessage">Are you sure you want to delete this show?</string>
     <string name="favoIgnoredConfirmationIgnoreMessage">Are you sure you want to ignore this show?</string>

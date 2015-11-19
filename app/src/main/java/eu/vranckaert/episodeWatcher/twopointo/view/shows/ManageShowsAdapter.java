@@ -42,6 +42,16 @@ public class ManageShowsAdapter extends Adapter<ManageShowsListItemView> {
         notifyDataSetChanged();
     }
 
+    public void remove(Show show) {
+        int position = mShows.indexOf(show);
+        mShows.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public Show getItem(int position) {
+        return mShows.get(position);
+    }
+
     private void sortShows() {
         Collections.sort(mShows, new Comparator<Show>() {
             @Override
