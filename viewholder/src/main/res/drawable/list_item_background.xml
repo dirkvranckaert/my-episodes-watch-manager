@@ -4,5 +4,5 @@
         android:drawable="?android:colorControlHighlight"
         android:state_selected="true"/>
     <item
-        android:drawable="@android:color/white"/>
+        android:drawable="?android:attr/colorBackground"/>
 </selector>
