@@ -7,9 +7,6 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.Snackbar.Callback;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import eu.vranckaert.android.context.BaseFragment;
@@ -19,7 +16,6 @@ import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.enums.ShowAction;
 import eu.vranckaert.episodeWatcher.enums.ShowType;
 import eu.vranckaert.episodeWatcher.service.ShowService;
-import eu.vranckaert.episodeWatcher.twopointo.context.NavigationManager;
 import eu.vranckaert.episodeWatcher.twopointo.threading.MyEpisodesTask;
 import eu.vranckaert.episodeWatcher.twopointo.utils.SnackbarUtil;
 import eu.vranckaert.episodeWatcher.twopointo.view.shows.ManageShowsView;
@@ -29,16 +25,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Date: 13/11/15
- * Time: 12:09
+ * Date: 24/11/15
+ * Time: 14:03
  *
  * @author Dirk Vranckaert
  */
-public class ManageShowsFragment extends BaseFragment implements ManageShowsListener {
-    private static final int REQUEST_CODE_ADD_SHOW = 0;
-    private static final int REQUEST_CODE_IGNORED_SHOWS = 1;
-
-    private boolean mShowsInitialized = false;
+public class IgnoredShowsFragment extends BaseFragment implements ManageShowsListener {
     private ManageShowsView mView;
     private ListShowsTask mListShowsTask;
     private final List<ChangeShowTask> mChangeShowTasks = new ArrayList<>();
@@ -47,7 +39,7 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
 
     @Override
     protected void doCreate(Bundle savedInstanceState) {
-        setTitle(R.string.manageShows);
+        setTitle(R.string.ignoredShows);
     }
 
     @Override
@@ -55,75 +47,6 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
         mView = new ManageShowsView(inflater, container, this);
         loadShows();
         return mView.getView();
-    }
-
-    private void loadShows() {
-        if (mListShowsTask != null) {
-            mListShowsTask.cancel();
-        }
-        mListShowsTask = new ListShowsTask(this);
-        mListShowsTask.attachSwipeRefreshLayout(mView.getRefreshView());
-        mListShowsTask.execute();
-    }
-
-    private void onShowsLoaded(List<Show> shows) {
-        mShowsInitialized = true;
-        mView.setShows(shows);
-    }
-
-    @Override
-    public void onDestroyView() {
-        mStopping = true;
-
-        if (mListShowsTask != null) {
-            mListShowsTask.cancel();
-            mListShowsTask = null;
-        }
-
-        if (mSnackbar != null) {
-            mSnackbar.dismiss();
-            mSnackbar = null;
-        }
-
-        int deleteShowTasks = mChangeShowTasks.size();
-        for (int i = 0; i < deleteShowTasks; i++) {
-            mChangeShowTasks.get(i).cancel();
-        }
-        mChangeShowTasks.clear();
-
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.manage_shows, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.add) {
-            NavigationManager.startAddShow(this, REQUEST_CODE_ADD_SHOW);
-            return true;
-        } else if (item.getItemId() == R.id.ignored) {
-            NavigationManager.startIngoredShows(this, REQUEST_CODE_IGNORED_SHOWS);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onFragmentResult(int requestCode, int resultCode, Bundle data) {
-        if (mShowsInitialized) {
-            if (requestCode == REQUEST_CODE_ADD_SHOW && resultCode == RESULT_OK && data != null) {
-                Show show = (Show) data.getSerializable(AddShowFragment.EXTRA_SHOW);
-                mView.addShow(show);
-            } else if (requestCode == REQUEST_CODE_IGNORED_SHOWS && resultCode == RESULT_OK) {
-                loadShows();
-            }
-        } else {
-            loadShows();
-        }
     }
 
     @Override
@@ -141,10 +64,10 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
                         onRemoveShow(show);
                     }
                 })
-                .setNegativeButton(R.string.favoIgnoredIgnoreShow, new OnClickListener() {
+                .setNegativeButton(R.string.favoIgnoredUnignoreShow, new OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        onIgnoreShow(show);
+                        onUnignoreShow(show);
                     }
                 })
                 .setNeutralButton(R.string.close, null)
@@ -191,7 +114,7 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
         changeShowTask.execute();
     }
 
-    private void onIgnoreShow(final Show show) {
+    private void onUnignoreShow(final Show show) {
         mView.removeShow(show);
 
         if (mSnackbar != null) {
@@ -209,7 +132,7 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
             @Override
             public void onDismissed(Snackbar snackbar, int event) {
                 if (Callback.DISMISS_EVENT_ACTION != event) {
-                    ignoreShow(show);
+                    unignoreShow(show);
                     snackbar.setCallback(null);
                 }
             }
@@ -220,10 +143,12 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
         mSnackbar.show();
     }
 
-    public void ignoreShow(Show show) {
+    public void unignoreShow(Show show) {
         if (mStopping) {
             return;
         }
+
+        setResult(RESULT_OK);
 
         ChangeShowTask changeShowTask = new ChangeShowTask(this, show, ShowAction.IGNORE);
         mChangeShowTasks.add(changeShowTask);
@@ -235,10 +160,46 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
         // TODO should show some kind of message (SnackBar) that removing a show failed
     }
 
-    public static class ListShowsTask extends MyEpisodesTask<List<Show>> {
-        private final ManageShowsFragment mFragment;
+    private void loadShows() {
+        if (mListShowsTask != null) {
+            mListShowsTask.cancel();
+        }
+        mListShowsTask = new ListShowsTask(this);
+        mListShowsTask.attachSwipeRefreshLayout(mView.getRefreshView());
+        mListShowsTask.execute();
+    }
 
-        public ListShowsTask(ManageShowsFragment fragment) {
+    private void onShowsLoaded(List<Show> shows) {
+        mView.setShows(shows);
+    }
+
+    @Override
+    public void onDestroyView() {
+        mStopping = true;
+
+        if (mListShowsTask != null) {
+            mListShowsTask.cancel();
+            mListShowsTask = null;
+        }
+
+        if (mSnackbar != null) {
+            mSnackbar.dismiss();
+            mSnackbar = null;
+        }
+
+        int deleteShowTasks = mChangeShowTasks.size();
+        for (int i = 0; i < deleteShowTasks; i++) {
+            mChangeShowTasks.get(i).cancel();
+        }
+        mChangeShowTasks.clear();
+
+        super.onDestroyView();
+    }
+
+    public static class ListShowsTask extends MyEpisodesTask<List<Show>> {
+        private final IgnoredShowsFragment mFragment;
+
+        public ListShowsTask(IgnoredShowsFragment fragment) {
             super(fragment.getContext());
             mFragment = fragment;
         }
@@ -246,7 +207,7 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
         @Override
         public List<Show> doInBackground() throws Exception {
             ShowService showService = new ShowService();
-            return showService.getFavoriteOrIgnoredShows(User.get(mFragment.getContext()), ShowType.FAVOURITE_SHOWS);
+            return showService.getFavoriteOrIgnoredShows(User.get(mFragment.getContext()), ShowType.IGNORED_SHOWS);
         }
 
         @Override
@@ -256,11 +217,11 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
     }
 
     public static class ChangeShowTask extends MyEpisodesTask<Void> {
-        private final ManageShowsFragment mFragment;
+        private final IgnoredShowsFragment mFragment;
         private final Show mShow;
         private final ShowAction mAction;
 
-        public ChangeShowTask(ManageShowsFragment fragment, Show show, ShowAction action) {
+        public ChangeShowTask(IgnoredShowsFragment fragment, Show show, ShowAction action) {
             super(fragment.getContext());
             mFragment = fragment;
             mShow = show;
@@ -276,7 +237,7 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
         @Override
         public Void doInBackground() throws Exception {
             ShowService showService = new ShowService();
-            showService.markShow(User.get(mFragment.getContext()), mShow, mAction, ShowType.FAVOURITE_SHOWS);
+            showService.markShow(User.get(mFragment.getContext()), mShow, mAction, ShowType.IGNORED_SHOWS);
             return null;
         }
     }

@@ -6,6 +6,7 @@ import android.net.Uri;
 import eu.vranckaert.android.context.BaseFragment;
 import eu.vranckaert.episodeWatcher.twopointo.context.login.LoginActivity;
 import eu.vranckaert.episodeWatcher.twopointo.context.shows.AddShowFragment;
+import eu.vranckaert.episodeWatcher.twopointo.context.shows.IgnoredShowsFragment;
 import eu.vranckaert.episodeWatcher.twopointo.context.shows.ManageShowsFragment;
 
 /**
@@ -42,5 +43,9 @@ public class NavigationManager {
 
     public static void startAddShow(BaseFragment fragment, int requestCode) {
         fragment.startFragmentForResult(new AddShowFragment(), requestCode);
+    }
+
+    public static void startIngoredShows(BaseFragment fragment, int requestCode) {
+        fragment.startFragmentForResult(new IgnoredShowsFragment(), requestCode);
     }
 }

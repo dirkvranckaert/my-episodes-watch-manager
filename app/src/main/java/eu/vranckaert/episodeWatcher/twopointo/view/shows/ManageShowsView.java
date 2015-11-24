@@ -99,7 +99,7 @@ public class ManageShowsView extends AbstractViewHolder implements OnRefreshList
     public interface ManageShowsListener {
         void refresh();
 
-        void onShowClick(Show mShow);
+        void onShowClick(Show show);
 
         void onRemoveShow(Show show);
     }
