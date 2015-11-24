@@ -35,7 +35,8 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
     private int mCurrentPage = 0;
     private boolean[] mLoadingTabs;
 
-    public EpisodesTabsView(LayoutInflater inflater, ViewGroup container, EpisodesTabListener episodesTabListener,  EpisodesListListener episodesListListener) {
+    public EpisodesTabsView(LayoutInflater inflater, ViewGroup container, EpisodesTabListener episodesTabListener,
+                            EpisodesListListener episodesListListener) {
         super(inflater, container, R.layout.new_episodes_tab);
         mListener = episodesTabListener;
 
@@ -86,10 +87,11 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
             public void onScrollChanged() {
                 RecyclerView list = mAdapter.getListFor(mCurrentPage);
                 if (list != null) {
-                    if (list.computeVerticalScrollOffset() == 0)
+                    if (list.computeVerticalScrollOffset() == 0) {
                         mRefresh.setEnabled(true);
-                    else
+                    } else {
                         mRefresh.setEnabled(false);
+                    }
                 }
             }
         });

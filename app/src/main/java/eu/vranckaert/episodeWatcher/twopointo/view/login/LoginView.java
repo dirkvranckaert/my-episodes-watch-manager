@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import eu.vranckaert.android.viewholder.AbstractViewHolder;
+import eu.vranckaert.episodeWatcher.BuildConfig;
 import eu.vranckaert.episodeWatcher.R;
 
 /**
@@ -30,6 +31,10 @@ public class LoginView extends AbstractViewHolder implements OnClickListener {
         loginButton.setOnClickListener(this);
         Button registerButton = findViewById(R.id.register);
         registerButton.setOnClickListener(this);
+
+        if (BuildConfig.DEBUG) {
+            mUsername.setText("dirken");
+        }
     }
 
     public void setUsername(String username) {

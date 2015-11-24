@@ -41,6 +41,8 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
     private ManageShowsView mView;
     private ListShowsTask mListShowsTask;
     private final List<ChangeShowTask> mChangeShowTasks = new ArrayList<>();
+    private Snackbar mSnackbar;
+    private boolean mStopping = false;
 
     @Override
     protected void doCreate(Bundle savedInstanceState) {
@@ -70,16 +72,23 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
 
     @Override
     public void onDestroyView() {
+        mStopping = true;
+
         if (mListShowsTask != null) {
             mListShowsTask.cancel();
             mListShowsTask = null;
         }
 
+        if (mSnackbar != null) {
+            mSnackbar.dismiss();
+            mSnackbar = null;
+        }
+
         int deleteShowTasks = mChangeShowTasks.size();
         for (int i = 0; i < deleteShowTasks; i++) {
             mChangeShowTasks.get(i).cancel();
-            mChangeShowTasks.remove(i);
         }
+        mChangeShowTasks.clear();
 
         super.onDestroyView();
     }
@@ -140,14 +149,14 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
     public void onRemoveShow(final Show show) {
         mView.removeShow(show);
 
-        Snackbar snackbar = Snackbar.make(getView(), R.string.favoIgnoredDeletedShow, Snackbar.LENGTH_LONG);
-        snackbar.setAction(R.string.undo, new View.OnClickListener() {
+        mSnackbar = Snackbar.make(getView(), R.string.favoIgnoredDeletedShow, Snackbar.LENGTH_LONG);
+        mSnackbar.setAction(R.string.undo, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mView.addShow(show);
             }
         });
-        snackbar.setCallback(new Callback() {
+        mSnackbar.setCallback(new Callback() {
             @Override
             public void onDismissed(Snackbar snackbar, int event) {
                 if (Callback.DISMISS_EVENT_ACTION != event) {
@@ -156,13 +165,17 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
                 }
             }
         });
-        snackbar = SnackbarUtil.colorSnackBar(snackbar, getResources().getColor(R.color.primary_color));
-        snackbar = SnackbarUtil.colorSnackBarText(snackbar, getResources().getColor(android.R.color.white));
-        snackbar = SnackbarUtil.colorSnackBarAction(snackbar, getResources().getColor(android.R.color.white));
-        snackbar.show();
+        mSnackbar = SnackbarUtil.colorSnackBar(mSnackbar, getResources().getColor(R.color.primary_color));
+        mSnackbar = SnackbarUtil.colorSnackBarText(mSnackbar, getResources().getColor(android.R.color.white));
+        mSnackbar = SnackbarUtil.colorSnackBarAction(mSnackbar, getResources().getColor(android.R.color.white));
+        mSnackbar.show();
     }
 
     public void removeShow(Show show) {
+        if (mStopping) {
+            return;
+        }
+
         ChangeShowTask changeShowTask = new ChangeShowTask(this, show, ShowAction.DELETE);
         mChangeShowTasks.add(changeShowTask);
         changeShowTask.execute();
@@ -194,6 +207,10 @@ public class ManageShowsFragment extends BaseFragment implements ManageShowsList
     }
 
     public void ignoreShow(Show show) {
+        if (mStopping) {
+            return;
+        }
+
         ChangeShowTask changeShowTask = new ChangeShowTask(this, show, ShowAction.IGNORE);
         mChangeShowTasks.add(changeShowTask);
         changeShowTask.execute();

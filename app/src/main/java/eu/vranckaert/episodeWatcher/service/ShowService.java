@@ -244,7 +244,7 @@ public class ShowService {
 
     public List<Show> getFavoriteOrIgnoredShows(User user, ShowType showType)
             throws UnsupportedHttpPostEncodingException, InternetConnectivityException, LoginFailedException {
-        if (BuildConfig.DEBUG) {
+        if (false && BuildConfig.DEBUG) {
             List<Show> shows = new ArrayList<>();
             for (int i=0; i<20; i++) {
                 Show show = new Show("Show number " + i, "EPSIODE" + i);

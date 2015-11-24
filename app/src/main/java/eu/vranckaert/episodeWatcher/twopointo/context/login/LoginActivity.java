@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import eu.vranckaert.episodeWatcher.BuildConfig;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.exception.InternetConnectivityException;
@@ -110,6 +111,9 @@ public class LoginActivity extends BaseActivity implements LoginListener {
 
         @Override
         public Boolean doInBackground() throws Exception {
+            if (BuildConfig.DEBUG) {
+                return true;
+            }
             return new UserService().login(mUser);
         }
 
