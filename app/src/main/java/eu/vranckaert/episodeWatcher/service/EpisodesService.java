@@ -62,6 +62,11 @@ public class EpisodesService {
     }
 
     public List<Episode> retrieveUnlimitedNumberOfEpisodes(final EpisodeType episodesType, final User user) throws Exception {
+        List<Episode> cachedEpisodes = CacheService.getEpisodes(episodesType);
+        if (cachedEpisodes != null) {
+            return cachedEpisodes;
+        }
+
         if (false && BuildConfig.DEBUG) {
             //SystemClock.sleep(1000L);
 
@@ -92,7 +97,6 @@ public class EpisodesService {
             fixedEpisode.setName("Some random episode");
             fixedEpisode.setType(episodesType);
             episodes.add(fixedEpisode);
-
 
             return episodes;
         }
@@ -128,6 +132,7 @@ public class EpisodesService {
             }
         }
 
+        CacheService.storeEpisodes(episodes, episodesType);
         return episodes;
     }
 

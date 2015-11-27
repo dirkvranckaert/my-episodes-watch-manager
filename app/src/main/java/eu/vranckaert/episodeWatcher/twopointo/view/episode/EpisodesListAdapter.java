@@ -14,6 +14,7 @@ import eu.vranckaert.android.viewholder.AbstractRecyclerViewHolder;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.enums.EpisodeType;
+import eu.vranckaert.episodeWatcher.service.CacheService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -87,13 +88,8 @@ public class EpisodesListAdapter extends SectionedAdapter<AbstractRecyclerViewHo
 
     public void removeAllEpisodes(List<Episode> episodes) {
         List<Episode> existingEpisodes = getEpisodes();
-
-        for (Episode episode : episodes) {
-            if (existingEpisodes.contains(episode)) {
-                existingEpisodes.remove(episode);
-            }
-        }
-
+        existingEpisodes.removeAll(episodes);
+        CacheService.storeEpisodes(existingEpisodes, mType);
         setEpisodes(existingEpisodes);
     }
 
@@ -106,6 +102,7 @@ public class EpisodesListAdapter extends SectionedAdapter<AbstractRecyclerViewHo
             }
         }
 
+        CacheService.storeEpisodes(existingEpisodes, mType);
         setEpisodes(existingEpisodes);
     }
 
