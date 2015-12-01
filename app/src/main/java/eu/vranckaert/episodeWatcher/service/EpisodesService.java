@@ -67,7 +67,7 @@ public class EpisodesService {
             return cachedEpisodes;
         }
 
-        if (true && BuildConfig.DEBUG) {
+        if (false && BuildConfig.DEBUG) {
             SystemClock.sleep(5000L);
 
             String[] shows = new String[]{"Fargo", "How I Met Your Mother", "The Big Bang Theory", "Dexter", "Thuis", "Familie", "24", "Chuck", "The Americans", "The White House"};
