@@ -171,7 +171,9 @@ public class EpisodesTabsView extends AbstractViewHolder implements OnPageChange
         mTabs.post(new Runnable() {
             @Override
             public void run() {
-                mTabs.getTabAt(tabPosition).select();
+                if (tabPosition != -1) {
+                    mTabs.getTabAt(tabPosition).select();
+                }
             }
         });
     }

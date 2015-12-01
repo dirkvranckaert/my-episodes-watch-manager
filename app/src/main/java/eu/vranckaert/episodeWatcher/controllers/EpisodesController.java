@@ -9,9 +9,9 @@ import eu.vranckaert.episodeWatcher.domain.Show;
 import eu.vranckaert.episodeWatcher.enums.EpisodeType;
 
 public class EpisodesController {
-	private List<Episode> watchEpisodes = new ArrayList<Episode>();
-	private List<Episode> acquireEpisodes = new ArrayList<Episode>();
-	private List<Episode> comingEpisodes = new ArrayList<Episode>();
+	private List<Episode> watchEpisodes = new ArrayList<>();
+	private List<Episode> acquireEpisodes = new ArrayList<>();
+	private List<Episode> comingEpisodes = new ArrayList<>();
 	private ArrayList<Show> shows;
 	private static EpisodesController Instance;
 	
@@ -95,7 +95,7 @@ public class EpisodesController {
 	}
 	
 	public Episode getRandomWatchEpisode() {
-		shows = new ArrayList<Show>();
+		shows = new ArrayList<>();
         if (watchEpisodes != null && watchEpisodes.size() > 0) {
             for (Episode ep : watchEpisodes) {
                 AddEpisodeToShow(ep);
@@ -108,7 +108,7 @@ public class EpisodesController {
 	}
 	
 	public void deleteAll() {
-		List<Episode> tempList = new ArrayList<Episode>();
+		List<Episode> tempList = new ArrayList<>();
 		watchEpisodes = tempList; acquireEpisodes = tempList; comingEpisodes = tempList;
 	}
 	

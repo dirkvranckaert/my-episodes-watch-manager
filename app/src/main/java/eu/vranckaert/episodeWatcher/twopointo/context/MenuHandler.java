@@ -12,6 +12,7 @@ import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.twopointo.context.episode.EpisodesTabFragment;
+import eu.vranckaert.episodeWatcher.twopointo.context.episode.RandomEpisodePickerFragment;
 import eu.vranckaert.episodeWatcher.twopointo.context.settings.SettingsFragment;
 import eu.vranckaert.episodeWatcher.twopointo.context.shows.ManageShowsFragment;
 
@@ -31,6 +32,9 @@ public class MenuHandler extends AbstractMenuHandler {
                 break;
             case R.id.drawer_item_manage_shows:
                 baseFragment = new ManageShowsFragment();
+                break;
+            case R.id.drawer_item_random_episode_picker:
+                baseFragment = new RandomEpisodePickerFragment();
                 break;
             case R.id.drawer_item_logout:
                 new AlertDialog.Builder(activity)
