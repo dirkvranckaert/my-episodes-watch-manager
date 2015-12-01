@@ -85,6 +85,8 @@ public class RandomEpisodePickerFragment extends BaseFragment {
 
     @Override
     public void onDestroyView() {
+        mView.stopLoading();
+
         if (mEpisodePickerTask != null) {
             mEpisodePickerTask.cancel();
             mEpisodePickerTask = null;

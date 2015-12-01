@@ -1,7 +1,10 @@
 package eu.vranckaert.episodeWatcher.service;
 
+import eu.vranckaert.episodeWatcher.MyEpisodes;
 import eu.vranckaert.episodeWatcher.domain.Episode;
 import eu.vranckaert.episodeWatcher.enums.EpisodeType;
+import eu.vranckaert.episodeWatcher.preferences.Preferences;
+import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
 
 import java.util.Date;
 import java.util.List;
@@ -13,7 +16,7 @@ import java.util.List;
  * @author Dirk Vranckaert
  */
 public class CacheService {
-    private static final long EPISODES_VALID_TIME = 1000 * 60 * 15; // Valid for 15 minutes
+    private static final long EPISODES_VALID_TIME = 1000 * 60 * 60 * 2; // Valid for 2 hours
 
     private static Long mCacheTimeEpisodesToWatch;
     private static Long mCacheTimeEpisodesToAcquire;
@@ -21,12 +24,15 @@ public class CacheService {
     private static List<Episode> mEpisodesToAcquire;
 
     public static void storeEpisodes(List<Episode> episodes, EpisodeType type) {
-        if (type.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
-            mEpisodesToAcquire = episodes;
-            mCacheTimeEpisodesToAcquire = new Date().getTime();
-        } else if (type.equals(EpisodeType.EPISODES_TO_WATCH)) {
-            mEpisodesToWatch = episodes;
-            mCacheTimeEpisodesToWatch = new Date().getTime();
+        boolean caching = Preferences.getPreferenceBoolean(MyEpisodes.getContext(), PreferencesKeys.CACHE_EPISODES, true);
+        if (caching) {
+            if (type.equals(EpisodeType.EPISODES_TO_ACQUIRE)) {
+                mEpisodesToAcquire = episodes;
+                mCacheTimeEpisodesToAcquire = new Date().getTime();
+            } else if (type.equals(EpisodeType.EPISODES_TO_WATCH)) {
+                mEpisodesToWatch = episodes;
+                mCacheTimeEpisodesToWatch = new Date().getTime();
+            }
         }
     }
 
@@ -51,5 +57,12 @@ public class CacheService {
     private static boolean isValid(long time, long maxValidLength) {
         long now = new Date().getTime();
         return !(now > time + maxValidLength);
+    }
+
+    public static void clearEpisodeCache() {
+        mEpisodesToWatch = null;
+        mCacheTimeEpisodesToAcquire = null;
+        mEpisodesToAcquire = null;
+        mCacheTimeEpisodesToWatch = null;
     }
 }

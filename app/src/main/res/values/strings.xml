@@ -135,6 +135,7 @@
 
 	<!-- preferences titles -->
     <string name="generalPreferences">General</string>
+    <string name="networkPreferences">Network</string>
     <string name="showPreferences">Shows</string>
     <string name="orderPreferences">Order</string>
     <string name="disablePreferences">Disable</string>
@@ -188,6 +189,9 @@
     </string-array>
     <!-- Store password -->
     <string name="storePasswordPrompt">Store password</string>
+    <!-- Cache episodes -->
+    <string name="cacheEpisodesPrompt">Cache Episodes</string>
+    <string name="cacheEpisodesSummary">Caching the episodes will reduce your mobile data usage.</string>
     <!-- Disable -->
     <string name="disableAcquire">Disable Acquire</string>
     <string name="disableComing">Disable Coming</string>

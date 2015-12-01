@@ -45,7 +45,7 @@ public class RandomEpisodePickerView extends AbstractViewHolder {
     }
 
     public void setEpisode(Episode episode) {
-        mLoading.setRefreshing(false);
+        stopLoading();
         mLabel.setVisibility(VISIBLE);
         mShow.setVisibility(VISIBLE);
         mEpisodeName.setVisibility(VISIBLE);
@@ -54,5 +54,9 @@ public class RandomEpisodePickerView extends AbstractViewHolder {
         mShow.setText(episode.getShowName());
         mEpisodeName.setText(episode.getName());
         mEpisodeNumber.setText(episode.getEpisodeString());
+    }
+
+    public void stopLoading() {
+        mLoading.setRefreshing(false);
     }
 }

@@ -98,7 +98,7 @@ public class EpisodesService {
             fixedEpisode.setType(episodesType);
             episodes.add(fixedEpisode);
 
-            //CacheService.storeEpisodes(episodes, episodesType);
+            CacheService.storeEpisodes(episodes, episodesType);
 
             return episodes;
         }

@@ -11,6 +11,8 @@ import eu.vranckaert.episodeWatcher.MyEpisodes;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.domain.User;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
+import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
+import eu.vranckaert.episodeWatcher.service.CacheService;
 import eu.vranckaert.episodeWatcher.twopointo.context.episode.EpisodesTabFragment;
 import eu.vranckaert.episodeWatcher.twopointo.context.episode.RandomEpisodePickerFragment;
 import eu.vranckaert.episodeWatcher.twopointo.context.settings.SettingsFragment;
@@ -43,6 +45,12 @@ public class MenuHandler extends AbstractMenuHandler {
                         .setPositiveButton(R.string.logout, new OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                boolean caching = Preferences
+                                        .getPreferenceBoolean(MyEpisodes.getContext(), PreferencesKeys.CACHE_EPISODES,
+                                                true);
+                                if (!caching) {
+                                    CacheService.clearEpisodeCache();
+                                }
                                 Preferences.setPreference(MyEpisodes.getContext(), User.USERNAME, null);
                                 Preferences.setPreference(MyEpisodes.getContext(), User.PASSWORD, null);
                                 NavigationManager.restartApplication(activity, false);

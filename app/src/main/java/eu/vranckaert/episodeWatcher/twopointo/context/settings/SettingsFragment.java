@@ -10,6 +10,7 @@ import eu.vranckaert.android.context.BasePreferenceFragment;
 import eu.vranckaert.episodeWatcher.R;
 import eu.vranckaert.episodeWatcher.preferences.Preferences;
 import eu.vranckaert.episodeWatcher.preferences.PreferencesKeys;
+import eu.vranckaert.episodeWatcher.service.CacheService;
 import eu.vranckaert.episodeWatcher.twopointo.context.NavigationManager;
 
 /**
@@ -37,6 +38,10 @@ public class SettingsFragment extends BasePreferenceFragment implements OnShared
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (getContext() == null) {
+            return;
+        }
+
         if (PreferencesKeys.LANGUAGE_KEY.equals(key)) {
             String language = Preferences.getPreference(getContext(), key);
             getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
@@ -46,6 +51,11 @@ public class SettingsFragment extends BasePreferenceFragment implements OnShared
                 getActivity().recreate();
             } else {
                 NavigationManager.restartApplication(getActivity(), true);
+            }
+        } else if (PreferencesKeys.CACHE_EPISODES.equals(key)) {
+            boolean caching = Preferences.getPreferenceBoolean(getContext(), key, true);
+            if (!caching) {
+                CacheService.clearEpisodeCache();
             }
         }
     }
